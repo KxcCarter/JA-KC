@@ -14,7 +14,7 @@ if (process.env.DATABASE_URL) {
   // Heroku gives a url, not a connection object
   // https://github.com/brianc/node-pg-pool
   const params = url.parse(process.env.DATABASE_URL) as any;
-  const auth = params.auth.split(':') ;
+  const auth = params.auth.split(':');
 
   config = {
     user: auth[0],
@@ -27,11 +27,17 @@ if (process.env.DATABASE_URL) {
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
   };
 } else {
-  const host = process.env.POSTGRES_HOST ? process.env.POSTGRES_HOST : 'localhost'; // "localhost" is Docker's default
-  const user = process.env.POSTGRES_USER ? process.env.POSTGRES_USER : 'postgres'; // "postgres" is the default username for Docker
-  const password = process.env.POSTGRES_PASSWORD ? process.env.POSTGRES_PASSWORD : 'postgres'; // "postgres" is the default password for Docker
+  const host = process.env.POSTGRES_HOST
+    ? process.env.POSTGRES_HOST
+    : 'localhost'; // "localhost" is Docker's default
+  const user = process.env.POSTGRES_USER
+    ? process.env.POSTGRES_USER
+    : 'postgres'; // "postgres" is the default username for Docker
+  const password = process.env.POSTGRES_PASSWORD
+    ? process.env.POSTGRES_PASSWORD
+    : 'postgres'; // "postgres" is the default password for Docker
   const port = process.env.PORT_DB ? process.env.PORT_DB : 5432;
-  const database = process.env.POSTGRES_DB ? process.env.POSTGRES_DB : 'prime_db';
+  const database = process.env.POSTGRES_DB ? process.env.POSTGRES_DB : 'ja_kc';
 
   config = {
     host, // Server hosting the postgres database
