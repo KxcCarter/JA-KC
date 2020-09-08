@@ -10,13 +10,19 @@ import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../assets/css/animate.min.css";
+import "../../assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
+import "../../assets/css/demo.css";
+import "../../assets/css/pe-icon-7-stroke.css";
+
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import JALandingPage from '../JALandingPage/JALandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
@@ -89,7 +95,7 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
+              component={JALandingPage}
               authRedirect="/user"
             />
 

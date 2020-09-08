@@ -19,7 +19,7 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <img src="https://greaterkansascity.ja.org/contentAsset/image/ac1a740b-7a33-4563-906c-5324fec01b64/hostThumbnail/filter/Resize/resize_h/80" />
       </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
@@ -43,6 +43,7 @@ const Nav = (props) => {
         </Link>
       </div>
     </div>
+
   );
 };
 
