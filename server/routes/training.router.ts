@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import pool from '../modules/pool';
+import { ESRCH } from 'constants';
 
 const router: express.Router = express.Router();
 
@@ -24,7 +25,14 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // POST route code here
+    const title = req.body;
+    const content = req.body;
+
+    const queryText = `INSERT INTO`;
+    pool
+      .query(queryText, [title, content])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
   }
 );
 
