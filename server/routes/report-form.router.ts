@@ -24,7 +24,23 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // POST route code here
+    const class_id = req.body;
+    const school_name = req.body;
+    const volunteer_name = req.body;
+    const size = req.body;
+    const completion_date = req.body;
+
+    const queryText = `INSERT INTO`;
+    pool
+      .query(queryText, [
+        class_id,
+        school_name,
+        volunteer_name,
+        size,
+        completion_date,
+      ])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
   }
 );
 
