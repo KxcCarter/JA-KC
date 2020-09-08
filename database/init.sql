@@ -51,22 +51,21 @@ CREATE TABLE "images"
     "id" SERIAL PRIMARY KEY,
     "user_id" int REFERENCES "users",
     "program_id" int REFERENCES "programs",
-    "scheduled_class_id" int REFERENCES "scheduled_classes"
-    "image_url" varchar
-    (150),
-  "upload_date" DATE DEFAULT CURRENT_DATE
+    "scheduled_class_id" int REFERENCES "scheduled_classes",
+    "image_url" varchar(150),
+    "upload_date" DATE DEFAULT CURRENT_DATE
 );
 
-    CREATE TABLE "scheduled_classes"
-    (
-        "id" SERIAL PRIMARY KEY,
-        "user_id" int REFERENCES "users",
-        "program_id" int REFERENCES "programs",
-        "school_id" int REFERENCES "schools",
-        "size" int,
-        "image_id" int REFERENCES "images",
-        "completion_date" DATE
-    );
+CREATE TABLE "scheduled_classes"
+(
+    "id" SERIAL PRIMARY KEY,
+    "user_id" int REFERENCES "users",
+    "program_id" int REFERENCES "programs",
+    "school_id" int REFERENCES "schools",
+    "size" int,
+    "image_id" int REFERENCES "images",
+    "completion_date" DATE
+);
 
 
 
