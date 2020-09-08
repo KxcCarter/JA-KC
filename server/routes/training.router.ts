@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import pool from '../modules/pool';
-import { ESRCH } from 'constants';
 
 const router: express.Router = express.Router();
 
@@ -36,4 +35,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;
