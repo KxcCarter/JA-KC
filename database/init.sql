@@ -1,8 +1,3 @@
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-
 CREATE TABLE "account_type"
 (
     "id" SERIAL PRIMARY KEY,
@@ -12,6 +7,7 @@ CREATE TABLE "account_type"
 CREATE TABLE "users"
 (
     "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR(80) NOT NULL,
     "first_name" VARCHAR (80) NOT NULL,
     "last_name" VARCHAR (80) NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
@@ -46,6 +42,16 @@ CREATE TABLE "learning_material"
     "content" text
 );
 
+CREATE TABLE "scheduled_classes"
+(
+    "id" SERIAL PRIMARY KEY,
+    "user_id" int REFERENCES "users",
+    "program_id" int REFERENCES "programs",
+    "school_id" int REFERENCES "schools",
+    "size" int,
+    "completion_date" DATE
+);
+
 CREATE TABLE "images"
 (
     "id" SERIAL PRIMARY KEY,
@@ -55,17 +61,4 @@ CREATE TABLE "images"
     "image_url" varchar(150),
     "upload_date" DATE DEFAULT CURRENT_DATE
 );
-
-CREATE TABLE "scheduled_classes"
-(
-    "id" SERIAL PRIMARY KEY,
-    "user_id" int REFERENCES "users",
-    "program_id" int REFERENCES "programs",
-    "school_id" int REFERENCES "schools",
-    "size" int,
-    "image_id" int REFERENCES "images",
-    "completion_date" DATE
-);
-
-
 
