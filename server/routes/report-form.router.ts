@@ -10,9 +10,9 @@ const router: express.Router = express.Router();
 router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT`;
+    const queryText = `SELECT * FROM "scheduled_classes";`;
     pool
-      .query(queryText, [req.body])
+      .query(queryText)
       .then((response) => res.send(response.rows))
       .catch((error) => console.log('Error in report-form GET:', error));
   }
@@ -24,13 +24,13 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const class_id = req.body;
-    const school_name = req.body;
-    const volunteer_name = req.body;
-    const size = req.body;
-    const completion_date = req.body;
+    const class_id: string = req.body.class_id;
+    const school_name: string = req.body.school_name;
+    const volunteer_name: string = req.body.volunteer_name;
+    const size: string = req.body.size;
+    const completion_date: string = req.body.completion_date;
 
-    const queryText = `INSERT INTO`;
+    const queryText = `INSERT INTO "scheduled_classes" VALUES ($1, $2, $3, $4, $5);`;
     pool
       .query(queryText, [
         class_id,
