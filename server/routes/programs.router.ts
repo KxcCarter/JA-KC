@@ -58,10 +58,11 @@ router.put(
   (req: Request, res: Response, next: express.NextFunction): void => {
     const title: string = req.body.title;
     const image: string = req.body.image;
+    const id: number = req.params.id;
 
-    const queryText = `UPDATE "learning_material" SET "title"=$1, "image"=$2);`;
+    const queryText = `UPDATE "learning_material" SET "title"=$1, "image"=$2 WHERE "id"=$3);`;
     pool
-      .query(queryText, [title, image])
+      .query(queryText, [title, image, id])
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(500));
   }
