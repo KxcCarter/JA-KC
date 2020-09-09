@@ -4,14 +4,11 @@ import { StyleSheet, css } from 'aphrodite';
 import LogoComponent from './LogoComponent';
 import MenuItemComponent from './MenuItemComponent';
 import IconOverview from '../../assets/icon-overview.js';
-import IconTickets from '../../assets/icon-tickets.js';
-import IconIdeas from '../../assets/icon-ideas.js';
 import IconContacts from '../../assets/icon-contacts';
 import IconAgents from '../../assets/icon-agents';
 import IconArticles from '../../assets/icon-articles';
-import IconSettings from '../../assets/icon-settings';
-import IconSubscription from '../../assets/con-subscription';
 import IconBurger from '../../assets/icon-burger';
+import AddAdmin from '../AddAdmin/AddAdmin';
 
 const styles = StyleSheet.create({
     burgerIcon: {
@@ -73,6 +70,9 @@ const styles = StyleSheet.create({
 });
 
 function SidebarComponent({ onChange, selectedItem }) {
+
+
+
     const [expanded, setExpanded] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const input1 = useRef(null);
@@ -95,6 +95,12 @@ function SidebarComponent({ onChange, selectedItem }) {
         setExpanded(false);
         return onChange(item);
     };
+
+    const onAddAdmin = () => {
+        window.location.href = `mailto: `;
+    };
+
+
 
     const toggleMenu = () => setExpanded(!expanded);
 
@@ -131,54 +137,32 @@ function SidebarComponent({ onChange, selectedItem }) {
                     <LogoComponent />
                     <Column className={css(styles.menuItemList)}>
                         <MenuItemComponent
-                            title="Overview"
+                            title="Reports"
                             icon={IconOverview}
-                            onClick={() => onItemClicked('Overview')}
-                            active={selectedItem === 'Overview'}
+                            onClick={() => onItemClicked('Reports')}
+                            active={selectedItem === 'Reports'}
                         />
                         <MenuItemComponent
-                            title="Tickets"
-                            icon={IconTickets}
-                            onClick={() => onItemClicked('Tickets')}
-                            active={selectedItem === 'Tickets'}
-                        />
-                        <MenuItemComponent
-                            title="Ideas"
-                            icon={IconIdeas}
-                            onClick={() => onItemClicked('Ideas')}
-                            active={selectedItem === 'Ideas'}
-                        />
-                        <MenuItemComponent
-                            title="Contacts"
+                            title="Volunteers"
                             icon={IconContacts}
-                            onClick={() => onItemClicked('Contacts')}
-                            active={selectedItem === 'Contacts'}
+                            onClick={() => onItemClicked('Volunteers')}
+                            active={selectedItem === 'Volunteers'}
                         />
                         <MenuItemComponent
-                            title="Agents"
-                            icon={IconAgents}
-                            onClick={() => onItemClicked('Agents')}
-                            active={selectedItem === 'Agents'}
-                        />
-                        <MenuItemComponent
-                            title="Articles"
+                            title="Classes and Training"
                             icon={IconArticles}
-                            onClick={() => onItemClicked('Articles')}
-                            active={selectedItem === 'Articles'}
+                            onClick={() => onItemClicked('Classes and Training')}
+                            active={selectedItem === 'Classes and Training'}
                         />
+                        <MenuItemComponent
+                            title="Add Admin User"
+                            icon={IconAgents}
+                            onClick={() => onAddAdmin('Add Admin User')}
+                            active={selectedItem === 'Add Admin User'}
+
+                        />
+                        <AddAdmin />
                         <div className={css(styles.separator)}></div>
-                        <MenuItemComponent
-                            title="Settings"
-                            icon={IconSettings}
-                            onClick={() => onItemClicked('Settings')}
-                            active={selectedItem === 'Settings'}
-                        />
-                        <MenuItemComponent
-                            title="Subscription"
-                            icon={IconSubscription}
-                            onClick={() => onItemClicked('Subscription')}
-                            active={selectedItem === 'Subscription'}
-                        />
                     </Column>
                 </Column>
                 {isMobile && expanded && (

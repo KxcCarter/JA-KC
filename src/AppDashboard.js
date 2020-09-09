@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         minHeight: '100vh',
-        width: '140%',
-        marginRight: '5%',
-        marginLeft: '-25%'
+        width: '100%',
+        marginRight: '2%',
+        marginLeft: '0%'
     },
     content: {
         marginTop: 54

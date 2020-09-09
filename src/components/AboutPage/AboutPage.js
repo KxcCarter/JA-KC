@@ -1,9 +1,5 @@
 import React from 'react';
-import Admin from '../../layouts/Admin';
-import AdminNavbarLinks from '../../componentsAdmin/Navbars/AdminNavbarLinks';
-import Footer from '../../componentsAdmin/Footer/Footer';
-import Sidebar from '../../componentsAdmin/Sidebar/Sidebar';
-import JALandingPage from '../JALandingPage/JALandingPage';
+
 // import AdminDash from "../AdminDash/AdminDash";
 import AppDashboard from "../../AppDashboard";
 

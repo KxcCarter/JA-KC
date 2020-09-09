@@ -16,11 +16,13 @@ import './RegisterForm.css';
 
 class RegisterForm extends Component {
   state = {
+    username: '',
     first_name: '',
     last_name: '',
-    username: '',
     password: '',
+    account_type_id: '1',
     email: '',
+    telephone: ''
   }; // end state
 
   // event listener to dispatch register
@@ -30,11 +32,13 @@ class RegisterForm extends Component {
     this.props.dispatch({
       type: 'REGISTER',
       payload: {
+        username: this.state.username,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        username: this.state.username,
         password: this.state.password,
+        account_type_id: this.state.account_type_id,
         email: this.state.email,
+        telephone: this.state.telephone,
       },
     });
   } // end registerUser
@@ -124,6 +128,17 @@ class RegisterForm extends Component {
                     value={this.state.email}
                     required
                     onChange={this.handleInputChangeFor('email')}
+                  />
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    label="Telephone"
+                    autoFocus
+                    type="text"
+                    name="telephone"
+                    value={this.state.telephone}
+                    required
+                    onChange={this.handleInputChangeFor('telephone')}
                   />
                   <Button className="registerButton"
                     type="submit"

@@ -58,9 +58,9 @@ function ContentComponent() {
                     <MiniCardComponent className={css(styles.miniCardContainer)} title="On hold" value="64" />
                 </Row>
             </Row>
-            <div className={css(styles.todayTrends)}>
+            {/* <div className={css(styles.todayTrends)}>
                 <TodayTrendsComponent />
-            </div>
+            </div> */}
             <Row horizontal="space-between" className={css(styles.lastRow)} breakpoints={{ 1024: 'column' }}>
                 <UnresolvedTicketsComponent containerStyles={styles.unresolvedTickets} />
                 <TasksComponent containerStyles={styles.tasks} />
