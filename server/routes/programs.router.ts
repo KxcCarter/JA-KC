@@ -10,9 +10,9 @@ const router: express.Router = express.Router();
 router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT * FROM "programs"`;
+    const queryText = `SELECT * FROM "programs";`;
     pool
-      .query(queryText, [req.body])
+      .query(queryText)
       .then((response) => res.send(response.rows))
       .catch((error) => console.log('Error in programs GET:', error));
   }
