@@ -10,9 +10,9 @@ const router: express.Router = express.Router();
 router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT`;
+    const queryText = `SELECT * FROM "learning_material";`;
     pool
-      .query(queryText, [req.body])
+      .query(queryText)
       .then((response) => res.send(response.rows))
       .catch((error) => console.log('Error in training GET:', error));
   }
@@ -24,12 +24,13 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const title = req.body;
-    const content = req.body;
+    const program_id: string = req.body.program_id;
+    const title: string = req.body.title;
+    const content: string = req.body.content;
 
-    const queryText = `INSERT INTO`;
+    const queryText = `INSERT INTO "learning_material" VALUES ($1, $2, $3);`;
     pool
-      .query(queryText, [title, content])
+      .query(queryText, [program_id, title, content])
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(500));
   }
