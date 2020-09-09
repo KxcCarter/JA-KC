@@ -80,7 +80,37 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    // POST route code here
+    const images: any = req.body.images;
+    const user: any = req.user;
+    const program_id: number = req.body.program_id;
+    const scheduled_class_id: number = req.body.scheduled_class_id;
+    const class_size: number = req.body.class_size;
+    let queryStart: string = `WITH ins AS (
+        INSERT INTO "images" 
+            ("user_id", "program_id", "scheduled_class_id", "image_url")
+        VALUES `;
+
+    images.forEach((item: any, index: number) => {
+      if (index === images.length - 1) {
+        queryStart += `($1, $2, $3, '${item}'))`;
+      } else {
+        queryStart += `($1, $2, $3, '${item}'), `;
+      }
+    });
+
+    const queryEnd: string = `UPDATE "scheduled_classes"
+      SET "size" = $4, "completion_date" = CURRENT_DATE 
+    WHERE "id" = $3;`;
+
+    const fullQuery: string = queryStart + queryEnd;
+
+    pool
+      .query(fullQuery, [user.id, program_id, scheduled_class_id, class_size])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log(`Error saving completed class details to database: ${err}`);
+        res.sendStatus(500);
+      });
   }
 );
 
