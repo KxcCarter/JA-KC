@@ -92,20 +92,29 @@ router.post(
 
     images.forEach((item: any, index: number) => {
       if (index === images.length - 1) {
-        queryStart += `($1, $2, $3, '${item}'))`;
+        queryStart += `($3, $4, $1, '${item}'))`;
       } else {
-        queryStart += `($1, $2, $3, '${item}'), `;
+        queryStart += `($3, $4, $1, '${item}'), `;
       }
     });
 
     const queryEnd: string = `UPDATE "scheduled_classes"
-      SET "size" = $4, "completion_date" = CURRENT_DATE 
-    WHERE "id" = $3;`;
+      SET "size" = $2, "completion_date" = CURRENT_DATE 
+        WHERE "id" = $1;`;
 
-    const fullQuery: string = queryStart + queryEnd;
+    let fullQuery: string;
+    let parameters: any;
+
+    if (images.length > 0) {
+      fullQuery = queryStart + queryEnd;
+      parameters = [scheduled_class_id, class_size, user.id, program_id];
+    } else {
+      fullQuery = queryEnd;
+      parameters = [scheduled_class_id, class_size];
+    }
 
     pool
-      .query(fullQuery, [user.id, program_id, scheduled_class_id, class_size])
+      .query(fullQuery, parameters)
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log(`Error saving completed class details to database: ${err}`);
