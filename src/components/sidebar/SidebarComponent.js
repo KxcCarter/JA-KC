@@ -97,7 +97,10 @@ function SidebarComponent({ onChange, selectedItem }) {
     };
 
     const onAddAdmin = () => {
-        window.location.href = `mailto: `;
+        const register = (
+            <a href="http://localhost:3000/#/registration"></a>
+        );
+        window.location.href = `mailto:?, cc=?, &subject=Please join Junior Achievement as an Admin&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as an admin www.google.com`;
     };
 
 
@@ -161,7 +164,7 @@ function SidebarComponent({ onChange, selectedItem }) {
                             active={selectedItem === 'Add Admin User'}
 
                         />
-                        <AddAdmin />
+
                         <div className={css(styles.separator)}></div>
                     </Column>
                 </Column>
