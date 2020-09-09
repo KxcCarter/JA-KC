@@ -26,6 +26,11 @@ const styles = (theme) => ({
         alignItems: 'center',
         textTransform: 'none',
     },
+    text: {
+        fontWeight: 'lighter',
+        fontFamily: 'Montserrat',
+        textTransform: 'none',
+    },
     backdrop: {
         position: 'absolute',
         left: 0,

@@ -23,11 +23,18 @@ const styles = (theme) => ({
         backgroundColor: '#008751',
         color: 'white',
         minWidth: 200,
+        fontWeight: 'lighter',
+        fontFamily: 'Montserrat', 
+        textTransform: 'none',
     },
     text: {
+        fontWeight: 'lighter',
+        fontFamily: 'Montserrat', 
         textTransform: 'none',
     },
     h5: {
+        fontWeight: 'lighter',
+        fontFamily: 'Montserrat', 
         textTransform: 'none',
         marginBottom: theme.spacing(4),
         marginTop: theme.spacing(4),
@@ -51,9 +58,8 @@ function JALandingPage(props) {
                         Junior Achievement of Greater Kansas City
                     </Typography>
                     <Typography className={classes.text} color="inherit" align="center" variant="h5" className={classes.h5}>
-                        Helping our youth with financial literacy, entreprenuerial mindset,
-                    <br></br>
-                        and workforce readiness
+                        Administrative Registration
+                        
                     </Typography>
                     <Link className="landinglinks" to="/registration">
                         <Button

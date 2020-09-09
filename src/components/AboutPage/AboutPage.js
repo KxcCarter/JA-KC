@@ -4,6 +4,8 @@ import AdminNavbarLinks from '../../componentsAdmin/Navbars/AdminNavbarLinks';
 import Footer from '../../componentsAdmin/Footer/Footer';
 import Sidebar from '../../componentsAdmin/Sidebar/Sidebar';
 import JALandingPage from '../JALandingPage/JALandingPage';
+// import AdminDash from "../AdminDash/AdminDash";
+import AppDashboard from "../../AppDashboard";
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -13,7 +15,7 @@ import JALandingPage from '../JALandingPage/JALandingPage';
 const AboutPage = () => (
   <div className="container">
     <div>
-      <JALandingPage />
+      <AppDashboard />
     </div>
   </div>
 );
