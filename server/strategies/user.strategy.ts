@@ -9,7 +9,7 @@ passport.serializeUser((user: any, done: any): void => {
 
 passport.deserializeUser((id: any, done: any): void => {
   pool
-    .query('SELECT * FROM "users" WHERE id = $1', [id])
+    .query('SELECT * FROM "user" WHERE id = $1', [id])
     .then((result: any): void => {
       const user = result && result.rows && result.rows[0];
 
@@ -30,7 +30,7 @@ passport.use(
   'local',
   new Strategy((username: string, password: string, done: Function): void => {
     pool
-      .query('SELECT * FROM "users" WHERE username = $1', [username])
+      .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result: any) => {
         const user = result && result.rows && result.rows[0];
         if (user && comparePassword(password, user.password)) {
