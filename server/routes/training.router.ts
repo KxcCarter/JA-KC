@@ -36,4 +36,6 @@ router.post(
   }
 );
 
+router.delete('/:id');
+
 export default router;
