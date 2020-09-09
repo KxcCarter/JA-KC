@@ -9,10 +9,13 @@ const router: express.Router = express.Router();
  * GET route template
  */
 router.get(
-  '/',
+  '/classes',
   rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const query: string = `SELECT * FROM "scheduled_classes" WHERE "user_id" = $1;`;
+    const query: string = `SELECT "scheduled_classes".*, "programs".image, "programs".sessions, "programs".title, "schools".name FROM "scheduled_classes"
+    JOIN "programs" on "programs".id = "scheduled_classes".program_id
+    JOIN "schools" on "schools".id = "scheduled_classes".school_id
+    WHERE "scheduled_classes".user_id = $1;`;
     const user: any = req.user;
 
     pool
