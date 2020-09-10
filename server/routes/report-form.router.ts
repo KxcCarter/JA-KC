@@ -29,6 +29,7 @@ router.post(
     const volunteer_name: string = req.body.volunteer_name;
     const size: string = req.body.size;
     const completion_date: string = req.body.completion_date;
+    const user_id:
 
     const queryText = `INSERT INTO "scheduled_classes" VALUES ($1, $2, $3, $4, $5);`;
     pool
@@ -39,6 +40,36 @@ router.post(
         size,
         completion_date,
       ])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
+  }
+);
+
+router.delete(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const id: number = req.params.id;
+    const queryText = `DELETE FROM "scheduled_classes" WHERE "scheduled_classes".id=$1`;
+    pool
+      .query(queryText, [id])
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+router.put(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const title: string = req.body.title;
+    const image: string = req.body.image;
+    const id: number = req.params.id;
+
+    const queryText = `UPDATE "scheduled_classes" SET "title"=$1, "image"=$2 WHERE "id"=$3);`;
+    pool
+      .query(queryText, [title, image, id])
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(500));
   }
