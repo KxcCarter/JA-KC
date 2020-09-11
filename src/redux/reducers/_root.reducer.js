@@ -5,6 +5,12 @@ import user from './user.reducer';
 import programs from './programs.reducer';
 =======
 import learning_material from './training.reducer';
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+import volunteerScheduledClasses from './volunteerScheduledClasses.reducer';
+import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
+import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
 >>>>>>> develop
 
 // rootReducer is the primary reducer for our entire project
@@ -20,6 +26,12 @@ const rootReducer = combineReducers({
   programs, // will have all programs
 =======
   learning_material, //will show all learning materials
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+  volunteerScheduledClasses,
+  volunteerLearningMaterial,
+  volunteerSingleClassDetails,
 >>>>>>> develop
 });
 
