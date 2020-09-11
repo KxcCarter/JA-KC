@@ -22,30 +22,45 @@ router.post(
     const email: string = <string>req.body.email;
     const telephone: string = <string>req.body.telephone;
     const queryText: string = `INSERT INTO users (username, password, first_name, last_name, email, telephone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
-    pool
-      .query(queryText, [
-        username,
-        password,
-        first_name,
-        last_name,
-        email,
-        telephone,
-      ])
-      .then(() => res.sendStatus(201))
-      .catch((err) => {
-        console.log(`Error saving user to database: ${err}`);
-        res.sendStatus(500);
-      });
-  }
-);
+    router.post(
+      '/register',
+      (req: Request, res: Response, next: express.NextFunction): void => {
+        const username: string = <string>req.body.username;
+        const password: string = encryptPassword(req.body.password);
+        const first_name: string = <string>req.body.first_name;
+        const last_name: string = <string>req.body.last_name;
+        const email: string = <string>req.body.email;
+        const telephone: string = <string>req.body.telephone;
 
-router.post('/login', userStrategy.authenticate('local'), (req: Request, res: Response): void => {
-  res.sendStatus(200);
-});
+        const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
+        pool
+          .query(queryText, [
+            username,
+            password,
+            first_name,
+            last_name,
+            email,
+            telephone,
+          ])
+          .then(() => res.sendStatus(201))
+          .catch((err) => {
+            console.log(`Error saving user to database: ${err}`);
+            res.sendStatus(500);
+          });
+      }
+    );
 
-router.post('/logout', (req: Request, res: Response): void => {
-  req.logout();
-  res.sendStatus(200);
-});
+    router.post(
+      '/login',
+      userStrategy.authenticate('local'),
+      (req: Request, res: Response): void => {
+        res.sendStatus(200);
+      }
+    );
 
-export default router;
+    router.post('/logout', (req: Request, res: Response): void => {
+      req.logout();
+      res.sendStatus(200);
+    });
+
+    export default router;
