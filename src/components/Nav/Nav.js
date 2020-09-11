@@ -19,11 +19,7 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link to="/home">
-<<<<<<< HEAD
-        <img className="JALogo" src="https://greaterkansascity.ja.org/contentAsset/image/ac1a740b-7a33-4563-906c-5324fec01b64/hostThumbnail/filter/Resize/resize_h/80" />
-=======
         <h2 className="nav-title">Junior Achievement</h2>
->>>>>>> develop
       </Link>
 
       <div >
@@ -48,14 +44,10 @@ const Nav = (props) => {
         {/* Always show this link since the about page is not protected */}
         {/* <Link className="nav-link" to="/about">
           About
-<<<<<<< HEAD
-        </Link> */}
-=======
         </Link>
         <Link className="nav-link" to="/volunteer">
           Volunteer
         </Link>
->>>>>>> develop
       </div>
     </div>
 
