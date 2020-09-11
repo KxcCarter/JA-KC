@@ -26,7 +26,7 @@ router.post('/register', (req, res, next) => {
   const account_type_id = req.body.account_type_id;
   const email = req.body.email;
   const telephone = req.body.telephone;
-  const queryText = `INSERT INTO "users" (username, first_name, last_name, password, account_type_id, email, telephone)
+  const queryText = `INSERT INTO users (username, first_name, last_name, password, account_type_id, email, telephone)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
   pool
     .query(queryText, [username, first_name, last_name, password, account_type_id, email, telephone])

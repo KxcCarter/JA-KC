@@ -8,8 +8,12 @@ import './RegisterPage.css';
 
 class AdminRegisterPage extends Component {
   state = {
+    first_name: '',
+    last_name: '',
     username: '',
     password: '',
+    email: '',
+    phone: '',
   };
 
   render() {

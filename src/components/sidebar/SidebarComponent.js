@@ -10,6 +10,7 @@ import IconAgents from '../../assets/icon-agents';
 import IconArticles from '../../assets/icon-articles';
 import IconBurger from '../../assets/icon-burger';
 import Volunteers from '../content/Volunteers';
+import './SidebarComponent.css';
 // import UnresolvedTicketsComponent from '../content/UnresolvedTicketsComponent';
 // import AddAdmin from '../AddAdmin/AddAdmin';
 
@@ -157,7 +158,9 @@ function SidebarComponent({ onChange, selectedItem }) {
                 >
                     <LogoComponent />
                     <Column className={css(styles.menuItemList)}>
-                        <Link to="/reports">
+                        <Link
+                            className="link"
+                            to="/reports">
                             <MenuItemComponent
                                 title="Reports"
                                 icon={IconOverview}
@@ -165,7 +168,9 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Reports'}
                             />
                         </Link>
-                        <Link to="/volunteers">
+                        <Link
+                            className="link"
+                            to="/volunteers">
                             <MenuItemComponent
                                 title="Volunteers"
                                 icon={IconContacts}
@@ -173,7 +178,8 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Volunteers'}
                             />
                         </Link>
-                        <Link to="/classes">
+                        <Link className="link"
+                            to="/classes">
                             <MenuItemComponent
                                 title="Classes and Training"
                                 icon={IconArticles}

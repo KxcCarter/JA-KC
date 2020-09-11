@@ -20,7 +20,7 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: '1',
+    account_type_id: 1,
     email: '',
     telephone: ''
   }; // end state
