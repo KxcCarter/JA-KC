@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
         marginLeft: '0%'
     },
     content: {
-        marginTop: 54
+        marginTop: 54,
+
     },
     mainBlock: {
         backgroundColor: '#F7F8FC',
@@ -48,13 +49,15 @@ class AdminClasses extends React.Component {
                 <SidebarComponent selectedItem={selectedItem} onChange={(selectedItem) => this.setState({ selectedItem })} />
                 <Column flexGrow={1} className={css(styles.mainBlock)}>
                     <HeaderComponent title={selectedItem} />
-                    <div className={css(styles.content)}>
-                        <AdminMain />
 
+                    <div className={css(styles.content)}>
+
+                        <AdminMain />
 
                         <Classes />
 
                         <Trainings />
+
                     </div>
                 </Column>
             </Row >

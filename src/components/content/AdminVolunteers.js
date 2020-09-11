@@ -47,7 +47,7 @@ class AdminVolunteers extends React.Component {
                 <Column flexGrow={1} className={css(styles.mainBlock)}>
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
-                        <AdminMain />
+                        {/* <AdminMain /> */}
                         <Volunteers />
                     </div>
                 </Column>
