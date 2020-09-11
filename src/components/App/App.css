@@ -2,11 +2,15 @@ html,
 body,
 #react-root {
   height: 100%;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;  margin: 0px !important;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;  margin: 0px !important;
 }
 
 img {

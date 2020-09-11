@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 // Needed data on payload
 // {program_id: 'number'}
 
-function* getLearningMaterial() {
+function* getLearningMaterial(action) {
   try {
     const response = yield axios.get(
       `/volunteer/resources/${action.payload.program_id}`

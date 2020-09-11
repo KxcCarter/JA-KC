@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 // Required data on payload
 // {scheduled_class_id: 'number'}
 
-function* getClassDetails() {
+function* getClassDetails(action) {
   try {
     const response = yield axios.get(
       `/volunteer/scheduled/${action.payload.scheduled_class_id}`

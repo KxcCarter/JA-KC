@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Container from '@material-ui/core/Container';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+// CUSTOM COMPONENTS
+import "./LoginForm.css";
+
+// component for existing user log in
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-  };
+  };// end state
 
   login = (event) => {
     event.preventDefault();
-
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
@@ -22,53 +36,89 @@ class LoginForm extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  }; // end login
+  }// end login
 
-  handleInputChangeFor = (propertyName) => (event) => {
+  // captures change on each input
+  handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  };
+  };// end handleInputChangeFor
 
   render() {
     return (
-      <form className="formPanel" onSubmit={this.login}>
-        <h2>Login</h2>
-        {this.props.store.errors.loginMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.loginMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
+
+      <div className="loginDiv">
+        <div className="overlay">
+
+          <Card className="loginCard" onSubmit={this.login}>
+
+            <Container className="loginContainer" component="main" maxWidth="xs">
+              <CssBaseline />
+              <div className="loginPaper">
+                <ArrowBackIcon className="loginArrow" />
+                <br></br>
+                <br></br>
+                <Avatar className="loginAvatar">
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Admin Account Log In
+                    </Typography>
+                {this.props.store.errors.loginMessage && (
+                  <h3
+                    className="alert"
+                    role="alert"
+                  >
+                    {this.props.store.errors.loginMessage}
+                  </h3>
+                )}
+                <form className="loginForm" noValidate>
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    label="Username"
+                    autoFocus
+                    type="text"
+                    name="username"
+                    required
+                    value={this.state.username}
+                    onChange={this.handleInputChangeFor('username')}
+                  />
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    id="password"
+                    autoComplete="current-password"
+                    type="password"
+                    required
+                    value={this.state.password}
+                    onChange={this.handleInputChangeFor('password')}
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    color="primary"
+                    className="loginButton"
+                    variant="contained"
+                    value="Log In"
+                  >
+                    Log In
+                  </Button>
+
+                </form>
+              </div>
+            </Container>
+
+          </Card>
+
         </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
-        </div>
-      </form>
+      </div >
+
     );
   }
-}
+};// end LoginForm
 
 export default connect(mapStoreToProps)(LoginForm);

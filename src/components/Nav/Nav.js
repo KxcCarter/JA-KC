@@ -7,8 +7,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const Nav = (props) => {
   let loginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
+    path: '/adminlogin',
+    text: 'Login',
   };
 
   if (props.store.user.id != null) {
@@ -19,33 +19,46 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link to="/home">
+<<<<<<< HEAD
+        <img className="JALogo" src="https://greaterkansascity.ja.org/contentAsset/image/ac1a740b-7a33-4563-906c-5324fec01b64/hostThumbnail/filter/Resize/resize_h/80" />
+=======
         <h2 className="nav-title">Junior Achievement</h2>
+>>>>>>> develop
       </Link>
-      <div className="nav-right">
-        <Link className="nav-link" to={loginLinkData.path}>
+
+      <div >
+        {/* <Link className="nav-link" to={loginLinkData.path}> */}
+        {/* <Link className="nav-link" to="/adminlogin">
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
-          {loginLinkData.text}
-        </Link>
+        {/* {loginLinkData.text} */}
+        {/* <LogOutButton className="nav-link" /> 
+        </Link> */}
+        <LogOutButton className="nav-link" />
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
-            <Link className="nav-link" to="/info">
+            {/* <Link className="nav-link" to="/info">
               Info Page
-            </Link>
+            </Link> */}
             <LogOutButton className="nav-link" />
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
+<<<<<<< HEAD
+        </Link> */}
+=======
         </Link>
         <Link className="nav-link" to="/volunteer">
           Volunteer
         </Link>
+>>>>>>> develop
       </div>
     </div>
+
   );
 };
 
