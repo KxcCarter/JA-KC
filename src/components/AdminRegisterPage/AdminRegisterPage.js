@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import './RegisterPage.css';
 
-class RegisterPage extends Component {
+class AdminRegisterPage extends Component {
   state = {
     username: '',
     password: '',
@@ -23,4 +23,4 @@ class RegisterPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterPage);
+export default connect(mapStoreToProps)(AdminRegisterPage);

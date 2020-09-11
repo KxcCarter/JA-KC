@@ -157,12 +157,14 @@ function SidebarComponent({ onChange, selectedItem }) {
                 >
                     <LogoComponent />
                     <Column className={css(styles.menuItemList)}>
-                        <MenuItemComponent
-                            title="Reports"
-                            icon={IconOverview}
-                            onClick={() => onReportsClick('Reports')}
-                            active={selectedItem === 'Reports'}
-                        />
+                        <Link to="/reports">
+                            <MenuItemComponent
+                                title="Reports"
+                                icon={IconOverview}
+                                onClick={() => onReportsClick('Reports')}
+                                active={selectedItem === 'Reports'}
+                            />
+                        </Link>
                         <Link to="/volunteers">
                             <MenuItemComponent
                                 title="Volunteers"
@@ -171,13 +173,14 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Volunteers'}
                             />
                         </Link>
-                        <MenuItemComponent
-                            title="Classes and Training"
-                            icon={IconArticles}
-                            onClick={() => onClassesClick('Classes and Training')}
-                            active={selectedItem === 'Classes and Training'}
-                        />
-
+                        <Link to="/classes">
+                            <MenuItemComponent
+                                title="Classes and Training"
+                                icon={IconArticles}
+                                onClick={() => onClassesClick('Classes and Training')}
+                                active={selectedItem === 'Classes and Training'}
+                            />
+                        </Link>
                         <MenuItemComponent
                             title="Add Admin User"
                             icon={IconAgents}

@@ -63,7 +63,7 @@ class LoginForm extends Component {
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                  Log in to your profile
+                  Admin Account Log In
                     </Typography>
                 {this.props.store.errors.loginMessage && (
                   <h3

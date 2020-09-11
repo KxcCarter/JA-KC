@@ -17,10 +17,11 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
+import AdminReports from '../content/AdminReports';
+import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
@@ -55,6 +56,21 @@ class App extends Component {
               path="/classes"
               component={AdminClasses}
             />
+            <Route
+              exact
+              path="/reports"
+              component={AdminReports}
+            />
+            <Route
+              exact
+              path="/adminlogin"
+              component={AdminLoginPage}
+            />
+            <Route
+              exact
+              path="/home"
+              component={AdminRegisterPage}
+            />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -77,25 +93,34 @@ class App extends Component {
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-            <ProtectedRoute
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LoginPage at /login
               exact
-              path="/login"
-              component={LoginPage}
+              path="/adminlogin"
+              component={AdminLoginPage}
               authRedirect="/user"
-            />
-            <ProtectedRoute
+            /> */}
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows RegisterPage at "/registration"
               exact
-              path="/registration"
-              component={RegisterPage}
+              path="/adminregistration"
+              component={AdminRegisterPage}
               authRedirect="/user"
-            />
-            <ProtectedRoute
+            /> */}
+            {/* <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows RegisterPage at "/registration"
+              exact
+              path="/volunteerregistration"
+              component={VolunteerRegisterPage}
+              authRedirect="/user"
+            /> */}
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
@@ -103,7 +128,7 @@ class App extends Component {
               path="/home"
               component={RegisterPage}
               authRedirect="/user"
-            />
+            /> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

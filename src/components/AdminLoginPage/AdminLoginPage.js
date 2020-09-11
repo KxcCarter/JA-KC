@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 
 
-class LoginPage extends Component {
+class AdminLoginPage extends Component {
   render() {
     return (
       <div>
@@ -16,4 +16,4 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(LoginPage);
+export default connect(mapStoreToProps)(AdminLoginPage);

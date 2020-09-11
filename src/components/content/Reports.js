@@ -25,22 +25,24 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(name, email, phone, classes, assign) {
-    return { name, email, phone, classes, assign };
+function createData(name, classes, completion, image, location, number) {
+    return { name, classes, completion, image, location, number };
 }
 
 const rows = [
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5565", 'Financial Literacy', "ASSIGN CLASS"),
-    createData('Tammy Parker', 'ttammy@mail.com', "555-555-4455", 'Financial Literacy', "ASSIGN CLASS"),
-
-    createData('Steven Bobby', 'steveystevareno@mail.com', "555-555-6655", 'Financial Literacy', "ASSIGN CLASS"),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
-
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Allen', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Parsons', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Miller', 'Financial Literacy for Adults', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/25/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/26/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/27/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -70,11 +72,12 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
     { id: 'classes', numeric: true, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'assign', numeric: true, disablePadding: false, label: 'Assign New Class' },
+    { id: 'completion', numeric: true, disablePadding: false, label: 'Completion Date' },
+    { id: 'image', numeric: true, disablePadding: false, label: 'Image Link' },
+    { id: 'location', numeric: true, disablePadding: false, label: 'Location' },
+    { id: 'number', numeric: true, disablePadding: false, label: 'Number of Students' },
 ];
 
 function EnhancedTableHead(props) {
@@ -166,7 +169,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                     <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                        Volunteers
+                        Completion Reports
                     </Typography>
                 )}
 
@@ -218,7 +221,7 @@ const useStyles = makeStyles((theme) => ({
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-function Volunteers(props) {
+function Reports(props) {
     // Using hooks we're creating local state for a "heading" variable with
 
     const classes = useStyles();
@@ -328,10 +331,11 @@ function Volunteers(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
                                             <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.assign}</TableCell>
+                                            <TableCell align="right">{row.completion}</TableCell>
+                                            <TableCell align="right">{row.image}</TableCell>
+                                            <TableCell align="right">{row.location}</TableCell>
+                                            <TableCell align="center">{row.number}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -362,4 +366,4 @@ function Volunteers(props) {
 }
 
 
-export default connect(mapStoreToProps)(Volunteers);
+export default connect(mapStoreToProps)(Reports);
