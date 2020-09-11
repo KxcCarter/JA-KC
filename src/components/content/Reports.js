@@ -160,6 +160,7 @@ function EnhancedTableHead(props) {
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
+               
                     <Checkbox
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
@@ -240,13 +241,16 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
                         Completion Reports
+                        
                     </Typography>
+                    
                 )}
 
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
                         <DeleteIcon />
+                       
                     </IconButton>
                 </Tooltip>
             ) : (
@@ -359,6 +363,7 @@ function Reports(props) {
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
+                
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
