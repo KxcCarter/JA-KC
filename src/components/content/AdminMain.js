@@ -6,7 +6,7 @@ import MiniCardComponent from './MiniCardComponent';
 const styles = StyleSheet.create({
     cardsContainer: {
         marginRight: -30,
-        marginTop: -30
+        marginTop: -30,
     },
     cardRow: {
         marginTop: 30,

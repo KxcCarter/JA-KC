@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 class AdminClasses extends React.Component {
 
-    state = { selectedItem: '' };
+    state = { selectedItem: 'Classes and Training Resources' };
 
     componentDidMount() {
         window.addEventListener('resize', this.resize);
@@ -49,7 +49,6 @@ class AdminClasses extends React.Component {
                 <SidebarComponent selectedItem={selectedItem} onChange={(selectedItem) => this.setState({ selectedItem })} />
                 <Column flexGrow={1} className={css(styles.mainBlock)}>
                     <HeaderComponent title={selectedItem} />
-
                     <div className={css(styles.content)}>
 
                         <AdminMain />

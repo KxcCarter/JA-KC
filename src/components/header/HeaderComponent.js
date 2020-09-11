@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         border: '1px solid #DFE0EB',
     },
     container: {
-        height: 40
+        height: 5
     },
     cursorPointer: {
         cursor: 'pointer'
@@ -70,7 +70,7 @@ function HeaderComponent(props) {
     return (
         <Row className={css(styles.container)} vertical="center" horizontal="space-between" {...otherProps}>
             <span className={css(styles.title)}>{title}</span>
-            <Row vertical="center">
+            {/* <Row vertical="center">
                 <div className={css(styles.iconStyles)}>
                     <IconSearch />
                 </div>
@@ -79,9 +79,9 @@ function HeaderComponent(props) {
                 <Row vertical="center">
 
                     <span className={css(styles.name, styles.cursorPointer)}>Admin User</span>
-                </Row>
-            </Row>
+                </Row> */}
         </Row>
+
     );
 }
 

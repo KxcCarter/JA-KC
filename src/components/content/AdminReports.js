@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 class AdminReports extends React.Component {
 
-    state = { selectedItem: '' };
+    state = { selectedItem: 'Reports' };
 
     componentDidMount() {
         window.addEventListener('resize', this.resize);
@@ -47,7 +47,7 @@ class AdminReports extends React.Component {
                 <Column flexGrow={1} className={css(styles.mainBlock)}>
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
-                        {/* <AdminMain /> */}
+                        <AdminMain />
                         <Reports />
                     </div>
                 </Column>

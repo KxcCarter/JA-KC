@@ -177,8 +177,8 @@ function SidebarComponent({ onChange, selectedItem }) {
                             <MenuItemComponent
                                 title="Classes and Training"
                                 icon={IconArticles}
-                                onClick={() => onClassesClick('Classes and Training')}
-                                active={selectedItem === 'Classes and Training'}
+                                onClick={() => onClassesClick('Classes and Training Resources')}
+                                active={selectedItem === 'Classes and Training Resources'}
                             />
                         </Link>
                         <MenuItemComponent
