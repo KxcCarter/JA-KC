@@ -10,9 +10,9 @@ const router: express.Router = express.Router();
 router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT`;
+    const queryText = `SELECT * FROM "learning_material";`;
     pool
-      .query(queryText, [req.body])
+      .query(queryText)
       .then((response) => res.send(response.rows))
       .catch((error) => console.log('Error in training GET:', error));
   }
@@ -24,12 +24,43 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const title = req.body;
-    const content = req.body;
+    const program_id: string = req.body.program_id;
+    const title: string = req.body.title;
+    const content: string = req.body.content;
 
-    const queryText = `INSERT INTO`;
+    const queryText = `INSERT INTO "learning_material" VALUES ($1, $2, $3);`;
     pool
-      .query(queryText, [title, content])
+      .query(queryText, [program_id, title, content])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
+  }
+);
+
+router.delete(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const id: number = req.params.id;
+    const queryText = `DELETE FROM "learning_material" WHERE "learning_material".id=$1`;
+    pool
+      .query(queryText, [id])
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+router.put(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const program_id: string = req.body.program_id;
+    const title: string = req.body.title;
+    const content: string = req.body.content;
+
+    const queryText = `UPDATE "learning_material" SET "program_id"=$1, "title"=$2, "content"=$3);`;
+    pool
+      .query(queryText, [program_id, title, content])
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(500));
   }

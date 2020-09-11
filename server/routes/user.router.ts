@@ -16,10 +16,10 @@ router.post(
   (req: Request, res: Response, next: express.NextFunction): void => {
     const username: string = <string>req.body.username;
     const password: string = encryptPassword(req.body.password);
-    const first_name: string = req.body.first_name;
-    const last_name: string = req.body.last_name;
-    const email: string = req.body.email;
-    const telephone: string = req.body.telephone;
+    const first_name: string = <string>req.body.first_name;
+    const last_name: string = <string>req.body.last_name;
+    const email: string = <string>req.body.email;
+    const telephone: string = <string>req.body.telephone;
 
     const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
     pool

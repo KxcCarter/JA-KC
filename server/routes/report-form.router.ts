@@ -10,9 +10,9 @@ const router: express.Router = express.Router();
 router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT`;
+    const queryText = `SELECT * FROM "scheduled_classes";`;
     pool
-      .query(queryText, [req.body])
+      .query(queryText)
       .then((response) => res.send(response.rows))
       .catch((error) => console.log('Error in report-form GET:', error));
   }
@@ -24,13 +24,14 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const class_id = req.body;
-    const school_name = req.body;
-    const volunteer_name = req.body;
-    const size = req.body;
-    const completion_date = req.body;
+    const class_id: string = req.body.class_id;
+    const school_name: string = req.body.school_name;
+    const volunteer_name: string = req.body.volunteer_name;
+    const size: string = req.body.size;
+    const completion_date: string = req.body.completion_date;
+    const user_id:
 
-    const queryText = `INSERT INTO`;
+    const queryText = `INSERT INTO "scheduled_classes" VALUES ($1, $2, $3, $4, $5);`;
     pool
       .query(queryText, [
         class_id,
@@ -39,6 +40,36 @@ router.post(
         size,
         completion_date,
       ])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
+  }
+);
+
+router.delete(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const id: number = req.params.id;
+    const queryText = `DELETE FROM "scheduled_classes" WHERE "scheduled_classes".id=$1`;
+    pool
+      .query(queryText, [id])
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
+);
+
+router.put(
+  '/:id',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const title: string = req.body.title;
+    const image: string = req.body.image;
+    const id: number = req.params.id;
+
+    const queryText = `UPDATE "scheduled_classes" SET "title"=$1, "image"=$2 WHERE "id"=$3);`;
+    pool
+      .query(queryText, [title, image, id])
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(500));
   }
