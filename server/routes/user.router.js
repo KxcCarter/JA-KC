@@ -29,12 +29,23 @@ router.post('/register', (req, res, next) => {
   const queryText = `INSERT INTO users (username, first_name, last_name, password, account_type_id, email, telephone)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
 
-  const queryText = `INSERT INTO "users" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "users" (username, first_name, last_name, password, account_type_id, email, telephone)
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
   pool
     .query(queryText, [username, first_name, last_name, password, account_type_id, email, telephone])
+    .query(queryText, [
+      username,
+      first_name,
+      last_name,
+      password,
+      account_type_id,
+      email,
+      telephone,
+    ])
     .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .catch(() => {
+      res.sendStatus(500);
+    });
 });
 
 // Handles login form authenticate/login POST

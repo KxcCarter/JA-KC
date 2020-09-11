@@ -9,7 +9,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 //   class_size: 'number',
 // }
 
-function* volunteerCompleteClass() {
+function* volunteerCompleteClass(action) {
   try {
     yield axios.post('/volunteer', action.payload);
     yield put({ type: 'GET_SCHEDULED_CLASSES' });

@@ -1,4 +1,3 @@
--- This must be run before any other query!
 INSERT INTO "account_type"
     ("title")
 VALUES
@@ -48,6 +47,11 @@ INSERT INTO "scheduled_classes"
 VALUES
     (1, 2, 3),
     (1, 1, 1);
+INSERT INTO "images"
+    ("user_id", "program_id", "scheduled_class_id", "image_url")
+VALUES
+    (1, 1, 1, 'https://picsum.photos/200/300');
+
 
 INSERT INTO "images"
     ("user_id", "program_id", "scheduled_class_id", "image_url")

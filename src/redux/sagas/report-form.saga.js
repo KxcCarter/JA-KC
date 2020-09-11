@@ -11,7 +11,7 @@ function* submitReport(action) {
   }
 }
 
-function* dogregistrationSaga() {
+function* reportformSaga() {
   yield takeLatest('SUBMIT_REPORT', submitReport);
 }
 

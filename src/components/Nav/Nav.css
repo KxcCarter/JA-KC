@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html {
   -webkit-font-smoothing: antialiased;
 }
@@ -27,6 +28,19 @@ body {
 .nav {
   margin: 0;
   background-color: #f6f7f8;
+=======
+.nav-title {
+  font-size: 24px;
+  font-weight: 700;
+  display: inline-block;
+  color: #f2f2f2;
+  padding-left: 10px;
+}
+
+.nav {
+  margin: 0 0 30px;
+  background-color: #008751;
+>>>>>>> develop
   overflow: hidden;
   display: inline;
  
@@ -34,16 +48,23 @@ body {
 } 
 /* 
 .nav-link {
+<<<<<<< HEAD
   float: right;
   margin-right: 30px;
   margin-top: -80px;
   color: #61b42a;
   background-color: #fdfdfd;
+=======
+  float: left;
+  color: #f2f2f2;
+  background-color: #008751;
+>>>>>>> develop
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 20px;
 
+<<<<<<< HEAD
    these last two make the logout button in
   the nav bar look like another link 
  
@@ -56,10 +77,22 @@ body {
 
 .nav-link:hover {
   color: #e7a011
+=======
+  /* these last two make the logout button in
+  the nav bar look like another link */
+  border: none;
+  cursor: pointer;
+  outline: 0;
+}
+
+.nav-link:hover {
+  background-color: #d59844;
+>>>>>>> develop
 }
 
 .nav-right {
   float: right;
+<<<<<<< HEAD
   flex: 1;
   display: flex;
   justify-content: flex-end;
@@ -68,4 +101,6 @@ body {
 .maillink {
 text-decoration-line: none;
 
+=======
+>>>>>>> develop
 }

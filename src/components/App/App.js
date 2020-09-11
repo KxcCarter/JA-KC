@@ -17,11 +17,18 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+<<<<<<< HEAD
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
+=======
+import LandingPage from '../LandingPage/LandingPage';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
+>>>>>>> develop
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
@@ -129,6 +136,16 @@ class App extends Component {
               component={RegisterPage}
               authRedirect="/user"
             /> */}
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/volunteer"
+              component={VolunteerDashboardPage}
+              authRedirect="/volunteer"
+            />
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

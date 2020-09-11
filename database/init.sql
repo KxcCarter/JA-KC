@@ -3,7 +3,6 @@ CREATE TABLE "account_type"
     "id" SERIAL PRIMARY KEY,
     "title" VARCHAR(50) NOT NULL
 );
-
 CREATE TABLE "users"
 (
     "id" SERIAL PRIMARY KEY,
@@ -18,7 +17,6 @@ CREATE TABLE "users"
     "email" VARCHAR(80),
     "telephone" VARCHAR(80)
 );
-
 CREATE TABLE "programs"
 (
     "id" SERIAL PRIMARY KEY,
@@ -26,7 +24,6 @@ CREATE TABLE "programs"
     "image" varchar(150),
     "sessions" int
 );
-
 CREATE TABLE "schools"
 (
     "id" SERIAL PRIMARY KEY,
@@ -36,7 +33,6 @@ CREATE TABLE "schools"
     "state" VARCHAR(20),
     "zip" int
 );
-
 CREATE TABLE "learning_material"
 (
     "id" SERIAL PRIMARY KEY,
@@ -44,7 +40,6 @@ CREATE TABLE "learning_material"
     "title" varchar(100) NOT NULL,
     "content" text
 );
-
 CREATE TABLE "scheduled_classes"
 (
     "id" SERIAL PRIMARY KEY,
@@ -54,7 +49,6 @@ CREATE TABLE "scheduled_classes"
     "size" int,
     "completion_date" DATE
 );
-
 CREATE TABLE "images"
 (
     "id" SERIAL PRIMARY KEY,
@@ -64,4 +58,3 @@ CREATE TABLE "images"
     "image_url" varchar(150),
     "upload_date" DATE DEFAULT CURRENT_DATE
 );
-
