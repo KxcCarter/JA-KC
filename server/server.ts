@@ -6,6 +6,7 @@ import userRouter from './routes/user.router';
 import volunteerRouter from './routes/volunteer.router';
 import trainingRouter from './routes/training.router';
 import reportformRouter from './routes/report-form.router';
+import programsRouter from './routes/programs.router';
 
 require('dotenv').config();
 
@@ -29,6 +30,7 @@ app.use('/api/volunteer', volunteerRouter);
 
 app.use('/api/training', trainingRouter);
 app.use('/api/report-form', reportformRouter);
+app.use('/api/programs', programsRouter);
 
 
 // Serve static files

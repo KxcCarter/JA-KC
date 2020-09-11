@@ -6,6 +6,10 @@ import getReportSaga from './getreport.saga';
 import reportFormSaga from './report-form.saga';
 import deleteReportSaga from './deletereport.saga';
 import editReportSaga from './editreport.saga';
+import programSaga from './programs.saga';
+import editprogramSaga from './editprograms.saga';
+import deleteprogramSaga from './deleteprogram.saga';
+import deleteProgramSaga from './deleteprogram.saga';
 import volunteerGetClassListSaga from './volunteerGetClassList.saga';
 import volunteerCompleteClassSaga from './volunteerCompleteClass.saga';
 import volunteerGetLearningMaterialSaga from './volunteerGetLearningMaterial.saga';
@@ -27,6 +31,9 @@ export default function* rootSaga() {
     reportFormSaga(),
     deleteReportSaga(),
     editReportSaga(),
+    programSaga(),
+    editprogramSaga(),
+    deleteProgramSaga(),
     volunteerGetClassListSaga(),
     volunteerCompleteClassSaga(),
     volunteerGetLearningMaterialSaga(),
