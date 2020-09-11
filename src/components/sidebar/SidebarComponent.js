@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite';
 import LogoComponent from './LogoComponent';
@@ -8,7 +9,9 @@ import IconContacts from '../../assets/icon-contacts';
 import IconAgents from '../../assets/icon-agents';
 import IconArticles from '../../assets/icon-articles';
 import IconBurger from '../../assets/icon-burger';
-import AddAdmin from '../AddAdmin/AddAdmin';
+import Volunteers from '../content/Volunteers';
+// import UnresolvedTicketsComponent from '../content/UnresolvedTicketsComponent';
+// import AddAdmin from '../AddAdmin/AddAdmin';
 
 const styles = StyleSheet.create({
     burgerIcon: {
@@ -91,16 +94,33 @@ function SidebarComponent({ onChange, selectedItem }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.innerWidth]);
 
-    const onItemClicked = item => {
-        setExpanded(false);
-        return onChange(item);
-    };
 
     const onAddAdmin = () => {
 
         window.location.href = `mailto:?, cc=?, &subject=Please join Junior Achievement as an Admin&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as an admin www.google.com`;
     };
 
+    const onReportsClick = item => {
+        setExpanded(false);
+        console.log("Clicked Reports");
+        return onChange(item);
+    }
+
+    const onVolunteersClick = item => {
+        setExpanded(false);
+        return onChange(item);
+        //     return <button onClick={props.addTrip}>Add a trip</button>
+        //   }
+
+        // return onChange(item);
+    }
+
+    const onClassesClick = item => {
+        setExpanded(false);
+        console.log("Clicked Classes");
+        return onChange(item);
+
+    }
 
 
     const toggleMenu = () => setExpanded(!expanded);
@@ -140,21 +160,24 @@ function SidebarComponent({ onChange, selectedItem }) {
                         <MenuItemComponent
                             title="Reports"
                             icon={IconOverview}
-                            onClick={() => onItemClicked('Reports')}
+                            onClick={() => onReportsClick('Reports')}
                             active={selectedItem === 'Reports'}
                         />
-                        <MenuItemComponent
-                            title="Volunteers"
-                            icon={IconContacts}
-                            onClick={() => onItemClicked('Volunteers')}
-                            active={selectedItem === 'Volunteers'}
-                        />
+                        <Link to="/volunteers">
+                            <MenuItemComponent
+                                title="Volunteers"
+                                icon={IconContacts}
+                                onClick={() => onVolunteersClick('Volunteers')}
+                                active={selectedItem === 'Volunteers'}
+                            />
+                        </Link>
                         <MenuItemComponent
                             title="Classes and Training"
                             icon={IconArticles}
-                            onClick={() => onItemClicked('Classes and Training')}
+                            onClick={() => onClassesClick('Classes and Training')}
                             active={selectedItem === 'Classes and Training'}
                         />
+
                         <MenuItemComponent
                             title="Add Admin User"
                             icon={IconAgents}

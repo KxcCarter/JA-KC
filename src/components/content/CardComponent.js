@@ -80,7 +80,7 @@ class CardComponent extends React.Component {
         const { title, link, subtitle, subtitleTwo, items, containerStyles } = this.props;
         return (
             <Column flexGrow={1} className={css(styles.container, containerStyles)} breakpoints={{ 426: css(styles.containerMobile) }}>
-                <Row horizontal="space-between">
+                {/* <Row horizontal="space-between">
                     <Column>
                         <span className={css(styles.title)}>{title}</span>
                         <Row style={{ marginTop: 8, marginBottom: 16 }}>
@@ -90,7 +90,7 @@ class CardComponent extends React.Component {
                     </Column>
                     <span className={css(styles.link)}>{link}</span>
                 </Row>
-                {items.map(this.renderItem)}
+                {items.map(this.renderItem)} */}
             </Column>
         );
     }

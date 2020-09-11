@@ -3,7 +3,6 @@ import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
 
-
 const styles = StyleSheet.create({
     cardsContainer: {
         marginRight: -30,
@@ -23,29 +22,16 @@ const styles = StyleSheet.create({
             maxWidth: 'none'
         }
     },
-    todayTrends: {
-        marginTop: 30
-    },
     lastRow: {
         marginTop: 30
     },
-    unresolvedTickets: {
-        marginRight: 30,
-        '@media (max-width: 1024px)': {
-            marginRight: 0
-        }
-    },
-    tasks: {
-        marginTop: 0,
-        '@media (max-width: 1024px)': {
-            marginTop: 30,
-        }
-    }
+
+
 });
 
 
 
-function ContentComponent() {
+function AdminMain() {
 
 
     return (
@@ -60,15 +46,11 @@ function ContentComponent() {
                     <MiniCardComponent className={css(styles.miniCardContainer)} title="Total Students Taught" value="64" />
                 </Row>
             </Row>
-            {/* <div className={css(styles.todayTrends)}>
-                <TodayTrendsComponent />
-            </div> */}
+
             <Row horizontal="space-between" className={css(styles.lastRow)} breakpoints={{ 1024: 'column' }}>
-                {/* <UnresolvedTicketsComponent /> */}
-                {/* <TasksComponent containerStyles={styles.tasks} /> */}
             </Row>
         </Column>
     );
 }
 
-export default ContentComponent;
+export default AdminMain;

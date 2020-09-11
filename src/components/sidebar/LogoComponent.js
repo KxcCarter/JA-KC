@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Muli',
         fontStyle: 'normal',
         fontWeight: 'bold',
-        fontSize: 19,
+        fontSize: 22,
         lineHeight: '24px',
         letterSpacing: '0.4px',
         color: '#61b42a',
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
 function LogoComponent() {
     return (
         <Row className={css(styles.container)} horizontal="center" vertical="center">
-            <Logo />
-            <span className={css(styles.title)}>Admin Dashboard</span>
+
+            <span className={css(styles.title)}>JAKC Dashboard</span>
         </Row>
     );
 }

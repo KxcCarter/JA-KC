@@ -149,17 +149,8 @@ class RegisterForm extends Component {
                     value="Register"
                   >Register
                     </Button>
-                  <center>
-                    <Link to="/login">
-                      <Button
-                        type="logbutton"
-                        className="loginButton"
-                        color="primary"
-                      >
-                        Login
-                      </Button>
-                    </Link>
-                  </center>
+
+
                 </form>
               </div>
             </Container>

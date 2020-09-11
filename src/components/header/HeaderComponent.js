@@ -74,13 +74,11 @@ function HeaderComponent(props) {
                 <div className={css(styles.iconStyles)}>
                     <IconSearch />
                 </div>
-                <div className={css(styles.iconStyles)}>
-                    <IconBellNew />
-                </div>
+
                 <div className={css(styles.separator)}></div>
                 <Row vertical="center">
+
                     <span className={css(styles.name, styles.cursorPointer)}>Admin User</span>
-                    {/* <img src="https://avatars3.githubusercontent.com/u/21162888?s=460&v=4" alt="avatar" className={css(styles.avatar, styles.cursorPointer)} /> */}
                 </Row>
             </Row>
         </Row>

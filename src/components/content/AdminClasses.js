@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from './redux/mapStoreToProps';
+// import mapStoreToProps from './redux/mapStoreToProps';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite';
-import SidebarComponent from './components/sidebar/SidebarComponent';
-import HeaderComponent from './components/header/HeaderComponent';
-import AdminMain from './components/content/AdminMain';
-import './AppDashboard.css';
+import SidebarComponent from '../sidebar/SidebarComponent';
+import HeaderComponent from '../header/HeaderComponent';
+import AdminMain from '../content/AdminMain';
+import Classes from '../content/Classes';
+import Trainings from '../content/Trainings';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     }
 });
 
-class AppDashboard extends React.Component {
+class AdminClasses extends React.Component {
 
     state = { selectedItem: '' };
 
@@ -48,13 +50,16 @@ class AppDashboard extends React.Component {
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
                         <AdminMain />
+
+
+                        <Classes />
+
+                        <Trainings />
                     </div>
                 </Column>
-            </Row>
+            </Row >
         );
     }
 }
 
-export default AppDashboard;
-
-
+export default AdminClasses;

@@ -15,14 +15,15 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import JALandingPage from '../JALandingPage/JALandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminVolunteers from '../content/AdminVolunteers';
+import AdminClasses from '../content/AdminClasses';
 
 import './App.css';
+import AppDashboard from '../../AppDashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -40,10 +41,19 @@ class App extends Component {
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
-              // shows AboutPage at all times (logged in or not)
               exact
-              path="/about"
-              component={AboutPage}
+              path="/admin"
+              component={AppDashboard}
+            />
+            <Route
+              exact
+              path="/volunteers"
+              component={AdminVolunteers}
+            />
+            <Route
+              exact
+              path="/classes"
+              component={AdminClasses}
             />
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -91,7 +101,7 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={JALandingPage}
+              component={RegisterPage}
               authRedirect="/user"
             />
 
