@@ -6,7 +6,7 @@ import { StyleSheet, css } from 'aphrodite';
 import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
-import Volunteers from '../content/Volunteers';
+import Tab from '../content/Tab';
 import CSV from '../content/CSV';
 
 
@@ -51,7 +51,7 @@ class AdminVolunteers extends React.Component {
                     <div className={css(styles.content)}>
                         <AdminMain />
 
-                        <Volunteers />
+                        <Tab />
                     </div>
                 </Column>
             </Row>

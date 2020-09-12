@@ -15,15 +15,16 @@ function CSV(props) {
 
     const csvData = [
         ["firstname", "lastname", "email"],
-        ["Ahmed", "Tomi", "ah@smthing.co.com"],
-        ["Raed", "Labes", "rl@smthing.co.com"],
-        ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+        ["David", "Walton", "david@mail.com"],
+        ["Kenny", "Carter", "kenny@mail.com"],
+        ["Ailea", "Patrinely", "ailea@mail.com"],
+        ["Skyler", "Burgard", "skyler@mail.com"]
     ];
 
 
     return (
         <div>
-            <CSVLink data={csvData}>Export to CSV</CSVLink>;
+            <CSVLink data={csvData}>Export to CSV</CSVLink>
 
             {/* <CSVDownload data={csvData} target="_blank" />; */}
 
