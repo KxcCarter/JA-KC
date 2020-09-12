@@ -52,11 +52,11 @@ class AdminClasses extends React.Component {
                     <div className={css(styles.content)}>
 
                         <AdminMain />
-
+                        <button>click me</button>
                         <Classes />
 
                         <Trainings />
-
+                        <button>click me</button>
                     </div>
                 </Column>
             </Row >

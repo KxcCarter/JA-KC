@@ -61,9 +61,10 @@ class RegisterForm extends Component {
                 <ArrowBackIcon className="registerArrow" />
                 <Avatar className="registerAvatar">
                 </Avatar>
-                <h4>
-                  Administrative Registration
-                </h4>
+                <Typography className="loginTitle" component="h1" variant="h5">
+
+                  Administrator Registration
+                </Typography>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -156,7 +157,7 @@ class RegisterForm extends Component {
             </Container>
           </Card>
         </div >
-      </div>
+      </div >
     );
   }
 }

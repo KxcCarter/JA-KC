@@ -106,6 +106,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function downloadCSV(args) {
+    console.log("clicked csv");
     let data, filename, link;
     let csv = convertArrayOfObjectsToCSV({
         data: stockData
@@ -248,7 +249,9 @@ const EnhancedTableToolbar = (props) => {
 
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
-                    <IconButton aria-label="delete">
+                    <IconButton 
+                    onClick={downloadCSV}
+                    aria-label="delete">
                         <DeleteIcon />
                        
                     </IconButton>
