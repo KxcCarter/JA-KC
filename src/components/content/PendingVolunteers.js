@@ -25,6 +25,7 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
+import Button from '@material-ui/core/Button';
 
 
 function createData(name, email, phone, classes, assign) {
@@ -32,16 +33,28 @@ function createData(name, email, phone, classes, assign) {
 }
 
 const rows = [
-    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565", 'Entreprenuer', "ASSIGN CLASS"),
-    createData('Blink 182', 'ttammy@mail.com', "777-555-4455", 'Entreprenuer', "ASSIGN CLASS"),
+    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565", 'Entreprenuer', <Button variant="contained">
+        ASSIGN
+  </Button>),
+    createData('Blink 182', 'ttammy@mail.com', "777-555-4455", 'Entreprenuer', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Lil Wayne', 'steveystevareno@mail.com', "888-555-6655", 'Entreprenuer', "ASSIGN CLASS"),
+    createData('Lil Wayne', 'steveystevareno@mail.com', "888-555-6655", 'Entreprenuer', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
 ];
 
