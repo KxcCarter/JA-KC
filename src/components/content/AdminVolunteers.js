@@ -50,7 +50,7 @@ class AdminVolunteers extends React.Component {
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
                         <AdminMain />
-                        <CSV />
+
                         <Volunteers />
                     </div>
                 </Column>

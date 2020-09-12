@@ -24,6 +24,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import CSV from '../content/CSV';
+
 
 function createData(name, classes, completion, image, location, number) {
     return { name, classes, completion, image, location, number };
@@ -245,8 +247,9 @@ const EnhancedTableToolbar = (props) => {
                         
                     </Typography>
                     
+                    
                 )}
-
+<CSV/>
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton 

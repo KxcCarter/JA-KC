@@ -23,9 +23,9 @@ function CSV(props) {
 
     return (
         <div>
-            <CSVLink data={csvData}>Download me</CSVLink>;
-            // or
-            <CSVDownload data={csvData} target="_blank" />;
+            <CSVLink data={csvData}>Export to CSV</CSVLink>;
+
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
 
         </div>
     );
