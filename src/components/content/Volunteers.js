@@ -26,11 +26,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
-
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 function createData(name, email, phone, classes, assign) {
     return { name, email, phone, classes, assign };
 }
+
+
 
 const rows = [
     createData('Bob Stevens', 'bob@mail.com', "555-555-5565", 'Financial Literacy', <Button variant="contained" >
@@ -192,9 +194,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Invite New Volunteer">
+                        <IconButton aria-label="invite volunteer">
+                            <MailOutlineIcon />
                         </IconButton>
                     </Tooltip>
                 )}

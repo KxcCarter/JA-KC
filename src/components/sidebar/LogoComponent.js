@@ -2,6 +2,9 @@ import React from 'react';
 import { Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite';
 import Logo from '../../assets/icon-logo';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -15,13 +18,17 @@ const styles = StyleSheet.create({
         fontSize: 22,
         lineHeight: '24px',
         letterSpacing: '0.4px',
-        color: '#61b42a',
+        color: 'white',
         opacity: 0.7,
         marginLeft: 12
     }
 });
 
 function LogoComponent() {
+    console.log(this);
+
+
+
     return (
         <Row className={css(styles.container)} horizontal="center" vertical="center">
 
@@ -30,4 +37,4 @@ function LogoComponent() {
     );
 }
 
-export default LogoComponent;
+export default connect(mapStoreToProps)(LogoComponent);

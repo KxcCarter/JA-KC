@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './LogOutButton.css';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const LogOutButton = (props) => (
   <button className="nav-link"
@@ -11,7 +12,7 @@ const LogOutButton = (props) => (
     className="nav-link"
     onClick={() => props.dispatch({ type: 'LOGOUT' })}
   >
-    Log Out
+    Log Out {props.store.user.username}
   </button>
 );
 
@@ -19,4 +20,4 @@ const LogOutButton = (props) => (
 // because it doesn't care what the current state is.
 // No matter what the redux state is, this button will always be a log out button
 // this component still needs 'connect' though, because it is going to dispatch a redux action
-export default connect()(LogOutButton);
+export default connect(mapStoreToProps)(LogOutButton);

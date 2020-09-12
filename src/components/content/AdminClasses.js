@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import mapStoreToProps from './redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite';
 import SidebarComponent from '../sidebar/SidebarComponent';
@@ -61,4 +61,4 @@ class AdminClasses extends React.Component {
     }
 }
 
-export default AdminClasses;
+export default connect(mapStoreToProps)(AdminClasses);

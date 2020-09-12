@@ -20,7 +20,7 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: 1,
+    account_type_id: "1",
     email: '',
     telephone: ''
   }; // end state
@@ -28,6 +28,8 @@ class RegisterForm extends Component {
   // event listener to dispatch register
   registerUser = (event) => {
     event.preventDefault();
+    console.log(this.props);
+    console.log(this.props.history);
     console.log(this.state);
     this.props.dispatch({
       type: 'REGISTER',
@@ -40,7 +42,10 @@ class RegisterForm extends Component {
         email: this.state.email,
         telephone: this.state.telephone,
       },
+
+
     });
+
   } // end registerUser
 
   // capture change on all the inputs and set that value to state
