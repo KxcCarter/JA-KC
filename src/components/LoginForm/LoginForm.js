@@ -62,8 +62,8 @@ class LoginForm extends Component {
                 <Avatar className="loginAvatar">
                   <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                  Admin Account Log In
+                <Typography className="loginTitle" component="h1" variant="h5">
+                  Administrator Log In
                     </Typography>
                 {this.props.store.errors.loginMessage && (
                   <h3

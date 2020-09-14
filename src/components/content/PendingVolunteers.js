@@ -25,18 +25,38 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
+import Button from '@material-ui/core/Button';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 
-function createData(classes) {
-    return { classes };
+
+function createData(name, email, phone, classes, assign) {
+    return { name, email, phone, classes, assign };
 }
 
 const rows = [
-    createData("Financial Literacy"),
-    createData("Entreprenuership"),
-    createData("Career Readiness"),
-    createData("Financial Literacy"),
-    createData("Financial Literacy"),
+    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565", 'Entreprenuer', <Button variant="contained">
+        ASSIGN
+  </Button>),
+    createData('Blink 182', 'ttammy@mail.com', "777-555-4455", 'Entreprenuer', <Button variant="contained" >
+        ASSIGN
+</Button>),
+
+    createData('Lil Wayne', 'steveystevareno@mail.com', "888-555-6655", 'Entreprenuer', <Button variant="contained" >
+        ASSIGN
+</Button>),
+
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
+
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
+
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
 ];
 
@@ -67,7 +87,11 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'classes', numeric: true, disablePadding: false, label: 'Select All Classes' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
+    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'classes', numeric: true, disablePadding: false, label: 'Assigned Classes' },
+    { id: 'assign', numeric: true, disablePadding: false, label: 'Assign New Class' },
 ];
 
 function EnhancedTableHead(props) {
@@ -159,7 +183,7 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                     <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                        Classes
+                        Volunteers
                     </Typography>
                 )}
             <CSV />
@@ -170,9 +194,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Invite New Volunteer">
+                        <IconButton aria-label="invite volunteer">
+                            <MailOutlineIcon />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -187,14 +211,13 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-
     },
     paper: {
-        width: '50%',
+        width: '100%',
         marginBottom: theme.spacing(2),
     },
     table: {
-        minWidth: 550,
+        minWidth: 750,
     },
     visuallyHidden: {
         border: 0,
@@ -212,7 +235,7 @@ const useStyles = makeStyles((theme) => ({
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-function Classes(props) {
+function PendingVolunteers(props) {
     // Using hooks we're creating local state for a "heading" variable with
 
     const classes = useStyles();
@@ -281,7 +304,6 @@ function Classes(props) {
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <Table
-
                         className={classes.table}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
@@ -300,17 +322,17 @@ function Classes(props) {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.classes);
+                                    const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.classes)}
+                                            onClick={(event) => handleClick(event, row.name)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.classes}
+                                            key={row.name}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -319,15 +341,14 @@ function Classes(props) {
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />
                                             </TableCell>
-                                            <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
-                                                {row.classes}
+                                            <TableCell component="th" id={labelId} scope="row" padding="none">
+                                                {row.name}
                                             </TableCell>
-                                            {/* <TableCell align="right">{row.name}</TableCell>
+
+                                            <TableCell align="right">{row.email}</TableCell>
+                                            <TableCell align="right">{row.phone}</TableCell>
                                             <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="right">{row.number}</TableCell> */}
+                                            <TableCell align="right">{row.assign}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -358,4 +379,4 @@ function Classes(props) {
 }
 
 
-export default connect(mapStoreToProps)(Classes);
+export default connect(mapStoreToProps)(PendingVolunteers);

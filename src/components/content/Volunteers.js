@@ -24,22 +24,39 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import CSV from '../content/CSV';
+import Button from '@material-ui/core/Button';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 function createData(name, email, phone, classes, assign) {
     return { name, email, phone, classes, assign };
 }
 
+
+
 const rows = [
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5565", 'Financial Literacy', "ASSIGN CLASS"),
-    createData('Tammy Parker', 'ttammy@mail.com', "555-555-4455", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5565", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
+    createData('Tammy Parker', 'ttammy@mail.com', "555-555-4455", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Steven Bobby', 'steveystevareno@mail.com', "555-555-6655", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Steven Bobby', 'steveystevareno@mail.com', "555-555-6655", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', "ASSIGN CLASS"),
+    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
+        ASSIGN
+</Button>),
 
 ];
 
@@ -169,7 +186,7 @@ const EnhancedTableToolbar = (props) => {
                         Volunteers
                     </Typography>
                 )}
-
+            <CSV />
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -177,9 +194,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Invite New Volunteer">
+                        <IconButton aria-label="invite volunteer">
+                            <MailOutlineIcon />
                         </IconButton>
                     </Tooltip>
                 )}
