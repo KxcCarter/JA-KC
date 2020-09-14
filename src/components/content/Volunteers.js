@@ -167,9 +167,16 @@ const useToolbarStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+
+    const addVolunteer = () => {
+
+        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+    };
 
     return (
         <Toolbar
@@ -196,7 +203,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Invite New Volunteer">
                         <IconButton aria-label="invite volunteer">
-                            <MailOutlineIcon />
+                            <MailOutlineIcon onClick={() => addVolunteer('Add Volunteer User')} />
                         </IconButton>
                     </Tooltip>
                 )}
