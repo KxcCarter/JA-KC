@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import UserPage from '../UserPage/UserPage';
@@ -41,54 +39,23 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
-            <ProtectedRoute
-              exact
-              path="/admin"
-              component={AppDashboard}
-            />
-
-            <ProtectedRoute
-              exact
-              path="/volunteers"
-
-
-              component={AdminVolunteers}
-            />
-            <ProtectedRoute
-              exact
-              path="/classes"
-
-
-              component={AdminClasses}
-            />
-            <ProtectedRoute
-              exact
-              path="/reports"
-
-
-              component={AdminReports}
-            />
-            <Route
-              exact
-              path="/adminlogin"
-              component={AdminLoginPage}
-            />
-            <Route
-              exact
-              path="/home"
-              component={AdminRegisterPage}
-            />
+            <Route exact path="/admin" component={AppDashboard} />
+            <Route exact path="/volunteers" component={AdminVolunteers} />
+            <Route exact path="/classes" component={AdminClasses} />
+            <Route exact path="/reports" component={AdminReports} />
+            <Route exact path="/adminlogin" component={AdminLoginPage} />
+            <Route exact path="/home" component={AdminRegisterPage} />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            {/* <ProtectedRoute
+            <Route
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
               component={UserPage}
-            /> */}
+            />
 
             {/* <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
@@ -138,7 +105,7 @@ e
               authRedirect="/user"
             /> */}
 
-            <ProtectedRoute
+            <Route
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
