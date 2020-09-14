@@ -17,6 +17,7 @@ import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
+import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
 import './App.css';
 import AppDashboard from '../../AppDashboard';
 class App extends Component {
@@ -38,7 +39,11 @@ class App extends Component {
             <Route exact path="/reports" component={AdminReports} />
             <Route exact path="/adminlogin" component={AdminLoginPage} />
             <Route exact path="/home" component={AdminRegisterPage} />
-
+            <Route
+              exact
+              path="/volunteerhome"
+              component={VolunteerRegisterPage}
+            />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
