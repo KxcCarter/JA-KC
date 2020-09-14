@@ -2,7 +2,7 @@ import React from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const styles = StyleSheet.create({
@@ -30,6 +30,30 @@ const styles = StyleSheet.create({
 });
 
 function AdminMain() {
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_VOLUNTEER_COUNT',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_IN_PROGRESS',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_STUDENTS',
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_COMPLETED',
+    });
+  }, [dispatch]);
+
   return (
     <Column>
       <Row
