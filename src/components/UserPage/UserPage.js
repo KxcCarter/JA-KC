@@ -4,14 +4,14 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
 import './UserPage.css';
-import MobileNav from '../MobileNav/MobileNav';
+import TestNav from '../MobileNav/TestNav';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     return (
       <div>
-        <MobileNav />
+        <TestNav />
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
@@ -48,7 +48,7 @@ class UserPage extends Component {
             </Box>
           </Paper>
         </Container>
-        <LogOutButton className="log-in" />
+        {/* <LogOutButton className="log-in" /> */}
       </div>
     );
   }
