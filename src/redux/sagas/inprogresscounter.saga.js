@@ -7,7 +7,7 @@ function* fetchInProgress() {
     const response = yield axios.get('/api/counters/inprogress');
     yield put({ type: 'SET_IN_PROGRESS', payload: response.data });
   } catch (error) {
-    console.log('Completed Counter get request failed', error);
+    console.log('In Progress Counter get request failed', error);
   }
 }
 
