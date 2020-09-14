@@ -8,9 +8,12 @@ import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
 import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
 import volunteerList from './volunteerList.reducer';
 import programsReducer from './programs.reducer';
+import completedCounter from './completedcounter.reducer';
+import progressCounter from './inprogresscounter.reducer';
+import studentCounter from './studentcounter.reducer';
+import volunteerCounter from './volunteercount.reducer';
 
-// Lets make a bigger object for our store, with the objects from our reducers.
-// This is what we get when we use 'state' inside of 'mapStateToProps'
+
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
@@ -21,6 +24,11 @@ const rootReducer = combineReducers({
   volunteerSingleClassDetails,
   volunteerList,
   programsReducer,
+  completedCounter,
+  progressCounter,
+  studentCounter,
+  volunteerCounter,
+
 });
 
 export default rootReducer;
