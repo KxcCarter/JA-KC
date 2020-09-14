@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -13,26 +13,16 @@ import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './RegisterForm.css';
 
-
 class RegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
     last_name: '',
     password: '',
-<<<<<<< HEAD
     account_type_id: 1,
     email: '',
-    telephone: ''
-  }; // end state
-=======
-    account_type_id: '2',
-    email: '',
     telephone: '',
-  }; // end state\
-
-  // event listener to dispatch register
->>>>>>> develop
+  }; // end state
 
   // event listener to dispatch register
   registerUser = (event) => {
@@ -50,30 +40,30 @@ class RegisterForm extends Component {
         telephone: this.state.telephone,
       },
     });
-  } // end registerUser
+  }; // end registerUser
 
   // capture change on all the inputs and set that value to state
-  handleInputChangeFor = propertyName => (event) => {
+  handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  } // end handleInputChangeFor
+  }; // end handleInputChangeFor
 
   render() {
     return (
-<<<<<<< HEAD
       <div className="registerDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
-            <Container className="registerContainer" component="main" maxWidth="xs">
+            <Container
+              className="registerContainer"
+              component="main"
+              maxWidth="xs"
+            >
               <CssBaseline />
               <div className="registerPaper">
                 <ArrowBackIcon className="registerArrow" />
-                <Avatar className="registerAvatar">
-                </Avatar>
-                <h4>
-                  Administrative Registration
-                </h4>
+                <Avatar className="registerAvatar"></Avatar>
+                <h4>Administrative Registration</h4>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -150,109 +140,23 @@ class RegisterForm extends Component {
                     required
                     onChange={this.handleInputChangeFor('telephone')}
                   />
-                  <Button className="registerButton"
+                  <Button
+                    className="registerButton"
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     name="submit"
                     value="Register"
-                  >Register
-                    </Button>
-
-
+                  >
+                    Register
+                  </Button>
                 </form>
               </div>
             </Container>
           </Card>
-        </div >
+        </div>
       </div>
-=======
-      <form className="formPanel" onSubmit={this.registerUser}>
-        <h2>Register User</h2>
-        {this.props.store.errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.registrationMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="first_name">
-            First name:
-            <input
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              required
-              onChange={this.handleInputChangeFor('first_name')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="last_name">
-            Last name:
-            <input
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              required
-              onChange={this.handleInputChangeFor('last_name')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              required
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
-        </div>
-
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              required
-              onChange={this.handleInputChangeFor('email')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="telephone">
-            Telephone:
-            <input
-              type="text"
-              name="telephone"
-              value={this.state.telephone}
-              required
-              onChange={this.handleInputChangeFor('telephone')}
-            />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
-        </div>
-      </form>
->>>>>>> develop
     );
   }
 }

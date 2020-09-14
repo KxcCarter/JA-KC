@@ -11,25 +11,16 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-<<<<<<< HEAD
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
-=======
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
->>>>>>> develop
-
 import './App.css';
 import AppDashboard from '../../AppDashboard';
 
@@ -48,36 +39,12 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              exact
-              path="/admin"
-              component={AppDashboard}
-            />
-            <Route
-              exact
-              path="/volunteers"
-              component={AdminVolunteers}
-            />
-            <Route
-              exact
-              path="/classes"
-              component={AdminClasses}
-            />
-            <Route
-              exact
-              path="/reports"
-              component={AdminReports}
-            />
-            <Route
-              exact
-              path="/adminlogin"
-              component={AdminLoginPage}
-            />
-            <Route
-              exact
-              path="/home"
-              component={AdminRegisterPage}
-            />
+            <Route exact path="/admin" component={AppDashboard} />
+            <Route exact path="/volunteers" component={AdminVolunteers} />
+            <Route exact path="/classes" component={AdminClasses} />
+            <Route exact path="/reports" component={AdminReports} />
+            <Route exact path="/adminlogin" component={AdminLoginPage} />
+            <Route exact path="/home" component={AdminRegisterPage} />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
