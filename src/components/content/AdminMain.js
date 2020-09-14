@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const styles = StyleSheet.create({
+
     cardsContainer: {
         marginRight: -30,
         marginTop: -30,
@@ -30,6 +31,8 @@ const styles = StyleSheet.create({
 
 
 });
+
+
 
 
 

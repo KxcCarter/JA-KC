@@ -50,12 +50,12 @@ class App extends Component {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            {/* <ProtectedRoute
+            <Route
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
               component={UserPage}
-            /> */}
+            />
 
             {/* <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
@@ -105,7 +105,7 @@ e
               authRedirect="/user"
             /> */}
 
-            <ProtectedRoute
+            <Route
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
