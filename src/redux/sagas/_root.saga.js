@@ -17,6 +17,7 @@ import volunteerGetClassListSaga from './volunteerGetClassList.saga';
 import volunteerCompleteClassSaga from './volunteerCompleteClass.saga';
 import volunteerGetLearningMaterialSaga from './volunteerGetLearningMaterial.saga';
 import volunteerGetClassDetailsSaga from './volunteerGetSingleClassDetails.saga';
+import completedCounterSaga from './completedcounter.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -44,5 +45,6 @@ export default function* rootSaga() {
     volunteerCompleteClassSaga(),
     volunteerGetLearningMaterialSaga(),
     volunteerGetClassDetailsSaga(),
+    completedCounterSaga(),
   ]);
 }
