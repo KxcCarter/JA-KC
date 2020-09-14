@@ -11,7 +11,12 @@ router.get(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
     const account_type_id = 2;
-    const queryText = `SELECT * FROM "users" WHERE "users".account_type_id = $1 ORDER BY "users".last_name ASC;`;
+    const queryText = `SELECT "users".first_name, "users".last_name, "users".telephone, "users".email, "users".id AS "user_id", "users".username, array_agg("programs".title) AS "scheduled_classes" FROM "users"
+    LEFT JOIN "scheduled_classes" ON "scheduled_classes".user_id = "users".id
+    LEFT JOIN "programs" ON "programs".id = "scheduled_classes".program_id
+    
+    WHERE "users".account_type_id = $1
+    GROUP BY "users".id;`;
     pool
       .query(queryText, [account_type_id])
       .then((response) => res.send(response.rows))

@@ -1,7 +1,6 @@
 html {
   -webkit-font-smoothing: antialiased;
 }
-
 body {
   color: rgba(0, 0, 0, 0.87);
   margin: 0;
@@ -11,7 +10,6 @@ body {
   line-height: 1;
   background-color: #fff;
 }
-
 /* .nav-title {
   cursor: pointer;
     font-size: 24px;
@@ -22,7 +20,6 @@ body {
     padding-top: 20px;
     text-transform: none;
 } */
-
 .nav {
   margin: 0;
   background-color: #f6f7f8;
@@ -50,11 +47,9 @@ body {
   display: right;
   justify-content: flex-end;
 } */
-
 .nav-link:hover {
   color: #e7a011;
 }
-
 .nav-right {
   float: right;
   flex: 1;
