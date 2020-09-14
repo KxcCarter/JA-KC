@@ -17,7 +17,8 @@ router.post(
     const last_name: string = <string>req.body.last_name;
     const email: string = <string>req.body.email;
     const telephone: string = <string>req.body.telephone;
-    const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
+    const account_type_id: number = <number>req.body.account_type_id;
+    const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone, account_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
     pool
       .query(queryText, [
         username,
@@ -26,6 +27,7 @@ router.post(
         last_name,
         email,
         telephone,
+        account_type_id,
       ])
       .then(() => res.sendStatus(201))
       .catch((err) => {

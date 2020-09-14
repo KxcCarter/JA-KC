@@ -27,6 +27,8 @@ class RegisterForm extends Component {
   // event listener to dispatch register
   registerUser = (event) => {
     event.preventDefault();
+    console.log(this.props);
+    console.log(this.props.history);
     console.log(this.state);
     this.props.dispatch({
       type: 'REGISTER',

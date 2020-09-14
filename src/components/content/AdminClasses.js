@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import mapStoreToProps from './redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite';
 import SidebarComponent from '../sidebar/SidebarComponent';
@@ -8,7 +8,7 @@ import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
 import Classes from '../content/Classes';
 import Trainings from '../content/Trainings';
-
+import Tab from '../content/Tab';
 
 const styles = StyleSheet.create({
     container: {
@@ -50,13 +50,10 @@ class AdminClasses extends React.Component {
                 <Column flexGrow={1} className={css(styles.mainBlock)}>
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
-
                         <AdminMain />
-
                         <Classes />
 
                         <Trainings />
-
                     </div>
                 </Column>
             </Row >
@@ -64,4 +61,4 @@ class AdminClasses extends React.Component {
     }
 }
 
-export default AdminClasses;
+export default connect(mapStoreToProps)(AdminClasses);
