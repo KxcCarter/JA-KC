@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
-import './RegisterPage.css';
+import '../RegisterForm/RegisterForm.css';
 
 class VolunteerRegisterPage extends Component {
   state = {

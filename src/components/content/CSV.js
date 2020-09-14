@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { CSVLink, CSVDownload } from "react-csv";
-
+import './CSV.css';
 
 
 
@@ -24,7 +24,7 @@ function CSV(props) {
 
     return (
         <div>
-            <CSVLink data={csvData}>Export to CSV</CSVLink>
+            <CSVLink className="csvLink" data={csvData}>Export to CSV</CSVLink>
 
             {/* <CSVDownload data={csvData} target="_blank" />; */}
 
