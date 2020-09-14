@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // No action.payload needed. The router will get required data from req.user
 
-function* getScheduledClasses() {
+function* getScheduledClasses(action) {
   try {
     const response = yield axios.get('/api/volunteer/classes');
 

@@ -1,4 +1,4 @@
-const volunteerlistReducer = (state = [], action) => {
+const volunteerList = (state = [], action) => {
   switch (action.type) {
     case 'SET_VOLUNTEERS':
       return action.payload;
@@ -9,4 +9,4 @@ const volunteerlistReducer = (state = [], action) => {
   }
 };
 
-export default volunteerlistReducer;
+export default volunteerList;

@@ -5,14 +5,10 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
@@ -24,12 +20,10 @@ import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboard
 import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
 import './App.css';
 import AppDashboard from '../../AppDashboard';
-
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
   }
-
   render() {
     return (
       <Router>
@@ -38,7 +32,6 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route exact path="/admin" component={AppDashboard} />
             <Route exact path="/volunteers" component={AdminVolunteers} />
@@ -68,7 +61,6 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             /> */}
-
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -109,7 +101,6 @@ e
               component={RegisterPage}
               authRedirect="/user"
             /> */}
-
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
@@ -119,7 +110,6 @@ e
               component={VolunteerDashboardPage}
               authRedirect="/volunteer"
             />
-
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
@@ -129,5 +119,4 @@ e
     );
   }
 }
-
 export default connect()(App);
