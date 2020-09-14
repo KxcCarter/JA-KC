@@ -7,8 +7,12 @@ VALUES
 INSERT INTO "users"
     ("username", "first_name", "last_name", "password", "account_type_id", "email", "telephone")
 VALUES
-    ('admin-test', 'Jane', 'Smith', '1234', 1, 'janesmith@gmail.com', '555-555-5551'),
-    ('volunteer-test', 'John', 'Doe', '1234', 2, 'johndoe@gmail.com', '555-666-5651');
+    ('admin', 'Admin', 'Test', '1234', 1, 'admin@gmail.com', '816-555-5551'),
+    ('jsmith', 'Jane', 'Smith', '1234', 2, 'janesmith@gmail.com', '913-555-5551'),
+    ('adamM', 'Adam', 'Martin', '1234', 2, 'johndoe@gmail.com', '555-666-5651'),
+    ('bekahN', 'Bekah', 'Nord', '1234', 2, 'bekah@gmail.com', '310-666-5651'),
+    ('carlio', 'Carly', 'Olson', '1234', 2, 'carly@gmail.com', '555-666-5651'),
+    ('dnaPolo', 'Dana', 'Pollock', '1234', 2, 'dana@gmail.com', '616-686-5651');
 
 INSERT INTO "schools"
     ("name", "address", "city", "state", "zip")
@@ -46,6 +50,9 @@ INSERT INTO "scheduled_classes"
     ("user_id", "program_id", "school_id")
 VALUES
     (1, 2, 3),
+    (2, 3, 3),
+    (3, 2, 3),
+    (4, 2, 2),
     (1, 1, 1);
 INSERT INTO "images"
     ("user_id", "program_id", "scheduled_class_id", "image_url")
