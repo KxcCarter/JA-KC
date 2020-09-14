@@ -41,7 +41,7 @@ router.post(
 router.delete(
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const id: number = req.params.id;
+    const id: string = req.params.id;
     const queryText = `DELETE FROM "programs" WHERE "programs".id=$1`;
     pool
       .query(queryText, [id])
@@ -58,7 +58,7 @@ router.put(
   (req: Request, res: Response, next: express.NextFunction): void => {
     const title: string = req.body.title;
     const image: string = req.body.image;
-    const id: number = req.params.id;
+    const id: string = req.params.id;
 
     const queryText = `UPDATE "learning_material" SET "title"=$1, "image"=$2 WHERE "id"=$3);`;
     pool

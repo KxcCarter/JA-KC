@@ -39,7 +39,7 @@ router.post(
 router.delete(
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const id: number = req.params.id;
+    const id: string = req.params.id;
     const queryText = `DELETE FROM "learning_material" WHERE "learning_material".id=$1`;
     pool
       .query(queryText, [id])

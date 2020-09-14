@@ -20,6 +20,7 @@ const Nav = (props) => {
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Junior Achievement</h2>
+        <img className="JALogo" src="https://greaterkansascity.ja.org/contentAsset/image/ac1a740b-7a33-4563-906c-5324fec01b64/hostThumbnail/filter/Resize/resize_h/80" />
       </Link>
 
       <div >
@@ -48,6 +49,7 @@ const Nav = (props) => {
         <Link className="nav-link" to="/volunteer">
           Volunteer
         </Link>
+        </Link> */}
       </div>
     </div>
 

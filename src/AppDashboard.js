@@ -27,9 +27,14 @@ const styles = StyleSheet.create({
 
 class AppDashboard extends React.Component {
 
-    state = { selectedItem: '' };
+    state = { selectedItem: `Hi ${this.props.store.user.username}` };
 
     componentDidMount() {
+        console.log(this);
+        console.log(this.props);
+        console.log(this.props.store);
+        console.log(this.props.store.user);
+        console.log(this.props.store.user.username);
         window.addEventListener('resize', this.resize);
     }
 
@@ -42,19 +47,27 @@ class AppDashboard extends React.Component {
     render() {
         const { selectedItem } = this.state;
         return (
-            <Row className={css(styles.container)}>
-                <SidebarComponent selectedItem={selectedItem} onChange={(selectedItem) => this.setState({ selectedItem })} />
-                <Column flexGrow={1} className={css(styles.mainBlock)}>
-                    <HeaderComponent title={selectedItem} />
-                    <div className={css(styles.content)}>
-                        <AdminMain />
-                    </div>
-                </Column>
-            </Row>
+            <div>
+                <h1>Hi{this.props.store.user.username}</h1>
+                <Row className={css(styles.container)}>
+                    <h1>{this.props.store.user.id}</h1>
+                    <SidebarComponent selectedItem={selectedItem} onChange={(selectedItem) => this.setState({ selectedItem })} />
+                    <Column flexGrow={1} className={css(styles.mainBlock)}>
+                        <HeaderComponent title={selectedItem} />
+                        <div className={css(styles.content)}>
+                            <h1>{this.props.store.user.id}</h1>
+                            <AdminMain />
+                        </div>
+                        <h1>{this.props.store.user.id}</h1>
+                    </Column>
+                    <h1>{this.props.store.user.id}</h1>
+                </Row>
+                <h1>{this.props.store.user.id}</h1>
+            </div>
         );
     }
 }
 
-export default AppDashboard;
+export default connect(mapStoreToProps)(AppDashboard);
 
 
