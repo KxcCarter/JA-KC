@@ -35,6 +35,9 @@ class AdminClasses extends React.Component {
     this.props.dispatch({
       type: 'FETCH_PROGRAMS',
     });
+    this.props.dispatch({
+      type: 'FETCH_LEARNING_MATERIALS',
+    });
   }
 
   componentWillUnmount() {
