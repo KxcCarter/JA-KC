@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,18 +11,16 @@ import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './RegisterForm.css';
-
 class RegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: 1,
+    account_type_id: '1',
     email: '',
     telephone: '',
   }; // end state
-
   // event listener to dispatch register
   registerUser = (event) => {
     event.preventDefault();
@@ -43,14 +40,12 @@ class RegisterForm extends Component {
       },
     });
   }; // end registerUser
-
   // capture change on all the inputs and set that value to state
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }; // end handleInputChangeFor
-
   render() {
     return (
       <div className="registerDiv">
@@ -65,9 +60,9 @@ class RegisterForm extends Component {
               <div className="registerPaper">
                 <ArrowBackIcon className="registerArrow" />
                 <Avatar className="registerAvatar"></Avatar>
-                <Typography className="registerTitle" component="h1" variant="h5">
+                <Typography className="loginTitle" component="h1" variant="h5">
                   Administrator Registration
-                  </Typography>
+                </Typography>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"

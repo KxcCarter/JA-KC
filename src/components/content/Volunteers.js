@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -27,38 +26,6 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-
-function createData(name, email, phone, classes, assign) {
-    return { name, email, phone, classes, assign };
-}
-
-
-
-const rows = [
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5565", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-    createData('Tammy Parker', 'ttammy@mail.com', "555-555-4455", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-
-    createData('Steven Bobby', 'steveystevareno@mail.com', "555-555-6655", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-
-    createData('Bob Stevens', 'bob@mail.com', "555-555-5555", 'Financial Literacy', <Button variant="contained" >
-        ASSIGN
-</Button>),
-
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -90,12 +57,30 @@ const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
     { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
     { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
-    { id: 'classes', numeric: true, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'assign', numeric: true, disablePadding: false, label: 'Assign New Class' },
+    {
+        id: 'classes',
+        numeric: true,
+        disablePadding: false,
+        label: 'Assigned Classes',
+    },
+    {
+        id: 'assign',
+        numeric: true,
+        disablePadding: false,
+        label: 'Assign New Class',
+    },
 ];
 
 function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const {
+        classes,
+        onSelectAllClick,
+        order,
+        orderBy,
+        numSelected,
+        rowCount,
+        onRequestSort,
+    } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
@@ -231,7 +216,7 @@ const useStyles = makeStyles((theme) => ({
         clip: 'rect(0 0 0 0)',
         height: 1,
         margin: -1,
-        overflow: 'hidden',
+        overflow: 'off',
         padding: 0,
         position: 'absolute',
         top: 20,
@@ -252,6 +237,21 @@ function Volunteers(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_VOLUNTEERS' });
+    }, [dispatch]);
+
+    const volunteerList = props.store.volunteerList.map((item, index) => {
+        return {
+            name: item.first_name + ' ' + item.last_name,
+            email: item.email,
+            phone: item.telephone,
+            classes: item.scheduled_classes,
+            assign: <Button variant="contained">ASSIGN </Button>,
+        };
+    });
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -261,7 +261,7 @@ function Volunteers(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = volunteerList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -281,7 +281,7 @@ function Volunteers(props) {
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
+                selected.slice(selectedIndex + 1)
             );
         }
 
@@ -303,7 +303,9 @@ function Volunteers(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows =
+        rowsPerPage -
+        Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
 
     return (
         <div className={classes.root}>
@@ -323,10 +325,10 @@ function Volunteers(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={volunteerList.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(volunteerList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
                                     const isItemSelected = isSelected(row.name);
@@ -348,7 +350,12 @@ function Volunteers(props) {
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />
                                             </TableCell>
-                                            <TableCell component="th" id={labelId} scope="row" padding="none">
+                                            <TableCell
+                                                component="th"
+                                                id={labelId}
+                                                scope="row"
+                                                padding="none"
+                                            >
                                                 {row.name}
                                             </TableCell>
 
@@ -370,7 +377,7 @@ function Volunteers(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={volunteerList.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
@@ -384,6 +391,5 @@ function Volunteers(props) {
         </div>
     );
 }
-
 
 export default connect(mapStoreToProps)(Volunteers);
