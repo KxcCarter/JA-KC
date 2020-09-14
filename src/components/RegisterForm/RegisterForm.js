@@ -19,9 +19,7 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: '2',
-    email: '',
-    telephone: '',
+    account_type_id: 1,
     email: '',
     telephone: '',
   }; // end state
@@ -67,9 +65,7 @@ class RegisterForm extends Component {
               <div className="registerPaper">
                 <ArrowBackIcon className="registerArrow" />
                 <Avatar className="registerAvatar"></Avatar>
-                <Typography className="loginTitle" component="h1" variant="h5">
-                  Administrator Registration
-                </Typography>
+                <h4>Administrative Registration</h4>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"

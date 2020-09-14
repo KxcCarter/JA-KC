@@ -37,8 +37,10 @@ body {
   padding: 24px 10px;
   text-decoration: none;
   font-size: 20px;
+
    these last two make the logout button in
   the nav bar look like another link 
+ 
   cursor: pointer;
   outline:0;
   flex: 1;
@@ -54,6 +56,8 @@ body {
   display: flex;
   justify-content: flex-end;
 }
-.maillink {
-  text-decoration-line: none;
-}
+
+/* .maillink {
+text-decoration-line: none;
+
+} */

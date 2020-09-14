@@ -10,9 +10,6 @@ CREATE TABLE "users"
     "first_name" VARCHAR(80) NOT NULL,
     "last_name" VARCHAR(80) NOT NULL,
     "password" VARCHAR(1000) NOT NULL,
-    "first_name" VARCHAR (80) NOT NULL,
-    "last_name" VARCHAR (80) NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
     "account_type_id" INT REFERENCES "account_type",
     "email" VARCHAR(80),
     "telephone" VARCHAR(80)
