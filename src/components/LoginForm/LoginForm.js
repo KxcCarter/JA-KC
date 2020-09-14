@@ -97,16 +97,18 @@ class LoginForm extends Component {
                     value={this.state.password}
                     onChange={this.handleInputChangeFor('password')}
                   />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    color="primary"
-                    className="loginButton"
-                    variant="contained"
-                    value="Log In"
-                  >
-                    Log In
+                  <Link className="loginLink" to="/admin">
+                    <Button
+                      type="submit"
+                      fullWidth
+                      color="primary"
+                      className="loginButton"
+                      variant="contained"
+                      value="Log In"
+                    >
+                      Log In
                   </Button>
+                  </Link>
 
                 </form>
               </div>
