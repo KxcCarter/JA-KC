@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -13,16 +13,15 @@ import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './RegisterForm.css';
 
-
 class RegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: "1",
+    account_type_id: 1,
     email: '',
-    telephone: ''
+    telephone: '',
   }; // end state
 
   // event listener to dispatch register
@@ -42,34 +41,31 @@ class RegisterForm extends Component {
         email: this.state.email,
         telephone: this.state.telephone,
       },
-
-
     });
-
-  } // end registerUser
+  }; // end registerUser
 
   // capture change on all the inputs and set that value to state
-  handleInputChangeFor = propertyName => (event) => {
+  handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  } // end handleInputChangeFor
+  }; // end handleInputChangeFor
 
   render() {
     return (
       <div className="registerDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
-            <Container className="registerContainer" component="main" maxWidth="xs">
+            <Container
+              className="registerContainer"
+              component="main"
+              maxWidth="xs"
+            >
               <CssBaseline />
               <div className="registerPaper">
                 <ArrowBackIcon className="registerArrow" />
-                <Avatar className="registerAvatar">
-                </Avatar>
-                <Typography className="loginTitle" component="h1" variant="h5">
-
-                  Administrator Registration
-                </Typography>
+                <Avatar className="registerAvatar"></Avatar>
+                <h4>Administrative Registration</h4>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -146,23 +142,23 @@ class RegisterForm extends Component {
                     required
                     onChange={this.handleInputChangeFor('telephone')}
                   />
-                  <Button className="registerButton"
+                  <Button
+                    className="registerButton"
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     name="submit"
                     value="Register"
-                  >Register
-                    </Button>
-
-
+                  >
+                    Register
+                  </Button>
                 </form>
               </div>
             </Container>
           </Card>
-        </div >
-      </div >
+        </div>
+      </div>
     );
   }
 }
