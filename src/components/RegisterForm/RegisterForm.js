@@ -65,9 +65,9 @@ class RegisterForm extends Component {
               <div className="registerPaper">
                 <ArrowBackIcon className="registerArrow" />
                 <Avatar className="registerAvatar"></Avatar>
-                <Typography className="registerTitle" component="h1" variant="h5">
+                <Typography className="loginTitle" component="h1" variant="h5">
                   Administrator Registration
-                  </Typography>
+                </Typography>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"

@@ -6,6 +6,10 @@ import learning_material from './training.reducer';
 import volunteerScheduledClasses from './volunteerScheduledClasses.reducer';
 import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
 import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
+import completedCounter from './completedcounter.reducer';
+import progressCounter from './inprogresscounter.reducer';
+import studentCounter from './studentcounter.reducer';
+import volunteerCounter from './volunteercount.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +25,10 @@ const rootReducer = combineReducers({
   volunteerScheduledClasses,
   volunteerLearningMaterial,
   volunteerSingleClassDetails,
+  completedCounter,
+  progressCounter,
+  studentCounter,
+  volunteerCounter,
 });
 
 export default rootReducer;
