@@ -2,6 +2,8 @@ import React from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const styles = StyleSheet.create({
     cardsContainer: {
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
 function AdminMain() {
 
 
+
     return (
         <Column>
             <Row className={css(styles.cardsContainer)} wrap flexGrow={1} horizontal="space-between" breakpoints={{ 768: 'column' }}>
@@ -53,4 +56,4 @@ function AdminMain() {
     );
 }
 
-export default AdminMain;
+export default connect(mapStoreToProps)(AdminMain);

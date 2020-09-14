@@ -20,23 +20,16 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     password: '',
-<<<<<<< HEAD
-    account_type_id: 1,
+    account_type_id: "1",
     email: '',
     telephone: ''
   }; // end state
-=======
-    account_type_id: '2',
-    email: '',
-    telephone: '',
-  }; // end state\
-
-  // event listener to dispatch register
->>>>>>> develop
 
   // event listener to dispatch register
   registerUser = (event) => {
     event.preventDefault();
+    console.log(this.props);
+    console.log(this.props.history);
     console.log(this.state);
     this.props.dispatch({
       type: 'REGISTER',
@@ -49,7 +42,10 @@ class RegisterForm extends Component {
         email: this.state.email,
         telephone: this.state.telephone,
       },
+
+
     });
+
   } // end registerUser
 
   // capture change on all the inputs and set that value to state
@@ -61,7 +57,6 @@ class RegisterForm extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <div className="registerDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
@@ -71,9 +66,10 @@ class RegisterForm extends Component {
                 <ArrowBackIcon className="registerArrow" />
                 <Avatar className="registerAvatar">
                 </Avatar>
-                <h4>
-                  Administrative Registration
-                </h4>
+                <Typography className="loginTitle" component="h1" variant="h5">
+
+                  Administrator Registration
+                </Typography>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -166,93 +162,7 @@ class RegisterForm extends Component {
             </Container>
           </Card>
         </div >
-      </div>
-=======
-      <form className="formPanel" onSubmit={this.registerUser}>
-        <h2>Register User</h2>
-        {this.props.store.errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.registrationMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="first_name">
-            First name:
-            <input
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              required
-              onChange={this.handleInputChangeFor('first_name')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="last_name">
-            Last name:
-            <input
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              required
-              onChange={this.handleInputChangeFor('last_name')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              required
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label>
-        </div>
-
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              name="email"
-              value={this.state.email}
-              required
-              onChange={this.handleInputChangeFor('email')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="telephone">
-            Telephone:
-            <input
-              type="text"
-              name="telephone"
-              value={this.state.telephone}
-              required
-              onChange={this.handleInputChangeFor('telephone')}
-            />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
-        </div>
-      </form>
->>>>>>> develop
+      </div >
     );
   }
 }

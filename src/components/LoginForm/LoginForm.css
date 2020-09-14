@@ -1,14 +1,16 @@
 
 .loginPaper {
     background-color: white !important;
+    color: black !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 2.0);
     border-radius: 15px;
     width: 100% !important;
-    height: 100% !important;
-    margin-bottom: 0px;
+    height: 90% !important;
+    padding-bottom: 20%;
+    
     /* margin-top: 5%; */
     /* margin-left: 35% !important; */
     font-weight: lighter !important;
@@ -26,6 +28,7 @@
     flex: 1;
     justify-content: space-between;
     width: 100%; 
+   
     /* margin-top: -25%; */
     /* margin-bottom: -50px !important; */
     font-weight: lighter !important;
@@ -37,7 +40,7 @@
     display: flex;
     justify-content: space-evenly;
     height: 700px;
-    background-image: url(https://greaterkansascity.ja.org/dA/cbce3011a1/banner/event-header-image.jpg/2400w/jpeg/80);
+    background-image: url(https://greaterkansascity.ja.org/dA/846193d343/banner/inthenewsbackground.png/1200w/jpeg/80);
     background-size: cover;
     background-position: cover;
 }
@@ -71,7 +74,7 @@
 
 .loginCard {
     width: 100% !important;
-height: 100%;
+    height: 100%;
     justify-content: space-around !important;
     display: flex;
     flex-direction: column;
@@ -89,6 +92,10 @@ height: 100%;
 .loginHome {
     color: black;
     transform: scale(2.0);
+}
+
+.loginTitle {
+    color: black;
 }
 
 

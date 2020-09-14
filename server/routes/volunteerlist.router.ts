@@ -22,7 +22,7 @@ router.get(
 router.delete(
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const id: number = req.params.id;
+    const id: string = req.params.id;
     const queryText = `DELETE FROM "users" WHERE "users".id=$1`;
     pool
       .query(queryText, [id])
@@ -35,7 +35,7 @@ router.delete(
 );
 
 router.put('/:id', (req, res) => {
-  const id: number = req.params.id;
+  const id: string = req.params.id;
   const username: string = <string>req.body.username;
   const first_name: string = req.body.first_name;
   const last_name: string = req.body.last_name;

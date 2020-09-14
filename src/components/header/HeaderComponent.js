@@ -69,7 +69,7 @@ function HeaderComponent(props) {
     const { icon, title, ...otherProps } = props;
     return (
         <Row className={css(styles.container)} vertical="center" horizontal="space-between" {...otherProps}>
-            <span className={css(styles.title)}>{title}</span>
+            {/* <span className={css(styles.title)}>{this.props.store.user.username}</span> */}
             {/* <Row vertical="center">
                 <div className={css(styles.iconStyles)}>
                     <IconSearch />

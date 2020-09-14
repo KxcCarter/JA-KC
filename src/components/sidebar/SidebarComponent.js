@@ -10,6 +10,8 @@ import IconAgents from '../../assets/icon-agents';
 import IconArticles from '../../assets/icon-articles';
 import IconBurger from '../../assets/icon-burger';
 import Volunteers from '../content/Volunteers';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import './SidebarComponent.css';
 // import UnresolvedTicketsComponent from '../content/UnresolvedTicketsComponent';
 // import AddAdmin from '../AddAdmin/AddAdmin';
@@ -209,4 +211,4 @@ function SidebarComponent({ onChange, selectedItem }) {
     );
 }
 
-export default SidebarComponent;
+export default connect(mapStoreToProps)(SidebarComponent);
