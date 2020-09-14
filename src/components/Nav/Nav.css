@@ -3,13 +3,13 @@ html {
 }
 
 body {
-    color: rgba(0, 0, 0, 0.87);
-    margin: 0;
-    font-size: 14px;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 400;
-    line-height: 1;
-    background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  margin: 0;
+  font-size: 14px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  background-color: #fff;
 }
 
 /* .nav-title {
@@ -23,15 +23,12 @@ body {
     text-transform: none;
 } */
 
-
 .nav {
   margin: 0;
   background-color: #f6f7f8;
   overflow: hidden;
   display: inline;
- 
-  
-} 
+}
 /* 
 .nav-link {
   float: right;
@@ -55,7 +52,7 @@ body {
 } */
 
 .nav-link:hover {
-  color: #e7a011
+  color: #e7a011;
 }
 
 .nav-right {
@@ -65,7 +62,7 @@ body {
   justify-content: flex-end;
 }
 
-.maillink {
+/* .maillink {
 text-decoration-line: none;
 
-}
+} */
