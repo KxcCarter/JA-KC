@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
@@ -29,30 +29,39 @@ const styles = StyleSheet.create({
   },
 });
 
-function AdminMain() {
+function AdminMain(props) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({
       type: 'FETCH_VOLUNTEER_COUNT',
     });
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch({
       type: 'FETCH_IN_PROGRESS',
     });
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch({
       type: 'FETCH_STUDENTS',
     });
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch({
       type: 'FETCH_COMPLETED',
     });
   }, [dispatch]);
+
+  // const completed = props.store.completedCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const inProgress = props.store.progressCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const students = props.store.studentCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const volunteerCount = props.store.volunteerCounter.map((item) => {
+  //   return item;
+  // });
 
   return (
     <Column>
@@ -73,12 +82,12 @@ function AdminMain() {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Completed Classes"
-            value="60"
+            value={props.store.completedCounter.count}
           />
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Classes In Progress"
-            value="16"
+            value={props.store.progressCounter.count}
           />
         </Row>
         <Row
@@ -91,12 +100,12 @@ function AdminMain() {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Volunteers"
-            value="43"
+            value={props.store.volunteerCounter.count}
           />
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Students Taught"
-            value="64"
+            value={props.store.studentCounter.sum}
           />
         </Row>
       </Row>
