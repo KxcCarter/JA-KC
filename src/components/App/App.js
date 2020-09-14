@@ -5,28 +5,25 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
-import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-
+import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
+import AdminVolunteers from '../content/AdminVolunteers';
+import AdminClasses from '../content/AdminClasses';
+import AdminReports from '../content/AdminReports';
+import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
+import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
+import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
 import './App.css';
-
+import AppDashboard from '../../AppDashboard';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
   }
-
   render() {
     return (
       <Router>
@@ -35,64 +32,84 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             {/* Visiting localhost:3000/about will show the about page. */}
+            <Route exact path="/admin" component={AppDashboard} />
+            <Route exact path="/volunteers" component={AdminVolunteers} />
+            <Route exact path="/classes" component={AdminClasses} />
+            <Route exact path="/reports" component={AdminReports} />
+            <Route exact path="/adminlogin" component={AdminLoginPage} />
+            <Route exact path="/home" component={AdminRegisterPage} />
             <Route
-              // shows AboutPage at all times (logged in or not)
               exact
-              path="/about"
-              component={AboutPage}
+              path="/volunteerhome"
+              component={VolunteerRegisterPage}
             />
-
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <ProtectedRoute
+            <Route
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
               component={UserPage}
             />
 
-            <ProtectedRoute
+            {/* <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
               path="/info"
               component={InfoPage}
-            />
-
+            /> */}
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-            <ProtectedRoute
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LoginPage at /login
               exact
-              path="/login"
-              component={LoginPage}
+              path="/adminlogin"
+              component={AdminLoginPage}
               authRedirect="/user"
-            />
-            <ProtectedRoute
+            /> */}
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows RegisterPage at "/registration"
               exact
-              path="/registration"
-              component={RegisterPage}
+              path="/adminregistration"
+              component={AdminRegisterPage}
               authRedirect="/user"
-            />
-            <ProtectedRoute
+            /> */}
+            {/* <ProtectedRout              authRedirect="/admin"
+e
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows RegisterPage at "/registration"
+              exact
+              path="/volunteerregistration"
+              component={VolunteerRegisterPage}
+              authRedirect="/user"
+            /> */}
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
               path="/home"
-              component={LandingPage}
+              component={RegisterPage}
               authRedirect="/user"
+            /> */}
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/volunteer"
+              component={VolunteerDashboardPage}
+              authRedirect="/volunteer"
             />
-
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
@@ -102,5 +119,4 @@ class App extends Component {
     );
   }
 }
-
 export default connect()(App);

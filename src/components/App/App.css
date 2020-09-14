@@ -2,11 +2,15 @@ html,
 body,
 #react-root {
   height: 100%;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;  margin: 0px !important;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;  margin: 0px !important;
 }
 
 img {
@@ -29,10 +33,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #008751;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #008751;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -55,7 +59,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #008751;
   text-decoration: none;
 }
 
@@ -72,8 +76,8 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #008751;
+  color: #008751;
 }
 
 /* --------------------------------------------------------------------------------
@@ -106,7 +110,13 @@ Form Treatment
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
 
-input {
+/* .input {
   margin: 5px;
   margin-bottom: 10px;
+} */
+
+* {
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none !important;
 }
