@@ -9,6 +9,7 @@ import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
 import completedCounter from './completedcounter.reducer';
 import progressCounter from './inprogresscounter.reducer';
 import studentCounter from './studentcounter.reducer';
+import volunteerCounter from './volunteercount.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   completedCounter,
   progressCounter,
   studentCounter,
+  volunteerCounter,
 });
 
 export default rootReducer;

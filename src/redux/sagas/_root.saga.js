@@ -20,6 +20,7 @@ import volunteerGetClassDetailsSaga from './volunteerGetSingleClassDetails.saga'
 import completedCounterSaga from './completedcounter.saga';
 import inProgressSaga from './inprogresscounter.saga';
 import studentCounterSaga from './studentscounter.saga';
+import volunteerCounterSaga from './volunteercounter.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -50,5 +51,6 @@ export default function* rootSaga() {
     completedCounterSaga(),
     inProgressSaga(),
     studentCounterSaga(),
+    volunteerCounterSaga(),
   ]);
 }
