@@ -70,6 +70,7 @@
     font-weight: bolder !important;
     font-family: 'Montserrat', sans-serif !important;
     text-transform: none; 
+    text-underline-position: none !important;
 }
 
 .loginCard {
@@ -98,9 +99,9 @@
     color: black;
 }
 
-
-
-
+.loginLink {
+    text-decoration: none;;
+}
 
 
 
