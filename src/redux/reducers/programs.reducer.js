@@ -1,8 +1,8 @@
 const programsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_PROGRAM':
+    case 'SET_PROGRAMS':
       return action.payload;
-    case 'UNSET_PROGRAM':
+    case 'UNSET_PROGRAMS':
       return [];
     default:
       return state;
