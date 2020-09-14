@@ -27,59 +27,6 @@ import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
-function createData(name, email, phone, classes, assign) {
-  return { name, email, phone, classes, assign };
-}
-
-const rows = [
-  createData(
-    'Bob Stevens',
-    'bob@mail.com',
-    '555-555-5565',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-  createData(
-    'Tammy Parker',
-    'ttammy@mail.com',
-    '555-555-4455',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-
-  createData(
-    'Steven Bobby',
-    'steveystevareno@mail.com',
-    '555-555-6655',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-
-  createData(
-    'Bob Stevens',
-    'bob@mail.com',
-    '555-555-5555',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-
-  createData(
-    'Bob Stevens',
-    'bob@mail.com',
-    '555-555-5555',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-
-  createData(
-    'Bob Stevens',
-    'bob@mail.com',
-    '555-555-5555',
-    'Financial Literacy',
-    <Button variant="contained">ASSIGN</Button>
-  ),
-];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -299,6 +246,16 @@ function Volunteers(props) {
     dispatch({ type: 'FETCH_VOLUNTEERS' });
   }, [dispatch]);
 
+  const volunteerList = props.store.volunteerList.map((item, index) => {
+    return {
+      name: item.first_name + ' ' + item.last_name,
+      email: item.email,
+      phone: item.telephone,
+      classes: item.scheduled_classes,
+      assign: <Button variant="contained">ASSIGN </Button>,
+    };
+  });
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -307,7 +264,7 @@ function Volunteers(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = volunteerList.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -350,7 +307,8 @@ function Volunteers(props) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -370,10 +328,10 @@ function Volunteers(props) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={volunteerList.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(volunteerList, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -422,7 +380,7 @@ function Volunteers(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={volunteerList.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
