@@ -125,6 +125,13 @@ function SidebarComponent({ onChange, selectedItem }) {
 
     }
 
+    const onAdministratorsClick = item => {
+        setExpanded(false);
+        console.log("Clicked Administrators");
+        return onChange(item);
+
+    }
+
 
     const toggleMenu = () => setExpanded(!expanded);
 
@@ -180,6 +187,17 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Volunteers'}
                             />
                         </Link>
+                        <Link
+                            className="link"
+                            to="/administrators">
+                            <MenuItemComponent
+                                title="Administrators"
+                                icon={IconAgents}
+                                onClick={() => onAdministratorsClick('Administrators')}
+                                active={selectedItem === 'Administrators'}
+
+                            />
+                        </Link>
                         <Link className="link"
                             to="/classes">
                             <MenuItemComponent
@@ -189,13 +207,6 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Classes and Training Resources'}
                             />
                         </Link>
-                        <MenuItemComponent
-                            title="Add Admin User"
-                            icon={IconAgents}
-                            onClick={() => onAddAdmin('Add Admin User')}
-                            active={selectedItem === 'Add Admin User'}
-
-                        />
 
                         <div className={css(styles.separator)}></div>
                     </Column>
