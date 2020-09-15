@@ -7,6 +7,17 @@ import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button, Modal, Box } from '@material-ui/core';
 
+//
+// NOTE:
+// This component uploads an image to AWS S3 and then saves the URL that is returned to the database.
+// This component requires props to be passed to it in order to properly save to the database.
+// Please provide the following props, using the same key and value:
+// {
+//   user_id,
+//   program_id,
+//   class_id,
+// }
+
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -42,13 +53,6 @@ function S3ImageUploader(props) {
   const [filename, setFilename] = useState('');
   const [fileUrl, setFileUrl] = useState('');
 
-  // const deleteS3Image = () => {
-  //   dispatch({
-  //     type: 'DELETE_S3_IMAGE',
-  //     payload: { key: filename },
-  //   });
-  // };
-
   const confirmUpload = () => {
     dispatch({
       type: 'POST_IMG_URL',
@@ -71,7 +75,6 @@ function S3ImageUploader(props) {
 
   const uploadOptions = {
     server: 'http://localhost:5000',
-    // signingUrlQueryParams: {uploadType: 'avatar'},
   };
 
   const handleFinishedUpload = (info) => {
@@ -80,10 +83,18 @@ function S3ImageUploader(props) {
     setFilename(info.filename);
     setFileUrl(info.fileUrl);
 
+    // Uncomment the code below and remove setUploadFinished(true) in order to enable automatic saving to database.
+
     setUploadFinished(true);
+
     // dispatch({
     //   type: 'POST_IMG_URL',
-    //   payload: { image: info.fileUrl },
+    //   payload: {
+    //   imageUrl: fileUrl,
+    //   user_id: props.user_id,
+    //   program_id: props.program_id,
+    //   class_id: props.class_id,
+    // },
     // });
   };
 
