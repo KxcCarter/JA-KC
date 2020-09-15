@@ -4,6 +4,18 @@ import rejectUnauthenticated from '../modules/authentication-middleware';
 import pool from '../modules/pool';
 import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
+
+import path from 'path';
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.NODEMAILER_USERNAME, //YOUR GMAIL USER HERE -> EXAMPLE@gmail.com
+    pass: process.env.NODEMAILER_PASSWORD, //YOUR GMAIL PASSWORD, DO NOT HOST THIS INFO ON GITHUB!
+  },
+});
+
 const router: express.Router = express.Router();
 router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
@@ -47,4 +59,51 @@ router.post('/logout', (req: Request, res: Response): void => {
   req.logout();
   res.sendStatus(200);
 });
+
+router.post(
+  '/inviteAdmin',
+  async (req: Request, res: Response): Promise<void> => {
+    const mailer: any = req.body;
+
+    const mailOptions = {
+      //example: from: '"Scott" scott@primeacademy.io',
+      from: `"Junior Achievement Admin" ${process.env.NODEMAILER_FROM}`, // sender address -> //YOUR GMAIL USER HERE IN STRING + email not in string! -> EXAMPLE@gmail.com
+      to: mailer.toEmail, // list of receivers
+      subject: mailer.subject, // Subject line
+      text: mailer.message, // plain text body
+      html: '<b>' + mailer.message + '</b>', // html body
+    };
+
+    try {
+      await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          return console.log(error);
+        }
+        console.log('Message %s sent: %s', info.messageId, info.response);
+      });
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  }
+);
+
+router.post(
+  '/addUser',
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const queryString: string = `SELECT * FROM "invites" WHERE hex = $1;`;
+
+      const hexResult: any = await pool.query(queryString, [req.body.hex]);
+
+      if (hexResult.rows.length < 1) {
+        res.sendStatus(401);
+      }
+
+      const addUserQueryString: string = `INSERT INTO "users" () VALUES ();`;
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  }
+);
+
 export default router;
