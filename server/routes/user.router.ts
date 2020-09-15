@@ -7,12 +7,24 @@ import { encryptPassword } from '../modules/encryption';
 
 import path from 'path';
 import nodemailer from 'nodemailer';
+import XOAuth2 from 'nodemailer/lib/xoauth2';
+// const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
+  // host: 'smtp.gmail.com',
+  // auth: {
+  //   type: 'OAuth2',
+  //   user: process.env.NODEMAILER_USERNAME,
+  //   clientId: process.env.OAUTH_CLIENT_ID,
+  //   clientSecret: process.env.OAUTH_CLIENT_SECRET,
+  //   refreshToken: 'REFRESH_TOKEN_HERE',
+  // },
+
   service: 'gmail',
   auth: {
+    // xoath2: XOAuth2.createXOAuth2Generator({})
     user: process.env.NODEMAILER_USERNAME, //YOUR GMAIL USER HERE -> EXAMPLE@gmail.com
-    pass: process.env.NODEMAILER_PASSWORD, //YOUR GMAIL PASSWORD, DO NOT HOST THIS INFO ON GITHUB!
+    password: process.env.NODEMAILER_PASSWORD, //YOUR GMAIL PASSWORD, DO NOT HOST THIS INFO ON GITHUB!
   },
 });
 
@@ -67,7 +79,8 @@ router.post(
 
     const mailOptions = {
       //example: from: '"Scott" scott@primeacademy.io',
-      from: `"Junior Achievement Admin" ${process.env.NODEMAILER_FROM}`, // sender address -> //YOUR GMAIL USER HERE IN STRING + email not in string! -> EXAMPLE@gmail.com
+
+      from: `"Junior Achievement Admin" <juniorachievement.kc@gmail.com>`, // sender address -> //YOUR GMAIL USER HERE IN STRING + email not in string! -> EXAMPLE@gmail.com
       to: mailer.toEmail, // list of receivers
       subject: mailer.subject, // Subject line
       text: mailer.message, // plain text body
@@ -75,20 +88,22 @@ router.post(
     };
 
     try {
-      await transporter.sendMail(mailOptions, function (error, info) {
+      await transporter.sendMail(mailOptions, function (error: any, info: any) {
         if (error) {
           return console.log(error);
         }
         console.log('Message %s sent: %s', info.messageId, info.response);
       });
     } catch (err) {
+      console.log('There was an error. ', err);
+
       res.sendStatus(500);
     }
   }
 );
 
 router.post(
-  '/addUser',
+  '/registerUser',
   async (req: Request, res: Response): Promise<void> => {
     try {
       const queryString: string = `SELECT * FROM "invites" WHERE hex = $1;`;
