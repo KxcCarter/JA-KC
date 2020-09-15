@@ -10,10 +10,10 @@ const router: express.Router = express.Router();
 router.get(
   '/completed',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT COUNT (*) FROM "scheduled_classes";`;
+    const queryText = `SELECT COUNT (*) FROM "scheduled_classes" WHERE "completion_date" IS NOT NULL;`;
     pool
       .query(queryText)
-      .then((response) => res.send(response.rows))
+      .then((response) => res.send(response.rows[0]))
       .catch((error) => console.log('Error in programs GET:', error));
   }
 );
