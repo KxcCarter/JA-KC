@@ -1,9 +1,9 @@
-const inProgressReducer = (state = [], action) => {
+const inProgressReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_IN_PROGRESS':
       return action.payload;
     case 'UNSET_IN_PROGRESS':
-      return [];
+      return {};
     default:
       return state;
   }
