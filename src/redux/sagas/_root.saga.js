@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import volunteerList from './volunteerlist.saga';
+import volunteerList from './volunteerList.saga';
 import deleteVolunteer from './deletevolunteer.saga';
 import editVolunteer from './editvolunteer.saga';
 import getReportSaga from './getreport.saga';
@@ -21,14 +21,8 @@ import completedCounterSaga from './completedcounter.saga';
 import inProgressSaga from './inprogresscounter.saga';
 import studentCounterSaga from './studentscounter.saga';
 import volunteerCounterSaga from './volunteercounter.saga';
+import deleteS3ImageSaga from './deleteS3Image.saga';
 
-// rootSaga is the primary saga.
-// It bundles up all of the other sagas so our project can use them.
-// This is imported in index.js as rootSaga
-
-// some sagas trigger other sagas, as an example
-// the registration triggers a login
-// and login triggers setting the user
 export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
@@ -40,6 +34,7 @@ export default function* rootSaga() {
     getReportSaga(),
     reportFormSaga(),
     deleteReportSaga(),
+    deleteS3ImageSaga(),
     editReportSaga(),
     programsSaga(),
     editprogramSaga(),

@@ -48,6 +48,32 @@ router.post(
   }
 );
 
+//
+// POST image URL to database
+// NOTE: this route fires off after a photo has been uploaded via the S3ImageUploader.js component
+// This is independent from the above route for submitting a report.
+
+router.post(
+  '/saveImageUrl',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const user_id: number = <number>req.body.user_id;
+    const program_id: number = <number>req.body.program_id;
+    const class_id: number = <number>req.body.class_id;
+    const imageUrl: string = req.body.imageUrl;
+
+    const queryText: string = `INSERT INTO "images" ("user_id", "program_id", "scheduled_class_id", "image_url")
+    VALUES ($1, $2, $3, $4);`;
+
+    pool
+      .query(queryText, [user_id, program_id, class_id, imageUrl])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('Saving image to database failed. ', err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 router.delete(
   '/:id',
   (req: Request, res: Response, next: express.NextFunction): void => {
