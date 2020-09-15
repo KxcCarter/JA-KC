@@ -34,7 +34,7 @@ app.use('/api/training', trainingRouter);
 app.use('/api/report-form', reportformRouter);
 app.use('/api/programs', programsRouter);
 app.use('/api/volunteerlist', volunteerlistRouter);
-app.use('/api/couters', adminboxesRouter);
+app.use('/api/counters', adminboxesRouter);
 
 // Serve static files
 app.use(express.static('build'));

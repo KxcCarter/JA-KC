@@ -10,10 +10,10 @@ const router: express.Router = express.Router();
 router.get(
   '/completed',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT COUNT (*) FROM "scheduled_classes";`;
+    const queryText = `SELECT COUNT (*) FROM "scheduled_classes" WHERE "completion_date" IS NOT NULL;`;
     pool
       .query(queryText)
-      .then((response) => res.send(response.rows))
+      .then((response) => res.send(response.rows[0]))
       .catch((error) => console.log('Error in programs GET:', error));
   }
 );
@@ -29,7 +29,7 @@ router.get(
     `;
     pool
       .query(queryText)
-      .then((response) => res.send(response.rows))
+      .then((response) => res.send(response.rows[0]))
       .catch((error) => console.log('Error in programs GET:', error));
   }
 );
@@ -42,7 +42,7 @@ router.get(
     const queryText = `SELECT SUM ("size") FROM "scheduled_classes";`;
     pool
       .query(queryText)
-      .then((response) => res.send(response.rows))
+      .then((response) => res.send(response.rows[0]))
       .catch((error) => console.log('Error in programs GET:', error));
   }
 );
@@ -57,7 +57,7 @@ router.get(
         WHERE "account_type_id" = 2;`;
     pool
       .query(queryText)
-      .then((response) => res.send(response.rows))
+      .then((response) => res.send(response.rows[0]))
       .catch((error) => console.log('Error in programs GET:', error));
   }
 );
