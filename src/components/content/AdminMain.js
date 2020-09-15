@@ -34,9 +34,34 @@ function AdminMain(props) {
 
   useEffect(() => {
     dispatch({
+      type: 'FETCH_VOLUNTEER_COUNT',
+    });
+    dispatch({
+      type: 'FETCH_IN_PROGRESS',
+    });
+    dispatch({
+      type: 'FETCH_STUDENTS',
+    });
+    dispatch({
       type: 'FETCH_COMPLETED',
     });
   }, [dispatch]);
+
+  // const completed = props.store.completedCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const inProgress = props.store.progressCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const students = props.store.studentCounter.map((item) => {
+  //   return item;
+  // });
+
+  // const volunteerCount = props.store.volunteerCounter.map((item) => {
+  //   return item;
+  // });
 
   return (
     <Column>
@@ -62,7 +87,7 @@ function AdminMain(props) {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Classes In Progress"
-            value="16"
+            value={props.store.progressCounter.count}
           />
         </Row>
         <Row
@@ -75,12 +100,12 @@ function AdminMain(props) {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Volunteers"
-            value="43"
+            value={props.store.volunteerCounter.count}
           />
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Students Taught"
-            value="64"
+            value={props.store.studentCounter.sum}
           />
         </Row>
       </Row>

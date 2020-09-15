@@ -139,6 +139,7 @@ class RegisterForm extends Component {
                     required
                     onChange={this.handleInputChangeFor('telephone')}
                   />
+
                   <Button
                     className="registerButton"
                     type="submit"
@@ -150,6 +151,7 @@ class RegisterForm extends Component {
                   >
                     Register
                   </Button>
+
                 </form>
               </div>
             </Container>

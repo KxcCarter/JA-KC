@@ -1,9 +1,9 @@
-const volunteerCountReducer = (state = [], action) => {
+const volunteerCountReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_VOLUNTEER_COUNT':
       return action.payload;
     case 'UNSET_VOLUNTEER_COUNT':
-      return [];
+      return {};
     default:
       return state;
   }
