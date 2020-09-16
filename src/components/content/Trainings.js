@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -245,6 +245,31 @@ function Trainings(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_LEARNING_MATERIALS',
+        });
+    }, [dispatch]);
+
+    const trainingData = props.store.trainingReducer.map((item, index) => {
+        return { title: item.title, content: item.content, program_id: item.id };
+    });
+
+    function CSV(data) {
+
+
+        return (
+            <div>
+                <CSVLink className="csvLink" data={trainingData}>Export to CSV</CSVLink>
+
+                {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+            </div>
+        );
+    }
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -254,7 +279,7 @@ function Trainings(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = trainingData.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -292,7 +317,7 @@ function Trainings(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, trainingData.length - page * rowsPerPage);
 
 
     function SearchTraining(props) {
@@ -372,23 +397,23 @@ function Trainings(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={trainingData.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(trainingData, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.classes);
+                                    const isItemSelected = isSelected(row.title);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.trainings)}
+                                            onClick={(event) => handleClick(event, trainingData.content)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.trainings}
+                                            key={row.program_id}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -398,10 +423,10 @@ function Trainings(props) {
                                                 />
                                             </TableCell>
                                             <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
-                                                {row.trainings}
+                                                {row.content}
                                             </TableCell>
-                                            {/* <TableCell align="right">{row.name}</TableCell>
-                                            <TableCell align="right">{row.classes}</TableCell>
+                                            <TableCell align="right">{row.title}</TableCell>
+                                            {/* <TableCell align="right">{row.classes}</TableCell>
                                             <TableCell align="right">{row.completion}</TableCell>
                                             <TableCell align="right">{row.image}</TableCell>
                                             <TableCell align="right">{row.location}</TableCell>
@@ -420,7 +445,7 @@ function Trainings(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={trainingData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

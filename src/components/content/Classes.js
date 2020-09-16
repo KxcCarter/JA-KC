@@ -30,6 +30,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { CSVLink, CSVDownload } from "react-csv";
+import { title } from 'process';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -186,7 +189,7 @@ const EnhancedTableToolbar = (props) => {
             Classes
           </Typography>
         )}
-      <CSV />
+
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -261,6 +264,20 @@ function Classes(props) {
   const programData = props.store.programsReducer.map((item, index) => {
     return { title: item.title, sesssion: item.sessions, program_id: item.id };
   });
+
+  function CSV(data) {
+
+
+    return (
+      <div>
+        <CSVLink className="csvLink" data={programData}>Export to CSV</CSVLink>
+
+        {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+      </div>
+    );
+  }
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -374,10 +391,14 @@ function Classes(props) {
     );
   }
 
+
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+
         <EnhancedTableToolbar numSelected={selected.length} />
+
         <TableContainer>
           <SearchClasses />
           <Table
@@ -395,6 +416,7 @@ function Classes(props) {
               onRequestSort={handleRequestSort}
               rowCount={programData.length}
             />
+
             <TableBody>
               {stableSort(programData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -443,7 +465,9 @@ function Classes(props) {
               )}
             </TableBody>
           </Table>
+
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
@@ -453,6 +477,7 @@ function Classes(props) {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        <CSV />
       </Paper>
       {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

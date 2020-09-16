@@ -22,6 +22,7 @@ import inProgressSaga from './inprogresscounter.saga';
 import studentCounterSaga from './studentscounter.saga';
 import volunteerCounterSaga from './volunteercounter.saga';
 import deleteS3ImageSaga from './deleteS3Image.saga';
+import trainingSaga from './training.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -47,5 +48,6 @@ export default function* rootSaga() {
     inProgressSaga(),
     studentCounterSaga(),
     volunteerCounterSaga(),
+    trainingSaga(),
   ]);
 }
