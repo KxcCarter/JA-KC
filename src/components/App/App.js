@@ -10,7 +10,6 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
@@ -21,6 +20,7 @@ import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPag
 import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
 import './App.css';
 import AppDashboard from '../../AppDashboard';
+import AdminAdministrators from '../content/AdminAdministrators';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
@@ -31,9 +31,8 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page. */}
+
             <Route exact path="/admin" component={AppDashboard} />
             <Route exact path="/adminvolunteers" component={AdminVolunteers} />
             <Route exact path="/adminclasses" component={AdminClasses} />

@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
-import '../RegisterForm/RegisterForm.css';
+import VolunteerRegisterForm from '../VolunteerRegisterPage/VolunteerRegisterForm';
 
 class VolunteerRegisterPage extends Component {
   state = {
@@ -14,12 +13,13 @@ class VolunteerRegisterPage extends Component {
     email: '',
     phone: '',
     social_media_link: '',
+    account_type_id: '2',
   };
 
   render() {
     return (
       <div className="mainRegisterDiv">
-        <RegisterForm />
+        <VolunteerRegisterForm />
       </div>
     );
   }

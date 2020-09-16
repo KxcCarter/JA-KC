@@ -55,3 +55,10 @@ CREATE TABLE "images"
     "image_url" varchar(150),
     "upload_date" DATE DEFAULT CURRENT_DATE
 );
+
+CREATE TABLE "invites"
+(
+    "id" SERIAL PRIMARY KEY,
+    "email" VARCHAR(50) NOT NULL,
+    "hex" VARCHAR(20) NOT NULL
+);

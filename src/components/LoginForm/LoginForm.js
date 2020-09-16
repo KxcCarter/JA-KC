@@ -36,6 +36,7 @@ class LoginForm extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
+
   }// end login
 
   // captures change on each input
@@ -97,18 +98,18 @@ class LoginForm extends Component {
                     value={this.state.password}
                     onChange={this.handleInputChangeFor('password')}
                   />
-                  <Link className="loginLink" to="/admin">
-                    <Button
-                      type="submit"
-                      fullWidth
-                      color="primary"
-                      className="loginButton"
-                      variant="contained"
-                      value="Log In"
-                    >
-                      Log In
+                  {/* <Link className="loginLink" to="/admin"> */}
+                  <Button
+                    type="submit"
+                    fullWidth
+                    color="primary"
+                    className="loginButton"
+                    variant="contained"
+                    value="Log In"
+                  >
+                    Log In
                   </Button>
-                  </Link>
+                  {/* </Link> */}
 
                 </form>
               </div>
