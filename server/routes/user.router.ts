@@ -30,7 +30,7 @@ router.post(
 );
 
 router.post(
-  '/register',
+  '/register/:hex',
   async (
     req: Request,
     res: Response,
@@ -38,9 +38,9 @@ router.post(
   ): Promise<void> => {
     try {
       const userQueryText = `SELECT * FROM "invites" WHERE "email"=$1 AND "hex"=$2;`; //will need to replace invites with proper table name
-      const response = await pool.query(userQueryText, [
+      const response: any = await pool.query(userQueryText, [
         req.body.email.toLowerCase(),
-        req.body.hex,
+        req.params.hex,
       ]);
       if (response.rows == 0) res.send(401);
 
