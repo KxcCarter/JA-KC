@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import sessionMiddleware from './modules/session-middleware';
 import passport from './strategies/user.strategy';
+
+// Routers
 import userRouter from './routes/user.router';
 import volunteerRouter from './routes/volunteer.router';
 import trainingRouter from './routes/training.router';
@@ -9,12 +11,13 @@ import reportformRouter from './routes/report-form.router';
 import programsRouter from './routes/programs.router';
 import volunteerlistRouter from './routes/volunteerlist.router';
 import adminboxesRouter from './routes/counterboxes.router';
-import mailerRouter from './routes/mailer.router';
+import mailerRouter from './routes/nodemailer.router';
+import s3Router from './routes/s3.router';
 
 const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
 // import UploaderS3Router from 'react-dropzone-s3-uploader/s3router';
 
-import s3Router from './routes/s3.router';
+// import * as nodemailer from 'nodemailer'
 
 require('dotenv').config();
 

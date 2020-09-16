@@ -6,7 +6,8 @@ import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
 
 import path from 'path';
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
