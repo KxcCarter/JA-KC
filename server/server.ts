@@ -9,6 +9,7 @@ import reportformRouter from './routes/report-form.router';
 import programsRouter from './routes/programs.router';
 import volunteerlistRouter from './routes/volunteerlist.router';
 import adminboxesRouter from './routes/counterboxes.router';
+import mailerRouter from './routes/mailer.router';
 
 const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
 // import UploaderS3Router from 'react-dropzone-s3-uploader/s3router';
@@ -42,6 +43,8 @@ app.use('/api/volunteerlist', volunteerlistRouter);
 app.use('/api/counters', adminboxesRouter);
 
 app.use('/s3delete', s3Router);
+
+app.use('/api/mailer', mailerRouter);
 
 app.use(
   '/s3',

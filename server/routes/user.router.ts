@@ -7,24 +7,12 @@ import { encryptPassword } from '../modules/encryption';
 
 import path from 'path';
 import nodemailer from 'nodemailer';
-import XOAuth2 from 'nodemailer/lib/xoauth2';
-// const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  // host: 'smtp.gmail.com',
-  // auth: {
-  //   type: 'OAuth2',
-  //   user: process.env.NODEMAILER_USERNAME,
-  //   clientId: process.env.OAUTH_CLIENT_ID,
-  //   clientSecret: process.env.OAUTH_CLIENT_SECRET,
-  //   refreshToken: 'REFRESH_TOKEN_HERE',
-  // },
-
   service: 'gmail',
   auth: {
-    // xoath2: XOAuth2.createXOAuth2Generator({})
-    user: process.env.NODEMAILER_USERNAME, //YOUR GMAIL USER HERE -> EXAMPLE@gmail.com
-    password: process.env.NODEMAILER_PASSWORD, //YOUR GMAIL PASSWORD, DO NOT HOST THIS INFO ON GITHUB!
+    user: 'juniorachievement.kc@gmail.com',
+    pass: process.env.NODEMAILER_PASSWORD,
   },
 });
 
@@ -78,9 +66,7 @@ router.post(
     const mailer: any = req.body;
 
     const mailOptions = {
-      //example: from: '"Scott" scott@primeacademy.io',
-
-      from: `"Junior Achievement Admin" <juniorachievement.kc@gmail.com>`, // sender address -> //YOUR GMAIL USER HERE IN STRING + email not in string! -> EXAMPLE@gmail.com
+      from: `"Junior Achievement Admin" juniorachievement.kc@gmail.com`,
       to: mailer.toEmail, // list of receivers
       subject: mailer.subject, // Subject line
       text: mailer.message, // plain text body
@@ -93,10 +79,10 @@ router.post(
           return console.log(error);
         }
         console.log('Message %s sent: %s', info.messageId, info.response);
+        res.sendStatus(200);
       });
     } catch (err) {
       console.log('There was an error. ', err);
-
       res.sendStatus(500);
     }
   }
