@@ -201,7 +201,7 @@ const EnhancedTableToolbar = (props) => {
                         Volunteers
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -265,6 +265,20 @@ function PendingVolunteers(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+    // function CSV(data) {
+
+
+    //     return (
+    //         <div>
+    //             <CSVLink className="csvLink" data={volunteerList}>Export to CSV</CSVLink>
+
+    //             {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+    //         </div>
+    //     );
+    // }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -445,6 +459,7 @@ function PendingVolunteers(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

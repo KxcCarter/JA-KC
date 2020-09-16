@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -27,86 +27,11 @@ import { CSVLink, CSVDownload } from "react-csv";
 
 
 
-function createData(name, classes, completion, image, location, number) {
-    return { name, classes, completion, image, location, number };
-}
 
 
-const rows = [
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Allen', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Parsons', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Miller', 'Financial Literacy for Adults', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/25/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/26/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/27/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-];
 
 
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-        </div>
-    );
-}
 
-
-let stockData = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: 132.54
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: 33.45
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: 554.52
-    },
-];
-
-
-function convertArrayOfObjectsToCSV(args) {
-    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-    data = args.data || null;
-    if (data == null || !data.length) {
-        return null;
-    }
-
-    columnDelimiter = args.columnDelimiter || ',';
-    lineDelimiter = args.lineDelimiter || '\n';
-
-    keys = Object.keys(data[0]);
-
-    result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
-    data.forEach(function (item) {
-        ctr = 0;
-        keys.forEach(function (key) {
-            if (ctr > 0) result += columnDelimiter;
-
-            result += item[key];
-            ctr++;
-        });
-        result += lineDelimiter;
-    });
-
-    return result;
-}
 
 
 
@@ -121,26 +46,7 @@ function descendingComparator(a, b, orderBy) {
     return 0;
 }
 
-function downloadCSV(args) {
-    console.log("clicked csv");
-    let data, filename, link;
-    let csv = convertArrayOfObjectsToCSV({
-        data: stockData
-    });
-    if (csv == null) return;
 
-    filename = args.filename || 'export.csv';
-
-    if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
-    }
-    data = encodeURI(csv);
-
-    link = document.createElement('a');
-    link.setAttribute('href', data);
-    link.setAttribute('download', filename);
-    link.click();
-}
 
 function getComparator(order, orderBy) {
     return order === 'desc'
@@ -322,7 +228,7 @@ const EnhancedTableToolbar = (props) => {
                     
                     
                 )}
-<CSV/>
+
             {/* {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton 
@@ -389,6 +295,36 @@ function Reports(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_REPORT' });
+    }, [dispatch]);
+
+    const reportList = props.store.reportformReducer.map((item, index) => {
+        return {
+            user: item.user_id,
+            program: item.program_id,
+            school: item.school_id,
+            size: item.size,
+            completion_date: item.completion_date,
+        };
+    });
+
+
+    function CSV(data) {
+
+
+        return (
+          <div>
+            <CSVLink className="csvLink" data={reportList}>Export to CSV</CSVLink>
+    
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
+    
+          </div>
+        );
+      }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -398,7 +334,7 @@ function Reports(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = reportList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -438,7 +374,64 @@ function Reports(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, reportList.length - page * rowsPerPage);
+
+    function SearchClasses(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+          // searchQuery is what the user types in to search.
+          setSearchQuery(event.target.value);
+          // list is what is being searched through. It get's its data from a reducer.
+          setList(
+            // This is searching through an array of objects to see if the object.name 
+            // matches the searchQuery.
+            props.talentPool.filter((el) => el.name.includes(event.target.value))
+          );
+          setOpen(true);
+        };
+        const clickAway = () => {
+          setSearchQuery('');
+          setTimeout(() => {
+            setOpen(false);
+          }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+              <Paper className={classes.paper}>
+                <Box pt={.5}>
+                  <TextField
+                    className={classes.search}
+                    id="outlined-basic"
+                    size="small"
+                    value={searchQuery}
+                    label="Search"
+                    variant="outlined"
+                    autoComplete="off"
+                    onBlur={clickAway}
+                    onChange={handleSearchChange}
+                  />
+                </Box>
+                <Box display={open ? 'block' : 'none'}>
+                  <MenuList>
+                    {list.slice(0, 5).map((item, index) => {
+                      return (
+                        <MenuItem
+                          key={item.id}
+                          onClick={props.handleTalentAssign(item.id)}
+                        >
+                          {item.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </Box>
+              </Paper>
+            </Box>
+          );
+        }
 
     return (
         <div className={classes.root}>
@@ -459,23 +452,23 @@ function Reports(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={reportList.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(reportList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(row.user);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.name)}
+                                            onClick={(event) => handleClick(event, row.user)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.name}
+                                            key={row.program}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
@@ -485,14 +478,14 @@ function Reports(props) {
                                                 />
                                             </TableCell>
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                {row.name}
+                                                {row.user}
                                             </TableCell>
 
-                                            <TableCell align="left">{row.classes}</TableCell>
-                                            <TableCell align="left">{row.completion}</TableCell>
-                                            <TableCell align="left">{row.image}</TableCell>
-                                            <TableCell align="left">{row.location}</TableCell>
-                                            <TableCell align="left">{row.number}</TableCell>
+                                            <TableCell align="left">{row.program}</TableCell>
+                                            <TableCell align="left">{row.school}</TableCell>
+                                            <TableCell align="left">{row.size}</TableCell>
+                                            <TableCell align="left">{row.completion_date}</TableCell>
+                         
                                         </TableRow>
                                     );
                                 })}
@@ -507,12 +500,13 @@ function Reports(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={reportList.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV/>
             </Paper>
         </div>
     );

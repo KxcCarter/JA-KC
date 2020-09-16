@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import report_form from './report-form.reducer';
+import reportformReducer from './report-form.reducer';
 import trainingReducer from './training.reducer';
 import volunteerScheduledClasses from './volunteerScheduledClasses.reducer';
 import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
@@ -17,7 +17,7 @@ import volunteerCounter from './volunteercount.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  report_form, //will have all scheduled_classes information
+  reportformReducer, //will have all scheduled_classes information
   trainingReducer, //will show all learning materials
   volunteerScheduledClasses,
   volunteerLearningMaterial,

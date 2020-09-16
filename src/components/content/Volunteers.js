@@ -264,11 +264,12 @@ function Volunteers(props) {
         };
     });
 
+    function CSV(data) {
 
-    function CSV(props) {
+
         return (
             <div>
-                {/* <CSVLink className="csvLink" data={volunteerList.name}>Export to CSV</CSVLink> */}
+                <CSVLink className="csvLink" data={volunteerList}>Export to CSV</CSVLink>
 
                 {/* <CSVDownload data={csvData} target="_blank" />; */}
 
@@ -392,7 +393,7 @@ function Volunteers(props) {
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <SearchVolunteers />
-                    <CSV />
+
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
@@ -464,6 +465,7 @@ function Volunteers(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

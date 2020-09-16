@@ -182,7 +182,7 @@ const EnhancedTableToolbar = (props) => {
                         Training Resources
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
