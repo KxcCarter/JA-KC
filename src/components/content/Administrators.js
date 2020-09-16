@@ -30,7 +30,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -179,9 +179,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Invite New Admin">
+                    <Tooltip title="Add New Admin">
                         <IconButton aria-label="invite admin">
-                            <MailOutlineIcon onClick={() => addAdmin('Add Admin User')} />
+                            <AddCircleIcon onClick={addAdmin} />
                         </IconButton>
                     </Tooltip>
                 )}

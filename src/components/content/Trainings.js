@@ -27,7 +27,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CSV from '../content/CSV';
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 function createData(trainings) {
@@ -42,6 +42,17 @@ const rows = [
     createData("www.github.com"),
     createData("www.twitter.com"),
 ];
+
+function CSV(props) {
+    return (
+        <div>
+            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
+
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+        </div>
+    );
+}
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -150,6 +161,10 @@ const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
 
+    const addTraining = () => {
+
+        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+    };
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -173,9 +188,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Add Training">
-                        <IconButton aria-label="Add Training">
-                            <AddCircleIcon />
+                    <Tooltip title="Add New Training">
+                        <IconButton aria-label="Add New Training">
+                            <AddCircleIcon onClick={addTraining} />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -274,10 +289,6 @@ function Trainings(props) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 

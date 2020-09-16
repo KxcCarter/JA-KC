@@ -77,17 +77,6 @@ const headCells = [
     },
 ];
 
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={headCells}>Export to CSV</CSVLink>
-
-            {/* <CSVDownload data={csvData} target="_blank" />; */}
-
-        </div>
-    );
-}
-
 function EnhancedTableHead(props) {
     const {
         classes,
@@ -180,6 +169,7 @@ const EnhancedTableToolbar = (props) => {
         window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
     };
 
+
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -195,7 +185,6 @@ const EnhancedTableToolbar = (props) => {
                         Volunteers
                     </Typography>
                 )}
-            <CSV />
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -205,7 +194,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Add New Volunteer">
                         <IconButton aria-label="Add New Volunteer">
-                            <AddCircleIcon />
+                            <AddCircleIcon onClick={addVolunteer} />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -275,6 +264,19 @@ function Volunteers(props) {
         };
     });
 
+
+    function CSV(props) {
+        return (
+            <div>
+                {/* <CSVLink className="csvLink" data={volunteerList.name}>Export to CSV</CSVLink> */}
+
+                {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+            </div>
+        );
+    }
+
+
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -319,9 +321,6 @@ function Volunteers(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -393,6 +392,7 @@ function Volunteers(props) {
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <SearchVolunteers />
+                    <CSV />
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
@@ -469,7 +469,7 @@ function Volunteers(props) {
                     control={<Switch checked={dense} onChange={handleChangeDense} />}
                     label="Dense padding"
                 /> */}
-        </div>
+        </div >
     );
 }
 

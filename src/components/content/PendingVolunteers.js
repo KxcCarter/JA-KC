@@ -27,10 +27,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Search from "./Search";
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 function createData(name, email, phone, classes, assign) {
@@ -62,6 +62,17 @@ const rows = [
 </Button>),
 
 ];
+
+function CSV(props) {
+    return (
+        <div>
+            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
+
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+        </div>
+    );
+}
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -200,7 +211,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Invite New Volunteer">
                         <IconButton aria-label="invite volunteer">
-                            <MailOutlineIcon />
+
                         </IconButton>
                     </Tooltip>
                 )}
@@ -299,9 +310,6 @@ function PendingVolunteers(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 

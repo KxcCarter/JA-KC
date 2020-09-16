@@ -157,6 +157,10 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
+  const addClass = () => {
+
+    window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+  };
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -190,9 +194,9 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Add Class">
-            <IconButton aria-label="Add Class">
-              <AddCircleIcon />
+          <Tooltip title="Add New Class">
+            <IconButton aria-label="Add New Class">
+              <AddCircleIcon onClick={addClass} />
             </IconButton>
           </Tooltip>
         )}
