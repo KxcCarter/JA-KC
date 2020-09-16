@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import HeaderComponent from '../header/HeaderComponent';
 
 const styles = StyleSheet.create({
   cardsContainer: {
@@ -46,22 +47,6 @@ function AdminMain(props) {
       type: 'FETCH_COMPLETED',
     });
   }, [dispatch]);
-
-  // const completed = props.store.completedCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const inProgress = props.store.progressCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const students = props.store.studentCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const volunteerCount = props.store.volunteerCounter.map((item) => {
-  //   return item;
-  // });
 
   return (
     <Column>

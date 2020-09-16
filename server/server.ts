@@ -14,12 +14,10 @@ import adminboxesRouter from './routes/counterboxes.router';
 import mailerRouter from './routes/nodemailer.router';
 import s3Router from './routes/s3.router';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
-// import UploaderS3Router from 'react-dropzone-s3-uploader/s3router';
-
-// import * as nodemailer from 'nodemailer'
-
-require('dotenv').config();
 
 const app: any = express();
 

@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import TextField from '@material-ui/core/TextField';
+import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -23,7 +26,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CSV from '../content/CSV';
 
 
@@ -170,9 +173,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Add Training">
+                        <IconButton aria-label="Add Training">
+                            <AddCircleIcon />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -186,7 +189,7 @@ EnhancedTableToolbar.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '50%',
+        width: '100%',
 
     },
     paper: {
@@ -195,6 +198,11 @@ const useStyles = makeStyles((theme) => ({
     },
     table: {
         minWidth: 550,
+    },
+    search: {
+        width: 250,
+        marginBottom: theme.spacing(1),
+        marginLeft: theme.spacing(1),
     },
     visuallyHidden: {
         border: 0,
@@ -275,11 +283,70 @@ function Trainings(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+
+    function SearchTraining(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+            // searchQuery is what the user types in to search.
+            setSearchQuery(event.target.value);
+            // list is what is being searched through. It get's its data from a reducer.
+            setList(
+                // This is searching through an array of objects to see if the object.name 
+                // matches the searchQuery.
+                props.talentPool.filter((el) => el.name.includes(event.target.value))
+            );
+            setOpen(true);
+        };
+        const clickAway = () => {
+            setSearchQuery('');
+            setTimeout(() => {
+                setOpen(false);
+            }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+                <Paper className={classes.paper}>
+                    <Box pt={.5}>
+                        <TextField
+                            className={classes.search}
+                            id="outlined-basic"
+                            size="small"
+                            value={searchQuery}
+                            label="Search"
+                            variant="outlined"
+                            autoComplete="off"
+                            onBlur={clickAway}
+                            onChange={handleSearchChange}
+                        />
+                    </Box>
+                    <Box display={open ? 'block' : 'none'}>
+                        <MenuList>
+                            {list.slice(0, 5).map((item, index) => {
+                                return (
+                                    <MenuItem
+                                        key={item.id}
+                                        onClick={props.handleTalentAssign(item.id)}
+                                    >
+                                        {item.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </MenuList>
+                    </Box>
+                </Paper>
+            </Box>
+        );
+    }
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
+                    <SearchTraining />
                     <Table
 
                         className={classes.table}
