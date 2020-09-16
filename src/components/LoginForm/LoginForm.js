@@ -64,7 +64,7 @@ class LoginForm extends Component {
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography className="loginTitle" component="h1" variant="h5">
-                  Administrator Log In
+                  Log In
                     </Typography>
                 {this.props.store.errors.loginMessage && (
                   <h3

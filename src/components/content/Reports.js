@@ -22,22 +22,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+
 import { CSVLink, CSVDownload } from "react-csv";
 
 
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-        </div>
-    );
-}
 
 function createData(name, classes, completion, image, location, number) {
     return { name, classes, completion, image, location, number };
@@ -61,6 +49,13 @@ const rows = [
 ];
 
 
+function CSV(props) {
+    return (
+        <div>
+            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
+        </div>
+    );
+}
 
 
 let stockData = [
@@ -439,9 +434,7 @@ function Reports(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
+  
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -451,7 +444,6 @@ function Reports(props) {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
-              
                 <TableContainer>
                 <SearchReports />
                     <Table
@@ -522,10 +514,6 @@ function Reports(props) {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
-            {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
         </div>
     );
 }
