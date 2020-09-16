@@ -78,9 +78,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
 
 ];
 
@@ -399,8 +399,8 @@ function PendingAdministrators(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
 
                                         </TableRow>
                                     );

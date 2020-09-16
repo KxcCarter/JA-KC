@@ -81,7 +81,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'trainings', numeric: true, disablePadding: false, label: 'Select All Trainings' },
+    { id: 'title', numeric: false, disablePadding: true, label: 'Title' },
+    { id: 'resource link', numeric: false, disablePadding: false, label: 'Resource Link' },
+
 ];
 
 function EnhancedTableHead(props) {
@@ -409,7 +411,7 @@ function Trainings(props) {
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, trainingData.content)}
+                                            onClick={(event) => handleClick(event, row.title)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
@@ -423,9 +425,9 @@ function Trainings(props) {
                                                 />
                                             </TableCell>
                                             <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
-                                                {row.content}
+                                                {row.title}
                                             </TableCell>
-                                            <TableCell align="right">{row.title}</TableCell>
+                                            <TableCell align="left">{row.content}</TableCell>
                                             {/* <TableCell align="right">{row.classes}</TableCell>
                                             <TableCell align="right">{row.completion}</TableCell>
                                             <TableCell align="right">{row.image}</TableCell>
@@ -451,6 +453,7 @@ function Trainings(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

@@ -217,11 +217,11 @@ function SearchReports(props) {
 
 const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'completion', numeric: true, disablePadding: false, label: 'Completion Date' },
+    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Class' },
+    { id: 'completion', numeric: false, disablePadding: true, label: 'Completion Date' },
     { id: 'image', numeric: false, disablePadding: false, label: 'Image Link' },
     { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-    { id: 'number', numeric: true, disablePadding: false, label: 'Number of Students' },
+    { id: 'number', numeric: false, disablePadding: false, label: 'Number of Students' },
 ];
 
 function EnhancedTableHead(props) {
@@ -488,11 +488,11 @@ function Reports(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="center">{row.number}</TableCell>
+                                            <TableCell align="left">{row.classes}</TableCell>
+                                            <TableCell align="left">{row.completion}</TableCell>
+                                            <TableCell align="left">{row.image}</TableCell>
+                                            <TableCell align="left">{row.location}</TableCell>
+                                            <TableCell align="left">{row.number}</TableCell>
                                         </TableRow>
                                     );
                                 })}

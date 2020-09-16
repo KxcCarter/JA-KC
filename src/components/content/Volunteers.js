@@ -61,17 +61,17 @@ function stableSort(array, comparator) {
 
 const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
     {
         id: 'classes',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: 'Assigned Classes',
     },
     {
         id: 'assign',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
         label: 'Assign New Class',
     },
@@ -440,10 +440,10 @@ function Volunteers(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.assign}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.classes}</TableCell>
+                                            <TableCell align="left">{row.assign}</TableCell>
                                         </TableRow>
                                     );
                                 })}

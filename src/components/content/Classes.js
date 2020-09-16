@@ -62,10 +62,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'classes',
-    numeric: true,
-    disablePadding: false,
-    label: 'Select All Classes',
+    id: 'title',
+    numeric: false,
+    disablePadding: true,
+    label: 'Title',
   },
 ];
 
