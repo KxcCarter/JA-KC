@@ -30,29 +30,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { CSVLink, CSVDownload } from "react-csv";
 
 
-function createData(trainings) {
-    return { trainings };
-}
 
-const rows = [
-    createData("www.google.com"),
-    createData("www.github.com"),
-    createData("www.twitter.com"),
-    createData("www.google.com"),
-    createData("www.github.com"),
-    createData("www.twitter.com"),
-];
-
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-
-            {/* <CSVDownload data={csvData} target="_blank" />; */}
-
-        </div>
-    );
-}
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -143,6 +121,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+        height: '60%',
     },
     highlight:
         theme.palette.type === 'light'

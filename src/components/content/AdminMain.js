@@ -9,7 +9,7 @@ import HeaderComponent from '../header/HeaderComponent';
 const styles = StyleSheet.create({
   cardsContainer: {
     marginRight: -30,
-    marginTop: -30,
+    marginTop: -90,
   },
   cardRow: {
     marginTop: 30,
