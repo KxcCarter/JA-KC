@@ -48,25 +48,8 @@ function AdminMain(props) {
     });
   }, [dispatch]);
 
-  // const completed = props.store.completedCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const inProgress = props.store.progressCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const students = props.store.studentCounter.map((item) => {
-  //   return item;
-  // });
-
-  // const volunteerCount = props.store.volunteerCounter.map((item) => {
-  //   return item;
-  // });
-
   return (
     <Column>
-
       <Row
         className={css(styles.cardsContainer)}
         wrap
