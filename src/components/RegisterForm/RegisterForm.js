@@ -151,7 +151,6 @@ class RegisterForm extends Component {
                   >
                     Register
                   </Button>
-
                 </form>
               </div>
             </Container>
