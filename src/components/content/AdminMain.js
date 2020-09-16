@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import HeaderComponent from '../header/HeaderComponent';
 
 const styles = StyleSheet.create({
   cardsContainer: {
@@ -65,6 +66,7 @@ function AdminMain(props) {
 
   return (
     <Column>
+
       <Row
         className={css(styles.cardsContainer)}
         wrap

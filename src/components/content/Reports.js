@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { lighten } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -24,12 +28,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
+import { CSVLink, CSVDownload } from "react-csv";
 
+
+function CSV(props) {
+    return (
+        <div>
+            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
+        </div>
+    );
+}
 
 function createData(name, classes, completion, image, location, number) {
     return { name, classes, completion, image, location, number };
 }
+
 
 const rows = [
     createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
@@ -46,6 +59,9 @@ const rows = [
     createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
     createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
 ];
+
+
+
 
 let stockData = [
     {
@@ -64,6 +80,7 @@ let stockData = [
         Price: 554.52
     },
 ];
+
 
 function convertArrayOfObjectsToCSV(args) {
     let result, ctr, keys, columnDelimiter, lineDelimiter, data;
@@ -95,6 +112,8 @@ function convertArrayOfObjectsToCSV(args) {
 
     return result;
 }
+
+
 
 
 function descendingComparator(a, b, orderBy) {
@@ -144,6 +163,63 @@ function stableSort(array, comparator) {
     return stabilizedThis.map((el) => el[0]);
 }
 
+function SearchReports(props) {
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    const [list, setList] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const handleSearchChange = (event) => {
+        // searchQuery is what the user types in to search.
+        setSearchQuery(event.target.value);
+        // list is what is being searched through. It get's its data from a reducer.
+        setList(
+            // This is searching through an array of objects to see if the object.name 
+            // matches the searchQuery.
+            props.talentPool.filter((el) => el.name.includes(event.target.value))
+        );
+        setOpen(true);
+    };
+    const clickAway = () => {
+        setSearchQuery('');
+        setTimeout(() => {
+            setOpen(false);
+        }, 100);
+    };
+    return (
+        <Box className={classes.box} component="span">
+            <Paper className={classes.paper}>
+                <Box pt={.5}>
+                    <TextField
+                    className={classes.search}
+                        id="outlined-basic"
+                        size="small"
+                        value={searchQuery}
+                        label="Search"
+                        variant="outlined"
+                        autoComplete="off"
+                        onBlur={clickAway}
+                        onChange={handleSearchChange}
+                    />
+                </Box>
+                <Box display={open ? 'block' : 'none'}>
+                    <MenuList>
+                        {list.slice(0, 5).map((item, index) => {
+                            return (
+                                <MenuItem
+                                    key={item.id}
+                                    onClick={props.handleTalentAssign(item.id)}
+                                >
+                                    {item.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </MenuList>
+                </Box>
+            </Paper>
+        </Box>
+    );
+}
+
 const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
     { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
@@ -160,6 +236,7 @@ function EnhancedTableHead(props) {
     };
 
     return (
+      
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
@@ -194,6 +271,7 @@ function EnhancedTableHead(props) {
                 ))}
             </TableRow>
         </TableHead>
+      
     );
 }
 
@@ -250,7 +328,7 @@ const EnhancedTableToolbar = (props) => {
                     
                 )}
 <CSV/>
-            {numSelected > 0 ? (
+            {/* {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton 
                     onClick={downloadCSV}
@@ -265,7 +343,7 @@ const EnhancedTableToolbar = (props) => {
                             <FilterListIcon />
                         </IconButton>
                     </Tooltip>
-                )}
+                )} */}
         </Toolbar>
     );
 };
@@ -281,6 +359,11 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         width: '100%',
         marginBottom: theme.spacing(2),
+    },
+    search: {
+        width: 250,
+        marginBottom: theme.spacing(1),
+        marginLeft: theme.spacing(1),
     },
     table: {
         minWidth: 750,
@@ -368,8 +451,9 @@ function Reports(props) {
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
+              
                 <TableContainer>
-                
+                <SearchReports />
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
