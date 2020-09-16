@@ -61,6 +61,7 @@ router.post(
         telephone,
         account_type_id,
       ]);
+      res.sendStatus(201);
     } catch (err) {
       console.log(`Error saving user to database: ${err}`);
       res.sendStatus(500);
