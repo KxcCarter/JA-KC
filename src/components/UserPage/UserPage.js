@@ -7,29 +7,33 @@ import './UserPage.css';
 import TestNav from '../MobileNav/TestNav';
 
 class UserPage extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_SCHEDULED_CLASSES',
+    });
+  }
+
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
+    const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
+      (item, index) => {
+        return (
+          <div key={item.index}>
+            <h3 id="welcome">View Program Information</h3>
+            <h5>{item.title}</h5>
+            <h5>{item.name}</h5>
+            <h5>Number of Sessions: {item.sessions}</h5>
+          </div>
+        );
+      }
+    );
     return (
       <div>
         <TestNav />
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
-              {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1> */}
-              <h3 id="welcome">View Program Information</h3>
-              <h5>JA Career Speakers Series</h5>
-              <h5>Park Hill High School</h5>
-              <h5>October 14th, 2020 - 1PM</h5>
-              <p>
-                In JA Career Speakers Series, a volunteer guest speaker visits
-                the classroom and shares information about his or her career,
-                work, and education experience. The speaker may bring props,
-                samples of his or her work, or other visuals to help engage
-                students. Activities and implementation design will vary based
-                on grade level. This event is part of the JA Work and Career
-                Readiness Pathway and can be placed in grades K–12, in-school or
-                after-school/out-of-school.
-              </p>
+              {scheduled_classes}
             </Box>
           </Paper>
         </Container>

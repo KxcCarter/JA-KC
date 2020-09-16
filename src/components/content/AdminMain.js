@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import HeaderComponent from '../header/HeaderComponent';
 
 const styles = StyleSheet.create({
   cardsContainer: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function AdminMain() {
+function AdminMain(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {

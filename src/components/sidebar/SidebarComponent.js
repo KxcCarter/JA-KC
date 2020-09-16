@@ -21,37 +21,37 @@ const styles = StyleSheet.create({
         cursor: 'pointer',
         position: 'absolute',
         left: 24,
-        top: 34
+        top: 34,
     },
     container: {
         backgroundColor: '#363740',
         color: '#61b42a',
         width: 255,
         paddingTop: 32,
-        height: 'calc(100% - 32px)'
+        height: 'calc(100% - 32px)',
     },
     containerMobile: {
         transition: 'left 0.5s, right 0.5s',
         position: 'absolute',
         width: 255,
         height: 'calc(100% - 32px)',
-        zIndex: 901
+        zIndex: 901,
     },
     mainContainer: {
         height: '100%',
-        minHeight: '100vh'
+        minHeight: '100vh',
     },
     mainContainerMobile: {
         position: 'absolute',
         top: 0,
-        left: 0
+        left: 0,
     },
     mainContainerExpanded: {
         width: '100%',
-        minWidth: '100vh'
+        minWidth: '100vh',
     },
     menuItemList: {
-        marginTop: 52
+        marginTop: 52,
     },
     outsideLayer: {
         position: 'absolute',
@@ -59,26 +59,23 @@ const styles = StyleSheet.create({
         minWidth: '100%',
         height: '100%',
         backgroundColor: 'rgba(0,0,0,.50)',
-        zIndex: 900
+        zIndex: 900,
     },
     separator: {
         borderTop: '1px solid #DFE0EB',
         marginTop: 16,
         marginBottom: 16,
-        opacity: 0.06
+        opacity: 0.06,
     },
     hide: {
-        left: -255
+        left: -255,
     },
     show: {
-        left: 0
-    }
+        left: 0,
+    },
 });
 
 function SidebarComponent({ onChange, selectedItem }) {
-
-
-
     const [expanded, setExpanded] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const input1 = useRef(null);
@@ -97,34 +94,36 @@ function SidebarComponent({ onChange, selectedItem }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [window.innerWidth]);
 
-
     const onAddAdmin = () => {
-
         window.location.href = `mailto:?, cc=?, &subject=Please join Junior Achievement as an Admin&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as an admin www.google.com`;
     };
 
-    const onReportsClick = item => {
+    const onReportsClick = (item) => {
         setExpanded(false);
-        console.log("Clicked Reports");
+        console.log('Clicked Reports');
         return onChange(item);
-    }
+    };
 
-    const onVolunteersClick = item => {
+    const onVolunteersClick = (item) => {
         setExpanded(false);
         return onChange(item);
         //     return <button onClick={props.addTrip}>Add a trip</button>
         //   }
 
         // return onChange(item);
-    }
+    };
 
-    const onClassesClick = item => {
+    const onClassesClick = (item) => {
         setExpanded(false);
-        console.log("Clicked Classes");
+        console.log('Clicked Classes');
         return onChange(item);
+    };
 
-    }
-
+    const onAdministratorsClick = (item) => {
+        setExpanded(false);
+        console.log('Clicked Administrators');
+        return onChange(item);
+    };
 
     const toggleMenu = () => setExpanded(!expanded);
 
@@ -139,13 +138,13 @@ function SidebarComponent({ onChange, selectedItem }) {
     return (
         <div style={{ position: 'relative' }}>
             <Row
-                componentRef={element => (input1.current = element)}
+                componentRef={(element) => (input1.current = element)}
                 className={css(styles.mainContainer)}
                 breakpoints={{
                     768: css(
                         styles.mainContainerMobile,
                         expanded && styles.mainContainerExpanded
-                    )
+                    ),
                 }}
             >
                 {isMobile && !expanded && renderBurger()}
@@ -155,14 +154,12 @@ function SidebarComponent({ onChange, selectedItem }) {
                         768: css(
                             styles.containerMobile,
                             expanded ? styles.show : styles.hide
-                        )
+                        ),
                     }}
                 >
                     <LogoComponent />
                     <Column className={css(styles.menuItemList)}>
-                        <Link
-                            className="link"
-                            to="/reports">
+                        <Link className="link" to="/adminreports">
                             <MenuItemComponent
                                 title="Reports"
                                 icon={IconOverview}
@@ -170,9 +167,7 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Reports'}
                             />
                         </Link>
-                        <Link
-                            className="link"
-                            to="/volunteers">
+                        <Link className="link" to="/adminvolunteers">
                             <MenuItemComponent
                                 title="Volunteers"
                                 icon={IconContacts}
@@ -180,8 +175,15 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Volunteers'}
                             />
                         </Link>
-                        <Link className="link"
-                            to="/classes">
+                        <Link className="link" to="/adminadministrators">
+                            <MenuItemComponent
+                                title="Administrators"
+                                icon={IconAgents}
+                                onClick={() => onAdministratorsClick('Administrators')}
+                                active={selectedItem === 'Administrators'}
+                            />
+                        </Link>
+                        <Link className="link" to="/adminclasses">
                             <MenuItemComponent
                                 title="Classes and Training"
                                 icon={IconArticles}
@@ -189,22 +191,12 @@ function SidebarComponent({ onChange, selectedItem }) {
                                 active={selectedItem === 'Classes and Training Resources'}
                             />
                         </Link>
-                        <MenuItemComponent
-                            title="Add Admin User"
-                            icon={IconAgents}
-                            onClick={() => onAddAdmin('Add Admin User')}
-                            active={selectedItem === 'Add Admin User'}
-
-                        />
 
                         <div className={css(styles.separator)}></div>
                     </Column>
                 </Column>
                 {isMobile && expanded && (
-                    <div
-                        className={css(styles.outsideLayer)}
-                        onClick={toggleMenu}
-                    ></div>
+                    <div className={css(styles.outsideLayer)} onClick={toggleMenu}></div>
                 )}
             </Row>
         </div>

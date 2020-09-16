@@ -5,9 +5,14 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
+
 import rootReducer from './redux/reducers/_root.reducer'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas/_root.saga'; // imports ./redux/sagas/index.js
-
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import
+  'bootstrap-css-only/css/bootstrap.min.css';
+import
+  'mdbreact/dist/css/mdb.css';
 import App from './components/App/App';
 
 const sagaMiddleware = createSagaMiddleware();

@@ -47,7 +47,7 @@ class AdminClasses extends React.Component {
   resize = () => this.forceUpdate();
 
   render() {
-    const { selectedItem } = this.state;
+    const { selectedItem } = 'Classes and Training Resources';
     return (
       <Row className={css(styles.container)}>
         <SidebarComponent
