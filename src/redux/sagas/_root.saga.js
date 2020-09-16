@@ -25,7 +25,7 @@ import deleteS3ImageSaga from './deleteS3Image.saga';
 
 export default function* rootSaga() {
   yield all([
-    loginSaga(), // login saga is now registered
+    loginSaga(),
     registrationSaga(),
     userSaga(),
     volunteerList(), //contains only users that are volunteers

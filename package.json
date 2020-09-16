@@ -9,8 +9,12 @@
     "@types/bcrypt": "^3.0.0",
     "@types/body-parser": "^1.17.0",
     "@types/cookie-session": "^2.0.37",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.0",
     "@types/node": "^12.0.10",
+    "@types/nodemailer": "^6.4.0",
+    "@types/nodemailer-direct-transport": "^1.0.31",
+    "@types/nodemailer-smtp-transport": "^2.7.4",
     "@types/passport": "^1.0.0",
     "@types/passport-local": "^1.0.33",
     "@types/pg": "^7.4.14",
@@ -29,6 +33,7 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "fixed-data-table": "^0.6.5",
+    "fontawesome": "^5.6.3",
     "googlemaps": "^1.12.0",
     "lodash": "^4.17.20",
     "match-sorter": "^4.2.1",
@@ -36,6 +41,7 @@
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "node-uuid": "^1.4.8",
+    "nodemailer": "^6.4.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^8.3.0",
@@ -72,7 +78,8 @@
     "style-loader": "^1.2.1",
     "sweetalert": "^2.1.2",
     "sweetalert-react": "^0.4.11",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "xoauth2": "^1.2.0"
   },
   "scripts": {
     "start": "npm run tsc && node dist/server.js",

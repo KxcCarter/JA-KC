@@ -4,6 +4,7 @@ import rejectUnauthenticated from '../modules/authentication-middleware';
 import pool from '../modules/pool';
 import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
+
 const router: express.Router = express.Router();
 router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
@@ -47,4 +48,24 @@ router.post('/logout', (req: Request, res: Response): void => {
   req.logout();
   res.sendStatus(200);
 });
+
+router.post(
+  '/registerUser',
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const queryString: string = `SELECT * FROM "invites" WHERE hex = $1;`;
+
+      const hexResult: any = await pool.query(queryString, [req.body.hex]);
+
+      if (hexResult.rows.length < 1) {
+        res.sendStatus(401);
+      }
+
+      const addUserQueryString: string = `INSERT INTO "users" () VALUES ();`;
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  }
+);
+
 export default router;
