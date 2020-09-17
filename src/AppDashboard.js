@@ -14,13 +14,14 @@ const styles = StyleSheet.create({
         minHeight: '100vh',
         width: '100%',
         marginRight: '2%',
-        marginLeft: '0%'
+        marginLeft: '0%',
+        backgroundColor: '#a3a7a5',
     },
     content: {
         marginTop: 54
     },
     mainBlock: {
-        backgroundColor: '#F7F8FC',
+        backgroundColor: '#a3a7a5',
         padding: 30,
 
     },

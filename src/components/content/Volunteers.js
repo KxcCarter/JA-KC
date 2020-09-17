@@ -60,20 +60,20 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email ' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone ' },
     {
         id: 'classes',
         numeric: false,
         disablePadding: false,
-        label: 'Assigned Classes',
+        label: 'Class Assigned',
     },
     {
         id: 'assign',
         numeric: false,
         disablePadding: false,
-        label: 'Assign New Class',
+        label: 'Add Class',
     },
 ];
 
@@ -181,7 +181,7 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Volunteers
                     </Typography>
                 )}
@@ -254,13 +254,17 @@ function Volunteers(props) {
         dispatch({ type: 'FETCH_VOLUNTEERS' });
     }, [dispatch]);
 
+    const addClass = () => {
+        console.log("You are adding a class");
+    }
+
     const volunteerList = props.store.volunteerList.map((item, index) => {
         return {
             name: item.first_name + ' ' + item.last_name,
             email: item.email,
             phone: item.telephone,
             classes: item.scheduled_classes,
-            assign: <Button variant="contained">ASSIGN </Button>,
+            assign: <Button onClick={addClass} variant="contained">ADD </Button>,
         };
     });
 

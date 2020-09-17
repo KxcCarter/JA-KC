@@ -190,6 +190,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+      
     },
     highlight:
         theme.palette.type === 'light'
@@ -221,7 +222,7 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Completion Reports
                         
                     </Typography>
@@ -267,7 +268,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
     },
     table: {
-        minWidth: 750,
+        minWidth: 550,
     },
     visuallyHidden: {
         border: 0,
@@ -508,7 +509,8 @@ function Reports(props) {
                 />
                 <CSV/>
             </Paper>
-        </div>
+            </div>
+        
     );
 }
 
