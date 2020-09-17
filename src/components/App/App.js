@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import UserPage from '../UserPage/UserPage';
+import VolunteerClassesPage from '../VolunteerClassesPage/VolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
@@ -17,7 +17,9 @@ import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
 import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
-import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
+import MainVolunteerHomePage from '../MainVolunteerHomePage/MainVolunteerHomePage';
+import Modal from 'react-modal';
+
 import './App.css';
 import AppDashboard from '../../AppDashboard';
 import AdminAdministrators from '../content/AdminAdministrators';
@@ -41,8 +43,8 @@ class App extends Component {
             <Route exact path="/adminhome" component={AdminRegisterPage} />
             <Route
               exact
-              path="/volunteerclasses"
-              component={MainVolunteerClassesPage}
+              path="/volunteerhome"
+              component={MainVolunteerHomePage}
             />
             <Route
               exact
@@ -56,8 +58,8 @@ class App extends Component {
             <Route
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/volunteeruser"
-              component={UserPage}
+              path="/volunteerclasses"
+              component={VolunteerClassesPage}
             />
 
             {/* <ProtectedRoute

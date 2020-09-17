@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
-import './MainVolunteerClassesPage.css';
+import './MainVolunteerHomePage.css';
 import TestNav from '../MobileNav/TestNav';
 
-class MainVolunteerClassesPage extends Component {
+class MainVolunteerHomePage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     return (
       <div>
         <TestNav />
         <Container>
-          <Paper className="VolunteerPageBubbleStyle">
+          <Paper className="WelcomeVolunteerPageBubbleStyle">
             <Box p={1} m={1}>
               <h3 id="welcome">Hi, Johanna D!</h3>
             </Box>
@@ -23,9 +23,9 @@ class MainVolunteerClassesPage extends Component {
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
               {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1> */}
-              <h5>JA Career Speakers Series</h5>
-              <h5>Park Hill High School</h5>
-              <h5>October 14th, 2020 - 1PM</h5>
+              <h3>JA Career Speakers Series</h3>
+              <h4>Park Hill High School</h4>
+              <h4>October 14th, 2020 - 1PM</h4>
               {/* <p>
                 In JA Career Speakers Series, a volunteer guest speaker visits
                 the classroom and shares information about his or her career,
@@ -42,34 +42,44 @@ class MainVolunteerClassesPage extends Component {
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
-              <h5>JA Career Speakers Series</h5>
-              <h5>Park Hill High School</h5>
-              <h5>October 14th, 2020 - 1PM</h5>
+              <h3>JA Career Speakers Series</h3>
+              <h4>Park Hill High School</h4>
+              <h4>October 14th, 2020 - 1PM</h4>
+              <p></p>
+            </Box>
+          </Paper>
+        </Container>
+        <Container>
+          <Paper className="VolunteerPageBubbleStyle">
+            <Box p={1} m={1}>
+              <h3>JA Career Speakers Series</h3>
+              <h4>Park Hill High School</h4>
+              <h4>October 14th, 2020 - 1PM</h4>
               <p></p>
             </Box>
           </Paper>
         </Container>
 
-        <Container>
-          <Paper className="ProgramResourcesBubbleStyle">
-            <Box p={1} m={1}>
-              {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
-              <h2>Program Resources</h2>
+        {/* <Container> */}
+        {/* <Paper className="ProgramResourcesBubbleStyle"> */}
+        {/* <Box p={1} m={1}> */}
+        {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
+        {/* <h2>Program Resources</h2> */}
+        {/* </Box> */}
+        {/* </Paper> */}
+        {/* </Container> */}
+        {/* <Container> */}
+        {/* <Paper className="ProgramResourcesBubbleStyle"> */}
+        {/* <Box p={1} m={1}> */}
+        {/* <h2>Submit Class Details</h2>
             </Box>
           </Paper>
         </Container>
-        <Container>
-          <Paper className="ProgramResourcesBubbleStyle">
-            <Box p={1} m={1}>
-              <h2>Submit Class Details</h2>
-            </Box>
-          </Paper>
-        </Container>
-        {/* <LogOutButton className="log-in" /> */}
+        <LogOutButton className="log-in" /> */}
       </div>
     );
   }
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(MainVolunteerClassesPage);
+export default connect(mapStoreToProps)(MainVolunteerHomePage);

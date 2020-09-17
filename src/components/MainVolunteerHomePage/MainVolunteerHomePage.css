@@ -1,15 +1,20 @@
 .VolunteerPageBubbleStyle {
   background-color: #8cc63e !important;
   border-radius: 5px solid #8cc63e;
-  box-shadow: 2px 2px 1px #8cc63e !important;
+  box-shadow: 2px 2px 1px #6a6565 !important;
 }
 
 .ProgramResourcesBubbleStyle {
   background-color: #d59844 !important;
   border-radius: 5px solid #8cc63e;
-  box-shadow: 2px 2px 1px #8cc63e !important;
+  box-shadow: 2px 2px 1px #6a6565 !important;
 }
 
+.WelcomeVolunteerPageBubbleStyle {
+  background-color: #6a6565 !important;
+  border-radius: 5px solid #6a6565;
+  box-shadow: 2px 2px 1px #6a6565 !important;
+}
 h1 {
   color: white;
 }
