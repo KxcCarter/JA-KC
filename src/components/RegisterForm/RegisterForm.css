@@ -6,7 +6,7 @@
   box-shadow: 0 0 8px -4px rgba(0, 0, 0, 2);
   border-radius: 15px;
   width: 100% !important;
-  height: 100% !important;
+  height: 70% !important;
   /* margin-bottom: 0px;
     margin-top: 5%;
     margin-left: 35% !important; */
@@ -32,7 +32,7 @@
 .registerDiv {
   display: flex;
   justify-content: space-evenly;
-  height: 800px;
+  height: 700px;
   background-image: url(https://greaterkansascity.ja.org/dA/dcc9112e7e/banner/programs_background.png/1200w/jpeg/80);
   background-size: cover;
   background-position: cover;

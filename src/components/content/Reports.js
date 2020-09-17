@@ -379,7 +379,7 @@ function Reports(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, reportList.length - page * rowsPerPage);
 
-    function SearchClasses(props) {
+    function SearchReports(props) {
         const classes = useStyles();
         const [open, setOpen] = useState(false);
         const [list, setList] = useState([]);
