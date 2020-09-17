@@ -6,13 +6,12 @@ import learning_material from './training.reducer';
 import volunteerScheduledClasses from './volunteerScheduledClasses.reducer';
 import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
 import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
-import volunteerList from './volunteerlist.reducer';
+import volunteerlist from './volunteerlist.reducer';
 import programsReducer from './programs.reducer';
 import completedCounter from './completedcounter.reducer';
 import progressCounter from './inprogresscounter.reducer';
 import studentCounter from './studentcounter.reducer';
 import volunteerCounter from './volunteercount.reducer';
-
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -28,7 +27,6 @@ const rootReducer = combineReducers({
   progressCounter,
   studentCounter,
   volunteerCounter,
-
 });
 
 export default rootReducer;
