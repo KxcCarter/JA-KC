@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import VolunteerClassesPage from '../VolunteerClassesPage/VolunteerClassesPage';
+import MainVolunteerClassesPage from '../MainVolunteerClassesPage/VolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
@@ -58,7 +58,7 @@ class App extends Component {
               // logged in shows UserPage else shows LoginPage
               exact
               path="/volunteerclasses"
-              component={VolunteerClassesPage}
+              component={MainVolunteerClassesPage}
             />
 
             {/* <ProtectedRoute
