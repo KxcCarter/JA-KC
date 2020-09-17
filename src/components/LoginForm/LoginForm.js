@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link, Route, withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import { Spring } from 'react-spring/renderprops';
+
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -53,66 +55,79 @@ class LoginForm extends Component {
       <div className="loginDiv">
         <div className="overlay">
           <Card className="loginCard" onSubmit={this.login}>
-            <Container
-              className="loginContainer"
-              component="main"
-              maxWidth="xs"
+            <Spring
+              from={{ opacity: 0, marginTop: -600 }}
+              to={{ opacity: 1, marginTop: 0 }}
             >
-              <CssBaseline />
-              <div className="loginPaper">
-                <ArrowBackIcon className="loginArrow" />
-                <br></br>
-                <br></br>
-                <Avatar className="loginAvatar">
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography className="loginTitle" component="h1" variant="h5">
-                  Administrator Log In
-                </Typography>
-                {this.props.store.errors.loginMessage && (
-                  <h3 className="alert" role="alert">
-                    {this.props.store.errors.loginMessage}
-                  </h3>
-                )}
-                <form className="loginForm" noValidate>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Username"
-                    autoFocus
-                    type="text"
-                    name="username"
-                    required
-                    value={this.state.username}
-                    onChange={this.handleInputChangeFor('username')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    id="password"
-                    autoComplete="current-password"
-                    type="password"
-                    required
-                    value={this.state.password}
-                    onChange={this.handleInputChangeFor('password')}
-                  />
-                  {/* <Link className="loginLink" to="/admin"> */}
-                  <Button
-                    type="submit"
-                    fullWidth
-                    color="primary"
-                    className="loginButton"
-                    variant="contained"
-                    value="Log In"
+              {(props) => (
+                <div style={props}>
+                  <Container
+                    className="loginContainer"
+                    component="main"
+                    maxWidth="xs"
                   >
-                    Log In
-                  </Button>
-                  {/* </Link> */}
-                </form>
-              </div>
-            </Container>
+                    <CssBaseline />
+                    <div className="loginPaper">
+                      <ArrowBackIcon className="loginArrow" />
+                      <br></br>
+                      <br></br>
+                      <Avatar className="loginAvatar">
+                        <LockOutlinedIcon />
+                      </Avatar>
+                      <Typography
+                        className="loginTitle"
+                        component="h1"
+                        variant="h5"
+                      >
+                        Log In
+                      </Typography>
+                      {this.props.store.errors.loginMessage && (
+                        <h3 className="alert" role="alert">
+                          {this.props.store.errors.loginMessage}
+                        </h3>
+                      )}
+                      <form className="loginForm" noValidate>
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="Username"
+                          autoFocus
+                          type="text"
+                          name="username"
+                          required
+                          value={this.state.username}
+                          onChange={this.handleInputChangeFor('username')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          name="password"
+                          label="Password"
+                          id="password"
+                          autoComplete="current-password"
+                          type="password"
+                          required
+                          value={this.state.password}
+                          onChange={this.handleInputChangeFor('password')}
+                        />
+                        {/* <Link className="loginLink" to="/admin"> */}
+                        <Button
+                          type="submit"
+                          fullWidth
+                          color="primary"
+                          className="loginButton"
+                          variant="contained"
+                          value="Log In"
+                        >
+                          Log In
+                        </Button>
+                        {/* </Link> */}
+                      </form>
+                    </div>
+                  </Container>
+                </div>
+              )}
+            </Spring>
           </Card>
         </div>
       </div>

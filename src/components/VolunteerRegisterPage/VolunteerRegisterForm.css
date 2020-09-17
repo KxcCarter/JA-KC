@@ -36,8 +36,10 @@
   .volunteerRegisterDiv {
     display: flex;
     justify-content: space-evenly;
-    height: 700px;
-    background-image: linear-gradient(to bottom, #f0f6ec, #d7dfd6, #bec8c0, #a6b1ab, #8f9b96);
+    height: 800px;
+    background-image: url(https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);
+    background-size: cover;
+    background-position: center;
   }
   .overlay {
     background-color: rgba(0, 0, 0, 0.5);

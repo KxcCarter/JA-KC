@@ -39,7 +39,7 @@ class VolunteerRegisterForm extends Component {
         telephone: this.state.telephone,
       },
     });
-    this.props.history.push('/volunteerhome');
+    this.props.history.push('/volunteerclasses');
   }; // end registerUser
   // capture change on all the inputs and set that value to state
   handleInputChangeFor = (propertyName) => (event) => {

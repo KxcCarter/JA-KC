@@ -8,7 +8,7 @@ import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
 import Classes from '../content/Classes';
 import Trainings from '../content/Trainings';
-import Tab from '../content/Tab';
+import TabClassTraining from '../content/TabClassTraining';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginTop: 54,
   },
   mainBlock: {
-    backgroundColor: '#F7F8FC',
+    backgroundColor: '#a3a7a5',
     padding: 30,
   },
 });
@@ -58,9 +58,7 @@ class AdminClasses extends React.Component {
           <HeaderComponent title={selectedItem} />
           <div className={css(styles.content)}>
             <AdminMain />
-            <Classes />
-
-            <Trainings />
+            <TabClassTraining />
           </div>
         </Column>
       </Row>

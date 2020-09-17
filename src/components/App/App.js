@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
@@ -17,6 +16,7 @@ import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
 import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
+import MainVolunteerHomePage from '../MainVolunteerHomePage/MainVolunteerHomePage';
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
@@ -70,7 +70,7 @@ class App extends Component {
               // logged in shows UserPage else shows LoginPage
               exact
               path="/volunteerhome"
-              component={MainVolunteerClassesPage}
+              component={MainVolunteerHomePage}
               userAdminRedirect="/adminreports"
             />
 

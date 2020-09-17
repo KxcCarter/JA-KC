@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
-import './MainVolunteerClassesPage.css';
+import './MainVolunteerHomePage.css';
 import TestNav from '../MobileNav/TestNav';
 
-class MainVolunteerClassesPage extends Component {
+class MainVolunteerHomePage extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_SCHEDULED_CLASSES',
+    });
+    this.props.dispatch({
+      type: 'GET_CLASS_DETAILS',
     });
   }
   // this component doesn't do much to start, just renders some user info to the DOM
@@ -39,4 +42,4 @@ class MainVolunteerClassesPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(MainVolunteerClassesPage);
+export default connect(mapStoreToProps)(MainVolunteerHomePage);
