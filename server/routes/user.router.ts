@@ -5,6 +5,15 @@ import pool from '../modules/pool';
 import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
 import hexGen from '../modules/hex';
+import * as nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'juniorachievement.kc@gmail.com', // these should be replaced with .env variables
+    pass: 'i?q6$83heBMQ9%rKPoM$', // replace with .env variable
+  },
+});
 
 const router: express.Router = express.Router();
 router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
@@ -21,6 +30,26 @@ router.post(
       const queryString = `INSERT INTO "invites" ("email", "hex") VALUES ($1, $2);`;
 
       await pool.query(queryString, [email, newHex]);
+
+      const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? ${newHex}`;
+      const subject: string = `Grreeeetings from the intertubes`;
+
+      const mailOptions = {
+        from: `"Junior Achievement Admin" juniorachievement.kc@gmail.com`,
+        to: email,
+        subject: subject,
+        text: message,
+        html: '<b>' + message + '</b>',
+      };
+
+      await transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(`error: ${error}`);
+        }
+        console.log(`Message Sent ${info.response}`);
+        res.sendStatus(200);
+      });
+
       res.sendStatus(201);
     } catch (err) {
       console.warn(err);

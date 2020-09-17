@@ -11,7 +11,6 @@ import reportformRouter from './routes/report-form.router';
 import programsRouter from './routes/programs.router';
 import volunteerlistRouter from './routes/volunteerlist.router';
 import adminboxesRouter from './routes/counterboxes.router';
-import mailerRouter from './routes/nodemailer.router';
 import s3Router from './routes/s3.router';
 
 import * as dotenv from 'dotenv';
@@ -44,8 +43,6 @@ app.use('/api/volunteerlist', volunteerlistRouter);
 app.use('/api/counters', adminboxesRouter);
 
 app.use('/s3delete', s3Router);
-
-app.use('/api/mailer', mailerRouter);
 
 app.use(
   '/s3',
