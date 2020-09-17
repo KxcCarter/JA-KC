@@ -35,10 +35,14 @@ class App extends Component {
 
             <Route exact path="/admin" component={AppDashboard} />
             <Route exact path="/adminvolunteers" component={AdminVolunteers} />
-            <Route exact path="/adminadministrators" component={AdminAdministrators} />
+            <Route
+              exact
+              path="/adminadministrators"
+              component={AdminAdministrators}
+            />
             <Route exact path="/adminclasses" component={AdminClasses} />
             <Route exact path="/adminreports" component={AdminReports} />
-            <Route exact path="/adminlogin" component={AdminLoginPage} />
+            <Route exact path="/login" component={AdminLoginPage} />
             <Route exact path="/adminhome" component={AdminRegisterPage} />
             <Route
               exact

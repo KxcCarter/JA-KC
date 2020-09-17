@@ -13,7 +13,6 @@ import progressCounter from './inprogresscounter.reducer';
 import studentCounter from './studentcounter.reducer';
 import volunteerCounter from './volunteercount.reducer';
 
-
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
@@ -28,7 +27,6 @@ const rootReducer = combineReducers({
   progressCounter,
   studentCounter,
   volunteerCounter,
-
 });
 
 export default rootReducer;
