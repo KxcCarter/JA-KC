@@ -78,9 +78,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
 
 ];
 
@@ -172,11 +172,11 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Administrators
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -399,8 +399,8 @@ function PendingAdministrators(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
 
                                         </TableRow>
                                     );
@@ -422,6 +422,7 @@ function PendingAdministrators(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

@@ -30,7 +30,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -59,9 +59,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Admin Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
 ];
 
 function EnhancedTableHead(props) {
@@ -167,11 +167,11 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Administrators
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -179,9 +179,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Invite New Admin">
+                    <Tooltip title="Add New Admin">
                         <IconButton aria-label="invite admin">
-                            <MailOutlineIcon onClick={() => addAdmin('Add Admin User')} />
+                            <AddCircleIcon onClick={addAdmin} />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -415,8 +415,8 @@ function Administrators(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
 
                                         </TableRow>
                                     );
@@ -438,6 +438,7 @@ function Administrators(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

@@ -30,6 +30,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { CSVLink, CSVDownload } from "react-csv";
+import { title } from 'process';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,10 +62,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'classes',
-    numeric: true,
-    disablePadding: false,
-    label: 'Select All Classes',
+    id: 'title',
+    numeric: false,
+    disablePadding: true,
+    label: 'Title',
   },
 ];
 
@@ -157,6 +160,10 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
+  const addClass = () => {
+
+    window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+  };
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -175,14 +182,14 @@ const EnhancedTableToolbar = (props) => {
       ) : (
           <Typography
             className={classes.title}
-            variant="h6"
+            variant="h5"
             id="tableTitle"
             component="div"
           >
             Classes
           </Typography>
         )}
-      <CSV />
+
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -190,9 +197,9 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Add Class">
-            <IconButton aria-label="Add Class">
-              <AddCircleIcon />
+          <Tooltip title="Add New Class">
+            <IconButton aria-label="Add New Class">
+              <AddCircleIcon onClick={addClass} />
             </IconButton>
           </Tooltip>
         )}
@@ -257,6 +264,20 @@ function Classes(props) {
   const programData = props.store.programsReducer.map((item, index) => {
     return { title: item.title, sesssion: item.sessions, program_id: item.id };
   });
+
+  function CSV(data) {
+
+
+    return (
+      <div>
+        <CSVLink className="csvLink" data={programData}>Export to CSV</CSVLink>
+
+        {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+      </div>
+    );
+  }
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -370,10 +391,14 @@ function Classes(props) {
     );
   }
 
+
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+
         <EnhancedTableToolbar numSelected={selected.length} />
+
         <TableContainer>
           <SearchClasses />
           <Table
@@ -391,6 +416,7 @@ function Classes(props) {
               onRequestSort={handleRequestSort}
               rowCount={programData.length}
             />
+
             <TableBody>
               {stableSort(programData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -439,7 +465,9 @@ function Classes(props) {
               )}
             </TableBody>
           </Table>
+
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
@@ -449,6 +477,7 @@ function Classes(props) {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        <CSV />
       </Paper>
       {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}

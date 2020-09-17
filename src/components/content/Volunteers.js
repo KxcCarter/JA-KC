@@ -60,33 +60,22 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email ' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone ' },
     {
         id: 'classes',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
-        label: 'Assigned Classes',
+        label: 'Class Assigned',
     },
     {
         id: 'assign',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
-        label: 'Assign New Class',
+        label: 'Add Class',
     },
 ];
-
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={headCells}>Export to CSV</CSVLink>
-
-            {/* <CSVDownload data={csvData} target="_blank" />; */}
-
-        </div>
-    );
-}
 
 function EnhancedTableHead(props) {
     const {
@@ -180,6 +169,7 @@ const EnhancedTableToolbar = (props) => {
         window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
     };
 
+
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -191,11 +181,10 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Volunteers
                     </Typography>
                 )}
-            <CSV />
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -205,7 +194,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Add New Volunteer">
                         <IconButton aria-label="Add New Volunteer">
-                            <AddCircleIcon />
+                            <AddCircleIcon onClick={addVolunteer} />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -265,15 +254,33 @@ function Volunteers(props) {
         dispatch({ type: 'FETCH_VOLUNTEERS' });
     }, [dispatch]);
 
+    const addClass = () => {
+        console.log("You are adding a class");
+    }
+
     const volunteerList = props.store.volunteerList.map((item, index) => {
         return {
             name: item.first_name + ' ' + item.last_name,
             email: item.email,
             phone: item.telephone,
             classes: item.scheduled_classes,
-            assign: <Button variant="contained">ASSIGN </Button>,
+            assign: <Button onClick={addClass} variant="contained">ADD </Button>,
         };
     });
+
+    function CSV(data) {
+
+
+        return (
+            <div>
+                <CSVLink className="csvLink" data={volunteerList}>Export to CSV</CSVLink>
+
+                {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+            </div>
+        );
+    }
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -319,9 +326,6 @@ function Volunteers(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -393,6 +397,7 @@ function Volunteers(props) {
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
                     <SearchVolunteers />
+
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
@@ -440,10 +445,10 @@ function Volunteers(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.assign}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.classes}</TableCell>
+                                            <TableCell align="left">{row.assign}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -464,12 +469,13 @@ function Volunteers(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}
                     label="Dense padding"
                 /> */}
-        </div>
+        </div >
     );
 }
 

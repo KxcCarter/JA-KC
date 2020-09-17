@@ -32,7 +32,7 @@ function LogoComponent() {
     return (
         <Row className={css(styles.container)} horizontal="center" vertical="center">
 
-            <span className={css(styles.title)}>JAKC Dashboard</span>
+            <span className={css(styles.title)}>JA Connect</span>
         </Row>
     );
 }

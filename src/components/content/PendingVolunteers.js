@@ -27,10 +27,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Search from "./Search";
+import { CSVLink, CSVDownload } from "react-csv";
 
 
 function createData(name, email, phone, classes, assign) {
@@ -63,6 +63,17 @@ const rows = [
 
 ];
 
+function CSV(props) {
+    return (
+        <div>
+            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
+
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+        </div>
+    );
+}
+
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
@@ -91,10 +102,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
-    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
-    { id: 'classes', numeric: true, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'assign', numeric: true, disablePadding: false, label: 'Assign New Class' },
+    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
+    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
+    { id: 'assign', numeric: false, disablePadding: false, label: 'Assign New Class' },
 ];
 
 function EnhancedTableHead(props) {
@@ -186,11 +197,11 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Volunteers
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -200,7 +211,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Invite New Volunteer">
                         <IconButton aria-label="invite volunteer">
-                            <MailOutlineIcon />
+
                         </IconButton>
                     </Tooltip>
                 )}
@@ -255,6 +266,20 @@ function PendingVolunteers(props) {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+
+    // function CSV(data) {
+
+
+    //     return (
+    //         <div>
+    //             <CSVLink className="csvLink" data={volunteerList}>Export to CSV</CSVLink>
+
+    //             {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+    //         </div>
+    //     );
+    // }
+
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -299,9 +324,6 @@ function PendingVolunteers(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -413,10 +435,10 @@ function PendingVolunteers(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.email}</TableCell>
-                                            <TableCell align="right">{row.phone}</TableCell>
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.assign}</TableCell>
+                                            <TableCell align="left">{row.email}</TableCell>
+                                            <TableCell align="left">{row.phone}</TableCell>
+                                            <TableCell align="left">{row.classes}</TableCell>
+                                            <TableCell align="left">{row.assign}</TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -437,6 +459,7 @@ function PendingVolunteers(props) {
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV />
             </Paper>
             {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}
