@@ -22,6 +22,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import { Spring } from 'react-spring/renderprops';
 
 import { CSVLink, CSVDownload } from "react-csv";
 
@@ -435,6 +436,12 @@ function Reports(props) {
         }
 
     return (
+           <Spring
+      from={{ opacity: 0 }}
+      to={{ opacity: 1}}
+    >
+      {props => (
+        <div style={props}>
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
@@ -510,8 +517,10 @@ function Reports(props) {
                 <CSV/>
             </Paper>
             </div>
-        
-    );
+        </div>
+      )}
+    </Spring>
+    )
 }
 
 
