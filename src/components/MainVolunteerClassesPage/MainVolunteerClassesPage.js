@@ -17,25 +17,21 @@ class MainVolunteerClassesPage extends Component {
     const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
       (item, index) => {
         return (
-          <div key={item.index}>
-            <h3 id="welcome">View Program Information</h3>
-            <h5>{item.title}</h5>
-            <h5>{item.name}</h5>
-            <h5>Number of Sessions: {item.sessions}</h5>
-          </div>
+          <Paper className="VolunteerPageBubbleStyle" key={item.index}>
+            <Box p={1} m={1}>
+              <h3 id="welcome">View Program Information</h3>
+              <h5>{item.title}</h5>
+              <h5>{item.name}</h5>
+              <h5>Number of Sessions: {item.sessions}</h5>
+            </Box>
+          </Paper>
         );
       }
     );
     return (
       <div>
         <TestNav />
-        <Container>
-          <Paper className="VolunteerPageBubbleStyle">
-            <Box p={1} m={1}>
-              {scheduled_classes}
-            </Box>
-          </Paper>
-        </Container>
+        <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}
       </div>
     );

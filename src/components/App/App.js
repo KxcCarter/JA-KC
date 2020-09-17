@@ -9,18 +9,18 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import UserPage from '../UserPage/UserPage';
+import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
-import AdminAdministrators from '../content/AdminAdministrators';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
 import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
-import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
+
 import './App.css';
 import AppDashboard from '../../AppDashboard';
+import AdminAdministrators from '../content/AdminAdministrators';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
@@ -31,24 +31,32 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            <Redirect exact from="/" to="/adminlogin" />
+            <Redirect exact from="/" to="/home" />
 
-            <Route exact path="/admin" component={AppDashboard} />
-            <Route exact path="/adminvolunteers" component={AdminVolunteers} />
-            <Route
+            {/* <Route exact path="/admin" component={AppDashboard} /> */}
+            <ProtectedRoute
               exact
-              path="/adminadministrators"
-              component={AdminAdministrators}
+              path="/adminvolunteers"
+              component={AdminVolunteers}
             />
-            <Route exact path="/adminclasses" component={AdminClasses} />
-            <Route exact path="/adminreports" component={AdminReports} />
-            <Route exact path="/login" component={AdminLoginPage} />
+            <ProtectedRoute
+              exact
+              path="/adminclasses"
+              component={AdminClasses}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminreports"
+              component={AdminReports}
+              userVolunteerRedirect="/volunteerhome"
+            />
+            <ProtectedRoute
+              exact
+              path="/login"
+              component={AdminLoginPage}
+              authRedirect="/volunteerhome"
+            />
             <Route exact path="/adminhome" component={AdminRegisterPage} />
-            <Route
-              exact
-              path="/volunteerclasses"
-              component={MainVolunteerClassesPage}
-            />
             <Route
               exact
               path="/volunteerregister"
@@ -58,11 +66,12 @@ class App extends Component {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <Route
+            <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/volunteeruser"
-              component={UserPage}
+              path="/volunteerhome"
+              component={MainVolunteerClassesPage}
+              userAdminRedirect="/adminreports"
             />
 
             {/* <ProtectedRoute
@@ -116,8 +125,9 @@ e
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
-              path="/volunteerdashboard"
+              path="/volunteer"
               component={VolunteerDashboardPage}
+              authRedirect="/volunteerdashboard"
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

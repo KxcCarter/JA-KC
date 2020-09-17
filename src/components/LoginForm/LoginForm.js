@@ -39,11 +39,6 @@ class LoginForm extends Component {
     this.props.dispatch({
       type: 'FETCH_USER',
     });
-    if (this.props.store.user.account_type_id == 1) {
-      this.props.history.push('/adminreports');
-    } else {
-      this.props.history.push('/volunteerclasses');
-    }
   }; // end login
 
   // captures change on each input
