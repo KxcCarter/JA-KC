@@ -8,8 +8,8 @@
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 2.0);
     border-radius: 15px;
     width: 100% !important;
-    height: 90% !important;
-    padding-bottom: 20%;
+    height: 420px !important;
+   
     
     /* margin-top: 5%; */
     /* margin-left: 35% !important; */
@@ -19,7 +19,7 @@
 }
 
 .loginAvatar {
-    margin-top: -10px;
+    margin-top: -50px;
     margin-bottom: 5px;
 }
 
