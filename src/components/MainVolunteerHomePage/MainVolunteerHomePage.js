@@ -42,9 +42,9 @@ class MainVolunteerHomePage extends Component {
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
-              <h3>JA Career Speakers Series</h3>
+              <h3>JA Biztown Program</h3>
               <h4>Park Hill High School</h4>
-              <h4>October 14th, 2020 - 1PM</h4>
+              <h4>October 26th, 2020 - 1PM</h4>
               <p></p>
             </Box>
           </Paper>
@@ -52,9 +52,9 @@ class MainVolunteerHomePage extends Component {
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
-              <h3>JA Career Speakers Series</h3>
+              <h3>JA Career Success Program</h3>
               <h4>Park Hill High School</h4>
-              <h4>October 14th, 2020 - 1PM</h4>
+              <h4>October 30th, 2020 - 1PM</h4>
               <p></p>
             </Box>
           </Paper>
