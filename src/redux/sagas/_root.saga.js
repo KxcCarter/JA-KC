@@ -10,9 +10,9 @@ import reportFormSaga from './report-form.saga';
 import deleteReportSaga from './deletereport.saga';
 import editReportSaga from './editreport.saga';
 import programsSaga from './programs.saga';
-import editprogramSaga from './editprograms.saga';
-import deleteprogramSaga from './deleteprogram.saga';
+import editProgramSaga from './editprograms.saga';
 import deleteProgramSaga from './deleteprogram.saga';
+
 import volunteerGetClassListSaga from './volunteerGetClassList.saga';
 import volunteerCompleteClassSaga from './volunteerCompleteClass.saga';
 import volunteerGetLearningMaterialSaga from './volunteerGetLearningMaterial.saga';
@@ -39,7 +39,7 @@ export default function* rootSaga() {
     deleteS3ImageSaga(),
     editReportSaga(),
     programsSaga(),
-    editprogramSaga(),
+    editProgramSaga(),
     deleteProgramSaga(),
     volunteerGetClassListSaga(),
     volunteerCompleteClassSaga(),
