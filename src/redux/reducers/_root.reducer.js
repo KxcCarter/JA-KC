@@ -6,7 +6,7 @@ import learning_material from './training.reducer';
 import volunteerScheduledClasses from './volunteerScheduledClasses.reducer';
 import volunteerLearningMaterial from './volunteerLearningMaterial.reducer';
 import volunteerSingleClassDetails from './volunteerSingleClassDetails.reducer';
-import volunteerlist from './volunteerlist.reducer';
+import volunteerList from './volunteerlist.reducer';
 import programsReducer from './programs.reducer';
 import completedCounter from './completedcounter.reducer';
 import progressCounter from './inprogresscounter.reducer';
