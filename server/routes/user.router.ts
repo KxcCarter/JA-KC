@@ -20,6 +20,24 @@ router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
 
+router.get(
+  '/pending',
+  rejectUnauthenticated,
+  (req: Request, res: Response): void => {
+    const queryText: string = `SELECT "email" FROM "invites"`;
+
+    pool
+      .query(queryText)
+      .then((dbRes) => {
+        res.send(dbRes.rows);
+      })
+      .catch((err) => {
+        console.log('Error getting pending invites. ', err);
+        res.sendStatus(500);
+      });
+  }
+);
+
 router.post(
   '/',
   async (req: Request, res: Response): Promise<void> => {
@@ -90,6 +108,11 @@ router.post(
         telephone,
         account_type_id,
       ]);
+
+      const deleteHex: string = `DELETE FROM "invites" WHERE "hex" = $1;`;
+      await pool.query(deleteHex, [req.params.hex]);
+      console.log(`Success! User registered and removed from invites table.`);
+
       res.sendStatus(201);
     } catch (err) {
       console.log(`Error saving user to database: ${err}`);
