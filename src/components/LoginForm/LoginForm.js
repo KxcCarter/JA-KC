@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,14 +14,14 @@ import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 // CUSTOM COMPONENTS
-import "./LoginForm.css";
+import './LoginForm.css';
 
 // component for existing user log in
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-  };// end state
+  }; // end state
 
   login = (event) => {
     event.preventDefault();
@@ -36,25 +36,33 @@ class LoginForm extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-
-  }// end login
+    this.props.dispatch({
+      type: 'FETCH_USER',
+    });
+    if (this.props.store.user.account_type_id == 1) {
+      this.props.history.push('/adminreports');
+    } else {
+      this.props.history.push('/volunteerhome');
+    }
+  }; // end login
 
   // captures change on each input
-  handleInputChangeFor = propertyName => (event) => {
+  handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  };// end handleInputChangeFor
+  }; // end handleInputChangeFor
 
   render() {
     return (
-
       <div className="loginDiv">
         <div className="overlay">
-
           <Card className="loginCard" onSubmit={this.login}>
-
-            <Container className="loginContainer" component="main" maxWidth="xs">
+            <Container
+              className="loginContainer"
+              component="main"
+              maxWidth="xs"
+            >
               <CssBaseline />
               <div className="loginPaper">
                 <ArrowBackIcon className="loginArrow" />
@@ -65,12 +73,9 @@ class LoginForm extends Component {
                 </Avatar>
                 <Typography className="loginTitle" component="h1" variant="h5">
                   Administrator Log In
-                    </Typography>
+                </Typography>
                 {this.props.store.errors.loginMessage && (
-                  <h3
-                    className="alert"
-                    role="alert"
-                  >
+                  <h3 className="alert" role="alert">
                     {this.props.store.errors.loginMessage}
                   </h3>
                 )}
@@ -110,18 +115,14 @@ class LoginForm extends Component {
                     Log In
                   </Button>
                   {/* </Link> */}
-
                 </form>
               </div>
             </Container>
-
           </Card>
-
         </div>
-      </div >
-
+      </div>
     );
   }
-};// end LoginForm
+} // end LoginForm
 
-export default connect(mapStoreToProps)(LoginForm);
+export default connect(mapStoreToProps)(withRouter(LoginForm));
