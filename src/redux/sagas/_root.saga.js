@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import volunteerList from './volunteerlist.saga';
+import volunteerList from './volunteerList.saga';
 import deleteVolunteer from './deletevolunteer.saga';
 import editVolunteer from './editvolunteer.saga';
 import getReportSaga from './getreport.saga';
@@ -22,6 +22,8 @@ import inProgressSaga from './inprogresscounter.saga';
 import studentCounterSaga from './studentscounter.saga';
 import volunteerCounterSaga from './volunteercounter.saga';
 import deleteS3ImageSaga from './deleteS3Image.saga';
+import getPendingInvitesSaga from './getPendingInvites.saga';
+import inviteUserSaga from './inviteUser.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -47,5 +49,7 @@ export default function* rootSaga() {
     inProgressSaga(),
     studentCounterSaga(),
     volunteerCounterSaga(),
+    getPendingInvitesSaga(),
+    inviteUserSaga(),
   ]);
 }
