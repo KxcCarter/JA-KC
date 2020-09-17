@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
@@ -16,14 +16,14 @@ import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 // CUSTOM COMPONENTS
-import "./LoginForm.css";
+import './LoginForm.css';
 
 // component for existing user log in
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-  };// end state
+  }; // end state
 
   login = (event) => {
     event.preventDefault();
@@ -38,15 +38,22 @@ class LoginForm extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-
-  }// end login
+    this.props.dispatch({
+      type: 'FETCH_USER',
+    });
+    if (this.props.store.user.account_type_id == 1) {
+      this.props.history.push('/adminreports');
+    } else {
+      this.props.history.push('/volunteerhome');
+    }
+  }; // end login
 
   // captures change on each input
-  handleInputChangeFor = propertyName => (event) => {
+  handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  };// end handleInputChangeFor
+  }; // end handleInputChangeFor
 
   render() {
     return (
@@ -55,7 +62,6 @@ class LoginForm extends Component {
 
       <div className="loginDiv">
         <div className="overlay">
-
           <Card className="loginCard" onSubmit={this.login}>
             <Spring
               from={{ opacity: 0, marginTop: -600 }}
@@ -128,7 +134,6 @@ class LoginForm extends Component {
               )}
             </Spring>
           </Card>
-
         </div>
       </div>
 
@@ -136,4 +141,4 @@ class LoginForm extends Component {
   }
 }// end LoginForm
 
-export default connect(mapStoreToProps)(LoginForm);
+export default connect(mapStoreToProps)(withRouter(LoginForm));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
@@ -39,6 +39,7 @@ class VolunteerRegisterForm extends Component {
         telephone: this.state.telephone,
       },
     });
+    this.props.history.push('/volunteerhome');
   }; // end registerUser
   // capture change on all the inputs and set that value to state
   handleInputChangeFor = (propertyName) => (event) => {
@@ -164,4 +165,4 @@ class VolunteerRegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(VolunteerRegisterForm);
+export default connect(mapStoreToProps)(withRouter(VolunteerRegisterForm));

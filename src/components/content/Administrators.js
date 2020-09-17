@@ -153,12 +153,14 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+    const dispatch = useDispatch();
 
     const addAdmin = () => {
         swal("What is the email address you would like to send invite to?", {
             content: "input",
         })
             .then((value) => {
+                dispatch({ type: 'INVITE_USER', payload: { email: value } });
                 console.log(value);
                 swal(`Your invite has been sent to: ${value}`);
             });
