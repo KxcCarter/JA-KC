@@ -12,6 +12,7 @@ import completedCounter from './completedcounter.reducer';
 import progressCounter from './inprogresscounter.reducer';
 import studentCounter from './studentcounter.reducer';
 import volunteerCounter from './volunteercount.reducer';
+import pendingInvites from './pendingInvites.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   progressCounter,
   studentCounter,
   volunteerCounter,
+  pendingInvites,
 });
 
 export default rootReducer;
