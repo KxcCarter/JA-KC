@@ -11,6 +11,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './RegisterForm.css';
+import { Spring } from 'react-spring/renderprops';
+
+
 class RegisterForm extends Component {
   state = {
     username: '',
@@ -52,19 +55,25 @@ class RegisterForm extends Component {
       <div className="registerDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
-            <Container
-              className="registerContainer"
-              component="main"
-              maxWidth="xs"
+            <Spring
+              from={{ opacity: 0, marginTop: -600 }}
+              to={{ opacity: 1, marginTop: 0 }}
             >
-              <CssBaseline />
-              <div className="registerPaper">
-                <ArrowBackIcon className="registerArrow" />
-                <Avatar className="registerAvatar"></Avatar>
-                <Typography className="loginTitle" component="h1" variant="h5">
-                  Administrator Registration
+              {props => (
+                <div style={props}>
+                  <Container
+                    className="registerContainer"
+                    component="main"
+                    maxWidth="xs"
+                  >
+                    <CssBaseline />
+                    <div className="registerPaper">
+                      <ArrowBackIcon className="registerArrow" />
+                      <Avatar className="registerAvatar"></Avatar>
+                      <Typography className="loginTitle" component="h1" variant="h5">
+                        Administrator Registration
                 </Typography>
-                {/* {this.props.errors.registrationMessage && (
+                      {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
                     role="alert"
@@ -72,89 +81,92 @@ class RegisterForm extends Component {
                     {this.props.errors.registrationMessage}
                   </h3>
                 )} */}
-                <form className="registerForm" noValidate>
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="First Name"
-                    autoFocus
-                    type="text"
-                    name="first_name"
-                    value={this.state.first_name}
-                    required
-                    onChange={this.handleInputChangeFor('first_name')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Last Name"
-                    autoFocus
-                    type="text"
-                    name="last_name"
-                    value={this.state.last_name}
-                    required
-                    onChange={this.handleInputChangeFor('last_name')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Username"
-                    autoFocus
-                    type="text"
-                    name="username"
-                    value={this.state.username}
-                    required
-                    onChange={this.handleInputChangeFor('username')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    value={this.state.password}
-                    required
-                    onChange={this.handleInputChangeFor('password')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Email"
-                    autoFocus
-                    type="text"
-                    name="email"
-                    id="email"
-                    value={this.state.email}
-                    required
-                    onChange={this.handleInputChangeFor('email')}
-                  />
-                  <TextField
-                    margin="normal"
-                    fullWidth
-                    label="Telephone"
-                    autoFocus
-                    type="text"
-                    name="telephone"
-                    value={this.state.telephone}
-                    required
-                    onChange={this.handleInputChangeFor('telephone')}
-                  />
+                      <form className="registerForm" noValidate>
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="First Name"
+                          autoFocus
+                          type="text"
+                          name="first_name"
+                          value={this.state.first_name}
+                          required
+                          onChange={this.handleInputChangeFor('first_name')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="Last Name"
+                          autoFocus
+                          type="text"
+                          name="last_name"
+                          value={this.state.last_name}
+                          required
+                          onChange={this.handleInputChangeFor('last_name')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="Username"
+                          autoFocus
+                          type="text"
+                          name="username"
+                          value={this.state.username}
+                          required
+                          onChange={this.handleInputChangeFor('username')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          name="password"
+                          label="Password"
+                          type="password"
+                          id="password"
+                          value={this.state.password}
+                          required
+                          onChange={this.handleInputChangeFor('password')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="Email"
+                          autoFocus
+                          type="text"
+                          name="email"
+                          id="email"
+                          value={this.state.email}
+                          required
+                          onChange={this.handleInputChangeFor('email')}
+                        />
+                        <TextField
+                          margin="normal"
+                          fullWidth
+                          label="Telephone"
+                          autoFocus
+                          type="text"
+                          name="telephone"
+                          value={this.state.telephone}
+                          required
+                          onChange={this.handleInputChangeFor('telephone')}
+                        />
 
-                  <Button
-                    className="registerButton"
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    name="submit"
-                    value="Register"
-                  >
-                    Register
+                        <Button
+                          className="registerButton"
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                          name="submit"
+                          value="Register"
+                        >
+                          Register
                   </Button>
-                </form>
-              </div>
-            </Container>
+                      </form>
+                    </div>
+                  </Container>
+                </div>
+              )}
+            </Spring>
           </Card>
         </div>
       </div>

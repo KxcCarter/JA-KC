@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import volunteerList from './volunteerList.saga';
+import volunteerList from './volunteerlist.saga';
 import deleteVolunteer from './deletevolunteer.saga';
 import editVolunteer from './editvolunteer.saga';
 import getReportSaga from './getreport.saga';

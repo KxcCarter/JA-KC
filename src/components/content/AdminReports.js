@@ -6,8 +6,8 @@ import { StyleSheet, css } from 'aphrodite';
 import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
-import Reports from './Reports';
-
+import TabReports from './TabReports';
+import { Spring } from 'react-spring/renderprops';
 const styles = StyleSheet.create({
   container: {
     height: '100%',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginTop: 54,
   },
   mainBlock: {
-    backgroundColor: '#F7F8FC',
+    backgroundColor: '#a3a7a5',
     padding: 30,
   },
 });
@@ -53,7 +53,7 @@ class AdminReports extends React.Component {
           <HeaderComponent title={selectedItem} />
           <div className={css(styles.content)}>
             <AdminMain />
-            <Reports />
+            <TabReports />
           </div>
         </Column>
       </Row>
