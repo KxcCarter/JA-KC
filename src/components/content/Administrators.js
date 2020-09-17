@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { lighten } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -199,6 +204,11 @@ const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 750,
     },
+    search: {
+        width: 250,
+        marginBottom: theme.spacing(1),
+        marginLeft: theme.spacing(1),
+    },
     visuallyHidden: {
         border: 0,
         clip: 'rect(0 0 0 0)',
@@ -295,11 +305,69 @@ function Administrators(props) {
         rowsPerPage -
         Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
 
+
+    function SearchAdministrators(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+            // searchQuery is what the user types in to search.
+            setSearchQuery(event.target.value);
+            // list is what is being searched through. It get's its data from a reducer.
+            setList(
+                // This is searching through an array of objects to see if the object.name 
+                // matches the searchQuery.
+                props.talentPool.filter((el) => el.name.includes(event.target.value))
+            );
+            setOpen(true);
+        };
+        const clickAway = () => {
+            setSearchQuery('');
+            setTimeout(() => {
+                setOpen(false);
+            }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+                <Paper className={classes.paper}>
+                    <Box pt={.5}>
+                        <TextField
+                            className={classes.search}
+                            id="outlined-basic"
+                            size="small"
+                            value={searchQuery}
+                            label="Search"
+                            variant="outlined"
+                            autoComplete="off"
+                            onBlur={clickAway}
+                            onChange={handleSearchChange}
+                        />
+                    </Box>
+                    <Box display={open ? 'block' : 'none'}>
+                        <MenuList>
+                            {list.slice(0, 5).map((item, index) => {
+                                return (
+                                    <MenuItem
+                                        key={item.id}
+                                        onClick={props.handleTalentAssign(item.id)}
+                                    >
+                                        {item.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </MenuList>
+                    </Box>
+                </Paper>
+            </Box>
+        );
+    }
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <TableContainer>
+                    <SearchAdministrators />
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"

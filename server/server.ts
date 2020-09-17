@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import sessionMiddleware from './modules/session-middleware';
 import passport from './strategies/user.strategy';
+
+// Routers
 import userRouter from './routes/user.router';
 import volunteerRouter from './routes/volunteer.router';
 import trainingRouter from './routes/training.router';
@@ -9,8 +11,12 @@ import reportformRouter from './routes/report-form.router';
 import programsRouter from './routes/programs.router';
 import volunteerlistRouter from './routes/volunteerlist.router';
 import adminboxesRouter from './routes/counterboxes.router';
+import s3Router from './routes/s3.router';
 
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
 
 const app: any = express();
 
@@ -35,6 +41,19 @@ app.use('/api/report-form', reportformRouter);
 app.use('/api/programs', programsRouter);
 app.use('/api/volunteerlist', volunteerlistRouter);
 app.use('/api/counters', adminboxesRouter);
+
+app.use('/s3delete', s3Router);
+
+app.use(
+  '/s3',
+  UploaderS3Router({
+    bucket: 'operisstorage', // This will be changed for production.
+    region: 'us-east-2', // optional
+    headers: { 'Access-Control-Allow-Origin': '*' }, // optional
+    ACL: 'public-read', // private is the default - set to `public-read` to let anyone view uploads
+    uniquePrefix: true, // true is the default. This prevents overwriting a file with the same name.
+  })
+);
 
 // Serve static files
 app.use(express.static('build'));

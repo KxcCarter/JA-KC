@@ -12,6 +12,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import VolunteerClassesPage from '../VolunteerClassesPage/VolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
+import AdminAdministrators from '../content/AdminAdministrators';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
@@ -22,7 +23,6 @@ import Modal from 'react-modal';
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
-import AdminAdministrators from '../content/AdminAdministrators';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
@@ -33,10 +33,11 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/adminlogin" />
 
             <Route exact path="/admin" component={AppDashboard} />
             <Route exact path="/adminvolunteers" component={AdminVolunteers} />
+            <Route exact path="/adminadministrators" component={AdminAdministrators} />
             <Route exact path="/adminclasses" component={AdminClasses} />
             <Route exact path="/adminreports" component={AdminReports} />
             <Route exact path="/adminlogin" component={AdminLoginPage} />
