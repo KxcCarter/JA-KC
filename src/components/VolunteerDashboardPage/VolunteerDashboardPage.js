@@ -115,9 +115,28 @@ const useStyles = makeStyles({
   },
 });
 
-export default function VolunteerDashboardPage() {
+export default function VolunteerDashboardPage(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   // const bull = <span className={classes.bullet}>•</span>;
+  useEffect(
+    (props) => {
+      dispatch({
+        type: 'GET_SCHEDULED_CLASSES',
+      });
+    },
+    [dispatch]
+  );
+
+  const scheduled_classes = props.store.volunteerScheduledClasses.map(
+    (item, index) => {
+      return {
+        name: item.name,
+        title: item.title,
+        sessions: item.sessions,
+      };
+    }
+  );
 
   return (
     <div>
@@ -130,7 +149,7 @@ export default function VolunteerDashboardPage() {
             color="textSecondary"
             gutterBottom
           >
-            <p> Hello</p>
+            <p> Hello </p>
             {/* <h1 id="welcome">Welcome, {props.store.user.username}!</h1> */}
           </Typography>
           <Typography variant="h5" component="h2">
@@ -149,6 +168,10 @@ export default function VolunteerDashboardPage() {
           <Button size="medium">PROGRAMS!!!!</Button>
         </CardActions>
       </Card>
+      <ul>
+        {scheduled_classes}
+        <li>{scheduled_classes.name}</li>
+      </ul>
     </div>
   );
 }
