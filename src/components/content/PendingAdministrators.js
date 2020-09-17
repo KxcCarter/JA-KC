@@ -187,7 +187,7 @@ const EnhancedTableToolbar = (props) => {
             ) : (
                     <Tooltip title="Invite New Administrators">
                         <IconButton aria-label="invite administrator">
-                            <MailOutlineIcon />
+
                         </IconButton>
                     </Tooltip>
                 )}

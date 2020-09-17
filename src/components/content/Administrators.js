@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
 
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -154,8 +155,13 @@ const EnhancedTableToolbar = (props) => {
     const { numSelected } = props;
 
     const addAdmin = () => {
-
-        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+        swal("What is the email address you would like to send invite to?", {
+            content: "input",
+        })
+            .then((value) => {
+                console.log(value);
+                swal(`Your invite has been sent to: ${value}`);
+            });
     };
 
     return (

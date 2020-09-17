@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import swal from 'sweetalert';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
@@ -166,8 +167,13 @@ const EnhancedTableToolbar = (props) => {
     const { numSelected } = props;
 
     const addVolunteer = () => {
-
-        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+        swal("What is the email address you would like to send invite to?", {
+            content: "input",
+        })
+            .then((value) => {
+                console.log(value);
+                swal(`Your invite has been sent to: ${value}`);
+            });
     };
 
 
@@ -257,6 +263,7 @@ function Volunteers(props) {
 
     const addClass = () => {
         console.log("You are adding a class");
+
     }
 
     const volunteerList = props.store.volunteerList.map((item, index) => {
