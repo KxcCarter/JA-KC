@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import { Spring } from 'react-spring/renderprops';
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -30,6 +32,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CSV from '../content/CSV';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { CSVLink, CSVDownload } from "react-csv";
+import { title } from 'process';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -59,15 +64,14 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'classes',
-    numeric: true,
-    disablePadding: false,
-    label: 'Select All Classes',
+    id: 'title',
+    numeric: false,
+    disablePadding: true,
+    label: 'Title',
   },
 ];
 
-// const addClass = (event, name) => {
-// }
+
 
 // const deleteClass = (event, name) => {
 // }
@@ -157,6 +161,16 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
+  const addClass = (event, name) => {
+    swal("What is the title of the Class you would like to add?", {
+      content: "input",
+    })
+      .then((value) => {
+        console.log(value);
+        swal(`The following Class has been added to Classes: ${value}`);
+      });
+  }
+
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -175,14 +189,14 @@ const EnhancedTableToolbar = (props) => {
       ) : (
           <Typography
             className={classes.title}
-            variant="h6"
+            variant="h5"
             id="tableTitle"
             component="div"
           >
             Classes
           </Typography>
         )}
-      <CSV />
+
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -190,9 +204,9 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Add Class">
-            <IconButton aria-label="Add Class">
-              <AddCircleIcon />
+          <Tooltip title="Add New Class">
+            <IconButton aria-label="Add New Class">
+              <AddCircleIcon onClick={addClass} />
             </IconButton>
           </Tooltip>
         )}
@@ -257,6 +271,20 @@ function Classes(props) {
   const programData = props.store.programsReducer.map((item, index) => {
     return { title: item.title, sesssion: item.sessions, program_id: item.id };
   });
+
+  function CSV(data) {
+
+
+    return (
+      <div>
+        <CSVLink className="csvLink" data={programData}>Export to CSV</CSVLink>
+
+        {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+      </div>
+    );
+  }
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -370,92 +398,108 @@ function Classes(props) {
     );
   }
 
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <SearchClasses />
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={programData.length}
-            />
-            <TableBody>
-              {stableSort(programData, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
-                  const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.title)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.program_id}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        align="left"
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.title}
-                      </TableCell>
-                      <TableCell align="right">{row.sessions}</TableCell>
-                      {/* <TableCell align="right">{row.classes}</TableCell>
+
+  return (
+    <Spring
+      from={{ opacity: 0 }}
+      to={{ opacity: 1 }}
+    >
+      {props => (
+        <div style={props}>
+          <div className={classes.root}>
+            <Paper className={classes.paper}>
+
+              <EnhancedTableToolbar numSelected={selected.length} />
+
+              <TableContainer>
+                <SearchClasses />
+                <Table
+                  className={classes.table}
+                  aria-labelledby="tableTitle"
+                  size={dense ? 'small' : 'medium'}
+                  aria-label="enhanced table"
+                >
+                  <EnhancedTableHead
+                    classes={classes}
+                    numSelected={selected.length}
+                    order={order}
+                    orderBy={orderBy}
+                    onSelectAllClick={handleSelectAllClick}
+                    onRequestSort={handleRequestSort}
+                    rowCount={programData.length}
+                  />
+
+                  <TableBody>
+                    {stableSort(programData, getComparator(order, orderBy))
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row, index) => {
+                        const isItemSelected = isSelected(row.title);
+                        const labelId = `enhanced-table-checkbox-${index}`;
+
+                        return (
+                          <TableRow
+                            hover
+                            onClick={(event) => handleClick(event, row.title)}
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={row.program_id}
+                            selected={isItemSelected}
+                          >
+                            <TableCell padding="checkbox">
+                              <Checkbox
+                                checked={isItemSelected}
+                                inputProps={{ 'aria-labelledby': labelId }}
+                              />
+                            </TableCell>
+                            <TableCell
+                              align="left"
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                            >
+                              {row.title}
+                            </TableCell>
+                            <TableCell align="right">{row.sessions}</TableCell>
+                            {/* <TableCell align="right">{row.classes}</TableCell>
                                             <TableCell align="right">{row.completion}</TableCell>
                                             <TableCell align="right">{row.image}</TableCell>
                                             <TableCell align="right">{row.location}</TableCell>
                                             <TableCell align="right">{row.number}</TableCell> */}
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={programData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
-      {/* <FormControlLabel
+                          </TableRow>
+                        );
+                      })}
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+
+              </TableContainer>
+
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={programData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+              <CSV />
+            </Paper>
+            {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}
                     label="Dense padding"
                 /> */}
-    </div>
-  );
+          </div>
+        </div>
+      )}
+    </Spring>
+  )
 }
-
 export default connect(mapStoreToProps)(Classes);

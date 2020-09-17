@@ -18,7 +18,7 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <Link to="/adminreports">
         <img
           className="JALogo"
           src="https://greaterkansascity.ja.org/contentAsset/image/ac1a740b-7a33-4563-906c-5324fec01b64/hostThumbnail/filter/Resize/resize_h/80"

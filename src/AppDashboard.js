@@ -9,19 +9,21 @@ import AdminMain from './components/content/AdminMain';
 import './AppDashboard.css';
 
 const styles = StyleSheet.create({
-    // container: {
-    //     height: '100%',
-    //     minHeight: '100vh',
-    //     width: '100%',
-    //     marginRight: '2%',
-    //     marginLeft: '0%'
-    // },
-    // content: {
-    //     marginTop: 54
-    // },
+    container: {
+        height: 300,
+        minHeight: '100vh',
+        width: '100%',
+        marginRight: '2%',
+        marginLeft: '0%',
+        backgroundColor: '#a3a7a5',
+    },
+    content: {
+        marginTop: 54
+    },
     mainBlock: {
-        backgroundColor: '#F7F8FC',
-        padding: 30
+        backgroundColor: '#a3a7a5',
+        padding: 30,
+
     },
     root: {
         width: '100%',

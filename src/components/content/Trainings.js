@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { Spring } from 'react-spring/renderprops';
 
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -27,21 +29,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CSV from '../content/CSV';
+import { CSVLink, CSVDownload } from "react-csv";
 
 
-function createData(trainings) {
-    return { trainings };
-}
 
-const rows = [
-    createData("www.google.com"),
-    createData("www.github.com"),
-    createData("www.twitter.com"),
-    createData("www.google.com"),
-    createData("www.github.com"),
-    createData("www.twitter.com"),
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -70,7 +61,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'trainings', numeric: true, disablePadding: false, label: 'Select All Trainings' },
+    { id: 'title', numeric: false, disablePadding: true, label: 'Title' },
+    { id: 'resource link', numeric: false, disablePadding: false, label: 'Resource Link' },
+
 ];
 
 function EnhancedTableHead(props) {
@@ -130,6 +123,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+        height: '100%',
     },
     highlight:
         theme.palette.type === 'light'
@@ -150,6 +144,15 @@ const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
 
+    const addTraining = (event, name) => {
+        swal("What is the Training Resource you would like to add?", {
+            content: "input",
+        })
+            .then((value) => {
+                console.log(value);
+                swal(`The following Training Resource has been added: ${value}`);
+            });
+    }
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -161,11 +164,11 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Training Resources
                     </Typography>
                 )}
-            <CSV />
+
             {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton aria-label="delete">
@@ -173,9 +176,9 @@ const EnhancedTableToolbar = (props) => {
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Add Training">
-                        <IconButton aria-label="Add Training">
-                            <AddCircleIcon />
+                    <Tooltip title="Add New Training">
+                        <IconButton aria-label="Add New Training">
+                            <AddCircleIcon onClick={addTraining} />
                         </IconButton>
                     </Tooltip>
                 )}
@@ -230,6 +233,31 @@ function Trainings(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_LEARNING_MATERIALS',
+        });
+    }, [dispatch]);
+
+    const trainingData = props.store.trainingReducer.map((item, index) => {
+        return { title: item.title, content: item.content, program_id: item.id };
+    });
+
+    function CSV(data) {
+
+
+        return (
+            <div>
+                <CSVLink className="csvLink" data={trainingData}>Export to CSV</CSVLink>
+
+                {/* <CSVDownload data={csvData} target="_blank" />; */}
+
+            </div>
+        );
+    }
+
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -239,7 +267,7 @@ function Trainings(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = trainingData.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -275,13 +303,9 @@ function Trainings(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
-
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, trainingData.length - page * rowsPerPage);
 
 
     function SearchTraining(props) {
@@ -342,86 +366,96 @@ function Trainings(props) {
     }
 
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <EnhancedTableToolbar numSelected={selected.length} />
-                <TableContainer>
-                    <SearchTraining />
-                    <Table
+        <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+        >
+            {props => (
+                <div style={props}>
+                    <div className={classes.root}>
+                        <Paper className={classes.paper}>
+                            <EnhancedTableToolbar numSelected={selected.length} />
+                            <TableContainer>
+                                <SearchTraining />
+                                <Table
 
-                        className={classes.table}
-                        aria-labelledby="tableTitle"
-                        size={dense ? 'small' : 'medium'}
-                        aria-label="enhanced table"
-                    >
-                        <EnhancedTableHead
-                            classes={classes}
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
-                        />
-                        <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row, index) => {
-                                    const isItemSelected = isSelected(row.classes);
-                                    const labelId = `enhanced-table-checkbox-${index}`;
+                                    className={classes.table}
+                                    aria-labelledby="tableTitle"
+                                    size={dense ? 'small' : 'medium'}
+                                    aria-label="enhanced table"
+                                >
+                                    <EnhancedTableHead
+                                        classes={classes}
+                                        numSelected={selected.length}
+                                        order={order}
+                                        orderBy={orderBy}
+                                        onSelectAllClick={handleSelectAllClick}
+                                        onRequestSort={handleRequestSort}
+                                        rowCount={trainingData.length}
+                                    />
+                                    <TableBody>
+                                        {stableSort(trainingData, getComparator(order, orderBy))
+                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                            .map((row, index) => {
+                                                const isItemSelected = isSelected(row.title);
+                                                const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    return (
-                                        <TableRow
-                                            hover
-                                            onClick={(event) => handleClick(event, row.trainings)}
-                                            role="checkbox"
-                                            aria-checked={isItemSelected}
-                                            tabIndex={-1}
-                                            key={row.trainings}
-                                            selected={isItemSelected}
-                                        >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    checked={isItemSelected}
-                                                    inputProps={{ 'aria-labelledby': labelId }}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
-                                                {row.trainings}
-                                            </TableCell>
-                                            {/* <TableCell align="right">{row.name}</TableCell>
-                                            <TableCell align="right">{row.classes}</TableCell>
+                                                return (
+                                                    <TableRow
+                                                        hover
+                                                        onClick={(event) => handleClick(event, row.title)}
+                                                        role="checkbox"
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={row.program_id}
+                                                        selected={isItemSelected}
+                                                    >
+                                                        <TableCell padding="checkbox">
+                                                            <Checkbox
+                                                                checked={isItemSelected}
+                                                                inputProps={{ 'aria-labelledby': labelId }}
+                                                            />
+                                                        </TableCell>
+                                                        <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
+                                                            {row.title}
+                                                        </TableCell>
+                                                        <TableCell align="left">{row.content}</TableCell>
+                                                        {/* <TableCell align="right">{row.classes}</TableCell>
                                             <TableCell align="right">{row.completion}</TableCell>
                                             <TableCell align="right">{row.image}</TableCell>
                                             <TableCell align="right">{row.location}</TableCell>
                                             <TableCell align="right">{row.number}</TableCell> */}
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
-            </Paper>
-            {/* <FormControlLabel
+                                                    </TableRow>
+                                                );
+                                            })}
+                                        {emptyRows > 0 && (
+                                            <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                                                <TableCell colSpan={6} />
+                                            </TableRow>
+                                        )}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                component="div"
+                                count={trainingData.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                            />
+                            <CSV />
+                        </Paper>
+                        {/* <FormControlLabel
                     control={<Switch checked={dense} onChange={handleChangeDense} />}
                     label="Dense padding"
                 /> */}
-        </div>
-    );
+                    </div>
+                </div>
+            )}
+        </Spring>
+    )
 }
 
 
