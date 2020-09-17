@@ -5,8 +5,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
 
-import Card from "@material-ui/core/Card";
-import Button from "@material-ui/core/Button";
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -41,11 +41,6 @@ class LoginForm extends Component {
     this.props.dispatch({
       type: 'FETCH_USER',
     });
-    if (this.props.store.user.account_type_id == 1) {
-      this.props.history.push('/adminreports');
-    } else {
-      this.props.history.push('/volunteerclasses');
-    }
   }; // end login
 
   // captures change on each input
@@ -57,9 +52,6 @@ class LoginForm extends Component {
 
   render() {
     return (
-
-
-
       <div className="loginDiv">
         <div className="overlay">
           <Card className="loginCard" onSubmit={this.login}>
@@ -67,10 +59,13 @@ class LoginForm extends Component {
               from={{ opacity: 0, marginTop: -600 }}
               to={{ opacity: 1, marginTop: 0 }}
             >
-              {props => (
+              {(props) => (
                 <div style={props}>
-
-                  <Container className="loginContainer" component="main" maxWidth="xs">
+                  <Container
+                    className="loginContainer"
+                    component="main"
+                    maxWidth="xs"
+                  >
                     <CssBaseline />
                     <div className="loginPaper">
                       <ArrowBackIcon className="loginArrow" />
@@ -79,14 +74,15 @@ class LoginForm extends Component {
                       <Avatar className="loginAvatar">
                         <LockOutlinedIcon />
                       </Avatar>
-                      <Typography className="loginTitle" component="h1" variant="h5">
+                      <Typography
+                        className="loginTitle"
+                        component="h1"
+                        variant="h5"
+                      >
                         Log In
-                    </Typography>
+                      </Typography>
                       {this.props.store.errors.loginMessage && (
-                        <h3
-                          className="alert"
-                          role="alert"
-                        >
+                        <h3 className="alert" role="alert">
                           {this.props.store.errors.loginMessage}
                         </h3>
                       )}
@@ -124,9 +120,8 @@ class LoginForm extends Component {
                           value="Log In"
                         >
                           Log In
-                  </Button>
+                        </Button>
                         {/* </Link> */}
-
                       </form>
                     </div>
                   </Container>
@@ -136,9 +131,8 @@ class LoginForm extends Component {
           </Card>
         </div>
       </div>
-
-    )
+    );
   }
-}// end LoginForm
+} // end LoginForm
 
 export default connect(mapStoreToProps)(withRouter(LoginForm));
