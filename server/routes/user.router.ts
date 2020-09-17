@@ -20,6 +20,7 @@ router.get('/', rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
 
+// View pending invitations
 router.get(
   '/pending',
   rejectUnauthenticated,
@@ -38,6 +39,7 @@ router.get(
   }
 );
 
+// Invite new user
 router.post(
   '/',
   async (req: Request, res: Response): Promise<void> => {
@@ -76,6 +78,8 @@ router.post(
   }
 );
 
+// Register new user using hex code sent via email.
+// Deletes email from invites table after user has been registered.
 router.post(
   '/register/:hex',
   async (
@@ -121,6 +125,7 @@ router.post(
   }
 );
 
+// Login
 router.post(
   '/login',
   userStrategy.authenticate('local'),
@@ -128,28 +133,11 @@ router.post(
     res.sendStatus(200);
   }
 );
+
+// Logout
 router.post('/logout', (req: Request, res: Response): void => {
   req.logout();
   res.sendStatus(200);
 });
-
-router.post(
-  '/registerUser',
-  async (req: Request, res: Response): Promise<void> => {
-    try {
-      const queryString: string = `SELECT * FROM "invites" WHERE hex = $1;`;
-
-      const hexResult: any = await pool.query(queryString, [req.body.hex]);
-
-      if (hexResult.rows.length < 1) {
-        res.sendStatus(401);
-      }
-
-      const addUserQueryString: string = `INSERT INTO "users" () VALUES ();`;
-    } catch (err) {
-      res.sendStatus(500);
-    }
-  }
-);
 
 export default router;
