@@ -31,7 +31,7 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            <Redirect exact from="/" to="/adminlogin" />
+            <Redirect exact from="/" to="/login" />
 
             {/* <Route exact path="/admin" component={AppDashboard} /> */}
             <Route exact path="/adminvolunteers" component={AdminVolunteers} />
