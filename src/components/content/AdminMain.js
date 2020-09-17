@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Column, Row } from 'simple-flexbox';
 import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import HeaderComponent from '../header/HeaderComponent';
 
 const styles = StyleSheet.create({
   cardsContainer: {
@@ -29,7 +30,24 @@ const styles = StyleSheet.create({
   },
 });
 
-function AdminMain() {
+function AdminMain(props) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_VOLUNTEER_COUNT',
+    });
+    dispatch({
+      type: 'FETCH_IN_PROGRESS',
+    });
+    dispatch({
+      type: 'FETCH_STUDENTS',
+    });
+    dispatch({
+      type: 'FETCH_COMPLETED',
+    });
+  }, [dispatch]);
+
   return (
     <Column>
       <Row
@@ -49,12 +67,12 @@ function AdminMain() {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Completed Classes"
-            value="60"
+            value={props.store.completedCounter.count}
           />
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Classes In Progress"
-            value="16"
+            value={props.store.progressCounter.count}
           />
         </Row>
         <Row
@@ -67,12 +85,12 @@ function AdminMain() {
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Volunteers"
-            value="43"
+            value={props.store.volunteerCounter.count}
           />
           <MiniCardComponent
             className={css(styles.miniCardContainer)}
             title="Total Students Taught"
-            value="64"
+            value={props.store.studentCounter.sum}
           />
         </Row>
       </Row>

@@ -10,14 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import './RegisterForm.css';
-class RegisterForm extends Component {
+import './VolunteerRegisterForm.css';
+class VolunteerRegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: '1',
+    account_type_id: '2',
     email: '',
     telephone: '',
   }; // end state
@@ -48,7 +48,7 @@ class RegisterForm extends Component {
   }; // end handleInputChangeFor
   render() {
     return (
-      <div className="registerDiv">
+      <div className="volunteerRegisterDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
             <Container
@@ -57,11 +57,14 @@ class RegisterForm extends Component {
               maxWidth="xs"
             >
               <CssBaseline />
-              <div className="registerPaper">
-                <ArrowBackIcon className="registerArrow" />
-                <Avatar className="registerAvatar"></Avatar>
-                <Typography className="loginTitle" component="h1" variant="h5">
-                  Administrator Registration
+              <div className="volunteerRegisterPaper">
+                <Avatar />
+                <Typography
+                  className="volunteerRegisterTitle"
+                  component="h1"
+                  variant="h5"
+                >
+                  Volunteer Registration
                 </Typography>
                 {/* {this.props.errors.registrationMessage && (
                   <h3
@@ -71,7 +74,7 @@ class RegisterForm extends Component {
                     {this.props.errors.registrationMessage}
                   </h3>
                 )} */}
-                <form className="registerForm" noValidate>
+                <form className="volunteerRegisterForm" noValidate>
                   <TextField
                     margin="normal"
                     fullWidth
@@ -161,4 +164,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(RegisterForm);
+export default connect(mapStoreToProps)(VolunteerRegisterForm);

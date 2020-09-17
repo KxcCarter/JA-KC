@@ -82,8 +82,8 @@
 // }
 // // this allows us to use <App /> in index.js
 
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 // import mapStateToProps from '../../redux/mapRedux/mapStateToProps';
 import { Paper, Box, Container } from '@material-ui/core';

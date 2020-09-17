@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -28,93 +28,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { CSVLink, CSVDownload } from "react-csv";
-
-
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-        </div>
-    );
-}
-
-function createData(name, classes, completion, image, location, number) {
-    return { name, classes, completion, image, location, number };
-}
-
-
-const rows = [
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Allen', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Parsons', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Miller', 'Financial Literacy for Adults', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/25/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/26/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/27/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-];
-
-
-
-
-let stockData = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: 132.54
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: 33.45
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: 554.52
-    },
-];
-
-
-function convertArrayOfObjectsToCSV(args) {
-    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-    data = args.data || null;
-    if (data == null || !data.length) {
-        return null;
-    }
-
-    columnDelimiter = args.columnDelimiter || ',';
-    lineDelimiter = args.lineDelimiter || '\n';
-
-    keys = Object.keys(data[0]);
-
-    result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
-    data.forEach(function (item) {
-        ctr = 0;
-        keys.forEach(function (key) {
-            if (ctr > 0) result += columnDelimiter;
-
-            result += item[key];
-            ctr++;
-        });
-        result += lineDelimiter;
-    });
-
-    return result;
-}
-
-
-
+import CSV from '../content/CSV';
+import Button from '@material-ui/core/Button';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -124,27 +40,6 @@ function descendingComparator(a, b, orderBy) {
         return 1;
     }
     return 0;
-}
-
-function downloadCSV(args) {
-    console.log("clicked csv");
-    let data, filename, link;
-    let csv = convertArrayOfObjectsToCSV({
-        data: stockData
-    });
-    if (csv == null) return;
-
-    filename = args.filename || 'export.csv';
-
-    if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
-    }
-    data = encodeURI(csv);
-
-    link = document.createElement('a');
-    link.setAttribute('href', data);
-    link.setAttribute('download', filename);
-    link.click();
 }
 
 function getComparator(order, orderBy) {
@@ -163,84 +58,30 @@ function stableSort(array, comparator) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-function SearchReports(props) {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const [list, setList] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const handleSearchChange = (event) => {
-        // searchQuery is what the user types in to search.
-        setSearchQuery(event.target.value);
-        // list is what is being searched through. It get's its data from a reducer.
-        setList(
-            // This is searching through an array of objects to see if the object.name 
-            // matches the searchQuery.
-            props.talentPool.filter((el) => el.name.includes(event.target.value))
-        );
-        setOpen(true);
-    };
-    const clickAway = () => {
-        setSearchQuery('');
-        setTimeout(() => {
-            setOpen(false);
-        }, 100);
-    };
-    return (
-        <Box className={classes.box} component="span">
-            <Paper className={classes.paper}>
-                <Box pt={.5}>
-                    <TextField
-                    className={classes.search}
-                        id="outlined-basic"
-                        size="small"
-                        value={searchQuery}
-                        label="Search"
-                        variant="outlined"
-                        autoComplete="off"
-                        onBlur={clickAway}
-                        onChange={handleSearchChange}
-                    />
-                </Box>
-                <Box display={open ? 'block' : 'none'}>
-                    <MenuList>
-                        {list.slice(0, 5).map((item, index) => {
-                            return (
-                                <MenuItem
-                                    key={item.id}
-                                    onClick={props.handleTalentAssign(item.id)}
-                                >
-                                    {item.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </MenuList>
-                </Box>
-            </Paper>
-        </Box>
-    );
-}
-
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'completion', numeric: true, disablePadding: false, label: 'Completion Date' },
-    { id: 'image', numeric: false, disablePadding: false, label: 'Image Link' },
-    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-    { id: 'number', numeric: true, disablePadding: false, label: 'Number of Students' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Admin Name' },
+    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
 ];
 
 function EnhancedTableHead(props) {
-    const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const {
+        classes,
+        onSelectAllClick,
+        order,
+        orderBy,
+        numSelected,
+        rowCount,
+        onRequestSort,
+    } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
 
     return (
-      
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
-               
                     <Checkbox
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
@@ -271,7 +112,6 @@ function EnhancedTableHead(props) {
                 ))}
             </TableRow>
         </TableHead>
-      
     );
 }
 
@@ -305,9 +145,16 @@ const useToolbarStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+
+    const addAdmin = () => {
+
+        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+    };
 
     return (
         <Toolbar
@@ -321,29 +168,23 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                     <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                        Completion Reports
-                        
+                        Administrators
                     </Typography>
-                    
-                    
                 )}
-<CSV/>
-            {/* {numSelected > 0 ? (
+            <CSV />
+            {numSelected > 0 ? (
                 <Tooltip title="Delete">
-                    <IconButton 
-                    onClick={downloadCSV}
-                    aria-label="delete">
+                    <IconButton aria-label="delete">
                         <DeleteIcon />
-                       
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Invite New Admin">
+                        <IconButton aria-label="invite admin">
+                            <MailOutlineIcon onClick={() => addAdmin('Add Admin User')} />
                         </IconButton>
                     </Tooltip>
-                )} */}
+                )}
         </Toolbar>
     );
 };
@@ -360,20 +201,20 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginBottom: theme.spacing(2),
     },
+    table: {
+        minWidth: 750,
+    },
     search: {
         width: 250,
         marginBottom: theme.spacing(1),
         marginLeft: theme.spacing(1),
-    },
-    table: {
-        minWidth: 750,
     },
     visuallyHidden: {
         border: 0,
         clip: 'rect(0 0 0 0)',
         height: 1,
         margin: -1,
-        overflow: 'hidden',
+        overflow: 'off',
         padding: 0,
         position: 'absolute',
         top: 20,
@@ -384,7 +225,7 @@ const useStyles = makeStyles((theme) => ({
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-function Reports(props) {
+function Administrators(props) {
     // Using hooks we're creating local state for a "heading" variable with
 
     const classes = useStyles();
@@ -394,6 +235,21 @@ function Reports(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_VOLUNTEERS' });
+    }, [dispatch]);
+
+    const volunteerList = props.store.volunteerList.map((item, index) => {
+        return {
+            name: item.first_name + ' ' + item.last_name,
+            email: item.email,
+            phone: item.telephone,
+            classes: item.scheduled_classes,
+            assign: <Button variant="contained">ASSIGN </Button>,
+        };
+    });
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -403,7 +259,7 @@ function Reports(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = volunteerList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -423,7 +279,7 @@ function Reports(props) {
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
+                selected.slice(selectedIndex + 1)
             );
         }
 
@@ -445,15 +301,73 @@ function Reports(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows =
+        rowsPerPage -
+        Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
 
+
+    function SearchAdministrators(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+            // searchQuery is what the user types in to search.
+            setSearchQuery(event.target.value);
+            // list is what is being searched through. It get's its data from a reducer.
+            setList(
+                // This is searching through an array of objects to see if the object.name 
+                // matches the searchQuery.
+                props.talentPool.filter((el) => el.name.includes(event.target.value))
+            );
+            setOpen(true);
+        };
+        const clickAway = () => {
+            setSearchQuery('');
+            setTimeout(() => {
+                setOpen(false);
+            }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+                <Paper className={classes.paper}>
+                    <Box pt={.5}>
+                        <TextField
+                            className={classes.search}
+                            id="outlined-basic"
+                            size="small"
+                            value={searchQuery}
+                            label="Search"
+                            variant="outlined"
+                            autoComplete="off"
+                            onBlur={clickAway}
+                            onChange={handleSearchChange}
+                        />
+                    </Box>
+                    <Box display={open ? 'block' : 'none'}>
+                        <MenuList>
+                            {list.slice(0, 5).map((item, index) => {
+                                return (
+                                    <MenuItem
+                                        key={item.id}
+                                        onClick={props.handleTalentAssign(item.id)}
+                                    >
+                                        {item.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </MenuList>
+                    </Box>
+                </Paper>
+            </Box>
+        );
+    }
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
-              
                 <TableContainer>
-                <SearchReports />
+                    <SearchAdministrators />
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
@@ -467,10 +381,10 @@ function Reports(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={volunteerList.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(volunteerList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
                                     const isItemSelected = isSelected(row.name);
@@ -492,15 +406,18 @@ function Reports(props) {
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />
                                             </TableCell>
-                                            <TableCell component="th" id={labelId} scope="row" padding="none">
+                                            <TableCell
+                                                component="th"
+                                                id={labelId}
+                                                scope="row"
+                                                padding="none"
+                                            >
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="center">{row.number}</TableCell>
+                                            <TableCell align="right">{row.email}</TableCell>
+                                            <TableCell align="right">{row.phone}</TableCell>
+
                                         </TableRow>
                                     );
                                 })}
@@ -515,7 +432,7 @@ function Reports(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={volunteerList.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
@@ -530,5 +447,4 @@ function Reports(props) {
     );
 }
 
-
-export default connect(mapStoreToProps)(Reports);
+export default connect(mapStoreToProps)(Administrators);

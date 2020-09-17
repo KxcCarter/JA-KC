@@ -10,14 +10,15 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
+import AdminAdministrators from '../content/AdminAdministrators';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
 import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
+import MainVolunteerClassesPage from '../MainVolunteerClassesPage/MainVolunteerClassesPage';
 import './App.css';
 import AppDashboard from '../../AppDashboard';
 class App extends Component {
@@ -30,18 +31,23 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page. */}
+            <Redirect exact from="/" to="/adminlogin" />
+
             <Route exact path="/admin" component={AppDashboard} />
-            <Route exact path="/volunteers" component={AdminVolunteers} />
-            <Route exact path="/classes" component={AdminClasses} />
-            <Route exact path="/reports" component={AdminReports} />
+            <Route exact path="/adminvolunteers" component={AdminVolunteers} />
+            <Route exact path="/adminadministrators" component={AdminAdministrators} />
+            <Route exact path="/adminclasses" component={AdminClasses} />
+            <Route exact path="/adminreports" component={AdminReports} />
             <Route exact path="/adminlogin" component={AdminLoginPage} />
-            <Route exact path="/home" component={AdminRegisterPage} />
+            <Route exact path="/adminhome" component={AdminRegisterPage} />
             <Route
               exact
-              path="/volunteerhome"
+              path="/volunteerclasses"
+              component={MainVolunteerClassesPage}
+            />
+            <Route
+              exact
+              path="/volunteerregister"
               component={VolunteerRegisterPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
@@ -51,7 +57,7 @@ class App extends Component {
             <Route
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/user"
+              path="/volunteeruser"
               component={UserPage}
             />
 
@@ -108,7 +114,7 @@ e
               exact
               path="/volunteer"
               component={VolunteerDashboardPage}
-              authRedirect="/volunteer"
+              authRedirect="/volunteerdashboard"
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

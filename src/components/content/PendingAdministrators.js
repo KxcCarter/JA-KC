@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -28,93 +29,27 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { CSVLink, CSVDownload } from "react-csv";
+import CSV from '../content/CSV';
+import Button from '@material-ui/core/Button';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-        </div>
-    );
+
+function createData(name, email, phone) {
+    return { name, email, phone };
 }
-
-function createData(name, classes, completion, image, location, number) {
-    return { name, classes, completion, image, location, number };
-}
-
 
 const rows = [
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Allen', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Parsons', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Miller', 'Financial Literacy for Adults', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/25/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/26/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/27/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
+    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565"),
+    createData('Billy Jean', 'bob@mail.com', "666-555-5565"),
+    createData('Michael Jackson', 'bob@mail.com', "666-555-5565"),
+    createData('Paul', 'bob@mail.com', "666-555-5565"),
+    createData('Beatles', 'bob@mail.com', "666-555-5565"),
+    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565"),
+
+
+
 ];
-
-
-
-
-let stockData = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: 132.54
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: 33.45
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: 554.52
-    },
-];
-
-
-function convertArrayOfObjectsToCSV(args) {
-    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-    data = args.data || null;
-    if (data == null || !data.length) {
-        return null;
-    }
-
-    columnDelimiter = args.columnDelimiter || ',';
-    lineDelimiter = args.lineDelimiter || '\n';
-
-    keys = Object.keys(data[0]);
-
-    result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
-    data.forEach(function (item) {
-        ctr = 0;
-        keys.forEach(function (key) {
-            if (ctr > 0) result += columnDelimiter;
-
-            result += item[key];
-            ctr++;
-        });
-        result += lineDelimiter;
-    });
-
-    return result;
-}
-
-
-
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -124,27 +59,6 @@ function descendingComparator(a, b, orderBy) {
         return 1;
     }
     return 0;
-}
-
-function downloadCSV(args) {
-    console.log("clicked csv");
-    let data, filename, link;
-    let csv = convertArrayOfObjectsToCSV({
-        data: stockData
-    });
-    if (csv == null) return;
-
-    filename = args.filename || 'export.csv';
-
-    if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
-    }
-    data = encodeURI(csv);
-
-    link = document.createElement('a');
-    link.setAttribute('href', data);
-    link.setAttribute('download', filename);
-    link.click();
 }
 
 function getComparator(order, orderBy) {
@@ -163,70 +77,11 @@ function stableSort(array, comparator) {
     return stabilizedThis.map((el) => el[0]);
 }
 
-function SearchReports(props) {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const [list, setList] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const handleSearchChange = (event) => {
-        // searchQuery is what the user types in to search.
-        setSearchQuery(event.target.value);
-        // list is what is being searched through. It get's its data from a reducer.
-        setList(
-            // This is searching through an array of objects to see if the object.name 
-            // matches the searchQuery.
-            props.talentPool.filter((el) => el.name.includes(event.target.value))
-        );
-        setOpen(true);
-    };
-    const clickAway = () => {
-        setSearchQuery('');
-        setTimeout(() => {
-            setOpen(false);
-        }, 100);
-    };
-    return (
-        <Box className={classes.box} component="span">
-            <Paper className={classes.paper}>
-                <Box pt={.5}>
-                    <TextField
-                    className={classes.search}
-                        id="outlined-basic"
-                        size="small"
-                        value={searchQuery}
-                        label="Search"
-                        variant="outlined"
-                        autoComplete="off"
-                        onBlur={clickAway}
-                        onChange={handleSearchChange}
-                    />
-                </Box>
-                <Box display={open ? 'block' : 'none'}>
-                    <MenuList>
-                        {list.slice(0, 5).map((item, index) => {
-                            return (
-                                <MenuItem
-                                    key={item.id}
-                                    onClick={props.handleTalentAssign(item.id)}
-                                >
-                                    {item.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </MenuList>
-                </Box>
-            </Paper>
-        </Box>
-    );
-}
-
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'completion', numeric: true, disablePadding: false, label: 'Completion Date' },
-    { id: 'image', numeric: false, disablePadding: false, label: 'Image Link' },
-    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-    { id: 'number', numeric: true, disablePadding: false, label: 'Number of Students' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Volunteer Name' },
+    { id: 'email', numeric: true, disablePadding: false, label: 'Email Address' },
+    { id: 'phone', numeric: true, disablePadding: false, label: 'Phone Number' },
+
 ];
 
 function EnhancedTableHead(props) {
@@ -236,11 +91,9 @@ function EnhancedTableHead(props) {
     };
 
     return (
-      
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
-               
                     <Checkbox
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
@@ -271,7 +124,6 @@ function EnhancedTableHead(props) {
                 ))}
             </TableRow>
         </TableHead>
-      
     );
 }
 
@@ -321,29 +173,23 @@ const EnhancedTableToolbar = (props) => {
                 </Typography>
             ) : (
                     <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                        Completion Reports
-                        
+                        Administrators
                     </Typography>
-                    
-                    
                 )}
-<CSV/>
-            {/* {numSelected > 0 ? (
+            <CSV />
+            {numSelected > 0 ? (
                 <Tooltip title="Delete">
-                    <IconButton 
-                    onClick={downloadCSV}
-                    aria-label="delete">
+                    <IconButton aria-label="delete">
                         <DeleteIcon />
-                       
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="filter list">
-                            <FilterListIcon />
+                    <Tooltip title="Invite New Administrators">
+                        <IconButton aria-label="invite administrator">
+                            <MailOutlineIcon />
                         </IconButton>
                     </Tooltip>
-                )} */}
+                )}
         </Toolbar>
     );
 };
@@ -360,13 +206,13 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginBottom: theme.spacing(2),
     },
+    table: {
+        minWidth: 750,
+    },
     search: {
         width: 250,
         marginBottom: theme.spacing(1),
         marginLeft: theme.spacing(1),
-    },
-    table: {
-        minWidth: 750,
     },
     visuallyHidden: {
         border: 0,
@@ -384,7 +230,7 @@ const useStyles = makeStyles((theme) => ({
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-function Reports(props) {
+function PendingAdministrators(props) {
     // Using hooks we're creating local state for a "heading" variable with
 
     const classes = useStyles();
@@ -447,13 +293,70 @@ function Reports(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+
+    function SearchPendingAdministrators(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+            // searchQuery is what the user types in to search.
+            setSearchQuery(event.target.value);
+            // list is what is being searched through. It get's its data from a reducer.
+            setList(
+                // This is searching through an array of objects to see if the object.name 
+                // matches the searchQuery.
+                props.talentPool.filter((el) => el.name.includes(event.target.value))
+            );
+            setOpen(true);
+        };
+        const clickAway = () => {
+            setSearchQuery('');
+            setTimeout(() => {
+                setOpen(false);
+            }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+                <Paper className={classes.paper}>
+                    <Box pt={.5}>
+                        <TextField
+                            className={classes.search}
+                            id="outlined-basic"
+                            size="small"
+                            value={searchQuery}
+                            label="Search"
+                            variant="outlined"
+                            autoComplete="off"
+                            onBlur={clickAway}
+                            onChange={handleSearchChange}
+                        />
+                    </Box>
+                    <Box display={open ? 'block' : 'none'}>
+                        <MenuList>
+                            {list.slice(0, 5).map((item, index) => {
+                                return (
+                                    <MenuItem
+                                        key={item.id}
+                                        onClick={props.handleTalentAssign(item.id)}
+                                    >
+                                        {item.name}
+                                    </MenuItem>
+                                );
+                            })}
+                        </MenuList>
+                    </Box>
+                </Paper>
+            </Box>
+        );
+    }
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
-              
                 <TableContainer>
-                <SearchReports />
+                    <SearchPendingAdministrators />
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
@@ -496,11 +399,9 @@ function Reports(props) {
                                                 {row.name}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="center">{row.number}</TableCell>
+                                            <TableCell align="right">{row.email}</TableCell>
+                                            <TableCell align="right">{row.phone}</TableCell>
+
                                         </TableRow>
                                     );
                                 })}
@@ -531,4 +432,4 @@ function Reports(props) {
 }
 
 
-export default connect(mapStoreToProps)(Reports);
+export default connect(mapStoreToProps)(PendingAdministrators);
