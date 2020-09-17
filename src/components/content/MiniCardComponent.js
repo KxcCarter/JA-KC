@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         border: '1px solid #DFE0EB',
         borderRadius: 4,
-        cursor: 'pointer',
+
         height: 140,
         maxWidth: 350,
         padding: '24px 32px 24px 32px',

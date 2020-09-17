@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,96 +22,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import { Spring } from 'react-spring/renderprops';
+
 import { CSVLink, CSVDownload } from "react-csv";
 
 
-function CSV(props) {
-    return (
-        <div>
-            <CSVLink className="csvLink" data={rows}>Export to CSV</CSVLink>
-        </div>
-    );
-}
-
-function createData(name, classes, completion, image, location, number) {
-    return { name, classes, completion, image, location, number };
-}
-
-
-const rows = [
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Allen', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Parsons', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Miller', 'Financial Literacy for Adults', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/25/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/26/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/27/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-    createData('Bob Stevens', 'Financial Literacy for Kids', "01/24/2020", 'www.google.com', 'Cedar Elementary', "19"),
-];
 
 
 
 
-let stockData = [
-    {
-        Symbol: "AAPL",
-        Company: "Apple Inc.",
-        Price: 132.54
-    },
-    {
-        Symbol: "INTC",
-        Company: "Intel Corporation",
-        Price: 33.45
-    },
-    {
-        Symbol: "GOOG",
-        Company: "Google Inc",
-        Price: 554.52
-    },
-];
 
 
-function convertArrayOfObjectsToCSV(args) {
-    let result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-    data = args.data || null;
-    if (data == null || !data.length) {
-        return null;
-    }
-
-    columnDelimiter = args.columnDelimiter || ',';
-    lineDelimiter = args.lineDelimiter || '\n';
-
-    keys = Object.keys(data[0]);
-
-    result = '';
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
-    data.forEach(function (item) {
-        ctr = 0;
-        keys.forEach(function (key) {
-            if (ctr > 0) result += columnDelimiter;
-
-            result += item[key];
-            ctr++;
-        });
-        result += lineDelimiter;
-    });
-
-    return result;
-}
 
 
 
@@ -126,26 +47,7 @@ function descendingComparator(a, b, orderBy) {
     return 0;
 }
 
-function downloadCSV(args) {
-    console.log("clicked csv");
-    let data, filename, link;
-    let csv = convertArrayOfObjectsToCSV({
-        data: stockData
-    });
-    if (csv == null) return;
 
-    filename = args.filename || 'export.csv';
-
-    if (!csv.match(/^data:text\/csv/i)) {
-        csv = 'data:text/csv;charset=utf-8,' + csv;
-    }
-    data = encodeURI(csv);
-
-    link = document.createElement('a');
-    link.setAttribute('href', data);
-    link.setAttribute('download', filename);
-    link.click();
-}
 
 function getComparator(order, orderBy) {
     return order === 'desc'
@@ -221,12 +123,12 @@ function SearchReports(props) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Classes' },
-    { id: 'completion', numeric: true, disablePadding: false, label: 'Completion Date' },
-    { id: 'image', numeric: false, disablePadding: false, label: 'Image Link' },
-    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-    { id: 'number', numeric: true, disablePadding: false, label: 'Number of Students' },
+    { id: 'first_name', numeric: false, disablePadding: true, label: 'First Name' },
+    { id: 'last_name', numeric: false, disablePadding: false, label: 'Last Name' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'School' },
+    { id: 'title', numeric: false, disablePadding: false, label: 'Class'  },
+    { id: 'size', numeric: false, disablePadding: false, label: 'Number of Students' },
+    { id: 'completion', numeric: false, disablePadding: false, label: 'Completion Date' },
 ];
 
 function EnhancedTableHead(props) {
@@ -289,6 +191,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     root: {
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(1),
+      
     },
     highlight:
         theme.palette.type === 'light'
@@ -320,14 +223,14 @@ const EnhancedTableToolbar = (props) => {
                     {numSelected} selected
                 </Typography>
             ) : (
-                    <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+                    <Typography className={classes.title} variant="h5" id="tableTitle" component="div">
                         Completion Reports
                         
                     </Typography>
                     
                     
                 )}
-<CSV/>
+
             {/* {numSelected > 0 ? (
                 <Tooltip title="Delete">
                     <IconButton 
@@ -366,7 +269,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
     },
     table: {
-        minWidth: 750,
+        minWidth: 550,
     },
     visuallyHidden: {
         border: 0,
@@ -394,6 +297,37 @@ function Reports(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_REPORT' });
+    }, [dispatch]);
+
+    const reportList = props.store.reportformReducer.map((item, index) => {
+        return {
+            firstName: item.first_name,
+            lastName: item.last_name,
+            name: item.name,
+            title: item.title,
+            size: item.size,
+            completion_date: item.completion_date,
+        };
+    });
+
+
+    function CSV(data) {
+
+
+        return (
+          <div>
+            <CSVLink className="csvLink" data={reportList}>Export to CSV</CSVLink>
+    
+            {/* <CSVDownload data={csvData} target="_blank" />; */}
+    
+          </div>
+        );
+      }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -403,7 +337,7 @@ function Reports(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = reportList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -439,19 +373,79 @@ function Reports(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
+  
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, reportList.length - page * rowsPerPage);
+
+    function SearchClasses(props) {
+        const classes = useStyles();
+        const [open, setOpen] = useState(false);
+        const [list, setList] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+        const handleSearchChange = (event) => {
+          // searchQuery is what the user types in to search.
+          setSearchQuery(event.target.value);
+          // list is what is being searched through. It get's its data from a reducer.
+          setList(
+            // This is searching through an array of objects to see if the object.name 
+            // matches the searchQuery.
+            props.talentPool.filter((el) => el.name.includes(event.target.value))
+          );
+          setOpen(true);
+        };
+        const clickAway = () => {
+          setSearchQuery('');
+          setTimeout(() => {
+            setOpen(false);
+          }, 100);
+        };
+        return (
+            <Box className={classes.box} component="span">
+              <Paper className={classes.paper}>
+                <Box pt={.5}>
+                  <TextField
+                    className={classes.search}
+                    id="outlined-basic"
+                    size="small"
+                    value={searchQuery}
+                    label="Search"
+                    variant="outlined"
+                    autoComplete="off"
+                    onBlur={clickAway}
+                    onChange={handleSearchChange}
+                  />
+                </Box>
+                <Box display={open ? 'block' : 'none'}>
+                  <MenuList>
+                    {list.slice(0, 5).map((item, index) => {
+                      return (
+                        <MenuItem
+                          key={item.id}
+                          onClick={props.handleTalentAssign(item.id)}
+                        >
+                          {item.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </Box>
+              </Paper>
+            </Box>
+          );
+        }
 
     return (
+           <Spring
+      from={{ opacity: 0 }}
+      to={{ opacity: 1}}
+    >
+      {props => (
+        <div style={props}>
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar numSelected={selected.length} />
-              
                 <TableContainer>
                 <SearchReports />
                     <Table
@@ -467,13 +461,13 @@ function Reports(props) {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={reportList.length}
                         />
                         <TableBody>
-                            {stableSort(rows, getComparator(order, orderBy))
+                            {stableSort(reportList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(row.user);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
@@ -493,14 +487,15 @@ function Reports(props) {
                                                 />
                                             </TableCell>
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                {row.name}
+                                                {row.firstName}
                                             </TableCell>
 
-                                            <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="center">{row.number}</TableCell>
+                                            <TableCell align="left">{row.lastName}</TableCell>
+                                            <TableCell align="left">{row.name}</TableCell>
+                                            <TableCell align="left">{row.title}</TableCell>
+                                            <TableCell align="left">{row.size}</TableCell>
+                                            <TableCell align="left">{row.completion_date}</TableCell>
+                         
                                         </TableRow>
                                     );
                                 })}
@@ -515,19 +510,19 @@ function Reports(props) {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={reportList.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
+                <CSV/>
             </Paper>
-            {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
+            </div>
         </div>
-    );
+      )}
+    </Spring>
+    )
 }
 
 

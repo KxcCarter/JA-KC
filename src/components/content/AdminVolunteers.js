@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginTop: 54,
   },
   mainBlock: {
-    backgroundColor: '#F7F8FC',
+    backgroundColor: '#a3a7a5',
     padding: 30,
   },
 });
