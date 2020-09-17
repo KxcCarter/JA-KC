@@ -42,7 +42,7 @@ class LoginForm extends Component {
     if (this.props.store.user.account_type_id == 1) {
       this.props.history.push('/adminreports');
     } else {
-      this.props.history.push('/volunteerhome');
+      this.props.history.push('/volunteerclasses');
     }
   }; // end login
 

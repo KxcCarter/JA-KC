@@ -119,14 +119,11 @@ export default function VolunteerDashboardPage(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   // const bull = <span className={classes.bullet}>•</span>;
-  useEffect(
-    (props) => {
-      dispatch({
-        type: 'GET_SCHEDULED_CLASSES',
-      });
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    dispatch({
+      type: 'GET_SCHEDULED_CLASSES',
+    });
+  }, [dispatch]);
 
   const scheduled_classes = props.store.volunteerScheduledClasses.map(
     (item, index) => {
@@ -168,10 +165,13 @@ export default function VolunteerDashboardPage(props) {
           <Button size="medium">PROGRAMS!!!!</Button>
         </CardActions>
       </Card>
-      <ul>
-        {scheduled_classes}
-        <li>{scheduled_classes.name}</li>
-      </ul>
+      <Container>
+        <Paper className="VolunteerPageBubbleStyle">
+          <Box p={1} m={1}>
+            {scheduled_classes}
+          </Box>
+        </Paper>
+      </Container>
     </div>
   );
 }
