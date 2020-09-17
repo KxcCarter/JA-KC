@@ -63,6 +63,7 @@
     "react-dropzone-s3-uploader": "^1.1.0",
     "react-google-maps": "^9.4.5",
     "react-map-gl": "^5.2.8",
+    "react-modal": "^3.11.2",
     "react-notification-system": "^0.4.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.0",
