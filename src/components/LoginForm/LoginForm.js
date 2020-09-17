@@ -58,8 +58,8 @@ class LoginForm extends Component {
 
           <Card className="loginCard" onSubmit={this.login}>
             <Spring
-              from={{ opacity: 0, }}
-              to={{ opacity: 1, }}
+              from={{ opacity: 0, marginTop: -600 }}
+              to={{ opacity: 1, marginTop: 0 }}
             >
               {props => (
                 <div style={props}>
