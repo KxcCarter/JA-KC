@@ -28,6 +28,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { CSVLink, CSVDownload } from "react-csv";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Spring } from 'react-spring/renderprops';
+import AddClassModal from './AddClassModal';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -264,9 +265,7 @@ function Volunteers(props) {
             email: item.email,
             phone: item.telephone,
             classes: item.scheduled_classes,
-            assign: <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-                Assign Class
-          </button>,
+            assign: <AddClassModal />,
         };
     });
 

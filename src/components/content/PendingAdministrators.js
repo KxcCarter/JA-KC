@@ -225,10 +225,7 @@ function PendingAdministrators(props) {
 
     const invitesList = props.store.pendingInvites.map((item, index) => {
         return {
-            name: item.first_name + ' ' + item.last_name,
             email: item.email,
-            phone: item.telephone,
-            classes: item.scheduled_classes,
         };
     });
 
