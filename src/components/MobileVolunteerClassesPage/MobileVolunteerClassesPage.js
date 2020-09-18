@@ -17,24 +17,26 @@ class MobileVolunteerClassesPage extends Component {
 
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
-    let scheduled_classes = this.props.store.volunteerScheduledClasses.map(
-      (item, index) => {
+    let scheduled_classes = this.props.store.volunteerScheduledClasses
+      .filter((item) => {
+        return item.id === parseInt(this.props.match.params.id);
+      })
+      .map((item, index) => {
         return (
           <div key={item.index}>
             <Container>
               <Paper>
                 <Box>
                   <h3 id="welcome">View Program Information</h3>
-                  {/* <h5>{item.title}</h5>
-                      <h5>{item.name}</h5>
-                      <h5>Number of Sessions: {item.sessions}</h5> */}
+                  <h5>{item.title}</h5>
+                  <h5>{item.name}</h5>
+                  <h5>Number of Sessions: {item.sessions}</h5>
                 </Box>
               </Paper>
             </Container>
           </div>
         );
-      }
-    );
+      });
     return (
       <div>
         <MobileTestNav />
