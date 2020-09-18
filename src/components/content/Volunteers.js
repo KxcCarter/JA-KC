@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import swal from 'sweetalert';
-
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -25,15 +24,11 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { CSVLink, CSVDownload } from "react-csv";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Spring } from 'react-spring/renderprops';
+import AddClassModal from './AddClassModal';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -244,12 +239,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
-function Volunteers(props) {
-    // Using hooks we're creating local state for a "heading" variable with
 
+function Volunteers(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('completion');
@@ -274,19 +265,14 @@ function Volunteers(props) {
             email: item.email,
             phone: item.telephone,
             classes: item.scheduled_classes,
-            assign: <Button onClick={addClass} variant="contained">ADD </Button>,
+            assign: <AddClassModal />,
         };
     });
 
     function CSV(data) {
-
-
         return (
             <div>
                 <CSVLink className="csvLink" data={volunteerList}>Export to CSV</CSVLink>
-
-                {/* <CSVDownload data={csvData} target="_blank" />; */}
-
             </div>
         );
     }
@@ -413,7 +399,6 @@ function Volunteers(props) {
                             <EnhancedTableToolbar numSelected={selected.length} />
                             <TableContainer>
                                 <SearchVolunteers />
-
                                 <Table
                                     className={classes.table}
                                     aria-labelledby="tableTitle"
@@ -439,7 +424,7 @@ function Volunteers(props) {
                                                 return (
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.name)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -448,6 +433,7 @@ function Volunteers(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.name)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />
@@ -487,10 +473,6 @@ function Volunteers(props) {
                             />
                             <CSV />
                         </Paper>
-                        {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
                     </div >
                 </div>
             )}

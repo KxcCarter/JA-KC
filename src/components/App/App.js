@@ -31,13 +31,18 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/login" />
 
             {/* <Route exact path="/admin" component={AppDashboard} /> */}
             <ProtectedRoute
               exact
               path="/adminvolunteers"
               component={AdminVolunteers}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminadministrators"
+              component={AdminAdministrators}
             />
             <ProtectedRoute
               exact

@@ -7,7 +7,6 @@ import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
 import Tab from '../content/Tab';
-import CSV from '../content/CSV';
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +53,6 @@ class AdminVolunteers extends React.Component {
           <HeaderComponent title={selectedItem} />
           <div className={css(styles.content)}>
             <AdminMain />
-
             <Tab />
           </div>
         </Column>

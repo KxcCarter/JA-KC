@@ -379,7 +379,7 @@ function Reports(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, reportList.length - page * rowsPerPage);
 
-    function SearchClasses(props) {
+    function SearchReports(props) {
         const classes = useStyles();
         const [open, setOpen] = useState(false);
         const [list, setList] = useState([]);
@@ -467,13 +467,13 @@ function Reports(props) {
                             {stableSort(reportList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.user);
+                                    const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.name)}
+                                            
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
@@ -482,6 +482,7 @@ function Reports(props) {
                                         >
                                             <TableCell padding="checkbox">
                                                 <Checkbox
+                                                onClick={(event) => handleClick(event, row.name)}
                                                     checked={isItemSelected}
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />

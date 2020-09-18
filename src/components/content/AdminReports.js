@@ -7,7 +7,7 @@ import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
 import TabReports from './TabReports';
-import { Spring } from 'react-spring/renderprops';
+
 const styles = StyleSheet.create({
   container: {
     height: '100%',

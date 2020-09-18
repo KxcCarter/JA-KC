@@ -6,8 +6,6 @@ import { StyleSheet, css } from 'aphrodite';
 import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
-import Classes from '../content/Classes';
-import Trainings from '../content/Trainings';
 import TabClassTraining from '../content/TabClassTraining';
 
 const styles = StyleSheet.create({
