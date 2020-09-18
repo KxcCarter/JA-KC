@@ -79,6 +79,9 @@ class App extends Component {
               exact
               path="/volunteerclasses"
               component={MobileVolunteerClassesPage}
+              userAdminRedirect="/adminreports"
+            />
+            <ProtectedRoute
               path="/volunteerhome"
               component={MainVolunteerHomePage}
               userAdminRedirect="/adminreports"

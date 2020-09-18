@@ -7,40 +7,20 @@ import './MobileMainVolunteerHomePage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
 
 class MobileMainVolunteerHomePage extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_SCHEDULED_CLASSES',
+    });
+    this.props.dispatch({
+      type: 'GET_CLASS_DETAILS',
+    });
+  }
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
-    return (
-      <div>
-        <MobileTestNav />
-        <Container>
-          <Paper className="WelcomeVolunteerPageBubbleStyle">
-            <Box p={1} m={1}>
-              <h3 id="welcome">Hi, Johanna D!</h3>
-            </Box>
-          </Paper>
-        </Container>
-        <Container>
-          <Paper className="VolunteerPageBubbleStyle">
-            <Box p={1} m={1}>
-              {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1> */}
-              <h3>JA Career Speakers Series</h3>
-              <h4>Park Hill High School</h4>
-              <h4>October 14th, 2020 - 1PM</h4>
-              {/* <p>
-                In JA Career Speakers Series, a volunteer guest speaker visits
-                the classroom and shares information about his or her career,
-                work, and education experience. The speaker may bring props,
-                samples of his or her work, or other visuals to help engage
-                students. Activities and implementation design will vary based
-                on grade level. This event is part of the JA Work and Career
-                Readiness Pathway and can be placed in grades K–12, in-school or
-                after-school/out-of-school.
-              </p> */}
-            </Box>
-          </Paper>
-        </Container>
-        <Container>
-          <Paper className="VolunteerPageBubbleStyle">
+    const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
+      (item, index) => {
+        return (
+          <Paper className="VolunteerPageBubbleStyle" key={item.index}>
             <Box p={1} m={1}>
               <h3 id="welcome">View Program Information</h3>
               <h5>{item.title}</h5>
