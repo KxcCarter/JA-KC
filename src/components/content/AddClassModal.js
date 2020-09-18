@@ -88,6 +88,9 @@ function AddClassModal(props) {
     dispatch({
       type: 'FETCH_PROGRAMS',
     });
+    dispatch({
+      type: 'GET_SCHOOL_LIST',
+    });
   }, [dispatch]);
 
   const programData = props.store.programsReducer.map((item, index) => {

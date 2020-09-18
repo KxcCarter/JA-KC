@@ -153,6 +153,8 @@ router.post(
     const program_id: number = <number>req.body.program_id;
     const school_id: number = <number>req.body.school_id;
 
+    console.log('look at this: ', user_id, program_id, school_id);
+
     const queryText: string = `INSERT INTO "scheduled_classes" ("user_id", "program_id", "school_id")
     VALUES ($1, $2, $3);`;
 

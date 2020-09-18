@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* adminAssignClassToVolunteer(action) {
   try {
-    yield axios.post('/api/volunteer/newScheduledClass');
+    yield axios.post('/api/volunteer/newScheduledClass', action.payload);
     yield put({ type: 'GET_SCHEDULED_CLASSES' });
   } catch (error) {
     console.log('Error message: ', error);
