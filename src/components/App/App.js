@@ -133,15 +133,7 @@ e
               component={RegisterPage}
               authRedirect="/user"
             /> */}
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
-              exact
-              path="/volunteer"
-              component={MobileVolunteerDashboardPage}
-              authRedirect="/volunteerdashboard"
-            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

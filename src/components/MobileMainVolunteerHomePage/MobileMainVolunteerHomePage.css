@@ -15,6 +15,10 @@
   border-radius: 5px solid #6a6565;
   box-shadow: 2px 2px 1px #6a6565 !important;
 }
+
+.MobileVolunteerPageBubbleStyle {
+  background-color: #008751 !important;
+}
 h1 {
   color: white;
 }
