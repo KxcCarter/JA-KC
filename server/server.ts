@@ -12,6 +12,7 @@ import programsRouter from './routes/programs.router';
 import volunteerlistRouter from './routes/volunteerlist.router';
 import adminboxesRouter from './routes/counterboxes.router';
 import s3Router from './routes/s3.router';
+import schoolsRouter from './routes/schools.router';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -41,6 +42,7 @@ app.use('/api/report-form', reportformRouter);
 app.use('/api/programs', programsRouter);
 app.use('/api/volunteerlist', volunteerlistRouter);
 app.use('/api/counters', adminboxesRouter);
+app.use('/api/schools', schoolsRouter);
 
 app.use('/s3delete', s3Router);
 

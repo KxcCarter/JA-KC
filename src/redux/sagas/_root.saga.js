@@ -24,6 +24,8 @@ import volunteerCounterSaga from './volunteercounter.saga';
 import deleteS3ImageSaga from './deleteS3Image.saga';
 import trainingSaga from './training.saga';
 import adminAssignClassToVolunteerSaga from './adminAssignClassToVolunteer.saga';
+import addNewSchoolSaga from './addNewSchool.saga';
+import getSchoolListSaga from './getSchoolList.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -51,5 +53,7 @@ export default function* rootSaga() {
     volunteerCounterSaga(),
     trainingSaga(),
     adminAssignClassToVolunteerSaga(),
+    addNewSchoolSaga(),
+    getSchoolListSaga(),
   ]);
 }
