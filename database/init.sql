@@ -60,5 +60,6 @@ CREATE TABLE "invites"
 (
     "id" SERIAL PRIMARY KEY,
     "email" VARCHAR(50) NOT NULL,
-    "hex" VARCHAR(20) NOT NULL
+    "hex" VARCHAR(20) NOT NULL,
+    "account_type_id" int
 );

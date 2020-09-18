@@ -13,7 +13,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './RegisterForm.css';
 import { Spring } from 'react-spring/renderprops';
 
-
 class RegisterForm extends Component {
   state = {
     username: '',
@@ -40,6 +39,7 @@ class RegisterForm extends Component {
         account_type_id: this.state.account_type_id,
         email: this.state.email,
         telephone: this.state.telephone,
+        hex: this.props.match.params,
       },
     });
     this.props.history.push('/adminreports');
@@ -59,7 +59,7 @@ class RegisterForm extends Component {
               from={{ opacity: 0, marginTop: -600 }}
               to={{ opacity: 1, marginTop: 0 }}
             >
-              {props => (
+              {(props) => (
                 <div style={props}>
                   <Container
                     className="registerContainer"
@@ -70,9 +70,13 @@ class RegisterForm extends Component {
                     <div className="registerPaper">
                       <ArrowBackIcon className="registerArrow" />
                       <Avatar className="registerAvatar"></Avatar>
-                      <Typography className="loginTitle" component="h1" variant="h5">
+                      <Typography
+                        className="loginTitle"
+                        component="h1"
+                        variant="h5"
+                      >
                         Administrator Registration
-                </Typography>
+                      </Typography>
                       {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -160,7 +164,7 @@ class RegisterForm extends Component {
                           value="Register"
                         >
                           Register
-                  </Button>
+                        </Button>
                       </form>
                     </div>
                   </Container>

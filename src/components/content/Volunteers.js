@@ -154,7 +154,10 @@ const EnhancedTableToolbar = (props) => {
     swal('What is the email address you would like to send invite to?', {
       content: 'input',
     }).then((value) => {
-      dispatch({ type: 'INVITE_USER', payload: { email: value } });
+      dispatch({
+        type: 'INVITE_USER',
+        payload: { email: value, account_type_id: 2 },
+      });
       console.log(value);
       swal(`Your invite has been sent to: ${value}`);
     });

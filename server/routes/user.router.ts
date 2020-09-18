@@ -46,12 +46,21 @@ router.post(
     try {
       const newHex: string = hexGen(8);
       const email: string = req.body.email;
+      const account_type_id: number = <number>req.body.account_type_id;
 
-      const queryString = `INSERT INTO "invites" ("email", "hex") VALUES ($1, $2);`;
+      const queryString = `INSERT INTO "invites" ("email", "hex", "account_type_id") VALUES ($1, $2, $3);`;
 
       await pool.query(queryString, [email, newHex]);
 
-      const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? ${newHex}`;
+      let link: string = ``;
+
+      if (account_type_id === 1) {
+        link = `http://localhost:3000/#/adminregister/${newHex}`;
+      } else {
+        link = `http://localhost:3000/#/volunteerregister/${newHex}`;
+      }
+
+      const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? Go to this link to register: ${link}`;
       const subject: string = `Grreeeetings from the intertubes`;
 
       const mailOptions = {
