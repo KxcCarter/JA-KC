@@ -12,7 +12,7 @@ class MobileMainVolunteerHomePage extends Component {
       type: 'GET_SCHEDULED_CLASSES',
     });
     this.props.dispatch({
-      type: 'GET_CLASS_DETAILS',
+      type: 'FETCH_LEARNING_MATERIAL',
     });
   }
 
