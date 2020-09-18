@@ -30,21 +30,17 @@ export default function AddClassModalTable(props) {
     });
   }, [dispatch]);
 
-  const assignToVolunteer = (id) => {
-    console.log('yay', id, props.user_id);
-    dispatch({
-      type: 'ASSIGN_VOLUNTEER_CLASS',
-      payload: { program_id: id, user_id: props.user_id, school_id: 1 },
-    });
-  };
-
   const rows = props.programs.map((item, index) => {
     return {
       title: item.title,
       sessions: item.sessions,
       program_id: item.id,
       assign: (
-        <Button onClick={() => assignToVolunteer(item.id)}>Assign</Button>
+        <Button
+          onClick={() => props.assignToVolunteer(item.id, props.user_id, 1)}
+        >
+          Assign
+        </Button>
       ),
     };
   });

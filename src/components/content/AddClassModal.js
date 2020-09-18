@@ -39,7 +39,6 @@ function AddClassModal(props) {
   const dispatch = useDispatch();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [task, setTask] = useState('');
 
   useEffect(() => {
     dispatch({
@@ -54,10 +53,6 @@ function AddClassModal(props) {
     return { title: item.title, sesssion: item.sessions, program_id: item.id };
   });
 
-  //   const {
-  //     store: { projectDetails },
-  //   } = props;
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -65,8 +60,14 @@ function AddClassModal(props) {
     setOpen(false);
   };
 
-  const handleInputChange = (event) => {
-    setTask(event.target.value);
+  const assignToVolunteer = (id, user_id, school_id) => {
+    console.log('yay', id, props.user_id);
+    dispatch({
+      type: 'ASSIGN_VOLUNTEER_CLASS',
+      payload: { program_id: id, user_id: user_id, school_id: school_id },
+    });
+
+    handleClose();
   };
 
   const body = (
@@ -81,7 +82,11 @@ function AddClassModal(props) {
           Select a School and Class to assign to Volunteer
         </Typography>
 
-        <AddClassModalTable programs={props.store.programsReducer} {...props} />
+        <AddClassModalTable
+          programs={props.store.programsReducer}
+          assignToVolunteer={assignToVolunteer}
+          {...props}
+        />
       </Box>
 
       <Box p={3} display="inline">

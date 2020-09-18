@@ -253,7 +253,7 @@ function Volunteers(props) {
       email: item.email,
       phone: item.telephone,
       classes: item.scheduled_classes,
-      assign: <AddClassModal />,
+      assign: <AddClassModal user_id={item.user_id} />,
     };
   });
   function CSV(data) {
