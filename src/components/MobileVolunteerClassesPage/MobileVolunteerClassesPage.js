@@ -7,6 +7,7 @@ import './MobileVolunteerClassesPage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Button } from '@material-ui/core';
 import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
+import MobileSubmitReportModal from './MobileSubmitReportModal';
 
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
@@ -30,6 +31,14 @@ class MobileVolunteerClassesPage extends Component {
             <h5>Number of Sessions: {item.sessions}</h5>
           </div>
         );
+      });
+
+    let learning_materials = this.props.store.trainingReducer
+      .filter((item) => {
+        return item.program_id === parseInt(this.props.match.params.id);
+      })
+      .map((item, index) => {
+        return <link>{item.content}</link>;
       });
     return (
       <div>
@@ -70,7 +79,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Submit Class details
               </Button>
-              <MobileVolunteerClassesModal />
+              <MobileSubmitReportModal />
             </Box>
           </Paper>
         </Container>

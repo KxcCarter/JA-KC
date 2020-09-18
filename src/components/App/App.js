@@ -15,7 +15,6 @@ import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
-import MobileVolunteerDashboardPage from '../MobileVolunteerDashboardPage/MobileVolunteerDashboardPage';
 import MobileVolunteerRegisterPage from '../MobileVolunteerRegisterPage/MobileVolunteerRegisterPage';
 import MobileMainVolunteerHomePage from '../MobileMainVolunteerHomePage/MobileMainVolunteerHomePage';
 

@@ -11,6 +11,7 @@ import {
   Box,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
 
 function VolunteerClassesModalStyle() {
   const top = 50;
@@ -78,15 +79,10 @@ function VolunteerClassesModal(props) {
           align="center"
           color="primary"
         >
-          Select Learning Material
+          Submit Completion Report
         </Typography>
 
-        <TextField
-          fullWidth
-          multiline
-          variant="outlined"
-          onChange={handleInputChange}
-        />
+        <MobileReportForm />
       </Box>
       <Box p={3} display="inline">
         <Button
