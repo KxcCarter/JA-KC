@@ -63,11 +63,18 @@ function VolunteerClassesModal(props) {
 
   const learning_materials = props.store.trainingReducer
     .filter((item) => {
-      return item.program_id === props.store.programId;
+      return item.program_id === props.programId;
     })
     .map((item, index) => {
-      return <a href={item.content}>{item.title}</a>;
+      return (
+        <div>
+          <a href={item.content}>{item.title}</a>
+        </div>
+      );
     });
+  console.log('taining:', props.store.trainingReducer);
+  console.log('learning_materials:', learning_materials);
+  console.log('programId:', props.programId);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -80,14 +87,13 @@ function VolunteerClassesModal(props) {
         >
           Select Learning Material
         </Typography>
+        {props.store.trainingReducer.length > 0 && learning_materials}
         <Typography
           variant="h6"
           id="simple-modal-title"
           align="center"
           color="primary"
-        >
-          <ul>{learning_materials}</ul>
-        </Typography>
+        ></Typography>
       </Box>
       <Box p={3} display="inline">
         <Button variant="outlined" size="small" onClick={handleClose}>

@@ -34,6 +34,10 @@ class MobileVolunteerClassesPage extends Component {
       );
     });
 
+    const matchedProgramId =
+      matchedClass.length === 0 ? null : matchedClass[0].program_id;
+    console.log('matachedProgramId:', matchedProgramId);
+
     return (
       <div>
         <MobileTestNav />
@@ -57,7 +61,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Program Resources
               </Button>
-              <MobileVolunteerClassesModal />
+              <MobileVolunteerClassesModal programId={matchedProgramId} />
             </Box>
           </Paper>
         </Container>
@@ -73,7 +77,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Submit Class details
               </Button>
-              <MobileSubmitReportModal programId={matchedClass[0].program_id} />
+              <MobileSubmitReportModal />
             </Box>
           </Paper>
         </Container>
