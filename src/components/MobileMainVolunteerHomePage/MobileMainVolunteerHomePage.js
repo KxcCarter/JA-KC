@@ -15,12 +15,18 @@ class MobileMainVolunteerHomePage extends Component {
       type: 'GET_CLASS_DETAILS',
     });
   }
+
+  clickClassDetails=(event, id){
+    console.log('clicky click');
+    this.props.history.push(`/volunteerclasses/${id}`);
+  }
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
       (item, index) => {
         return (
-          <Paper className="VolunteerPageBubbleStyle" key={item.index}>
+          <Paper className="VolunteerPageBubbleStyle" key={item.index} onClick={(event) => this.clickClassDetails(event, item.id)}
+          >
             <Box p={1} m={1}>
               <h3 id="welcome">View Program Information</h3>
               <h5>{item.title}</h5>
