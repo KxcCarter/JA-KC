@@ -12,6 +12,7 @@ import completedCounter from './completedcounter.reducer';
 import progressCounter from './inprogresscounter.reducer';
 import studentCounter from './studentcounter.reducer';
 import volunteerCounter from './volunteercount.reducer';
+import schoolList from './schoolList.reducer';
 import pendingInvites from './pendingInvites.reducer';
 import adminList from './getadminuser.reducer';
 
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   progressCounter,
   studentCounter,
   volunteerCounter,
+  schoolList,
   pendingInvites,
   adminList,
 });

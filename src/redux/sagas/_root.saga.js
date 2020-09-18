@@ -22,10 +22,13 @@ import inProgressSaga from './inprogresscounter.saga';
 import studentCounterSaga from './studentscounter.saga';
 import volunteerCounterSaga from './volunteercounter.saga';
 import deleteS3ImageSaga from './deleteS3Image.saga';
+import trainingSaga from './training.saga';
+import adminAssignClassToVolunteerSaga from './adminAssignClassToVolunteer.saga';
+import addNewSchoolSaga from './addNewSchool.saga';
+import getSchoolListSaga from './getSchoolList.saga';
 import getPendingInvitesSaga from './getPendingInvites.saga';
 import inviteUserSaga from './inviteUser.saga';
 import adminListSaga from './getadminusers.saga';
-import trainingSaga from './training.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -51,6 +54,10 @@ export default function* rootSaga() {
     inProgressSaga(),
     studentCounterSaga(),
     volunteerCounterSaga(),
+    trainingSaga(),
+    adminAssignClassToVolunteerSaga(),
+    addNewSchoolSaga(),
+    getSchoolListSaga(),
     getPendingInvitesSaga(),
     inviteUserSaga(),
     adminListSaga(),

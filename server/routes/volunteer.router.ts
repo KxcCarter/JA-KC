@@ -146,6 +146,25 @@ router.post(
   }
 );
 
+router.post(
+  '/newScheduledClass',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const user_id: number = <number>req.body.user_id;
+    const program_id: number = <number>req.body.program_id;
+    const school_id: number = <number>req.body.school_id;
+
+    console.log('look at this: ', user_id, program_id, school_id);
+
+    const queryText: string = `INSERT INTO "scheduled_classes" ("user_id", "program_id", "school_id")
+    VALUES ($1, $2, $3);`;
+
+    pool
+      .query(queryText, [user_id, program_id, school_id])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(500));
+  }
+);
+
 // module.exports = router;
 
 export default router;
