@@ -42,7 +42,7 @@ class MobileMainVolunteerHomePage extends Component {
     );
     return (
       <div>
-        <TestNav />
+        <MobileTestNav />
         <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}
       </div>
