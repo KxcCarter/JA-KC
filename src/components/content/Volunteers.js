@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -24,17 +24,11 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import { CSVLink, CSVDownload } from 'react-csv';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Spring } from 'react-spring/renderprops';
 import AddClassModal from './AddClassModal';
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -44,13 +38,11 @@ function descendingComparator(a, b, orderBy) {
   }
   return 0;
 }
-
 function getComparator(order, orderBy) {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -60,7 +52,6 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
 const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
   { id: 'email', numeric: false, disablePadding: false, label: 'Email ' },
@@ -78,7 +69,6 @@ const headCells = [
     label: 'Add Class',
   },
 ];
-
 function EnhancedTableHead(props) {
   const {
     classes,
@@ -92,7 +82,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
   return (
     <TableHead>
       <TableRow>
@@ -129,7 +118,6 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
-
 EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
@@ -139,7 +127,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
@@ -159,15 +146,19 @@ const useToolbarStyles = makeStyles((theme) => ({
     flex: '1 1 100%',
   },
 }));
-
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
-
+  const dispatch = useDispatch();
   const addVolunteer = () => {
-    window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+    swal('What is the email address you would like to send invite to?', {
+      content: 'input',
+    }).then((value) => {
+      dispatch({ type: 'INVITE_USER', payload: { email: value } });
+      console.log(value);
+      swal(`Your invite has been sent to: ${value}`);
+    });
   };
-
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -209,11 +200,9 @@ const EnhancedTableToolbar = (props) => {
     </Toolbar>
   );
 };
-
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -242,13 +231,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
 }));
-
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function Volunteers(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('completion');
@@ -257,11 +240,9 @@ function Volunteers(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch({ type: 'FETCH_VOLUNTEERS' });
   }, [dispatch]);
-
   const addClass = () => {
     console.log('You are adding a class');
   };
@@ -272,28 +253,23 @@ function Volunteers(props) {
       email: item.email,
       phone: item.telephone,
       classes: item.scheduled_classes,
-      assign: <AddClassModal user_id={item.user_id} />,
+      assign: <AddClassModal />,
     };
   });
-
   function CSV(data) {
     return (
       <div>
         <CSVLink className="csvLink" data={volunteerList}>
           Export to CSV
         </CSVLink>
-
-        {/* <CSVDownload data={csvData} target="_blank" />; */}
       </div>
     );
   }
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = volunteerList.map((n) => n.name);
@@ -302,11 +278,9 @@ function Volunteers(props) {
     }
     setSelected([]);
   };
-
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
@@ -319,25 +293,19 @@ function Volunteers(props) {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
   const emptyRows =
     rowsPerPage -
     Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
-
   function SearchVolunteers(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
@@ -394,7 +362,6 @@ function Volunteers(props) {
       </Box>
     );
   }
-
   return (
     <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
       {(props) => (
@@ -404,7 +371,6 @@ function Volunteers(props) {
               <EnhancedTableToolbar numSelected={selected.length} />
               <TableContainer>
                 <SearchVolunteers />
-
                 <Table
                   className={classes.table}
                   aria-labelledby="tableTitle"
@@ -429,11 +395,9 @@ function Volunteers(props) {
                       .map((row, index) => {
                         const isItemSelected = isSelected(row.name);
                         const labelId = `enhanced-table-checkbox-${index}`;
-
                         return (
                           <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.name)}
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
@@ -442,6 +406,9 @@ function Volunteers(props) {
                           >
                             <TableCell padding="checkbox">
                               <Checkbox
+                                onClick={(event) =>
+                                  handleClick(event, row.name)
+                                }
                                 checked={isItemSelected}
                                 inputProps={{ 'aria-labelledby': labelId }}
                               />
@@ -454,7 +421,6 @@ function Volunteers(props) {
                             >
                               {row.name}
                             </TableCell>
-
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>
                             <TableCell align="left">{row.classes}</TableCell>
@@ -483,10 +449,6 @@ function Volunteers(props) {
               />
               <CSV />
             </Paper>
-            {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
           </div>
         </div>
       )}

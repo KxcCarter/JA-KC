@@ -3,6 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Spring } from 'react-spring/renderprops';
 
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -143,10 +144,15 @@ const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
 
-    const addTraining = () => {
-
-        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
-    };
+    const addTraining = (event, name) => {
+        swal("What is the Training Resource you would like to add?", {
+            content: "input",
+        })
+            .then((value) => {
+                console.log(value);
+                swal(`The following Training Resource has been added: ${value}`);
+            });
+    }
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -397,7 +403,7 @@ function Trainings(props) {
                                                 return (
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.title)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -406,6 +412,7 @@ function Trainings(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.title)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />

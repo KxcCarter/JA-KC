@@ -1,4 +1,4 @@
-.registerPaper {
+.volunteerRegisterPaper {
   background-color: white !important;
   display: flex;
   flex-direction: column;
@@ -14,11 +14,11 @@
   font-family: 'Montserrat', sans-serif !important;
   text-transform: none;
 }
-.registerAvatar {
-  margin-top: -15px;
+.volunteerRegisterAvatar {
+  margin-top: 15px;
   margin-bottom: 5px;
 }
-.registerForm {
+.volunteerRegisterForm {
   padding: 80px;
   flex: 1;
   justify-content: space-between;
@@ -29,11 +29,11 @@
   font-family: 'Montserrat', sans-serif !important;
   text-transform: none;
 }
-.registerDiv {
+.volunteerRegisterDiv {
   display: flex;
   justify-content: space-evenly;
   height: 700px;
-  background-image: url(https://greaterkansascity.ja.org/dA/dcc9112e7e/banner/programs_background.png/1200w/jpeg/80);
+  background-image: url(https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60);
   background-size: cover;
   background-position: cover;
 }
@@ -46,7 +46,7 @@
   position: relative;
   z-index: 1;
 }
-.registerButton {
+.volunteerRegisterButton {
   margin-top: 10px !important;
   background-color: #008751 !important;
   font-weight: bolder !important;
@@ -60,7 +60,7 @@
   font-family: 'Montserrat', sans-serif !important;
   text-transform: none;
 }
-.registerCard {
+.volunteerRegisterCard {
   width: 100% !important;
   height: 100%;
   justify-content: space-around !important;
@@ -69,16 +69,20 @@
   background-position: left;
   background-color: transparent !important;
 }
-.registerArrow {
+.volunteerRegisterArrow {
   margin-top: 15px !important;
   margin-right: 60%;
   transform: scale(1.8);
   color: white;
 }
-.registerHome {
+.volunteerRegisterHome {
   color: black;
   transform: scale(2);
 }
-.registerTitle {
+.volunteerRegisterTitle {
   color: black;
 }
+
+  
+
+

@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import volunteerList from './volunteerlist.saga';
+import volunteerList from './volunteerList.saga';
 import deleteVolunteer from './deletevolunteer.saga';
 import editVolunteer from './editvolunteer.saga';
 import getReportSaga from './getreport.saga';
@@ -10,9 +10,9 @@ import reportFormSaga from './report-form.saga';
 import deleteReportSaga from './deletereport.saga';
 import editReportSaga from './editreport.saga';
 import programsSaga from './programs.saga';
-import editprogramSaga from './editprograms.saga';
-import deleteprogramSaga from './deleteprogram.saga';
+import editProgramSaga from './editprograms.saga';
 import deleteProgramSaga from './deleteprogram.saga';
+
 import volunteerGetClassListSaga from './volunteerGetClassList.saga';
 import volunteerCompleteClassSaga from './volunteerCompleteClass.saga';
 import volunteerGetLearningMaterialSaga from './volunteerGetLearningMaterial.saga';
@@ -26,6 +26,9 @@ import trainingSaga from './training.saga';
 import adminAssignClassToVolunteerSaga from './adminAssignClassToVolunteer.saga';
 import addNewSchoolSaga from './addNewSchool.saga';
 import getSchoolListSaga from './getSchoolList.saga';
+import getPendingInvitesSaga from './getPendingInvites.saga';
+import inviteUserSaga from './inviteUser.saga';
+import adminListSaga from './getadminusers.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -41,7 +44,7 @@ export default function* rootSaga() {
     deleteS3ImageSaga(),
     editReportSaga(),
     programsSaga(),
-    editprogramSaga(),
+    editProgramSaga(),
     deleteProgramSaga(),
     volunteerGetClassListSaga(),
     volunteerCompleteClassSaga(),
@@ -55,5 +58,8 @@ export default function* rootSaga() {
     adminAssignClassToVolunteerSaga(),
     addNewSchoolSaga(),
     getSchoolListSaga(),
+    getPendingInvitesSaga(),
+    inviteUserSaga(),
+    adminListSaga(),
   ]);
 }

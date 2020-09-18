@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
 
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
@@ -26,13 +27,10 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
 import Button from '@material-ui/core/Button';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { CSVLink } from "react-csv";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -61,7 +59,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'username', numeric: false, disablePadding: true, label: 'Username' },
+    { id: 'first name', numeric: false, disablePadding: true, label: 'First Name' },
+    { id: 'last name', numeric: false, disablePadding: true, label: 'Last Name' },
     { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
     { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
 ];
@@ -152,10 +152,17 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+    const dispatch = useDispatch();
 
     const addAdmin = () => {
-
-        window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
+        swal("What is the email address you would like to send invite to?", {
+            content: "input",
+        })
+            .then((value) => {
+                dispatch({ type: 'INVITE_USER', payload: { email: value } });
+                console.log(value);
+                swal(`Your invite has been sent to: ${value}`);
+            });
     };
 
     return (
@@ -224,12 +231,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function Administrators(props) {
-    // Using hooks we're creating local state for a "heading" variable with
-
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('completion');
@@ -240,18 +242,27 @@ function Administrators(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_VOLUNTEERS' });
+        dispatch({ type: 'FETCH_ADMIN' });
     }, [dispatch]);
 
-    const volunteerList = props.store.volunteerList.map((item, index) => {
+    const adminList = props.store.adminList.map((item, index) => {
         return {
-            name: item.first_name + ' ' + item.last_name,
+            username: item.username,
+            first_name: item.first_name,
+            last_name: item.last_name,
             email: item.email,
             phone: item.telephone,
-            classes: item.scheduled_classes,
-            assign: <Button variant="contained">ASSIGN </Button>,
+
         };
     });
+
+    function CSV(data) {
+        return (
+            <div>
+                <CSVLink className="csvLink" data={adminList}>Export to CSV</CSVLink>
+            </div>
+        );
+    }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -261,7 +272,7 @@ function Administrators(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = volunteerList.map((n) => n.name);
+            const newSelecteds = adminList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -297,15 +308,12 @@ function Administrators(props) {
         setPage(0);
     };
 
-    // const handleChangeDense = (event) => {
-    //     setDense(event.target.checked);
-    // };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     const emptyRows =
         rowsPerPage -
-        Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
+        Math.min(rowsPerPage, adminList.length - page * rowsPerPage);
 
 
     function SearchAdministrators(props) {
@@ -389,10 +397,10 @@ function Administrators(props) {
                                         orderBy={orderBy}
                                         onSelectAllClick={handleSelectAllClick}
                                         onRequestSort={handleRequestSort}
-                                        rowCount={volunteerList.length}
+                                        rowCount={adminList.length}
                                     />
                                     <TableBody>
-                                        {stableSort(volunteerList, getComparator(order, orderBy))
+                                        {stableSort(adminList, getComparator(order, orderBy))
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
                                                 const isItemSelected = isSelected(row.name);
@@ -401,7 +409,7 @@ function Administrators(props) {
                                                 return (
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.name)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -410,6 +418,7 @@ function Administrators(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.name)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />
@@ -420,9 +429,11 @@ function Administrators(props) {
                                                             scope="row"
                                                             padding="none"
                                                         >
-                                                            {row.name}
+                                                            {row.username}
                                                         </TableCell>
 
+                                                        <TableCell align="left">{row.first_name}</TableCell>
+                                                        <TableCell align="left">{row.last_name}</TableCell>
                                                         <TableCell align="left">{row.email}</TableCell>
                                                         <TableCell align="left">{row.phone}</TableCell>
 
@@ -440,7 +451,7 @@ function Administrators(props) {
                             <TablePagination
                                 rowsPerPageOptions={[5, 10, 25]}
                                 component="div"
-                                count={volunteerList.length}
+                                count={<TableCell align="left">{adminList.phone}</TableCell>.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 onChangePage={handleChangePage}
@@ -448,10 +459,7 @@ function Administrators(props) {
                             />
                             <CSV />
                         </Paper>
-                        {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
+
                     </div>
                 </div>
             )}

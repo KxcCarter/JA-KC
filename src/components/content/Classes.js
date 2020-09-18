@@ -3,12 +3,11 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
-
+import swal from 'sweetalert';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import TextField from '@material-ui/core/TextField';
 import { Box } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -26,14 +25,8 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { CSVLink, CSVDownload } from "react-csv";
-import { title } from 'process';
+import { CSVLink } from "react-csv";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -70,12 +63,6 @@ const headCells = [
     label: 'Title',
   },
 ];
-
-// const addClass = (event, name) => {
-// }
-
-// const deleteClass = (event, name) => {
-// }
 
 function EnhancedTableHead(props) {
   const {
@@ -162,10 +149,16 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
-  const addClass = () => {
+  const addClass = (event, name) => {
+    swal("What is the title of the Class you would like to add?", {
+      content: "input",
+    })
+      .then((value) => {
+        console.log(value);
+        swal(`The following Class has been added to Classes: ${value}`);
+      });
+  }
 
-    window.location.href = `mailto:?, cc=?, &subject=Please register your Junior Achievement Volunteer account&body=Welcome!  We want to thank you for expressing interest in joining Junior Achievement of KC.  Please click the following link to register as a volunteer www.google.com`;
-  };
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -241,13 +234,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
 }));
-
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function Classes(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('completion');
@@ -268,14 +255,9 @@ function Classes(props) {
   });
 
   function CSV(data) {
-
-
     return (
       <div>
         <CSVLink className="csvLink" data={programData}>Export to CSV</CSVLink>
-
-        {/* <CSVDownload data={csvData} target="_blank" />; */}
-
       </div>
     );
   }
@@ -324,10 +306,6 @@ function Classes(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  // const handleChangeDense = (event) => {
-  //     setDense(event.target.checked);
-  // };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -393,8 +371,6 @@ function Classes(props) {
     );
   }
 
-
-
   return (
     <Spring
       from={{ opacity: 0 }}
@@ -404,9 +380,7 @@ function Classes(props) {
         <div style={props}>
           <div className={classes.root}>
             <Paper className={classes.paper}>
-
               <EnhancedTableToolbar numSelected={selected.length} />
-
               <TableContainer>
                 <SearchClasses />
                 <Table
@@ -424,18 +398,16 @@ function Classes(props) {
                     onRequestSort={handleRequestSort}
                     rowCount={programData.length}
                   />
-
                   <TableBody>
                     {stableSort(programData, getComparator(order, orderBy))
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row, index) => {
                         const isItemSelected = isSelected(row.title);
                         const labelId = `enhanced-table-checkbox-${index}`;
-
                         return (
                           <TableRow
                             hover
-                            onClick={(event) => handleClick(event, row.title)}
+
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
@@ -444,6 +416,7 @@ function Classes(props) {
                           >
                             <TableCell padding="checkbox">
                               <Checkbox
+                                onClick={(event) => handleClick(event, row.title)}
                                 checked={isItemSelected}
                                 inputProps={{ 'aria-labelledby': labelId }}
                               />
@@ -458,11 +431,6 @@ function Classes(props) {
                               {row.title}
                             </TableCell>
                             <TableCell align="right">{row.sessions}</TableCell>
-                            {/* <TableCell align="right">{row.classes}</TableCell>
-                                            <TableCell align="right">{row.completion}</TableCell>
-                                            <TableCell align="right">{row.image}</TableCell>
-                                            <TableCell align="right">{row.location}</TableCell>
-                                            <TableCell align="right">{row.number}</TableCell> */}
                           </TableRow>
                         );
                       })}
@@ -473,9 +441,7 @@ function Classes(props) {
                     )}
                   </TableBody>
                 </Table>
-
               </TableContainer>
-
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
@@ -487,10 +453,6 @@ function Classes(props) {
               />
               <CSV />
             </Paper>
-            {/* <FormControlLabel
-                    control={<Switch checked={dense} onChange={handleChangeDense} />}
-                    label="Dense padding"
-                /> */}
           </div>
         </div>
       )}

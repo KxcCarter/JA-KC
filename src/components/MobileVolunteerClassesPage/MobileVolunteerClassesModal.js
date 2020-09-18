@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Modal, Box } from '@material-ui/core';
+import {
+  Typography,
+  Button,
+  Modal,
+  TextField,
+  Fab,
+  Box,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import AddClassModalTable from './AddClassModalTable';
 
-function getModalStyle() {
+function VolunteerClassesModalStyle() {
   const top = 50;
   const left = 50;
 
@@ -14,15 +20,13 @@ function getModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-    height: '90%',
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '60%',
-    height: '90%',
+    width: 400,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -34,29 +38,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddClassModal(props) {
+function VolunteerClassesModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [modalStyle] = useState(getModalStyle);
+  const [modalStyle] = useState(VolunteerClassesModalStyle);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState('');
 
-  useEffect(() => {
-    dispatch({
-      type: 'FETCH_PROGRAMS',
-    });
-    dispatch({
-      type: 'GET_SCHOOL_LIST',
-    });
-  }, [dispatch]);
-
-  const programData = props.store.programsReducer.map((item, index) => {
-    return { title: item.title, sesssion: item.sessions, program_id: item.id };
-  });
-
-  //   const {
-  //     store: { projectDetails },
-  //   } = props;
+  const {
+    store: { projectDetails },
+  } = props;
 
   const handleOpen = () => {
     setOpen(true);
@@ -69,24 +60,47 @@ function AddClassModal(props) {
     setTask(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: 'CREATE_NEW_TASK',
+      payload: { task: task, projectID: projectDetails.id },
+    });
+    handleClose();
+  };
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <Box p={3} display="inline" overflow="hidden">
+      <Box p={3} display="inline">
         <Typography
           variant="h5"
           id="simple-modal-title"
           align="center"
           color="primary"
         >
-          Select a School and Class to assign to Volunteer
+          Select
         </Typography>
 
-        <AddClassModalTable programs={props.store.programsReducer} {...props} />
+        <TextField
+          fullWidth
+          multiline
+          variant="outlined"
+          onChange={handleInputChange}
+        />
       </Box>
-
+      <Box p={3} display="inline">
+        <Button
+          variant="outlined"
+          size="small"
+          className={classes.root}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Box>
       <Box p={3} display="inline">
         <Button variant="outlined" size="small" onClick={handleClose}>
-          cancel
+          Cancel
         </Button>
       </Box>
     </div>
@@ -94,13 +108,13 @@ function AddClassModal(props) {
 
   return (
     <>
-      <Button
+      <Fab
         size="small"
         className={classes.root}
         onClick={open ? handleClose : handleOpen}
       >
         <AddIcon />
-      </Button>
+      </Fab>
 
       <Modal
         open={open}
@@ -108,10 +122,9 @@ function AddClassModal(props) {
         aria-labelledby="simple-modal-title"
       >
         {body}
-        {/* <AddClassModalTable programs={props.store.programsReducer} /> */}
       </Modal>
     </>
   );
 }
 
-export default connect(mapStoreToProps)(AddClassModal);
+export default connect(mapStoreToProps)(VolunteerClassesModal);

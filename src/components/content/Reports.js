@@ -123,12 +123,12 @@ function SearchReports(props) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'classes', numeric: false, disablePadding: false, label: 'Assigned Class' },
-    { id: 'completion', numeric: false, disablePadding: true, label: 'Completion Date' },
-    { id: 'image', numeric: false, disablePadding: false, label: 'Image Link' },
-    { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
-    { id: 'number', numeric: false, disablePadding: false, label: 'Number of Students' },
+    { id: 'first_name', numeric: false, disablePadding: true, label: 'First Name' },
+    { id: 'last_name', numeric: false, disablePadding: false, label: 'Last Name' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'School' },
+    { id: 'title', numeric: false, disablePadding: false, label: 'Class'  },
+    { id: 'size', numeric: false, disablePadding: false, label: 'Number of Students' },
+    { id: 'completion', numeric: false, disablePadding: false, label: 'Completion Date' },
 ];
 
 function EnhancedTableHead(props) {
@@ -306,9 +306,10 @@ function Reports(props) {
 
     const reportList = props.store.reportformReducer.map((item, index) => {
         return {
-            user: item.user_id,
-            program: item.program_id,
-            school: item.school_id,
+            firstName: item.first_name,
+            lastName: item.last_name,
+            name: item.name,
+            title: item.title,
             size: item.size,
             completion_date: item.completion_date,
         };
@@ -378,7 +379,7 @@ function Reports(props) {
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, reportList.length - page * rowsPerPage);
 
-    function SearchClasses(props) {
+    function SearchReports(props) {
         const classes = useStyles();
         const [open, setOpen] = useState(false);
         const [list, setList] = useState([]);
@@ -466,31 +467,33 @@ function Reports(props) {
                             {stableSort(reportList, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.user);
+                                    const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={(event) => handleClick(event, row.user)}
+                                            
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.program}
+                                            key={row.name}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
                                                 <Checkbox
+                                                onClick={(event) => handleClick(event, row.name)}
                                                     checked={isItemSelected}
                                                     inputProps={{ 'aria-labelledby': labelId }}
                                                 />
                                             </TableCell>
                                             <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                {row.user}
+                                                {row.firstName}
                                             </TableCell>
 
-                                            <TableCell align="left">{row.program}</TableCell>
-                                            <TableCell align="left">{row.school}</TableCell>
+                                            <TableCell align="left">{row.lastName}</TableCell>
+                                            <TableCell align="left">{row.name}</TableCell>
+                                            <TableCell align="left">{row.title}</TableCell>
                                             <TableCell align="left">{row.size}</TableCell>
                                             <TableCell align="left">{row.completion_date}</TableCell>
                          

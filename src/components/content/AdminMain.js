@@ -4,8 +4,6 @@ import { StyleSheet, css } from 'aphrodite/no-important';
 import MiniCardComponent from './MiniCardComponent';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import HeaderComponent from '../header/HeaderComponent';
-import { Spring } from 'react-spring/renderprops';
 
 
 const styles = StyleSheet.create({
@@ -51,13 +49,6 @@ function AdminMain(props) {
   }, [dispatch]);
 
   return (
-
-    // <Spring
-    //   from={{ opacity: 0, marginTop: -500 }}
-    //   to={{ opacity: 1, marginTop: 0 }}
-    // >
-    //   {props => (
-    //     <div style={props}>
     <Column>
       <Row
         className={css(styles.cardsContainer)}
@@ -110,12 +101,6 @@ function AdminMain(props) {
         breakpoints={{ 1024: 'column' }}
       ></Row>
     </Column>
-    //     </div>
-    //   )}
-
-
-
-    // </Spring>
   )
 }
 

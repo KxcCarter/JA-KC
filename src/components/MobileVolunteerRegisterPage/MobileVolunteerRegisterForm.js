@@ -10,17 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import './RegisterForm.css';
+import './MobileVolunteerRegisterForm.css';
 import { Spring } from 'react-spring/renderprops';
 
-
-class RegisterForm extends Component {
+class MobileVolunteerRegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
     last_name: '',
     password: '',
-    account_type_id: '1',
+    account_type_id: '2',
     email: '',
     telephone: '',
   }; // end state
@@ -42,7 +41,7 @@ class RegisterForm extends Component {
         telephone: this.state.telephone,
       },
     });
-    this.props.history.push('/adminreports');
+    this.props.history.push('/volunteerclasses');
   }; // end registerUser
   // capture change on all the inputs and set that value to state
   handleInputChangeFor = (propertyName) => (event) => {
@@ -52,14 +51,14 @@ class RegisterForm extends Component {
   }; // end handleInputChangeFor
   render() {
     return (
-      <div className="registerDiv">
+      <div className="volunteerRegisterDiv">
         <div className="overlay">
           <Card className="registerCard" onSubmit={this.registerUser}>
             <Spring
               from={{ opacity: 0, marginTop: -600 }}
               to={{ opacity: 1, marginTop: 0 }}
             >
-              {props => (
+              {(props) => (
                 <div style={props}>
                   <Container
                     className="registerContainer"
@@ -67,12 +66,15 @@ class RegisterForm extends Component {
                     maxWidth="xs"
                   >
                     <CssBaseline />
-                    <div className="registerPaper">
-                      <ArrowBackIcon className="registerArrow" />
-                      <Avatar className="registerAvatar"></Avatar>
-                      <Typography className="loginTitle" component="h1" variant="h5">
-                        Administrator Registration
-                </Typography>
+                    <div className="volunteerRegisterPaper">
+                      <Avatar className="volunteerRegisterAvatar" />
+                      <Typography
+                        className="volunteerRegisterTitle"
+                        component="h1"
+                        variant="h5"
+                      >
+                        Volunteer Registration
+                      </Typography>
                       {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -81,7 +83,7 @@ class RegisterForm extends Component {
                     {this.props.errors.registrationMessage}
                   </h3>
                 )} */}
-                      <form className="registerForm" noValidate>
+                      <form className="volunteerRegisterForm" noValidate>
                         <TextField
                           margin="normal"
                           fullWidth
@@ -160,7 +162,7 @@ class RegisterForm extends Component {
                           value="Register"
                         >
                           Register
-                  </Button>
+                        </Button>
                       </form>
                     </div>
                   </Container>
@@ -174,4 +176,6 @@ class RegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withRouter(RegisterForm));
+export default connect(mapStoreToProps)(
+  withRouter(MobileVolunteerRegisterForm)
+);
