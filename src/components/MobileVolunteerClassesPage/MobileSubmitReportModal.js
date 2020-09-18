@@ -63,10 +63,6 @@ function VolunteerClassesModal(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({
-      type: 'CREATE_NEW_TASK',
-      payload: { task: task, projectID: projectDetails.id },
-    });
     handleClose();
   };
 

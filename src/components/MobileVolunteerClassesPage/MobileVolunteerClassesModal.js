@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
 function VolunteerClassesModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_LEARNING_MATERIALS',
+    });
+  }, [dispatch]);
   const [modalStyle] = useState(VolunteerClassesModalStyle);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState('');
@@ -56,18 +61,13 @@ function VolunteerClassesModal(props) {
     setOpen(false);
   };
 
-  const handleInputChange = (event) => {
-    setTask(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch({
-      type: 'CREATE_NEW_TASK',
-      payload: { task: task, projectID: projectDetails.id },
+  const learning_materials = props.store.trainingReducer
+    .filter((item) => {
+      return item.program_id === props.store.programId;
+    })
+    .map((item, index) => {
+      return <a href={item.content}>{item.title}</a>;
     });
-    handleClose();
-  };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -80,23 +80,14 @@ function VolunteerClassesModal(props) {
         >
           Select Learning Material
         </Typography>
-
-        <TextField
-          fullWidth
-          multiline
-          variant="outlined"
-          onChange={handleInputChange}
-        />
-      </Box>
-      <Box p={3} display="inline">
-        <Button
-          variant="outlined"
-          size="small"
-          className={classes.root}
-          onClick={handleSubmit}
+        <Typography
+          variant="h6"
+          id="simple-modal-title"
+          align="center"
+          color="primary"
         >
-          Submit
-        </Button>
+          <ul>{learning_materials}</ul>
+        </Typography>
       </Box>
       <Box p={3} display="inline">
         <Button variant="outlined" size="small" onClick={handleClose}>

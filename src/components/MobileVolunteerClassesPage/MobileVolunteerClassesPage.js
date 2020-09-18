@@ -18,28 +18,22 @@ class MobileVolunteerClassesPage extends Component {
 
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
-    let scheduled_classes = this.props.store.volunteerScheduledClasses
-      .filter((item) => {
+    let matchedClass = this.props.store.volunteerScheduledClasses.filter(
+      (item) => {
         return item.id === parseInt(this.props.match.params.id);
-      })
-      .map((item, index) => {
-        return (
-          <div key={item.index}>
-            <h3 id="welcome">View Program Information</h3>
-            <h5>{item.title}</h5>
-            <h5>{item.name}</h5>
-            <h5>Number of Sessions: {item.sessions}</h5>
-          </div>
-        );
-      });
+      }
+    );
+    let scheduled_classes = matchedClass.map((item, index) => {
+      return (
+        <div key={item.index}>
+          <h3 id="welcome">View Program Information</h3>
+          <h5>{item.title}</h5>
+          <h5>{item.name}</h5>
+          <h5>Number of Sessions: {item.sessions}</h5>
+        </div>
+      );
+    });
 
-    let learning_materials = this.props.store.trainingReducer
-      .filter((item) => {
-        return item.program_id === parseInt(this.props.match.params.id);
-      })
-      .map((item, index) => {
-        return <link>{item.content}</link>;
-      });
     return (
       <div>
         <MobileTestNav />
@@ -79,7 +73,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Submit Class details
               </Button>
-              <MobileSubmitReportModal />
+              <MobileSubmitReportModal programId={matchedClass[0].program_id} />
             </Box>
           </Paper>
         </Container>
