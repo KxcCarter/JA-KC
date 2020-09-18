@@ -32,7 +32,7 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/login" />
 
             {/* <Route exact path="/admin" component={AppDashboard} /> */}
             <ProtectedRoute
@@ -41,6 +41,11 @@ class App extends Component {
               component={MobileMainVolunteerHomePage}
               path="/adminvolunteers"
               component={AdminVolunteers}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminadministrators"
+              component={AdminAdministrators}
             />
             <ProtectedRoute
               exact

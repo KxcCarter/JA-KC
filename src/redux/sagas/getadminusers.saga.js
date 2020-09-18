@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchAmin() {
+function* fetchAdmin() {
   try {
     const response = yield axios.get('/api/user/adminlist');
     yield put({ type: 'SET_ADMIN', payload: response.data });

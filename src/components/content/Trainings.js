@@ -403,7 +403,7 @@ function Trainings(props) {
                                                 return (
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.title)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -412,6 +412,7 @@ function Trainings(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.title)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />

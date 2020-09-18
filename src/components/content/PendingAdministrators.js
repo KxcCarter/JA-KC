@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import { Spring } from 'react-spring/renderprops';
+import { CSVLink } from "react-csv";
 
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
@@ -26,31 +27,8 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import CSV from '../content/CSV';
-import Button from '@material-ui/core/Button';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
-
-
-function createData(name, email, phone) {
-    return { name, email, phone };
-}
-
-const rows = [
-    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565"),
-    createData('Billy Jean', 'bob@mail.com', "666-555-5565"),
-    createData('Michael Jackson', 'bob@mail.com', "666-555-5565"),
-    createData('Paul', 'bob@mail.com', "666-555-5565"),
-    createData('Beatles', 'bob@mail.com', "666-555-5565"),
-    createData('Dixie Chicks', 'bob@mail.com', "666-555-5565"),
-
-
-
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -79,9 +57,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-    { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
-    { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
+    { id: 'email', numeric: false, disablePadding: true, label: 'Email Address' },
+    { id: 'completed', numeric: false, disablePadding: false, label: 'Complete?' },
+
+
 
 ];
 
@@ -232,8 +211,6 @@ const useStyles = makeStyles((theme) => ({
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function PendingAdministrators(props) {
-    // Using hooks we're creating local state for a "heading" variable with
-
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('completion');
@@ -241,6 +218,25 @@ function PendingAdministrators(props) {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'GET_PENDING_INVITES' });
+    }, [dispatch]);
+
+    const invitesList = props.store.pendingInvites.map((item, index) => {
+        return {
+            email: item.email,
+        };
+    });
+
+    function CSV(data) {
+        return (
+            <div>
+                <CSVLink className="csvLink" data={invitesList}>Export to CSV</CSVLink>
+            </div>
+        );
+    }
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -250,7 +246,7 @@ function PendingAdministrators(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n) => n.name);
+            const newSelecteds = invitesList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -292,7 +288,7 @@ function PendingAdministrators(props) {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, invitesList.length - page * rowsPerPage);
 
 
     function SearchPendingAdministrators(props) {
@@ -378,10 +374,10 @@ function PendingAdministrators(props) {
                                         orderBy={orderBy}
                                         onSelectAllClick={handleSelectAllClick}
                                         onRequestSort={handleRequestSort}
-                                        rowCount={rows.length}
+                                        rowCount={invitesList.length}
                                     />
                                     <TableBody>
-                                        {stableSort(rows, getComparator(order, orderBy))
+                                        {stableSort(invitesList, getComparator(order, orderBy))
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
                                                 const isItemSelected = isSelected(row.name);
@@ -390,7 +386,7 @@ function PendingAdministrators(props) {
                                                 return (
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.name)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -399,16 +395,17 @@ function PendingAdministrators(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.name)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />
                                                         </TableCell>
                                                         <TableCell component="th" id={labelId} scope="row" padding="none">
-                                                            {row.name}
+                                                            {row.email}
                                                         </TableCell>
 
-                                                        <TableCell align="left">{row.email}</TableCell>
-                                                        <TableCell align="left">{row.phone}</TableCell>
+
+                                                        <TableCell align="left">No</TableCell>
 
                                                     </TableRow>
                                                 );
@@ -424,7 +421,7 @@ function PendingAdministrators(props) {
                             <TablePagination
                                 rowsPerPageOptions={[5, 10, 25]}
                                 component="div"
-                                count={rows.length}
+                                count={invitesList.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 onChangePage={handleChangePage}
