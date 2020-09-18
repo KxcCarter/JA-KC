@@ -9,14 +9,15 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import MobileVolunteerClassesPage from '../MobileVolunteerClassesPage/MobileVolunteerClassesPage';
 import AdminRegisterPage from '../AdminRegisterPage/AdminRegisterPage';
 import AdminVolunteers from '../content/AdminVolunteers';
 import AdminClasses from '../content/AdminClasses';
 import AdminReports from '../content/AdminReports';
 import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
-import VolunteerDashboardPage from '../VolunteerDashboardPage/VolunteerDashboardPage';
-import VolunteerRegisterPage from '../VolunteerRegisterPage/VolunteerRegisterPage';
-import MainVolunteerHomePage from '../MainVolunteerHomePage/MainVolunteerHomePage';
+import MobileVolunteerDashboardPage from '../MobileVolunteerDashboardPage/MobileVolunteerDashboardPage';
+import MobileVolunteerRegisterPage from '../MobileVolunteerRegisterPage/MobileVolunteerRegisterPage';
+import MobileMainVolunteerHomePage from '../MobileMainVolunteerHomePage/MobileMainVolunteerHomePage';
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
@@ -36,6 +37,8 @@ class App extends Component {
             {/* <Route exact path="/admin" component={AppDashboard} /> */}
             <ProtectedRoute
               exact
+              path="/volunteerhome"
+              component={MobileMainVolunteerHomePage}
               path="/adminvolunteers"
               component={AdminVolunteers}
             />
@@ -65,7 +68,7 @@ class App extends Component {
             <Route
               exact
               path="/volunteerregister"
-              component={VolunteerRegisterPage}
+              component={MobileVolunteerRegisterPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -74,6 +77,8 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
+              path="/volunteerclasses"
+              component={MobileVolunteerClassesPage}
               path="/volunteerhome"
               component={MainVolunteerHomePage}
               userAdminRedirect="/adminreports"
@@ -113,7 +118,7 @@ e
               // - else shows RegisterPage at "/registration"
               exact
               path="/volunteerregistration"
-              component={VolunteerRegisterPage}
+              component={MobileVolunteerRegisterPage}
               authRedirect="/user"
             /> */}
             {/* <ProtectedRoute
@@ -131,7 +136,7 @@ e
               // - else shows LandingPage at "/home"
               exact
               path="/volunteer"
-              component={VolunteerDashboardPage}
+              component={MobileVolunteerDashboardPage}
               authRedirect="/volunteerdashboard"
             />
             {/* If none of the other routes matched, we will show a 404. */}

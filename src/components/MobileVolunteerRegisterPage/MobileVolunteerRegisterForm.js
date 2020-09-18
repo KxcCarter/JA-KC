@@ -10,11 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import './VolunteerRegisterForm.css';
+import './MobileVolunteerRegisterForm.css';
 import { Spring } from 'react-spring/renderprops';
 
-
-class VolunteerRegisterForm extends Component {
+class MobileVolunteerRegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
@@ -59,7 +58,7 @@ class VolunteerRegisterForm extends Component {
               from={{ opacity: 0, marginTop: -600 }}
               to={{ opacity: 1, marginTop: 0 }}
             >
-              {props => (
+              {(props) => (
                 <div style={props}>
                   <Container
                     className="registerContainer"
@@ -75,7 +74,7 @@ class VolunteerRegisterForm extends Component {
                         variant="h5"
                       >
                         Volunteer Registration
-                </Typography>
+                      </Typography>
                       {/* {this.props.errors.registrationMessage && (
                   <h3
                     className="alert"
@@ -163,7 +162,7 @@ class VolunteerRegisterForm extends Component {
                           value="Register"
                         >
                           Register
-                  </Button>
+                        </Button>
                       </form>
                     </div>
                   </Container>
@@ -177,4 +176,6 @@ class VolunteerRegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withRouter(VolunteerRegisterForm));
+export default connect(mapStoreToProps)(
+  withRouter(MobileVolunteerRegisterForm)
+);

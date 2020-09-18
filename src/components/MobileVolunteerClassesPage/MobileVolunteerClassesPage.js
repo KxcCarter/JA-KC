@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
-import './VolunteerClassesPage.css';
-import TestNav from '../MobileNav/TestNav';
+import './MobileVolunteerClassesPage.css';
+import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Button } from '@material-ui/core';
-import VolunteerClassesModal from './VolunteerClassesModal';
+import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
 
-class VolunteerClassesPage extends Component {
+class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_SCHEDULED_CLASSES',
@@ -24,14 +24,10 @@ class VolunteerClassesPage extends Component {
             <Container>
               <Paper>
                 <Box>
-                  <ul>
-                    <li>
-                      <h3 id="welcome">View Program Information</h3>
-                      <h5>{item.title}</h5>
+                  <h3 id="welcome">View Program Information</h3>
+                  {/* <h5>{item.title}</h5>
                       <h5>{item.name}</h5>
-                      <h5>Number of Sessions: {item.sessions}</h5>
-                    </li>
-                  </ul>
+                      <h5>Number of Sessions: {item.sessions}</h5> */}
                 </Box>
               </Paper>
             </Container>
@@ -41,7 +37,7 @@ class VolunteerClassesPage extends Component {
     );
     return (
       <div>
-        <TestNav />
+        <MobileTestNav />
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
@@ -62,7 +58,7 @@ class VolunteerClassesPage extends Component {
               >
                 Program Resources
               </Button>
-              <VolunteerClassesModal />
+              <MobileVolunteerClassesModal />
             </Box>
           </Paper>
         </Container>
@@ -78,7 +74,7 @@ class VolunteerClassesPage extends Component {
               >
                 Submit Class details
               </Button>
-              <VolunteerClassesModal />
+              <MobileVolunteerClassesModal />
             </Box>
           </Paper>
         </Container>
@@ -89,4 +85,4 @@ class VolunteerClassesPage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(VolunteerClassesPage);
+export default connect(mapStoreToProps)(MobileVolunteerClassesPage);

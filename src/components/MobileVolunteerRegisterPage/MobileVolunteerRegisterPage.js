@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // CUSTOM COMPONENTS
-import VolunteerRegisterForm from '../VolunteerRegisterPage/VolunteerRegisterForm';
+import MobileVolunteerRegisterForm from '../MobileVolunteerRegisterPage/MobileVolunteerRegisterForm';
 
-class VolunteerRegisterPage extends Component {
+class MobileVolunteerRegisterPage extends Component {
   state = {
     first_name: '',
     last_name: '',
@@ -19,10 +19,10 @@ class VolunteerRegisterPage extends Component {
   render() {
     return (
       <div className="mainRegisterDiv">
-        <VolunteerRegisterForm />
+        <MobileVolunteerRegisterForm />
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(VolunteerRegisterPage);
+export default connect(mapStoreToProps)(MobileVolunteerRegisterPage);
