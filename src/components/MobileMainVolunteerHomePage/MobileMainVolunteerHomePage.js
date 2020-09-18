@@ -42,40 +42,20 @@ class MobileMainVolunteerHomePage extends Component {
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
-              <h3>JA Biztown Program</h3>
-              <h4>Park Hill High School</h4>
-              <h4>October 26th, 2020 - 1PM</h4>
-              <p></p>
+              <h3 id="welcome">View Program Information</h3>
+              <h5>{item.title}</h5>
+              <h5>{item.name}</h5>
+              <h5>Number of Sessions: {item.sessions}</h5>
             </Box>
           </Paper>
-        </Container>
-        <Container>
-          <Paper className="VolunteerPageBubbleStyle">
-            <Box p={1} m={1}>
-              <h3>JA Career Success Program</h3>
-              <h4>Park Hill High School</h4>
-              <h4>October 30th, 2020 - 1PM</h4>
-              <p></p>
-            </Box>
-          </Paper>
-        </Container>
-
-        {/* <Container> */}
-        {/* <Paper className="ProgramResourcesBubbleStyle"> */}
-        {/* <Box p={1} m={1}> */}
-        {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
-        {/* <h2>Program Resources</h2> */}
-        {/* </Box> */}
-        {/* </Paper> */}
-        {/* </Container> */}
-        {/* <Container> */}
-        {/* <Paper className="ProgramResourcesBubbleStyle"> */}
-        {/* <Box p={1} m={1}> */}
-        {/* <h2>Submit Class Details</h2>
-            </Box>
-          </Paper>
-        </Container>
-        <LogOutButton className="log-in" /> */}
+        );
+      }
+    );
+    return (
+      <div>
+        <TestNav />
+        <Container>{scheduled_classes}</Container>
+        {/* <LogOutButton className="log-in" /> */}
       </div>
     );
   }

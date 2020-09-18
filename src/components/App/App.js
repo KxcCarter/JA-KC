@@ -35,16 +35,31 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             {/* <Route exact path="/admin" component={AppDashboard} /> */}
-            <Route exact path="/adminvolunteers" component={AdminVolunteers} />
-            <Route exact path="/adminclasses" component={AdminClasses} />
-            <Route exact path="/adminreports" component={AdminReports} />
-            <Route exact path="/login" component={AdminLoginPage} />
-            <Route exact path="/adminhome" component={AdminRegisterPage} />
-            <Route
+            <ProtectedRoute
               exact
               path="/volunteerhome"
               component={MobileMainVolunteerHomePage}
+              path="/adminvolunteers"
+              component={AdminVolunteers}
             />
+            <ProtectedRoute
+              exact
+              path="/adminclasses"
+              component={AdminClasses}
+            />
+            <ProtectedRoute
+              exact
+              path="/adminreports"
+              component={AdminReports}
+              userVolunteerRedirect="/volunteerhome"
+            />
+            <ProtectedRoute
+              exact
+              path="/login"
+              component={AdminLoginPage}
+              authRedirect="/volunteerhome"
+            />
+            <Route exact path="/adminhome" component={AdminRegisterPage} />
             <Route
               exact
               path="/volunteerregister"
@@ -54,11 +69,14 @@ class App extends Component {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <Route
+            <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
               path="/volunteerclasses"
               component={MobileVolunteerClassesPage}
+              path="/volunteerhome"
+              component={MainVolunteerHomePage}
+              userAdminRedirect="/adminreports"
             />
 
             {/* <ProtectedRoute
