@@ -428,7 +428,7 @@ function PendingVolunteers(props) {
 
                                                     <TableRow
                                                         hover
-                                                        onClick={(event) => handleClick(event, row.name)}
+
                                                         role="checkbox"
                                                         aria-checked={isItemSelected}
                                                         tabIndex={-1}
@@ -437,6 +437,7 @@ function PendingVolunteers(props) {
                                                     >
                                                         <TableCell padding="checkbox">
                                                             <Checkbox
+                                                                onClick={(event) => handleClick(event, row.name)}
                                                                 checked={isItemSelected}
                                                                 inputProps={{ 'aria-labelledby': labelId }}
                                                             />

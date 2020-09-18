@@ -7,7 +7,6 @@ import SidebarComponent from '../sidebar/SidebarComponent';
 import HeaderComponent from '../header/HeaderComponent';
 import AdminMain from '../content/AdminMain';
 import AdminTab from '../content/AdminTab';
-import CSV from '../content/CSV';
 
 const styles = StyleSheet.create({
     container: {
@@ -32,7 +31,7 @@ class AdminAdministrators extends React.Component {
     componentDidMount() {
         window.addEventListener('resize', this.resize);
         this.props.dispatch({
-            type: 'FETCH_VOLUNTEERS',
+            type: 'FETCH_USER',
         });
     }
 
@@ -54,7 +53,6 @@ class AdminAdministrators extends React.Component {
                     <HeaderComponent title={selectedItem} />
                     <div className={css(styles.content)}>
                         <AdminMain />
-
                         <AdminTab />
                     </div>
                 </Column>
