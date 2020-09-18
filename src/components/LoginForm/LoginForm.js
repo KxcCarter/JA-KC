@@ -28,7 +28,6 @@ class LoginForm extends Component {
   login = (event) => {
     event.preventDefault();
 
-
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',
@@ -37,16 +36,6 @@ class LoginForm extends Component {
           password: this.state.password,
         },
       });
-      console.log(this);
-      console.log(this.props);
-      console.log(this.props.store);
-      console.log(this.props.store.user);
-      console.log(this.props.store.user.account_type_id);
-      if (this.props.store.user.account_type_id == 1) {
-        this.props.history.push('/adminreports');
-      } else {
-        this.props.history.push('/volunteerclasses');
-      }
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
