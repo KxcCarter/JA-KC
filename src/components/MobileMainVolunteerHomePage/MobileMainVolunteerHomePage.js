@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
-import './MainVolunteerHomePage.css';
-import TestNav from '../MobileNav/TestNav';
+import './MobileMainVolunteerHomePage.css';
+import MobileTestNav from '../MobileNav/MobileTestNav';
 
-class MainVolunteerHomePage extends Component {
+class MobileMainVolunteerHomePage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     return (
       <div>
-        <TestNav />
+        <MobileTestNav />
         <Container>
           <Paper className="WelcomeVolunteerPageBubbleStyle">
             <Box p={1} m={1}>
@@ -82,4 +82,4 @@ class MainVolunteerHomePage extends Component {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStoreToProps)(MainVolunteerHomePage);
+export default connect(mapStoreToProps)(MobileMainVolunteerHomePage);

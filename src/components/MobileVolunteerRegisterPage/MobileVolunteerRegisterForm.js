@@ -10,8 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import './VolunteerRegisterForm.css';
-class VolunteerRegisterForm extends Component {
+import './MobileVolunteerRegisterForm.css';
+
+class MobileVolunteerRegisterForm extends Component {
   state = {
     username: '',
     first_name: '',
@@ -165,4 +166,6 @@ class VolunteerRegisterForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(withRouter(VolunteerRegisterForm));
+export default connect(mapStoreToProps)(
+  withRouter(MobileVolunteerRegisterForm)
+);

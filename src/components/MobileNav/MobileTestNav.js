@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './TestNav.css';
+import './MobileTestNav.css';
 
 import { Dehaze, HomeOutlined } from '@material-ui/icons';
 import {
@@ -28,7 +28,7 @@ const muiStyles = (theme) =>
     divider: {},
   });
 
-class TestNav extends Component {
+class MobileTestNav extends Component {
   state = {
     open: false,
   };
@@ -66,7 +66,7 @@ class TestNav extends Component {
 
               <MenuItem>
                 <IconButton>
-                  <Link className="TestNavStyle" to="/user">
+                  <Link className="TestNavStyle" to="/volunteerhome">
                     <h6>Scheduled Classes</h6>
                   </Link>
                 </IconButton>
@@ -74,7 +74,7 @@ class TestNav extends Component {
               <Divider />
               <MenuItem>
                 <IconButton>
-                  <Link className="TestNavStyle" to="/user">
+                  <Link className="TestNavStyle" to="/volunteerclasses">
                     <h6>Programs</h6>
                   </Link>
                 </IconButton>
@@ -107,7 +107,7 @@ class TestNav extends Component {
                   </Link> */}
                   </MenuItem>
                   <Divider />
-                  <MenuItem>hi bob</MenuItem>
+                  <MenuItem></MenuItem>
                   <MenuItem className={this.props.classes.navItem}>
                     {/* <IconButton>
                                             <ExitToApp />
@@ -135,4 +135,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(withStyles(muiStyles)(TestNav));
+export default connect(mapStateToProps)(withStyles(muiStyles)(MobileTestNav));
