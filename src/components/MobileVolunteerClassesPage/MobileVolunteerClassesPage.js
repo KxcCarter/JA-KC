@@ -7,6 +7,7 @@ import './MobileVolunteerClassesPage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Button } from '@material-ui/core';
 import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
+import MobileSubmitReportModal from './MobileSubmitReportModal';
 
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
@@ -17,20 +18,26 @@ class MobileVolunteerClassesPage extends Component {
 
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
-    let scheduled_classes = this.props.store.volunteerScheduledClasses
-      .filter((item) => {
+    let matchedClass = this.props.store.volunteerScheduledClasses.filter(
+      (item) => {
         return item.id === parseInt(this.props.match.params.id);
-      })
-      .map((item, index) => {
-        return (
-          <div key={item.index}>
-            <h3 id="welcome">View Program Information</h3>
-            <h5>{item.title}</h5>
-            <h5>{item.name}</h5>
-            <h5>Number of Sessions: {item.sessions}</h5>
-          </div>
-        );
-      });
+      }
+    );
+    let scheduled_classes = matchedClass.map((item, index) => {
+      return (
+        <div key={item.index}>
+          <h3 id="welcome">View Program Information</h3>
+          <h5>{item.title}</h5>
+          <h5>{item.name}</h5>
+          <h5>Number of Sessions: {item.sessions}</h5>
+        </div>
+      );
+    });
+
+    const matchedProgramId =
+      matchedClass.length === 0 ? null : matchedClass[0].program_id;
+    console.log('matachedProgramId:', matchedProgramId);
+
     return (
       <div>
         <MobileTestNav />
@@ -54,7 +61,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Program Resources
               </Button>
-              <MobileVolunteerClassesModal />
+              <MobileVolunteerClassesModal programId={matchedProgramId} />
             </Box>
           </Paper>
         </Container>
@@ -70,7 +77,7 @@ class MobileVolunteerClassesPage extends Component {
               >
                 Submit Class details
               </Button>
-              <MobileVolunteerClassesModal />
+              <MobileSubmitReportModal />
             </Box>
           </Paper>
         </Container>

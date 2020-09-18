@@ -1,8 +1,8 @@
 const trainingReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_LEARNING_MATERIAL':
+    case 'SET_TRAINING':
       return action.payload;
-    case 'UNSET_LEARNING_MATERIAL':
+    case 'UNSET_TRAINING':
       return [];
     default:
       return state;

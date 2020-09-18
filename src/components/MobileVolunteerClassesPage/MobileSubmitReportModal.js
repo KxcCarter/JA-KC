@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import {
   Box,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
 
 function VolunteerClassesModalStyle() {
   const top = 50;
@@ -41,11 +42,6 @@ const useStyles = makeStyles((theme) => ({
 function VolunteerClassesModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({
-      type: 'FETCH_LEARNING_MATERIALS',
-    });
-  }, [dispatch]);
   const [modalStyle] = useState(VolunteerClassesModalStyle);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState('');
@@ -61,20 +57,14 @@ function VolunteerClassesModal(props) {
     setOpen(false);
   };
 
-  const learning_materials = props.store.trainingReducer
-    .filter((item) => {
-      return item.program_id === props.programId;
-    })
-    .map((item, index) => {
-      return (
-        <div>
-          <a href={item.content}>{item.title}</a>
-        </div>
-      );
-    });
-  console.log('taining:', props.store.trainingReducer);
-  console.log('learning_materials:', learning_materials);
-  console.log('programId:', props.programId);
+  const handleInputChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleClose();
+  };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -85,15 +75,20 @@ function VolunteerClassesModal(props) {
           align="center"
           color="primary"
         >
-          Select Learning Material
+          Submit Completion Report
         </Typography>
-        {props.store.trainingReducer.length > 0 && learning_materials}
-        <Typography
-          variant="h6"
-          id="simple-modal-title"
-          align="center"
-          color="primary"
-        ></Typography>
+
+        <MobileReportForm />
+      </Box>
+      <Box p={3} display="inline">
+        <Button
+          variant="outlined"
+          size="small"
+          className={classes.root}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
       </Box>
       <Box p={3} display="inline">
         <Button variant="outlined" size="small" onClick={handleClose}>
