@@ -83,7 +83,7 @@ class App extends Component {
             />
             <ProtectedRoute
               path="/volunteerhome"
-              component={MainVolunteerHomePage}
+              component={MobileMainVolunteerHomePage}
               userAdminRedirect="/adminreports"
             />
 
