@@ -59,7 +59,9 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-    { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
+    { id: 'username', numeric: false, disablePadding: true, label: 'Username' },
+    { id: 'first name', numeric: false, disablePadding: true, label: 'First Name' },
+    { id: 'last name', numeric: false, disablePadding: true, label: 'Last Name' },
     { id: 'email', numeric: false, disablePadding: false, label: 'Email Address' },
     { id: 'phone', numeric: false, disablePadding: false, label: 'Phone Number' },
 ];
@@ -240,22 +242,24 @@ function Administrators(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_USERS' });
+        dispatch({ type: 'FETCH_ADMIN' });
     }, [dispatch]);
 
-    const userList = props.store.userReducer.map((item, index) => {
+    const adminList = props.store.adminList.map((item, index) => {
         return {
-            name: item.first_name + ' ' + item.last_name,
+            username: item.username,
+            first_name: item.first_name,
+            last_name: item.last_name,
             email: item.email,
             phone: item.telephone,
-            classes: item.scheduled_classes,
+
         };
     });
 
     function CSV(data) {
         return (
             <div>
-                <CSVLink className="csvLink" data={userList}>Export to CSV</CSVLink>
+                <CSVLink className="csvLink" data={adminList}>Export to CSV</CSVLink>
             </div>
         );
     }
@@ -268,7 +272,7 @@ function Administrators(props) {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = userList.map((n) => n.name);
+            const newSelecteds = adminList.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -309,7 +313,7 @@ function Administrators(props) {
 
     const emptyRows =
         rowsPerPage -
-        Math.min(rowsPerPage, userList.length - page * rowsPerPage);
+        Math.min(rowsPerPage, adminList.length - page * rowsPerPage);
 
 
     function SearchAdministrators(props) {
@@ -393,10 +397,10 @@ function Administrators(props) {
                                         orderBy={orderBy}
                                         onSelectAllClick={handleSelectAllClick}
                                         onRequestSort={handleRequestSort}
-                                        rowCount={userList.length}
+                                        rowCount={adminList.length}
                                     />
                                     <TableBody>
-                                        {stableSort(userList, getComparator(order, orderBy))
+                                        {stableSort(adminList, getComparator(order, orderBy))
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((row, index) => {
                                                 const isItemSelected = isSelected(row.name);
@@ -425,9 +429,11 @@ function Administrators(props) {
                                                             scope="row"
                                                             padding="none"
                                                         >
-                                                            {row.name}
+                                                            {row.username}
                                                         </TableCell>
 
+                                                        <TableCell align="left">{row.first_name}</TableCell>
+                                                        <TableCell align="left">{row.last_name}</TableCell>
                                                         <TableCell align="left">{row.email}</TableCell>
                                                         <TableCell align="left">{row.phone}</TableCell>
 
@@ -445,7 +451,7 @@ function Administrators(props) {
                             <TablePagination
                                 rowsPerPageOptions={[5, 10, 25]}
                                 component="div"
-                                count={userList.length}
+                                count={<TableCell align="left">{adminList.phone}</TableCell>.length}
                                 rowsPerPage={rowsPerPage}
                                 page={page}
                                 onChangePage={handleChangePage}

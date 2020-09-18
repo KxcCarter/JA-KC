@@ -1,0 +1,44 @@
+.VolunteerPageBubbleStyle {
+  background-color: #008751 !important;
+  border-radius: 5px solid #008751;
+  box-shadow: 2px 2px 1px #6a6565 !important;
+}
+
+.ProgramResourcesBubbleStyle {
+  background-color: #d59844 !important;
+  border-radius: 5px solid #008751;
+  box-shadow: 2px 2px 1px #6a6565 !important;
+}
+
+.WelcomeVolunteerPageBubbleStyle {
+  background-color: #6a6565 !important;
+  border-radius: 5px solid #6a6565;
+  box-shadow: 2px 2px 1px #6a6565 !important;
+}
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: white;
+}
+
+h5 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+body {
+  background-color: white;
+}

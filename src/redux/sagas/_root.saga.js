@@ -10,9 +10,9 @@ import reportFormSaga from './report-form.saga';
 import deleteReportSaga from './deletereport.saga';
 import editReportSaga from './editreport.saga';
 import programsSaga from './programs.saga';
-import editprogramSaga from './editprograms.saga';
-import deleteprogramSaga from './deleteprogram.saga';
+import editProgramSaga from './editprograms.saga';
 import deleteProgramSaga from './deleteprogram.saga';
+
 import volunteerGetClassListSaga from './volunteerGetClassList.saga';
 import volunteerCompleteClassSaga from './volunteerCompleteClass.saga';
 import volunteerGetLearningMaterialSaga from './volunteerGetLearningMaterial.saga';
@@ -24,7 +24,7 @@ import volunteerCounterSaga from './volunteercounter.saga';
 import deleteS3ImageSaga from './deleteS3Image.saga';
 import getPendingInvitesSaga from './getPendingInvites.saga';
 import inviteUserSaga from './inviteUser.saga';
-import trainingSaga from './training.saga';
+import adminListSaga from './getadminusers.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -40,7 +40,7 @@ export default function* rootSaga() {
     deleteS3ImageSaga(),
     editReportSaga(),
     programsSaga(),
-    editprogramSaga(),
+    editProgramSaga(),
     deleteProgramSaga(),
     volunteerGetClassListSaga(),
     volunteerCompleteClassSaga(),
@@ -52,6 +52,6 @@ export default function* rootSaga() {
     volunteerCounterSaga(),
     getPendingInvitesSaga(),
     inviteUserSaga(),
-    trainingSaga(),
+    adminListSaga(),
   ]);
 }

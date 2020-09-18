@@ -52,7 +52,7 @@ class UserPage extends Component {
             </Box>
           </Paper>
         </Container>
-        {/* <LogOutButton className="log-in" /> */}
+        <li>{scheduled_classes}</li>
       </div>
     );
   }

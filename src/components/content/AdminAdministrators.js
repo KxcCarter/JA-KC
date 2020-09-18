@@ -30,9 +30,9 @@ class AdminAdministrators extends React.Component {
 
     componentDidMount() {
         window.addEventListener('resize', this.resize);
-        // this.props.dispatch({
-        //     type: 'FETCH_USER',
-        // });
+        this.props.dispatch({
+            type: 'FETCH_ADMIN',
+        });
     }
 
     componentWillUnmount() {

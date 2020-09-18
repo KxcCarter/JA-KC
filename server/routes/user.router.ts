@@ -140,4 +140,16 @@ router.post('/logout', (req: Request, res: Response): void => {
   res.sendStatus(200);
 });
 
+router.get(
+  '/adminlist',
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const account_type_id = '1';
+    const queryText = `SELECT * FROM "users" WHERE "account_type_id"=$1;`;
+    pool
+      .query(queryText, [account_type_id])
+      .then((response) => res.send(response.rows))
+      .catch((error) => console.log('Error in programs GET:', error));
+  }
+);
+
 export default router;
