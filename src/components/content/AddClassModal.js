@@ -1,72 +1,157 @@
+// import React, { useState, useEffect } from 'react';
+// import { connect, useDispatch } from 'react-redux';
+// import mapStoreToProps from '../../redux/mapStoreToProps';
+// import swal from 'sweetalert';
+// import AddClassModalTable from './AddClassModalTable';
+// // Basic functional component structure for React with default state
+// // value setup. When making a new component be sure to replace the
+// // component name TemplateFunction with the name for the new component.
+// function AddClassModal(props) {
+//   const dispatch = useDispatch();
+//   useEffect(() => {
+//     dispatch({
+//       type: 'FETCH_PROGRAMS',
+//     });
+//   }, [dispatch]);
+//   // const programData = props.store.programsReducer.map((item, index) => {
+//   //     return { title: item.title, sesssion: item.sessions, program_id: item.id };
+//   // });
+//   const [heading, setHeading] = useState('Functional Component');
+//   const addClass = () => {
+//     swal({
+//       title: <AddClassModalTable />,
+//       buttons: true,
+//       dangerMode: true,
+//     }).then((willAssign) => {
+//       if (willAssign) {
+//         return <h1>ASSIGNED YEAH BOY</h1>;
+//         swal('Great!  Class has been assigned', {
+//           icon: 'success',
+//         });
+//       } else {
+//         swal('No Class has been assigned');
+//       }
+//     });
+//   };
+//   return (
+//     <div>
+//       <button onClick={addClass}>{alert}ADD</button>
+//     </div>
+//   );
+// }
+// export default connect(mapStoreToProps)(AddClassModal);
+
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import swal from 'sweetalert';
-
-// MUI
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Typography, Button, Modal, Box } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import AddClassModalTable from './AddClassModalTable';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+    height: '90%',
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: '60%',
+    height: '90%',
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    textAlign: 'center',
   },
-});
+  root: {
+    backgroundColor: theme.palette.success.main,
+  },
+}));
 
-export default function SimpleTable() {
+function AddClassModal(props) {
   const classes = useStyles();
-
   const dispatch = useDispatch();
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [task, setTask] = useState('');
+
   useEffect(() => {
     dispatch({
       type: 'FETCH_PROGRAMS',
     });
   }, [dispatch]);
 
-  function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
+  const programData = props.store.programsReducer.map((item, index) => {
+    return { title: item.title, sesssion: item.sessions, program_id: item.id };
+  });
 
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
+  //   const {
+  //     store: { projectDetails },
+  //   } = props;
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleInputChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <Box p={3} display="inline" overflow="hidden">
+        <Typography
+          variant="h5"
+          id="simple-modal-title"
+          align="center"
+          color="primary"
+        >
+          Select a School and Class to assign to Volunteer
+        </Typography>
+
+        <AddClassModalTable programs={props.store.programsReducer} {...props} />
+      </Box>
+
+      <Box p={3} display="inline">
+        <Button variant="outlined" size="small" onClick={handleClose}>
+          cancel
+        </Button>
+      </Box>
+    </div>
+  );
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Button
+        size="small"
+        className={classes.root}
+        onClick={open ? handleClose : handleOpen}
+      >
+        <AddIcon />
+      </Button>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+      >
+        {body}
+        {/* <AddClassModalTable programs={props.store.programsReducer} /> */}
+      </Modal>
+    </>
   );
 }
+
+export default connect(mapStoreToProps)(AddClassModal);

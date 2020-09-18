@@ -31,11 +31,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from '@material-ui/core/Button';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import CSV from './CSV';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Spring } from 'react-spring/renderprops';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
+
+import CSV from './CSV';
+import AddClassModal from './AddClassModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -273,7 +275,7 @@ function VolunteersTabCurrent(props) {
   }, [dispatch]);
 
   const addClass = () => {
-    console.log('You are adding a class');
+    console.log('You are adding a class you idiot');
   };
 
   const volunteerList = props.store.volunteerList.map((item, index) => {
@@ -283,9 +285,10 @@ function VolunteersTabCurrent(props) {
       phone: item.telephone,
       classes: item.scheduled_classes,
       assign: (
-        <Button onClick={addClass} variant="contained">
-          ADD{' '}
-        </Button>
+        // <Button onClick={addClass} variant="contained">
+        //   ADD{' '}
+        // </Button>
+        <AddClassModal />
       ),
     };
   });
