@@ -11,7 +11,6 @@ import MobileSubmitReportModal from './MobileSubmitReportModal';
 import InfoIcon from '@material-ui/icons/Info';
 import { Spring } from 'react-spring/renderprops';
 
-
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
     this.props.dispatch({
@@ -41,70 +40,74 @@ class MobileVolunteerClassesPage extends Component {
       matchedClass.length === 0 ? null : matchedClass[0].program_id;
     console.log('matachedProgramId:', matchedProgramId);
 
+    // console.log('scheduledClassId:', scheduled_classes[0].params);
+    // console.log('scheduledClassId:', scheduled_classes[0].id);
+    console.log('matachedProgramId:', matchedProgramId);
+
     const matchedScheduledClassId =
-    matchedClass.length === 0 ? null : matchedClass[0].id;
-  console.log('matchedScheduledClassId:', matchedScheduledClassId);
+      matchedClass.length === 0 ? null : matchedClass[0].id;
+    console.log('matchedScheduledClassId:', matchedScheduledClassId);
 
+    // console.log('scheduledClassId:', scheduled_classes[0].params);
+    // console.log('scheduledClassId:', scheduled_classes[0].id);
+    console.log('matachedProgramId:', matchedProgramId);
 
-  const matchedUserId =
-  matchedClass.length === 0 ? null : matchedClass[0].user_id;
-console.log('matchedUserId:', matchedUserId);
+    const matchedUserId =
+      matchedClass.length === 0 ? null : matchedClass[0].user_id;
+    console.log('matchedUserId:', matchedUserId);
 
     return (
       <div className="MobileVolunteerClassPage">
         <MobileTestNav />
-        <Spring
-            from={{ opacity: 0 }}
-            to={{ opacity: 1}}
-          >
-            {(props) => (
-              <div style={props}>
-        <Container>
-          <Paper className="VolunteerPageBubbleStyle">
-            <Box p={1} m={1}>
-              {scheduled_classes}
-            </Box>
-          </Paper>
-        </Container>
-        <Container className="ClickButtonsContainer">
-          <Paper className="ProgramResourcesBubbleStyle">
-            <Box p={1} m={1}>
-              {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
-              <Button
-                type="button"
-                className="link-button"
-                onClick={() => {
-                  this.props.history.push('/');
-                }}
-              >
-                Program Resources
-             
-              </Button>
-              <MobileVolunteerClassesModal programId={matchedProgramId} />
-            </Box>
-          </Paper>
-        </Container>
-        <Container>
-          <Paper className="ProgramResourcesBubbleStyle">
-            <Box p={1} m={1}>
-              <Button
-                type="button"
-                className="link-button"
-                onClick={() => {
-                  this.props.history.push('/');
-                }}
-              >
-                
-                Submit Class Details
-               
-              </Button>
-              <MobileSubmitReportModal classId={matchedScheduledClassId} />
-            </Box>
-          </Paper>
-        </Container>
-        </div>
-            )}
-          </Spring>
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+          {(props) => (
+            <div style={props}>
+              <Container>
+                <Paper className="VolunteerPageBubbleStyle">
+                  <Box p={1} m={1}>
+                    {scheduled_classes}
+                  </Box>
+                </Paper>
+              </Container>
+              <Container className="ClickButtonsContainer">
+                <Paper className="ProgramResourcesBubbleStyle">
+                  <Box p={1} m={1}>
+                    {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
+                    <Button
+                      type="button"
+                      className="link-button"
+                      onClick={() => {
+                        this.props.history.push('/');
+                      }}
+                    >
+                      Program Resources
+                    </Button>
+                    <MobileVolunteerClassesModal programId={matchedProgramId} />
+                  </Box>
+                </Paper>
+              </Container>
+              <Container>
+                <Paper className="ProgramResourcesBubbleStyle">
+                  <Box p={1} m={1}>
+                    <Button
+                      type="button"
+                      className="link-button"
+                      onClick={() => {
+                        this.props.history.push('/');
+                      }}
+                    >
+                      Submit Class Details
+                    </Button>
+                    <MobileSubmitReportModal
+                      classId={matchedScheduledClassId}
+                      programId={matchedProgramId}
+                    />
+                  </Box>
+                </Paper>
+              </Container>
+            </div>
+          )}
+        </Spring>
         {/* <LogOutButton className="log-in" /> */}
       </div>
     );

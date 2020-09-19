@@ -80,7 +80,6 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-
     const user: any = req.user;
     const program_id: number = req.body.program_id;
     const scheduled_class_id: number = req.body.scheduled_class_id;
@@ -89,8 +88,6 @@ router.post(
     const query: string = `UPDATE "scheduled_classes"
       SET "size" = $2, "completion_date" = CURRENT_DATE 
         WHERE "id" = $1;`;
-
-
 
     pool
       .query(query, [scheduled_class_id, class_size])
@@ -110,7 +107,7 @@ router.post(
 router.post(
   '/saveImageUrl',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const user_id: number = <number>req.body.user_id;
+    const user_id: any = req.user;
     const program_id: number = <number>req.body.program_id;
     const class_id: number = <number>req.body.class_id;
     const imageUrl: string = req.body.imageUrl;
@@ -119,9 +116,13 @@ router.post(
     VALUES ($1, $2, $3, $4);`;
 
     pool
-      .query(queryText, [user_id, program_id, class_id, imageUrl])
+      .query(queryText, [user_id.id, program_id, class_id, imageUrl])
       .then(() => res.sendStatus(201))
-      .catch(() => res.sendStatus(500));
+      .catch((err) => {
+        console.log('Error saving image url to database. ', err);
+
+        res.sendStatus(500);
+      });
   }
 );
 
