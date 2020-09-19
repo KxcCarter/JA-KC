@@ -8,7 +8,7 @@
     box-shadow: 0 0 8px -4px rgba(0, 0, 0, 2.0);
     border-radius: 15px;
     width: 100% !important;
-    height: 420px !important;
+    height: 100% !important;
    
     
     /* margin-top: 5%; */
@@ -28,7 +28,7 @@
     flex: 1;
     justify-content: space-between;
     width: 100%; 
-   
+   margin-top: -20%;
     /* margin-top: -25%; */
     /* margin-bottom: -50px !important; */
     font-weight: lighter !important;
@@ -39,7 +39,7 @@
 .loginDiv {
     display: flex;
     justify-content: space-evenly;
-    height: 700px;
+    height: 650px;
     background-image: url(https://greaterkansascity.ja.org/dA/846193d343/banner/inthenewsbackground.png/1200w/jpeg/80);
     background-size: cover;
     background-position: cover;

@@ -30,6 +30,8 @@ import getPendingInvitesSaga from './getPendingInvites.saga';
 import inviteUserSaga from './inviteUser.saga';
 import adminListSaga from './getadminusers.saga';
 import saveImageUrlSaga from './saveImageToDatabase.saga';
+import postClassSaga from './postClass.saga';
+import postTrainingSaga from './postTraining.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -64,5 +66,7 @@ export default function* rootSaga() {
     adminListSaga(),
     trainingSaga(),
     saveImageUrlSaga(),
+    postClassSaga(),
+    postTrainingSaga(),
   ]);
 }

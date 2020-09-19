@@ -50,8 +50,7 @@ export default function AddClassModalTable(props) {
       <Table className={classes.table} aria-label="simple table" size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Program Name</TableCell>
-            <TableCell align="right">Select School</TableCell>
+            <TableCell>Class Name</TableCell>
             <TableCell align="right">Number of Sessions</TableCell>
             <TableCell align="right">Assign</TableCell>
           </TableRow>
@@ -62,7 +61,6 @@ export default function AddClassModalTable(props) {
               <TableCell component="th" scope="row">
                 {row.title}
               </TableCell>
-              <TableCell align="right">build dropdown list</TableCell>
               <TableCell align="right">{row.sessions}</TableCell>
               <TableCell align="right">{row.assign}</TableCell>
             </TableRow>

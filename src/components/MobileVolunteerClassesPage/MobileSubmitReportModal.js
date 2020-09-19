@@ -81,9 +81,9 @@ function VolunteerClassesModal(props) {
 
         <MobileReportForm />
 
-        <S3ImageUploader />
-        <S3ImageUploader />
-        <S3ImageUploader />
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
       </Box>
       <Box p={3} display="inline">
         <Button

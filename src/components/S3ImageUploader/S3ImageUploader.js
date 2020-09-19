@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
-
 //
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Modal, Box } from '@material-ui/core';
+import { Typography, Button, Box } from '@material-ui/core';
 
 //
 // NOTE:
@@ -65,15 +64,15 @@ function S3ImageUploader(props) {
   const [uploadFinished, setUploadFinished] = useState(false);
   const [filename, setFilename] = useState('');
   const [fileUrl, setFileUrl] = useState('');
+  const [image, setClearImage] = useState();
 
   const confirmUpload = () => {
     dispatch({
       type: 'POST_IMG_URL',
       payload: {
         imageUrl: fileUrl,
-        user_id: props.user_id,
-        program_id: props.program_id,
-        class_id: props.class_id,
+        program_id: props.programId,
+        class_id: props.classId,
       },
     });
   };
@@ -84,6 +83,7 @@ function S3ImageUploader(props) {
       type: 'DELETE_S3_IMAGE',
       payload: { key: filename },
     });
+    setClearImage('');
   };
 
   const uploadOptions = {
@@ -121,6 +121,7 @@ function S3ImageUploader(props) {
         maxSize={1024 * 1024 * 5}
         upload={uploadOptions}
         style={dropStyle}
+        canCancel={true}
       />
       {uploadFinished && (
         <Box>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid } from '@material-ui/core';
+import S3Page from '../../S3ImageUploader/S3Page';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -11,14 +12,11 @@ import { Button, Grid } from '@material-ui/core';
 
 class MobileReportForm extends Component {
   state = {
-    name: '',
-    energy_level: '',
-    size: '',
-    play_style: '',
-    description: '',
-    owner_id: '',
-    picture: '',
+    class_size: '',
+    scheduled_class_id: this.props.classId,
+
   };
+
 
   onCancelClick = (event) => {
     this.props.history.push(`/`); //NEED TO DECIDE
@@ -26,9 +24,10 @@ class MobileReportForm extends Component {
 
   onSaveClick = (event) => {
     event.preventDefault();
-    const dataForServer = {};
+    const dataForServer = this.state;
+    console.log(dataForServer);
     this.props.dispatch({
-      type: 'UPDATE_REPORT',
+      type: 'SUBMIT_CLASS_DETAILS',
       payload: dataForServer,
     });
     this.props.history.push(`/`); //NEED TO DECIDE
@@ -36,6 +35,7 @@ class MobileReportForm extends Component {
 
   onSavePic = (event) => {
     event.preventDefault();
+
     //KENNY WILL NEED TO HELP ME WITH THIS
   };
 
@@ -46,25 +46,27 @@ class MobileReportForm extends Component {
   };
 
   render() {
+
     return (
       <div>
         <form className="formPanel">
-          <h1>Editing CLASS NAME HERE!</h1>
+          <h1>Submit Class Details!</h1>
           <div>
             <label htmlFor="size">
               Class size:
-              {/* <input
-                defaultValue={this.props.store.dog.name}
+              <input
+
                 type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.onInputChange('name')}
-              /> */}
+                name="class_size"
+                value={this.state.class_size}
+                onChange={this.onInputChange('class_size')}
+              />
+
             </label>
+            <button onClick={this.onSaveClick}>Save</button>
           </div>
           <div>
-            {/* <ImageUploader />
-            <Button onClick={this.onSavePic}>Save Pic</Button> */}
+
           </div>
         </form>
       </div>

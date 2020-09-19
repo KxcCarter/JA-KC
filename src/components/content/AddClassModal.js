@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
     width: '60%',
-    height: '90%',
+    height: '100%',
+    overflow: 'auto',
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -79,7 +80,7 @@ function AddClassModal(props) {
           align="center"
           color="primary"
         >
-          Select a School and Class to assign to Volunteer
+          Select a Class to assign
         </Typography>
 
         <AddClassModalTable

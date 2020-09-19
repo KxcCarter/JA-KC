@@ -23,6 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import { Spring } from 'react-spring/renderprops';
+import moment from 'moment';
 
 import { CSVLink, CSVDownload } from "react-csv";
 
@@ -311,7 +312,7 @@ function Reports(props) {
             name: item.name,
             title: item.title,
             size: item.size,
-            completion_date: item.completion_date,
+            completion_date: moment(item.completion_date).format("MMM Do YYYY"),
         };
     });
 
@@ -388,11 +389,11 @@ function Reports(props) {
           // searchQuery is what the user types in to search.
           setSearchQuery(event.target.value);
           // list is what is being searched through. It get's its data from a reducer.
-          setList(
-            // This is searching through an array of objects to see if the object.name 
-            // matches the searchQuery.
-            props.talentPool.filter((el) => el.name.includes(event.target.value))
-          );
+        //   setList(
+        //     // This is searching through an array of objects to see if the object.name 
+        //     // matches the searchQuery.
+        //     props.talentPool.filter((el) => el.name.includes(event.target.value))
+        //   );
           setOpen(true);
         };
         const clickAway = () => {
