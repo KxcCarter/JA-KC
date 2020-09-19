@@ -1,48 +1,58 @@
 .VolunteerPageBubbleStyle {
-  background-color: #008751 !important;
-  border-radius: 5px solid #008751;
-  box-shadow: 2px 2px 1px #6a6565 !important;
+  background-color: white!important;
+  border-radius: 30px !important;
+  box-shadow: 0 0 8px 10px rgba(0, 0, 0, 2.0);
+  border: 1px solid black;
+  margin: 10px;
 }
 
 .ProgramResourcesBubbleStyle {
-  background-color: #008751 !important;
-  border-radius: 5px solid #008751;
-  box-shadow: 2px 2px 1px #6a6565 !important;
+  background-color: white!important;
+  border-radius: 30px !important;  
+  box-shadow: 0 0 8px 10px rgba(0, 0, 0, 2.0);
+  border: 1px solid black;
+  margin: 5px;
 }
 
 .WelcomeVolunteerPageBubbleStyle {
-  background-color: #6a6565 !important;
-  border-radius: 5px solid #6a6565;
-  box-shadow: 2px 2px 1px #6a6565 !important;
+  background-color: white!important;
+  border-radius: 30px !important;  
+  box-shadow: 0 0 8px 10px rgba(0, 0, 0, 2.0);
+  border: 1px solid black;
 }
 
 .MobileVolunteerPageBubbleStyle {
-  background-color: #008751 !important;
+  background-color: white!important;
+  border-radius: 30px !important;  
+
+  box-shadow: 0 0 8px 10px rgba(0, 0, 0, 2.0);
+  border: 1px solid black;
 }
 h1 {
-  color: white;
+  color: black;
 }
 
 h2 {
-  color: white;
+  color: black;
 }
 
 h3 {
-  color: white;
+  color: black;
 }
 
 h4 {
-  color: white;
+  color: black;
 }
 
 h5 {
-  color: white;
+  color: black;
 }
 
 p {
-  color: white;
+  color: black;
 }
 
-body {
-  background-color: white;
+.MobileVolunteerHomePage {
+  background-color: #008751 !important;
+  height: 650px;
 }
