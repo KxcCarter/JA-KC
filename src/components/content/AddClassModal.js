@@ -79,7 +79,7 @@ function AddClassModal(props) {
           align="center"
           color="primary"
         >
-          Select a School and Class to assign to Volunteer
+          Select a Class to assign
         </Typography>
 
         <AddClassModalTable

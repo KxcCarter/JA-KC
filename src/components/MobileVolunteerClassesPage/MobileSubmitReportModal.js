@@ -78,7 +78,7 @@ function VolunteerClassesModal(props) {
           Submit Completion Report
         </Typography>
 
-        <MobileReportForm />
+        <MobileReportForm classId={props.classId} />
       </Box>
       <Box p={3} display="inline">
         <Button

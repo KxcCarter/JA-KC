@@ -12,8 +12,11 @@ import S3Page from '../../S3ImageUploader/S3Page';
 
 class MobileReportForm extends Component {
   state = {
-    size: '',
+    class_size: '',
+    scheduled_class_id: this.props.classId,
+
   };
+
 
   onCancelClick = (event) => {
     this.props.history.push(`/`); //NEED TO DECIDE
@@ -21,10 +24,10 @@ class MobileReportForm extends Component {
 
   onSaveClick = (event) => {
     event.preventDefault();
-    const dataForServer = this.state.size;
+    const dataForServer = this.state;
     console.log(dataForServer);
     this.props.dispatch({
-      type: 'UPDATE_REPORT',
+      type: 'SUBMIT_CLASS_DETAILS',
       payload: dataForServer,
     });
     this.props.history.push(`/`); //NEED TO DECIDE
@@ -43,6 +46,7 @@ class MobileReportForm extends Component {
   };
 
   render() {
+
     return (
       <div>
         <form className="formPanel">
@@ -53,13 +57,13 @@ class MobileReportForm extends Component {
               <input
 
                 type="text"
-                name="name"
-                value={this.state.size}
-                onChange={this.onInputChange('size')}
+                name="class_size"
+                value={this.state.class_size}
+                onChange={this.onInputChange('class_size')}
               />
 
             </label>
-            <h3>Click this <S3Page /></h3>
+            <button onClick={this.onSaveClick}>Save</button>
           </div>
           <div>
 

@@ -11,7 +11,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* volunteerCompleteClass(action) {
   try {
-    yield axios.post('/volunteer', action.payload);
+    yield axios.post('/api/volunteer', action.payload);
     yield put({ type: 'GET_SCHEDULED_CLASSES' });
   } catch (error) {
     console.log('Submit Completed Class Details Failed', error);

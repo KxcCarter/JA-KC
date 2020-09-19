@@ -40,6 +40,18 @@ class MobileVolunteerClassesPage extends Component {
     const matchedProgramId =
       matchedClass.length === 0 ? null : matchedClass[0].program_id;
     console.log('matachedProgramId:', matchedProgramId);
+  
+    // console.log('scheduledClassId:', scheduled_classes[0].params);
+    // console.log('scheduledClassId:', scheduled_classes[0].id);
+    console.log('matachedProgramId:', matchedProgramId);
+
+    const matchedScheduledClassId =
+    matchedClass.length === 0 ? null : matchedClass[0].id;
+  console.log('matchedScheduledClassId:', matchedScheduledClassId);
+
+  // console.log('scheduledClassId:', scheduled_classes[0].params);
+  // console.log('scheduledClassId:', scheduled_classes[0].id);
+  console.log('matachedProgramId:', matchedProgramId);
 
     return (
       <div className="MobileVolunteerClassPage">
@@ -89,7 +101,7 @@ class MobileVolunteerClassesPage extends Component {
                 Submit Class Details
                
               </Button>
-              <MobileSubmitReportModal programId={matchedProgramId} />
+              <MobileSubmitReportModal classId={matchedScheduledClassId} />
             </Box>
           </Paper>
         </Container>

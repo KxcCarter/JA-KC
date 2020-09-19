@@ -80,41 +80,20 @@ router.get(
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const images: any = req.body.images;
+
     const user: any = req.user;
     const program_id: number = req.body.program_id;
     const scheduled_class_id: number = req.body.scheduled_class_id;
     const class_size: number = req.body.class_size;
-    let queryStart: string = `WITH ins AS (
-        INSERT INTO "images" 
-            ("user_id", "program_id", "scheduled_class_id", "image_url")
-        VALUES `;
 
-    images.forEach((item: any, index: number) => {
-      if (index === images.length - 1) {
-        queryStart += `($3, $4, $1, '${item}'))`;
-      } else {
-        queryStart += `($3, $4, $1, '${item}'), `;
-      }
-    });
-
-    const queryEnd: string = `UPDATE "scheduled_classes"
+    const query: string = `UPDATE "scheduled_classes"
       SET "size" = $2, "completion_date" = CURRENT_DATE 
         WHERE "id" = $1;`;
 
-    let fullQuery: string;
-    let parameters: any;
 
-    if (images.length > 0) {
-      fullQuery = queryStart + queryEnd;
-      parameters = [scheduled_class_id, class_size, user.id, program_id];
-    } else {
-      fullQuery = queryEnd;
-      parameters = [scheduled_class_id, class_size];
-    }
 
     pool
-      .query(fullQuery, parameters)
+      .query(query, [scheduled_class_id, class_size])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log(`Error saving completed class details to database: ${err}`);
