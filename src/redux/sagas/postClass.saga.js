@@ -11,7 +11,7 @@ function* submitClass(action) {
   }
 }
 
-function* reportformSaga() {
+function* postClassSaga() {
   yield takeLatest('SUBMIT_CLASS', submitClass);
 }
 

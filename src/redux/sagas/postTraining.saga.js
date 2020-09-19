@@ -11,7 +11,7 @@ function* submitTraining(action) {
   }
 }
 
-function* reportformSaga() {
+function* postTrainingSaga() {
   yield takeLatest('SUBMIT_TRAINING', submitTraining);
 }
 
