@@ -79,7 +79,7 @@ function VolunteerClassesModal(props) {
           Submit Completion Report
         </Typography>
 
-        <MobileReportForm />
+        <MobileReportForm classId={props.classId} />
 
         <S3ImageUploader classId={props.classId} programId={props.programId} />
         <S3ImageUploader classId={props.classId} programId={props.programId} />

@@ -6,6 +6,7 @@ function* submitClass(action) {
   try {
     // passes the username and password from the payload to the server
     yield axios.post('/api/programs', action.payload);
+    yield put({ type: 'FETCH_PROGRAMS' });
   } catch (error) {
     console.log('Error with submitting Class:', error);
   }
