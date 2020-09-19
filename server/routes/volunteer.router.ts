@@ -77,11 +77,12 @@ router.get(
 /**
  * POST route template
  */
+// Complete class details
 router.post(
   '/',
   (req: Request, res: Response, next: express.NextFunction): void => {
     const user: any = req.user;
-    const program_id: number = req.body.program_id;
+    // const program_id: number = req.body.program_id;
     const scheduled_class_id: number = req.body.scheduled_class_id;
     const class_size: number = req.body.class_size;
 
