@@ -39,6 +39,7 @@ class MobileVolunteerRegisterForm extends Component {
         account_type_id: this.state.account_type_id,
         email: this.state.email,
         telephone: this.state.telephone,
+        hex: this.props.match.params,
       },
     });
     this.props.history.push('/volunteerclasses');

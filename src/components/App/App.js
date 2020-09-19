@@ -63,10 +63,14 @@ class App extends Component {
               component={AdminLoginPage}
               authRedirect="/volunteerhome"
             />
-            <Route exact path="/adminhome" component={AdminRegisterPage} />
             <Route
               exact
-              path="/volunteerregister"
+              path="/adminregister/:hex"
+              component={AdminRegisterPage}
+            />
+            <Route
+              exact
+              path="/volunteerregister/:hex"
               component={MobileVolunteerRegisterPage}
             />
             {/* For protected routes, the view could show one of several things on the same route.
