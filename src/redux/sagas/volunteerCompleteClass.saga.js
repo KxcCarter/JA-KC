@@ -3,8 +3,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // Required data on payload:
 // {
-//   images: ['array of img urls'],
-//   program_id: 'number',
 //   scheduled_class_id: 'number',
 //   class_size: 'number',
 // }
