@@ -149,15 +149,24 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
-  const addClass = (event, name) => {
+  const dispatch = useDispatch();
+
+  const addClass = () => {
+
     swal("What is the title of the Class you would like to add?", {
-      content: "input",
+      content: 'input',
+
     })
       .then((value) => {
+        dispatch({
+          type: 'SUBMIT_CLASS',
+          payload: { title: value },
+        });
         console.log(value);
-        swal(`The following Class has been added to Classes: ${value}`);
+        swal(`${value} has been added to Classes!`);
       });
-  }
+  };
+
 
   return (
     <Toolbar
