@@ -52,6 +52,10 @@ class MobileVolunteerClassesPage extends Component {
     // console.log('scheduledClassId:', scheduled_classes[0].id);
     console.log('matachedProgramId:', matchedProgramId);
 
+    const matchedUserId =
+      matchedClass.length === 0 ? null : matchedClass[0].user_id;
+    console.log('matchedUserId:', matchedUserId);
+
     return (
       <div className="MobileVolunteerClassPage">
         <MobileTestNav />

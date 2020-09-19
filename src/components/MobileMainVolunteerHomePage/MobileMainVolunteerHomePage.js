@@ -6,6 +6,7 @@ import { Paper, Box, Container } from '@material-ui/core';
 import './MobileMainVolunteerHomePage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Spring } from 'react-spring/renderprops';
+import MobileFooter from '../Footer/MobileFooter';
 
 class MobileMainVolunteerHomePage extends Component {
   componentDidMount() {
@@ -56,6 +57,7 @@ class MobileMainVolunteerHomePage extends Component {
         <MobileTestNav />
         <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}
+        {/* <MobileFooter /> */}
       </div>
     );
   }
