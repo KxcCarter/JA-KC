@@ -135,13 +135,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   title: {
     flex: '1 1 100%',
   },
@@ -178,15 +178,15 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          className={classes.title}
-          variant="h5"
-          id="tableTitle"
-          component="div"
-        >
-          Volunteers
-        </Typography>
-      )}
+          <Typography
+            className={classes.title}
+            variant="h5"
+            id="tableTitle"
+            component="div"
+          >
+            Volunteers
+          </Typography>
+        )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -194,12 +194,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Add New Volunteer">
-          <IconButton aria-label="Add New Volunteer">
-            <AddCircleIcon onClick={addVolunteer} />
-          </IconButton>
-        </Tooltip>
-      )}
+          <Tooltip title="Add New Volunteer">
+            <IconButton aria-label="Add New Volunteer">
+              <AddCircleIcon onClick={addVolunteer} />
+            </IconButton>
+          </Tooltip>
+        )}
     </Toolbar>
   );
 };
@@ -318,11 +318,11 @@ function Volunteers(props) {
       // searchQuery is what the user types in to search.
       setSearchQuery(event.target.value);
       // list is what is being searched through. It get's its data from a reducer.
-      setList(
-        // This is searching through an array of objects to see if the object.name
-        // matches the searchQuery.
-        props.talentPool.filter((el) => el.name.includes(event.target.value))
-      );
+      // setList(
+      //   // This is searching through an array of objects to see if the object.name
+      //   // matches the searchQuery.
+      //   props.talentPool.filter((el) => el.name.includes(event.target.value))
+      // );
       setOpen(true);
     };
     const clickAway = () => {
@@ -339,16 +339,16 @@ function Volunteers(props) {
               className={classes.search}
               id="outlined-basic"
               size="small"
-              value={searchQuery}
+              // value={searchQuery}
               label="Search"
               variant="outlined"
               autoComplete="off"
-              onBlur={clickAway}
+              // onBlur={clickAway}
               onChange={handleSearchChange}
             />
           </Box>
           <Box display={open ? 'block' : 'none'}>
-            <MenuList>
+            {/* <MenuList>
               {list.slice(0, 5).map((item, index) => {
                 return (
                   <MenuItem
@@ -359,10 +359,10 @@ function Volunteers(props) {
                   </MenuItem>
                 );
               })}
-            </MenuList>
+            </MenuList> */}
           </Box>
         </Paper>
-      </Box>
+      </Box >
     );
   }
   return (
