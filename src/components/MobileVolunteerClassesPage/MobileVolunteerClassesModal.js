@@ -10,7 +10,7 @@ import {
   Fab,
   Box,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import InfoIcon from '@material-ui/icons/Info';
 
 function VolunteerClassesModalStyle() {
   const top = 50;
@@ -105,13 +105,12 @@ function VolunteerClassesModal(props) {
 
   return (
     <>
-      <Fab
-        size="small"
-        className={classes.root}
+
+      <InfoIcon
+        className="InfoIcon"
         onClick={open ? handleClose : handleOpen}
-      >
-        <AddIcon />
-      </Fab>
+      />
+
 
       <Modal
         open={open}

@@ -8,6 +8,9 @@ import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Button } from '@material-ui/core';
 import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
 import MobileSubmitReportModal from './MobileSubmitReportModal';
+import InfoIcon from '@material-ui/icons/Info';
+import { Spring } from 'react-spring/renderprops';
+
 
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
@@ -39,8 +42,14 @@ class MobileVolunteerClassesPage extends Component {
     console.log('matachedProgramId:', matchedProgramId);
 
     return (
-      <div>
+      <div className="MobileVolunteerClassPage">
         <MobileTestNav />
+        <Spring
+            from={{ opacity: 0 }}
+            to={{ opacity: 1}}
+          >
+            {(props) => (
+              <div style={props}>
         <Container>
           <Paper className="VolunteerPageBubbleStyle">
             <Box p={1} m={1}>
@@ -48,7 +57,7 @@ class MobileVolunteerClassesPage extends Component {
             </Box>
           </Paper>
         </Container>
-        <Container>
+        <Container className="ClickButtonsContainer">
           <Paper className="ProgramResourcesBubbleStyle">
             <Box p={1} m={1}>
               {/* <p>Your scheduled classes are: {this.props.store.user.id}</p> */}
@@ -60,6 +69,7 @@ class MobileVolunteerClassesPage extends Component {
                 }}
               >
                 Program Resources
+             
               </Button>
               <MobileVolunteerClassesModal programId={matchedProgramId} />
             </Box>
@@ -81,6 +91,9 @@ class MobileVolunteerClassesPage extends Component {
             </Box>
           </Paper>
         </Container>
+        </div>
+            )}
+          </Spring>
         {/* <LogOutButton className="log-in" /> */}
       </div>
     );
