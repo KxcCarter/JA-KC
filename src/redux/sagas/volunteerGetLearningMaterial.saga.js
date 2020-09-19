@@ -7,7 +7,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getLearningMaterial(action) {
   try {
     const response = yield axios.get(
-      `/volunteer/resources/${action.payload.program_id}`
+      `/api/volunteer/resources/${action.payload.program_id}`
     );
     yield put({ type: 'SET_LEARNING_MATERIAL', payload: response.data });
   } catch (error) {

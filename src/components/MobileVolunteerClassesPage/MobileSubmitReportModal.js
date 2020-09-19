@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
+import S3ImageUploader from '../S3ImageUploader/S3ImageUploader';
 
 function VolunteerClassesModalStyle() {
   const top = 50;
@@ -79,6 +80,10 @@ function VolunteerClassesModal(props) {
         </Typography>
 
         <MobileReportForm />
+
+        <S3ImageUploader />
+        <S3ImageUploader />
+        <S3ImageUploader />
       </Box>
       <Box p={3} display="inline">
         <Button
@@ -100,11 +105,10 @@ function VolunteerClassesModal(props) {
 
   return (
     <>
-
-      <InfoIcon className="InfoIcon"
+      <InfoIcon
+        className="InfoIcon"
         onClick={open ? handleClose : handleOpen}
       />
-
 
       <Modal
         open={open}

@@ -18,21 +18,34 @@ import { Typography, Button, Modal, Box } from '@material-ui/core';
 //   class_id,
 // }
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
+// function getModalStyle() {
+//   const top = 50;
+//   const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`,
+//   };
+// }
+
+const innerElement = (
+  <div>
+    <p>Select an Image</p>
+  </div>
+);
+
+const dropStyle = {
+  width: '100px',
+  height: '100px',
+  border: '1px solid black',
+  backgroundColor: '#dddddd',
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
-    width: 200,
+    position: 'relative',
+    width: 100,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -47,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 function S3ImageUploader(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [modalStyle] = useState(getModalStyle);
+  // const [modalStyle] = useState(getModalStyle);
 
   const [uploadFinished, setUploadFinished] = useState(false);
   const [filename, setFilename] = useState('');
@@ -60,7 +73,7 @@ function S3ImageUploader(props) {
         imageUrl: fileUrl,
         user_id: props.user_id,
         program_id: props.program_id,
-        class_id: props.class_id,
+        class_id: props.match.params,
       },
     });
   };
@@ -101,15 +114,13 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-    <div style={modalStyle} className={classes.paper}>
-      <Typography variant="h6" id="simple-modal-title" gutterBottom>
-        Upload an image
-      </Typography>
+    <div className={classes.paper}>
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
         s3Url={s3Url}
         maxSize={1024 * 1024 * 5}
         upload={uploadOptions}
+        style={dropStyle}
       />
       {uploadFinished && (
         <Box>

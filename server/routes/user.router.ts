@@ -50,7 +50,7 @@ router.post(
 
       const queryString = `INSERT INTO "invites" ("email", "hex", "account_type_id") VALUES ($1, $2, $3);`;
 
-      await pool.query(queryString, [email, newHex]);
+      await pool.query(queryString, [email, newHex, account_type_id]);
 
       let link: string = ``;
 

@@ -7,7 +7,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getClassDetails(action) {
   try {
     const response = yield axios.get(
-      `/volunteer/scheduled/${action.payload.scheduled_class_id}`
+      `/api/volunteer/scheduled/${action.payload.scheduled_class_id}`
     );
     yield put({ type: 'SET_SINGLE_CLASS_DETAILS', payload: response.data });
   } catch (error) {

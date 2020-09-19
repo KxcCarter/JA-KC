@@ -142,7 +142,11 @@ router.post(
     pool
       .query(queryText, [user_id, program_id, class_id, imageUrl])
       .then(() => res.sendStatus(201))
-      .catch(() => res.sendStatus(500));
+      .catch((err) => {
+        console.log('Error saving image url to database. ', err);
+
+        res.sendStatus(500);
+      });
   }
 );
 
