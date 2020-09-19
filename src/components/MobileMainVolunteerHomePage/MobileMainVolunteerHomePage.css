@@ -1,13 +1,28 @@
 .VolunteerPageBubbleStyle {
   background-color: #008751 !important;
-  border-radius: 5px solid #008751;
-  box-shadow: 2px 2px 1px #6a6565 !important;
+  border-radius: 40px !important;
+  box-shadow: 5px 5px 5px #6a6565 !important;
+  border: 1px solid black;
+  /* margin: 10% 15% 10% 10% ; */
+  margin-right: 15% !important;
+  margin-top: 7%;
+  width: 100%;
+}
+
+.VolunteerPageBackground{
+  display: column;
+  justify-content: space-evenly !important;
+  height: 600px;
+  background-image: url(https://www.colorhexa.com/ffb360.png);
+  background-size: cover;
+  background-position: cover;
 }
 
 .ProgramResourcesBubbleStyle {
   background-color: #008751 !important;
   border-radius: 5px solid #008751;
   box-shadow: 2px 2px 1px #6a6565 !important;
+ 
 }
 
 .WelcomeVolunteerPageBubbleStyle {

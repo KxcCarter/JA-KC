@@ -41,7 +41,7 @@ class MobileVolunteerClassesPage extends Component {
         return <link>{item.content}</link>;
       });
     return (
-      <div>
+      <div className="classDetailsPage">
         <MobileTestNav />
         <Container>
           <Paper className="VolunteerPageBubbleStyle">

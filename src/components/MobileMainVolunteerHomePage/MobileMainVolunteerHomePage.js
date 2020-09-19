@@ -25,6 +25,7 @@ class MobileMainVolunteerHomePage extends Component {
     const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
       (item, index) => {
         return (
+
           <Paper
             className="VolunteerPageBubbleStyle"
             key={item.index}
@@ -37,11 +38,13 @@ class MobileMainVolunteerHomePage extends Component {
               <h5>Number of Sessions: {item.sessions}</h5>
             </Box>
           </Paper>
+
         );
       }
     );
     return (
-      <div>
+      <div className="VolunteerPageBackground">
+
         <MobileTestNav />
         <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}

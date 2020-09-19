@@ -4,6 +4,17 @@
   box-shadow: 2px 2px 1px #6a6565 !important;
 }
 
+.link
+
+.classDetailsPage{
+  display: column;
+  justify-content: space-evenly !important;
+  height: 600px;
+  background-color: #008751 !important;
+  background-size: cover;
+  background-position: cover;
+}
+
 .ProgramResourcesBubbleStyle {
   background-color: #008751 !important;
   border-radius: 5px solid #008751;
@@ -37,3 +48,5 @@ p {
 body {
   background-color: white;
 }
+
+
