@@ -150,6 +150,7 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
   const dispatch = useDispatch();
+
   const addVolunteer = () => {
     swal('What is the email address you would like to send invite to?', {
       content: 'input',
@@ -162,6 +163,7 @@ const EnhancedTableToolbar = (props) => {
       swal(`Your invite has been sent to: ${value}`);
     });
   };
+
   return (
     <Toolbar
       className={clsx(classes.root, {
