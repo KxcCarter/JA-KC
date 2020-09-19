@@ -57,7 +57,7 @@ class MobileTestNav extends Component {
             <MenuList>
               <MenuItem>
                 <IconButton>
-                  <Link className="TestNavStyle" to="/user">
+                  <Link className="TestNavStyle" to="/volunteerhome">
                     <h6>Home</h6>
                   </Link>
                 </IconButton>
@@ -82,7 +82,7 @@ class MobileTestNav extends Component {
               <Divider />
               <MenuItem>
                 <IconButton>
-                  <Link className="TestNavStyle" to="/user">
+                  <Link className="TestNavStyle" to="/volunteerclasses/4">
                     <h6>Feedback</h6>
                   </Link>
                 </IconButton>
