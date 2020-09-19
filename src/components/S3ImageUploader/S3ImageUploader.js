@@ -73,7 +73,7 @@ function S3ImageUploader(props) {
         imageUrl: fileUrl,
         user_id: props.user_id,
         program_id: props.program_id,
-        class_id: props.match.params,
+        class_id: props.class_id,
       },
     });
   };
