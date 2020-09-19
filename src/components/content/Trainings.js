@@ -143,16 +143,24 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+    const dispatch = useDispatch();
 
-    const addTraining = (event, name) => {
-        swal("What is the Training Resource you would like to add?", {
-            content: "input",
+    const addTraining = () => {
+
+        swal("What is the link of the training resource you would like to add?", {
+            content: 'input',
+
         })
             .then((value) => {
+                dispatch({
+                    type: 'INVITE_USER',
+                    payload: { class: value },
+                });
                 console.log(value);
-                swal(`The following Training Resource has been added: ${value}`);
+                swal(`Your training ${value} has been saved!`);
             });
-    }
+    };
+
     return (
         <Toolbar
             className={clsx(classes.root, {
