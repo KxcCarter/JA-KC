@@ -55,4 +55,6 @@ p {
 .MobileVolunteerHomePage {
   background-color: #008751 !important;
   height: 650px;
+  max-height: 650px;
+  overflow: auto;
 }
