@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
-
+import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
 //
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button, Modal, Box } from '@material-ui/core';
@@ -101,22 +101,25 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-    <div style={modalStyle} className={classes.paper}>
-      <Typography variant="h6" id="simple-modal-title" gutterBottom>
-        Upload an image
+    <div>
+      <MobileReportForm />
+      <div style={modalStyle} className={classes.paper}>
+        <Typography variant="h6" id="simple-modal-title" gutterBottom>
+          Upload an image
       </Typography>
-      <DropzoneS3Uploader
-        onFinish={handleFinishedUpload}
-        s3Url={s3Url}
-        maxSize={1024 * 1024 * 5}
-        upload={uploadOptions}
-      />
-      {uploadFinished && (
-        <Box>
-          <Button onClick={confirmUpload}>done</Button>{' '}
-          <Button onClick={cancelUpload}>cancel</Button>
-        </Box>
-      )}
+        <DropzoneS3Uploader
+          onFinish={handleFinishedUpload}
+          s3Url={s3Url}
+          maxSize={1024 * 1024 * 5}
+          upload={uploadOptions}
+        />
+        {uploadFinished && (
+          <Box>
+            <Button onClick={confirmUpload}>done</Button>{' '}
+            <Button onClick={cancelUpload}>cancel</Button>
+          </Box>
+        )}
+      </div>
     </div>
   );
 }
