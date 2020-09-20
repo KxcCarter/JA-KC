@@ -60,7 +60,7 @@ router.post(
         link = `http://localhost:3000/#/volunteerregister/${newHex}`;
       }
 
-      const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? Go to this link to register: ${link}`;
+      const message: string = `You have been invited to create an account on Junior Achievement Connect KC! Follow this link to register: ${link}`;
       const subject: string = `Invitation to join JA KC!`;
 
       const mailOptions = {
