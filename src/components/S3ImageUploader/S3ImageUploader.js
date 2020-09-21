@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
     width: 80,
     height: 80,
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #000',
     margin: '8px',
     overflow: 'auto',
     boxShadow: theme.shadows[5],

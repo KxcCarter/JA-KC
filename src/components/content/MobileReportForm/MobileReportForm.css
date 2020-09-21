@@ -1,15 +1,15 @@
 .formPanel {
     width: 400px !important;
     height: 240px !important;
-    border-radius: 20px !important;
     background-color: white !important;
     font-weight: lighter !important;
     font-family: 'Montserrat', sans-serif !important;
     text-transform: none; 
-    border: 1px solid black}
-
+    margin: 20px auto 0;
+    box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+}
 .mobileReportFormButton {
-    background-color: #008751!important;
+    background-color: rgba(10, 213, 10, 0.445)!important;
     color: white !important;
     margin-top: 10px !important;
     margin-bottom: 10px !important;
@@ -17,8 +17,6 @@
     font-weight: lighter !important;
     font-family: 'Montserrat', sans-serif !important;
     text-transform: none; 
-    border: 1px solid black !important;
-    border-radius: 10px !important;
     width: 100px !important;
 }
 

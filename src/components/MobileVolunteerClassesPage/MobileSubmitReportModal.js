@@ -23,7 +23,6 @@ function VolunteerClassesModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-    borderRadius: '20px',
 
 
   };
@@ -32,7 +31,7 @@ function VolunteerClassesModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    backgroundColor: '#008751',
+    backgroundColor: 'rgba(0,255,0,0.5)',
     width: 300,
     height: 700,
     // backgroundColor: theme.palette.background.paper,
@@ -48,15 +47,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '15%',
     overflow: 'auto',
     alignContent: 'center',
-    backgroundColor: '#008751',
+    backgroundColor: 'rgba(0,255,0,0.5)',
 
   },
   root: {
     // backgroundColor: theme.palette.success.main,
     backgroundColor: '#ffff',
     margin: '10px',
-    border: '1px solid black',
-    borderRadius: '10px',
   },
 }));
 
