@@ -10,8 +10,8 @@ import * as nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'juniorachievement.kc@gmail.com', // these should be replaced with .env variables
-    pass: 'i?q6$83heBMQ9%rKPoM$', // replace with .env variable
+    user: process.env.NODEMAILER_USER, // these should be replaced with .env variables
+    pass: process.env.NODEMAILER_PASSWORD, // replace with .env variable
   },
 });
 
@@ -50,7 +50,7 @@ router.post(
 
       const queryString = `INSERT INTO "invites" ("email", "hex", "account_type_id") VALUES ($1, $2, $3);`;
 
-      await pool.query(queryString, [email, newHex]);
+      await pool.query(queryString, [email, newHex, account_type_id]);
 
       let link: string = ``;
 
@@ -60,8 +60,8 @@ router.post(
         link = `http://localhost:3000/#/volunteerregister/${newHex}`;
       }
 
-      const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? Go to this link to register: ${link}`;
-      const subject: string = `Grreeeetings from the intertubes`;
+      const message: string = `You have been invited to create an account on Junior Achievement Connect KC! Follow this link to register: ${link}`;
+      const subject: string = `Invitation to join JA KC!`;
 
       const mailOptions = {
         from: `"Junior Achievement Admin" juniorachievement.kc@gmail.com`,

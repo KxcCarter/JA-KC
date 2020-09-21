@@ -143,16 +143,24 @@ const useToolbarStyles = makeStyles((theme) => ({
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
+    const dispatch = useDispatch();
 
-    const addTraining = (event, name) => {
-        swal("What is the Training Resource you would like to add?", {
-            content: "input",
+    const addTraining = () => {
+
+        swal("What is the link of the training resource you would like to add?", {
+            content: 'input',
+
         })
             .then((value) => {
+                dispatch({
+                    type: 'INVITE_USER',
+                    payload: { class: value },
+                });
                 console.log(value);
-                swal(`The following Training Resource has been added: ${value}`);
+                swal(`Your training ${value} has been saved!`);
             });
-    }
+    };
+
     return (
         <Toolbar
             className={clsx(classes.root, {
@@ -317,11 +325,11 @@ function Trainings(props) {
             // searchQuery is what the user types in to search.
             setSearchQuery(event.target.value);
             // list is what is being searched through. It get's its data from a reducer.
-            setList(
-                // This is searching through an array of objects to see if the object.name 
-                // matches the searchQuery.
-                props.talentPool.filter((el) => el.name.includes(event.target.value))
-            );
+            // setList(
+            //     // This is searching through an array of objects to see if the object.name 
+            //     // matches the searchQuery.
+            //     props.talentPool.filter((el) => el.name.includes(event.target.value))
+            // );
             setOpen(true);
         };
         const clickAway = () => {

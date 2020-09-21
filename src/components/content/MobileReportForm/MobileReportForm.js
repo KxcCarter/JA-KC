@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid } from '@material-ui/core';
+import S3Page from '../../S3ImageUploader/S3Page';
+import './MobileReportForm.css';
+import TextField from '@material-ui/core/TextField';
+import { Spring } from 'react-spring/renderprops';
+import swal from 'sweetalert';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -11,14 +16,11 @@ import { Button, Grid } from '@material-ui/core';
 
 class MobileReportForm extends Component {
   state = {
-    name: '',
-    energy_level: '',
-    size: '',
-    play_style: '',
-    description: '',
-    owner_id: '',
-    picture: '',
+    class_size: '',
+    scheduled_class_id: this.props.classId,
+
   };
+
 
   onCancelClick = (event) => {
     this.props.history.push(`/`); //NEED TO DECIDE
@@ -26,16 +28,29 @@ class MobileReportForm extends Component {
 
   onSaveClick = (event) => {
     event.preventDefault();
-    const dataForServer = {};
+    const dataForServer = this.state;
+    console.log(dataForServer);
+
     this.props.dispatch({
-      type: 'UPDATE_REPORT',
+      type: 'SUBMIT_CLASS_DETAILS',
       payload: dataForServer,
     });
-    this.props.history.push(`/`); //NEED TO DECIDE
+
+    this.setState({
+      class_size: ''
+    })
+    swal({
+      title: "Great!",
+      text: "Upload any Class pics below!",
+      icon: "success",
+      button: "Ok!",
+    });
+
   };
 
   onSavePic = (event) => {
     event.preventDefault();
+
     //KENNY WILL NEED TO HELP ME WITH THIS
   };
 
@@ -46,28 +61,39 @@ class MobileReportForm extends Component {
   };
 
   render() {
+
     return (
-      <div>
-        <form className="formPanel">
-          <h1>Editing CLASS NAME HERE!</h1>
-          <div>
-            <label htmlFor="size">
-              Class size:
-              {/* <input
-                defaultValue={this.props.store.dog.name}
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.onInputChange('name')}
-              /> */}
-            </label>
+      <Spring
+        from={{ opacity: 0, marginTop: -600 }}
+        to={{ opacity: 1, marginTop: 0 }}
+      >
+        {(props) => (
+          <div style={props}>
+            <div className="formPanel">
+              <form >
+                <h1 className="ClassDetailsText">Class Completion</h1>
+                <div>
+
+                  <TextField id="outlined-basic" label="Outlined" variant="outlined" label='How many students?'
+                    type="text"
+                    name="class_size"
+                    className="TextField"
+                    value={this.state.class_size}
+                    onChange={this.onInputChange('class_size')} />
+
+
+
+
+                  <Button className="mobileReportFormButton" onClick={this.onSaveClick}>Save</Button>
+                </div>
+                <div>
+
+                </div>
+              </form>
+            </div>
           </div>
-          <div>
-            {/* <ImageUploader />
-            <Button onClick={this.onSavePic}>Save Pic</Button> */}
-          </div>
-        </form>
-      </div>
+        )}
+      </Spring>
     );
   }
 }

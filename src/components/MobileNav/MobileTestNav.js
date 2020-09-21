@@ -45,7 +45,7 @@ class MobileTestNav extends Component {
     return (
       <>
         <div>
-          <IconButton label="dehaze drawer" onClick={this.handleOpen}>
+          <IconButton className="HamburgerIcon" label="dehaze drawer" onClick={this.handleOpen}>
             <Dehaze />
           </IconButton>
 

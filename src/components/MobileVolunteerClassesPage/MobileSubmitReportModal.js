@@ -10,8 +10,10 @@ import {
   Fab,
   Box,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import InfoIcon from '@material-ui/icons/Info';
 import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
+import S3ImageUploader from '../S3ImageUploader/S3ImageUploader';
+import { CenterFocusStrong } from '@material-ui/icons';
 
 function VolunteerClassesModalStyle() {
   const top = 50;
@@ -21,21 +23,40 @@ function VolunteerClassesModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
+    borderRadius: '20px',
+
+
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    backgroundColor: '#008751',
+    width: 300,
+    height: 700,
+    // backgroundColor: theme.palette.background.paper,
+    border: '1px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
+    overflow: 'auto',
+
+  },
+  box: {
+    marginLeft: '15%',
+    marginRight: '15%',
+    overflow: 'auto',
+    alignContent: 'center',
+    backgroundColor: '#008751',
+
   },
   root: {
-    backgroundColor: theme.palette.success.main,
+    // backgroundColor: theme.palette.success.main,
+    backgroundColor: '#ffff',
+    margin: '10px',
+    border: '1px solid black',
+    borderRadius: '10px',
   },
 }));
 
@@ -68,30 +89,28 @@ function VolunteerClassesModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <Box p={3} display="inline">
-        <Typography
-          variant="h5"
-          id="simple-modal-title"
-          align="center"
-          color="primary"
-        >
-          Submit Completion Report
-        </Typography>
+      <MobileReportForm classId={props.classId} />
 
-        <MobileReportForm />
+      <Box p={3} className={classes.box}>
+
+
+
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
+        <S3ImageUploader classId={props.classId} programId={props.programId} />
       </Box>
       <Box p={3} display="inline">
         <Button
           variant="outlined"
-          size="small"
+          size="large"
           className={classes.root}
           onClick={handleSubmit}
         >
-          Submit
+          Complete Class
         </Button>
       </Box>
       <Box p={3} display="inline">
-        <Button variant="outlined" size="small" onClick={handleClose}>
+        <Button variant="outlined" size="large" className={classes.root} onClick={handleClose}>
           Cancel
         </Button>
       </Box>
@@ -100,13 +119,10 @@ function VolunteerClassesModal(props) {
 
   return (
     <>
-      <Fab
-        size="small"
-        className={classes.root}
+      <InfoIcon
+        className="InfoIcon"
         onClick={open ? handleClose : handleOpen}
-      >
-        <AddIcon />
-      </Fab>
+      />
 
       <Modal
         open={open}

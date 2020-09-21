@@ -149,15 +149,24 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
-  const addClass = (event, name) => {
+  const dispatch = useDispatch();
+
+  const addClass = () => {
+
     swal("What is the title of the Class you would like to add?", {
-      content: "input",
+      content: 'input',
+
     })
       .then((value) => {
+        dispatch({
+          type: 'SUBMIT_CLASS',
+          payload: { title: value },
+        });
         console.log(value);
-        swal(`The following Class has been added to Classes: ${value}`);
+        swal(`${value} has been added to Classes!`);
       });
-  }
+  };
+
 
   return (
     <Toolbar
@@ -323,11 +332,11 @@ function Classes(props) {
       // searchQuery is what the user types in to search.
       setSearchQuery(event.target.value);
       // list is what is being searched through. It get's its data from a reducer.
-      setList(
-        // This is searching through an array of objects to see if the object.name 
-        // matches the searchQuery.
-        props.talentPool.filter((el) => el.name.includes(event.target.value))
-      );
+      // setList(
+      //   // This is searching through an array of objects to see if the object.name 
+      //   // matches the searchQuery.
+      //   props.talentPool.filter((el) => el.name.includes(event.target.value))
+      // );
       setOpen(true);
     };
     const clickAway = () => {

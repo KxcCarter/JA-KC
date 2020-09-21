@@ -150,6 +150,7 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
   const dispatch = useDispatch();
+
   const addVolunteer = () => {
     swal('What is the email address you would like to send invite to?', {
       content: 'input',
@@ -162,6 +163,7 @@ const EnhancedTableToolbar = (props) => {
       swal(`Your invite has been sent to: ${value}`);
     });
   };
+
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -318,11 +320,11 @@ function Volunteers(props) {
       // searchQuery is what the user types in to search.
       setSearchQuery(event.target.value);
       // list is what is being searched through. It get's its data from a reducer.
-      setList(
-        // This is searching through an array of objects to see if the object.name
-        // matches the searchQuery.
-        props.talentPool.filter((el) => el.name.includes(event.target.value))
-      );
+      // setList(
+      //   // This is searching through an array of objects to see if the object.name
+      //   // matches the searchQuery.
+      //   props.talentPool.filter((el) => el.name.includes(event.target.value))
+      // );
       setOpen(true);
     };
     const clickAway = () => {
@@ -339,16 +341,16 @@ function Volunteers(props) {
               className={classes.search}
               id="outlined-basic"
               size="small"
-              value={searchQuery}
+              // value={searchQuery}
               label="Search"
               variant="outlined"
               autoComplete="off"
-              onBlur={clickAway}
+              // onBlur={clickAway}
               onChange={handleSearchChange}
             />
           </Box>
           <Box display={open ? 'block' : 'none'}>
-            <MenuList>
+            {/* <MenuList>
               {list.slice(0, 5).map((item, index) => {
                 return (
                   <MenuItem
@@ -359,7 +361,7 @@ function Volunteers(props) {
                   </MenuItem>
                 );
               })}
-            </MenuList>
+            </MenuList> */}
           </Box>
         </Paper>
       </Box>
@@ -426,7 +428,11 @@ function Volunteers(props) {
                             </TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>
-                            <TableCell align="left">{row.classes}</TableCell>
+                            <TableCell align="left">
+                              {row.classes.length > 1
+                                ? row.classes.join(', ')
+                                : row.classes}
+                            </TableCell>
                             <TableCell align="left">{row.assign}</TableCell>
                           </TableRow>
                         );

@@ -5,6 +5,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
 import './MobileMainVolunteerHomePage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
+import { Spring } from 'react-spring/renderprops';
+import MobileFooter from '../Footer/MobileFooter';
 
 class MobileMainVolunteerHomePage extends Component {
   componentDidMount() {
@@ -25,26 +27,37 @@ class MobileMainVolunteerHomePage extends Component {
     const scheduled_classes = this.props.store.volunteerScheduledClasses.map(
       (item, index) => {
         return (
-          <Paper
-            className="VolunteerPageBubbleStyle"
-            key={item.index}
-            onClick={(event) => this.clickClassDetails(event, item.id)}
+          <Spring
+            from={{ opacity: 0, marginTop: -600 }}
+            to={{ opacity: 1, marginTop: 0 }}
           >
-            <Box p={1} m={1}>
-              <h3 id="welcome">View Program Information</h3>
-              <h5>{item.title}</h5>
-              <h5>{item.name}</h5>
-              <h5>Number of Sessions: {item.sessions}</h5>
-            </Box>
-          </Paper>
+            {(props) => (
+              <div style={props}>
+                <Paper
+                  className="VolunteerPageBubbleStyle"
+                  key={item.index}
+                  onClick={(event) => this.clickClassDetails(event, item.id)}
+                >
+                  <Box p={1} m={1}>
+                    <h3 id="welcome">View Program Information</h3>
+                    <h5>{item.title}</h5>
+                    <h5>{item.name}</h5>
+                    <h5>Number of Sessions: {item.sessions}</h5>
+                  </Box>
+
+                </Paper>
+              </div>
+            )}
+          </Spring>
         );
       }
     );
     return (
-      <div>
+      <div className="MobileVolunteerHomePage">
         <MobileTestNav />
         <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}
+        {/* <MobileFooter /> */}
       </div>
     );
   }

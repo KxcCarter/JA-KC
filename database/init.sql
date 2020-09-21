@@ -19,6 +19,7 @@ CREATE TABLE "programs"
     "id" SERIAL PRIMARY KEY,
     "title" varchar(100) NOT NULL,
     "image" varchar(150),
+    "description" text,
     "sessions" int
 );
 CREATE TABLE "schools"

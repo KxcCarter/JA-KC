@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
-
 //
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Button, Modal, Box } from '@material-ui/core';
-
+import { Typography, Button, Box } from '@material-ui/core';
+import plus_icon from '../S3ImageUploader/plus_icon.png';
 //
 // NOTE:
 // This component uploads an image to AWS S3 and then saves the URL that is returned to the database.
@@ -18,23 +17,41 @@ import { Typography, Button, Modal, Box } from '@material-ui/core';
 //   class_id,
 // }
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
+// function getModalStyle() {
+//   const top = 50;
+//   const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`,
+//   };
+// }
+
+const innerElement = (
+  <div>
+    <p>Select an Image</p>
+  </div>
+);
+
+const dropStyle = {
+  width: '80px',
+  height: '80px',
+  border: '1px solid black',
+  backgroundColor: '#dddddd',
+  backgroundImage: plus_icon.png,
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
-    width: 200,
+    display: 'row',
+
+    width: 80,
+    height: 80,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '1px solid #000',
+    margin: '8px',
+    overflow: 'auto',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -47,31 +64,32 @@ const useStyles = makeStyles((theme) => ({
 function S3ImageUploader(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [modalStyle] = useState(getModalStyle);
+  // const [modalStyle] = useState(getModalStyle);
 
   const [uploadFinished, setUploadFinished] = useState(false);
   const [filename, setFilename] = useState('');
   const [fileUrl, setFileUrl] = useState('');
+  const [image, setClearImage] = useState();
 
-  const confirmUpload = () => {
-    dispatch({
-      type: 'POST_IMG_URL',
-      payload: {
-        imageUrl: fileUrl,
-        user_id: props.user_id,
-        program_id: props.program_id,
-        class_id: props.class_id,
-      },
-    });
-  };
+  // const confirmUpload = () => {
+  //   dispatch({
+  //     type: 'POST_IMG_URL',
+  //     payload: {
+  //       imageUrl: fileUrl,
+  //       program_id: props.programId,
+  //       class_id: props.classId,
+  //     },
+  //   });
+  // };
 
-  const cancelUpload = () => {
-    console.log('Here is what we want to delete: ', filename);
-    dispatch({
-      type: 'DELETE_S3_IMAGE',
-      payload: { key: filename },
-    });
-  };
+  // const cancelUpload = () => {
+  //   console.log('Here is what we want to delete: ', filename);
+  //   dispatch({
+  //     type: 'DELETE_S3_IMAGE',
+  //     payload: { key: filename },
+  //   });
+  //   setClearImage('');
+  // };
 
   const uploadOptions = {
     server: 'http://localhost:5000',
@@ -87,36 +105,34 @@ function S3ImageUploader(props) {
 
     setUploadFinished(true);
 
-    // dispatch({
-    //   type: 'POST_IMG_URL',
-    //   payload: {
-    //   imageUrl: fileUrl,
-    //   user_id: props.user_id,
-    //   program_id: props.program_id,
-    //   class_id: props.class_id,
-    // },
-    // });
+    dispatch({
+      type: 'POST_IMG_URL',
+      payload: {
+        imageUrl: fileUrl,
+        program_id: props.program_id,
+        class_id: props.class_id,
+      },
+    });
   };
 
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-    <div style={modalStyle} className={classes.paper}>
-      <Typography variant="h6" id="simple-modal-title" gutterBottom>
-        Upload an image
-      </Typography>
+    <div className={classes.paper}>
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
         s3Url={s3Url}
         maxSize={1024 * 1024 * 5}
         upload={uploadOptions}
+        style={dropStyle}
+        canCancel={true}
       />
-      {uploadFinished && (
+      {/* {uploadFinished && (
         <Box>
           <Button onClick={confirmUpload}>done</Button>{' '}
           <Button onClick={cancelUpload}>cancel</Button>
         </Box>
-      )}
+      )} */}
     </div>
   );
 }
