@@ -54,11 +54,14 @@ router.post(
       await pool.query(queryString, [email, newHex, account_type_id]);
 
       let link: string = ``;
+      let subjectText: string = ``;
 
       if (account_type_id === 1) {
         link = `http://localhost:3000/#/adminregister/${newHex}`;
+        subjectText = `Invitation to create an administrator account with JA KC!`;
       } else {
         link = `http://localhost:3000/#/volunteerregister/${newHex}`;
+        subjectText = `Invitation to volunteer with JA KC!`;
       }
 
       const message: string = `You have been invited to create an account on Junior Achievement Connect KC! Follow this link to register: ${link}`;
