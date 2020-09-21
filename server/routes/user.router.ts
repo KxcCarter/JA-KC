@@ -6,6 +6,7 @@ import userStrategy from '../strategies/user.strategy';
 import { encryptPassword } from '../modules/encryption';
 import hexGen from '../modules/hex';
 import * as nodemailer from 'nodemailer';
+import { QueryResult } from 'pg';
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -98,11 +99,16 @@ router.post(
   ): Promise<void> => {
     try {
       const userQueryText = `SELECT * FROM "invites" WHERE "email"=$1 AND "hex"=$2;`; //will need to replace invites with proper table name
+
       const response: any = await pool.query(userQueryText, [
         req.body.email.toLowerCase(),
         req.params.hex,
       ]);
-      if (response.rows == 0) res.send(401);
+      if (response.rows.length === 0) {
+        console.log('hex match:', response.rows[0]);
+        res.send(401);
+        return;
+      }
 
       const username: string = <string>req.body.username;
       const password: string = encryptPassword(req.body.password);
@@ -111,8 +117,8 @@ router.post(
       const email: string = <string>req.body.email;
       const telephone: string = <string>req.body.telephone;
       const account_type_id: number = <number>req.body.account_type_id;
-      const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone, account_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
-      await pool.query(queryText, [
+      const queryText: string = `INSERT INTO "users" (username, password, first_name, last_name, email, telephone, account_type_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
+      const saveResponse: QueryResult<any> = await pool.query(queryText, [
         username,
         password,
         first_name,
@@ -122,11 +128,12 @@ router.post(
         account_type_id,
       ]);
 
-      const deleteHex: string = `DELETE FROM "invites" WHERE "hex" = $1;`;
-      await pool.query(deleteHex, [req.params.hex]);
+      const deleteHex: string = `DELETE FROM "invites" WHERE "id" = $1;`;
+      await pool.query(deleteHex, [response.rows[0].id]);
       console.log(`Success! User registered and removed from invites table.`);
 
-      res.sendStatus(201);
+      res.status(201);
+      res.send(saveResponse);
     } catch (err) {
       console.log(`Error saving user to database: ${err}`);
       res.sendStatus(500);
