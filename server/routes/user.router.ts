@@ -10,8 +10,8 @@ import * as nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'juniorachievement.kc@gmail.com', // these should be replaced with .env variables
-    pass: 'i?q6$83heBMQ9%rKPoM$', // replace with .env variable
+    user: process.env.NODEMAILER_USER, // these should be replaced with .env variables
+    pass: process.env.NODEMAILER_PASSWORD, // replace with .env variable
   },
 });
 

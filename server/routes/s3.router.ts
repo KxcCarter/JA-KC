@@ -8,8 +8,8 @@ const s3 = new AWS.S3();
 
 AWS.config.update({
   // region: 'us-east-1', // Put your aws region here
-  accessKeyId: 'AKIAUR5YYQYJPUOQE64U',
-  secretAccessKey: 'km9UFalTprW5SO6OXZEerEYb3nFmcpEOalHwl9QE',
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 router.delete('/:key', rejectUnauthenticated, (req: any, res: any) => {
