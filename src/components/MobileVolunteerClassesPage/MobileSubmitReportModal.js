@@ -106,7 +106,7 @@ function VolunteerClassesModal(props) {
           className={classes.root}
           onClick={handleSubmit}
         >
-          Upload Images
+          Complete Class
         </Button>
       </Box>
       <Box p={3} display="inline">
