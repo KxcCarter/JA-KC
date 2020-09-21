@@ -4,7 +4,9 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 import { Button, Grid } from '@material-ui/core';
 import S3Page from '../../S3ImageUploader/S3Page';
-
+import './MobileReportForm.css';
+import TextField from '@material-ui/core/TextField';
+import { Spring } from 'react-spring/renderprops';
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -48,28 +50,37 @@ class MobileReportForm extends Component {
   render() {
 
     return (
-      <div>
-        <form className="formPanel">
-          <h1>Submit Class Details!</h1>
-          <div>
-            <label htmlFor="size">
-              Class size:
-              <input
+      <Spring
+        from={{ opacity: 0, marginTop: -600 }}
+        to={{ opacity: 1, marginTop: 0 }}
+      >
+        {(props) => (
+          <div style={props}>
+            <div className="formPanel">
+              <form >
+                <h1 className="ClassDetailsText">Submit Class Details</h1>
+                <div>
 
-                type="text"
-                name="class_size"
-                value={this.state.class_size}
-                onChange={this.onInputChange('class_size')}
-              />
+                  <TextField id="outlined-basic" label="Outlined" variant="outlined" label='How many students?'
+                    type="text"
+                    name="class_size"
+                    className="TextField"
+                    value={this.state.class_size}
+                    onChange={this.onInputChange('class_size')} />
 
-            </label>
-            <button onClick={this.onSaveClick}>Save</button>
+
+
+
+                  <Button className="mobileReportFormButton" onClick={this.onSaveClick}>Save</Button>
+                </div>
+                <div>
+
+                </div>
+              </form>
+            </div>
           </div>
-          <div>
-
-          </div>
-        </form>
-      </div>
+        )}
+      </Spring>
     );
   }
 }

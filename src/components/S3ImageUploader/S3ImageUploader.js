@@ -35,18 +35,22 @@ const innerElement = (
 );
 
 const dropStyle = {
-  width: '100px',
-  height: '100px',
+  width: '80px',
+  height: '80px',
   border: '1px solid black',
   backgroundColor: '#dddddd',
 };
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'relative',
-    width: 100,
+    display: 'row',
+
+    width: 80,
+    height: 80,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
+    margin: '8px',
+    overflow: 'auto',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -114,6 +118,7 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
+
     <div className={classes.paper}>
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
@@ -129,6 +134,7 @@ function S3ImageUploader(props) {
           <Button onClick={cancelUpload}>cancel</Button>
         </Box>
       )}
+
     </div>
   );
 }

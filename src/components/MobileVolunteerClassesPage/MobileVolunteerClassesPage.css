@@ -23,27 +23,43 @@
 
 h1 {
   color: black;
-  font-weight: bold !important;}
-
+  font-weight: bold !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none; 
+}
 h2 {
   color: black;
-  font-weight: bold !important;}
+  font-weight: bold !important;
+    font-family: 'Montserrat', sans-serif !important;
+    text-transform: none; }
 
 h3 {
   color: black;
-  font-weight: bold !important;}
-
+  font-weight: bold !important;
+    font-family: 'Montserrat', sans-serif !important;
+    text-transform: none; 
+    border-radius: 10px;
+}
 h4 {
   color: black;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none; 
 }
 
 h5 {
   color: black;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none; 
   
 }
 
 p {
   color: black;
+  font-weight: lighter !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none; 
 }
 
 .MobileVolunteerClassPage {
@@ -67,4 +83,10 @@ p {
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 2.0);
   border-radius: 20px !important;
   
+}
+
+.ImageBubbleStyle{
+  background-color: white!important;
+  border-radius: 20px !important;
+  width: 100%;
 }
