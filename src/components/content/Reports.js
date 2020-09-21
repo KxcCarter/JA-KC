@@ -330,9 +330,9 @@ function Reports(props) {
       title: item.title,
       size: item.size,
       completion_date:
-        item.completion_date != null
-          ? moment(item.completion_date).format('MMM Do YYYY')
-          : 'Not yet completed',
+        item.completion_date !== null
+          ? moment.parseZone(item.completion_date).format('MMM Do YYYY')
+          : 'Not Yet Completed',
     };
   });
 
