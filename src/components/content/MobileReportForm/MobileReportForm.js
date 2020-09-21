@@ -7,6 +7,8 @@ import S3Page from '../../S3ImageUploader/S3Page';
 import './MobileReportForm.css';
 import TextField from '@material-ui/core/TextField';
 import { Spring } from 'react-spring/renderprops';
+import swal from 'sweetalert';
+
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -28,11 +30,22 @@ class MobileReportForm extends Component {
     event.preventDefault();
     const dataForServer = this.state;
     console.log(dataForServer);
+
     this.props.dispatch({
       type: 'SUBMIT_CLASS_DETAILS',
       payload: dataForServer,
     });
-    this.props.history.push(`/`); //NEED TO DECIDE
+
+    this.setState({
+      class_size: ''
+    })
+    swal({
+      title: "Great!",
+      text: "Upload any Class pics below!",
+      icon: "success",
+      button: "Ok!",
+    });
+
   };
 
   onSavePic = (event) => {

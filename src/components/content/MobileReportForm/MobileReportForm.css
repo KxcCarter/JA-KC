@@ -6,19 +6,23 @@
     font-weight: lighter !important;
     font-family: 'Montserrat', sans-serif !important;
     text-transform: none; 
-}
+    border: 1px solid black}
 
 .mobileReportFormButton {
     background-color: #008751!important;
     color: white !important;
     margin-top: 10px !important;
-    margin-left: 10px !important;
     margin-bottom: 10px !important;
     display: column !important;
     font-weight: lighter !important;
     font-family: 'Montserrat', sans-serif !important;
     text-transform: none; 
+    border: 1px solid black !important;
+    border-radius: 10px !important;
+    width: 100px !important;
 }
+
+
 
 .ClassDetailsText {
     font-weight: bold !important;

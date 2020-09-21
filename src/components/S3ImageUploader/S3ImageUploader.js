@@ -5,7 +5,7 @@ import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 //
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button, Box } from '@material-ui/core';
-
+import plus_icon from '../S3ImageUploader/plus_icon.png';
 //
 // NOTE:
 // This component uploads an image to AWS S3 and then saves the URL that is returned to the database.
@@ -39,6 +39,8 @@ const dropStyle = {
   height: '80px',
   border: '1px solid black',
   backgroundColor: '#dddddd',
+  backgroundImage: plus_icon.png,
+
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     width: 80,
     height: 80,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '1px solid #000',
     margin: '8px',
     overflow: 'auto',
     boxShadow: theme.shadows[5],
