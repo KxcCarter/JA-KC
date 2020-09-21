@@ -40,7 +40,6 @@ const dropStyle = {
   border: '1px solid black',
   backgroundColor: '#dddddd',
   backgroundImage: plus_icon.png,
-
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -119,7 +118,6 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-
     <div className={classes.paper}>
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
@@ -135,7 +133,6 @@ function S3ImageUploader(props) {
           <Button onClick={cancelUpload}>cancel</Button>
         </Box>
       )} */}
-
     </div>
   );
 }
