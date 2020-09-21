@@ -96,7 +96,7 @@ class MobileVolunteerClassesPage extends Component {
                         this.props.history.push('/');
                       }}
                     >
-                      Submit Class Details
+                      Complete Class
                     </Button>
                     <MobileSubmitReportModal
                       classId={matchedScheduledClassId}

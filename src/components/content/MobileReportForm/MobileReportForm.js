@@ -71,7 +71,7 @@ class MobileReportForm extends Component {
           <div style={props}>
             <div className="formPanel">
               <form >
-                <h1 className="ClassDetailsText">Submit Class Details</h1>
+                <h1 className="ClassDetailsText">Class Completion</h1>
                 <div>
 
                   <TextField id="outlined-basic" label="Outlined" variant="outlined" label='How many students?'
