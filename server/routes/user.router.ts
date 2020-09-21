@@ -65,7 +65,7 @@ router.post(
       }
 
       const message: string = `You have been invited to create an account on Junior Achievement Connect KC! Follow this link to register: ${link}`;
-      const subject: string = `Invitation to join JA KC!`;
+      const subject: string = subjectText;
 
       const mailOptions = {
         from: `"Junior Achievement Admin" juniorachievement.kc@gmail.com`,
