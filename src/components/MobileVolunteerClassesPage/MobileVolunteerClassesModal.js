@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { makeStyles } from '@material-ui/core/styles';
+import { Spring } from 'react-spring/renderprops';
+
 import {
   Typography,
   Button,
@@ -26,15 +28,21 @@ function VolunteerClassesModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    width: '80%',
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
+    borderRadius: '20px',
   },
   root: {
-    backgroundColor: theme.palette.success.main,
+
+
+    backgroundColor: '#008751',
+    color: 'white',
+    marginTop: '15px',
+
   },
 }));
 
@@ -72,11 +80,12 @@ function VolunteerClassesModal(props) {
         </div>
       );
     });
-  console.log('taining:', props.store.trainingReducer);
+  console.log('training:', props.store.trainingReducer);
   console.log('learning_materials:', learning_materials);
   console.log('programId:', props.programId);
 
   const body = (
+
     <div style={modalStyle} className={classes.paper}>
       <Box p={3} display="inline">
         <Typography
@@ -85,7 +94,7 @@ function VolunteerClassesModal(props) {
           align="center"
           color="primary"
         >
-          Select Learning Material
+          Select Training Material
         </Typography>
         {props.store.trainingReducer.length > 0 && learning_materials}
         <Typography
@@ -96,11 +105,12 @@ function VolunteerClassesModal(props) {
         ></Typography>
       </Box>
       <Box p={3} display="inline">
-        <Button variant="outlined" size="small" onClick={handleClose}>
+        <Button variant="outlined" size="large" className={classes.root} onClick={handleClose}>
           Cancel
         </Button>
       </Box>
     </div>
+
   );
 
   return (
@@ -111,14 +121,25 @@ function VolunteerClassesModal(props) {
         onClick={open ? handleClose : handleOpen}
       />
 
-
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
       >
-        {body}
+
+        <Spring
+          from={{ opacity: 0, marginBottom: -600 }}
+          to={{ opacity: 1, marginBottom: 0 }}
+        >
+          {(props) => (
+            <div style={props}>
+
+              {body}
+            </div>
+          )}
+        </Spring>
       </Modal>
+
     </>
   );
 }
