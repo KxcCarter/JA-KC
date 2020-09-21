@@ -45,7 +45,6 @@ class MobileMainVolunteerHomePage extends Component {
                     <h5>{item.name}</h5>
                     {/* <h5>Number of Sessions: {item.sessions}</h5> */}
                   </Box>
-
                 </Paper>
               </div>
             )}
