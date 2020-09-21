@@ -61,7 +61,7 @@ router.post(
       }
 
       const message: string = `Hey we are sending you a link that has a hex code in it lol cool right? Go to this link to register: ${link}`;
-      const subject: string = `Grreeeetings from the intertubes`;
+      const subject: string = `Invitation to join JA KC!`;
 
       const mailOptions = {
         from: `"Junior Achievement Admin" juniorachievement.kc@gmail.com`,

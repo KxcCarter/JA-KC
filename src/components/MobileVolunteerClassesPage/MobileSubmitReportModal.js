@@ -83,8 +83,10 @@ function VolunteerClassesModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <MobileReportForm />
+      <MobileReportForm classId={props.classId} />
+
       <Box p={3} className={classes.box}>
+
 
 
         <S3ImageUploader classId={props.classId} programId={props.programId} />
