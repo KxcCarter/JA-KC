@@ -66,25 +66,25 @@ function S3ImageUploader(props) {
   const [fileUrl, setFileUrl] = useState('');
   const [image, setClearImage] = useState();
 
-  const confirmUpload = () => {
-    dispatch({
-      type: 'POST_IMG_URL',
-      payload: {
-        imageUrl: fileUrl,
-        program_id: props.programId,
-        class_id: props.classId,
-      },
-    });
-  };
+  // const confirmUpload = () => {
+  //   dispatch({
+  //     type: 'POST_IMG_URL',
+  //     payload: {
+  //       imageUrl: fileUrl,
+  //       program_id: props.programId,
+  //       class_id: props.classId,
+  //     },
+  //   });
+  // };
 
-  const cancelUpload = () => {
-    console.log('Here is what we want to delete: ', filename);
-    dispatch({
-      type: 'DELETE_S3_IMAGE',
-      payload: { key: filename },
-    });
-    setClearImage('');
-  };
+  // const cancelUpload = () => {
+  //   console.log('Here is what we want to delete: ', filename);
+  //   dispatch({
+  //     type: 'DELETE_S3_IMAGE',
+  //     payload: { key: filename },
+  //   });
+  //   setClearImage('');
+  // };
 
   const uploadOptions = {
     server: 'http://localhost:5000',
@@ -100,15 +100,14 @@ function S3ImageUploader(props) {
 
     setUploadFinished(true);
 
-    // dispatch({
-    //   type: 'POST_IMG_URL',
-    //   payload: {
-    //   imageUrl: fileUrl,
-    //   user_id: props.user_id,
-    //   program_id: props.program_id,
-    //   class_id: props.class_id,
-    // },
-    // });
+    dispatch({
+      type: 'POST_IMG_URL',
+      payload: {
+        imageUrl: fileUrl,
+        program_id: props.program_id,
+        class_id: props.class_id,
+      },
+    });
   };
 
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
@@ -123,12 +122,12 @@ function S3ImageUploader(props) {
         style={dropStyle}
         canCancel={true}
       />
-      {uploadFinished && (
+      {/* {uploadFinished && (
         <Box>
           <Button onClick={confirmUpload}>done</Button>{' '}
           <Button onClick={cancelUpload}>cancel</Button>
         </Box>
-      )}
+      )} */}
     </div>
   );
 }
