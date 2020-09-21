@@ -135,13 +135,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      }
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+        }
       : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark,
+        },
   title: {
     flex: '1 1 100%',
   },
@@ -180,15 +180,15 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-          <Typography
-            className={classes.title}
-            variant="h5"
-            id="tableTitle"
-            component="div"
-          >
-            Volunteers
-          </Typography>
-        )}
+        <Typography
+          className={classes.title}
+          variant="h5"
+          id="tableTitle"
+          component="div"
+        >
+          Volunteers
+        </Typography>
+      )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -196,12 +196,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Add New Volunteer">
-            <IconButton aria-label="Add New Volunteer">
-              <AddCircleIcon onClick={addVolunteer} />
-            </IconButton>
-          </Tooltip>
-        )}
+        <Tooltip title="Add New Volunteer">
+          <IconButton aria-label="Add New Volunteer">
+            <AddCircleIcon onClick={addVolunteer} />
+          </IconButton>
+        </Tooltip>
+      )}
     </Toolbar>
   );
 };
@@ -364,7 +364,7 @@ function Volunteers(props) {
             </MenuList> */}
           </Box>
         </Paper>
-      </Box >
+      </Box>
     );
   }
   return (
@@ -428,7 +428,11 @@ function Volunteers(props) {
                             </TableCell>
                             <TableCell align="left">{row.email}</TableCell>
                             <TableCell align="left">{row.phone}</TableCell>
-                            <TableCell align="left">{row.classes}</TableCell>
+                            <TableCell align="left">
+                              {row.classes.length > 1
+                                ? row.classes.join(', ')
+                                : row.classes}
+                            </TableCell>
                             <TableCell align="left">{row.assign}</TableCell>
                           </TableRow>
                         );
