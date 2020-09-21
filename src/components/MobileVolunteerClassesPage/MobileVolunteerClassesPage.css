@@ -1,8 +1,10 @@
 .VolunteerPageBubbleStyle {
   background-color: white!important;
-  border-radius: 30px !important;
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 2.0);
-  border: 1px solid black;
+  margin: 20px auto 0;
+  width: 80%;
+  height: 100px;
+  background: white;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
   
 }
 
@@ -10,15 +12,20 @@
 
 .WelcomeVolunteerPageBubbleStyle {
   background-color: white!important;
-  border-radius: 30px !important;  
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 2.0);
-  border: 1px solid black;
+  margin: 20px auto 0;
+  width: 80%;
+  height: 100px;
+  background: white;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
 }
 
 .MobileVolunteerPageBubbleStyle {
   background-color: white!important;
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 2.0);
-  border: 1px solid black;
+  margin: 20px auto 0;
+  width: 80%;
+  height: 100px;
+  background: white;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -63,15 +70,14 @@ p {
 }
 
 .MobileVolunteerClassPage {
-  background-color: #008751 !important;
-  height: 650px;
+  background-color: rgba(0,255,0,0.5);  height: 650px;
 }
 
 .InfoIcon {
   transform: scale(1.7);
   float: right !important;
   margin-top: 6px;
-  color:  #008751 !important;
+  color: rgba(0,255,0,0.5);
 }
 
 .ClickButtonsContainer{
@@ -80,13 +86,19 @@ p {
 }
 .ProgramResourcesBubbleStyle {
   background-color: white!important;
-  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 2.0);
-  border-radius: 20px !important;
-  
+  margin: 20px auto 0;
+  width: 80%;
+  height: 100px;
+  background: white;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);  
 }
 
 .ImageBubbleStyle{
   background-color: white!important;
-  border-radius: 20px !important;
+  margin: 20px auto 0;
+  width: 80%;
+  height: 100px;
+  background: white;
+  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
   width: 100%;
 }

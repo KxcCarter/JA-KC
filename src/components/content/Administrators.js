@@ -373,7 +373,7 @@ function Administrators(props) {
             />
           </Box>
           <Box display={open ? 'block' : 'none'}>
-            <MenuList>
+            {/* <MenuList>
               {list.slice(0, 5).map((item, index) => {
                 return (
                   <MenuItem
@@ -384,7 +384,7 @@ function Administrators(props) {
                   </MenuItem>
                 );
               })}
-            </MenuList>
+            </MenuList> */}
           </Box>
         </Paper>
       </Box>

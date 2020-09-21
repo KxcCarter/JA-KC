@@ -29,6 +29,8 @@ import { CSVLink, CSVDownload } from 'react-csv';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Spring } from 'react-spring/renderprops';
 import AddClassModal from './AddClassModal';
+
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -135,13 +137,13 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === 'light'
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+      }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.secondary.dark,
+      },
   title: {
     flex: '1 1 100%',
   },
@@ -180,15 +182,15 @@ const EnhancedTableToolbar = (props) => {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          className={classes.title}
-          variant="h5"
-          id="tableTitle"
-          component="div"
-        >
-          Volunteers
-        </Typography>
-      )}
+          <Typography
+            className={classes.title}
+            variant="h5"
+            id="tableTitle"
+            component="div"
+          >
+            Volunteers
+          </Typography>
+        )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton aria-label="delete">
@@ -196,12 +198,12 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Add New Volunteer">
-          <IconButton aria-label="Add New Volunteer">
-            <AddCircleIcon onClick={addVolunteer} />
-          </IconButton>
-        </Tooltip>
-      )}
+          <Tooltip title="Add New Volunteer">
+            <IconButton aria-label="Add New Volunteer">
+              <AddCircleIcon onClick={addVolunteer} />
+            </IconButton>
+          </Tooltip>
+        )}
     </Toolbar>
   );
 };
@@ -308,9 +310,11 @@ function Volunteers(props) {
     setPage(0);
   };
   const isSelected = (name) => selected.indexOf(name) !== -1;
+
   const emptyRows =
     rowsPerPage -
     Math.min(rowsPerPage, volunteerList.length - page * rowsPerPage);
+  console.log(emptyRows);
   function SearchVolunteers(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
