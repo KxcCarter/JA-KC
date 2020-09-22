@@ -47,9 +47,15 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     // backgroundColor: theme.palette.success.main,
-    backgroundColor: '#ffff',
+    backgroundColor: '#4ac05d ',
+    color: 'white',
     margin: '10px',
+    fontWeight: 'bold',
   },
+  s3: {
+    display: 'center',
+    marginLeft: '15% !important',
+  }
 }));
 
 function VolunteerClassesModal(props) {
@@ -83,8 +89,8 @@ function VolunteerClassesModal(props) {
     <div style={modalStyle} className={classes.paper}>
       <MobileReportForm classId={props.classId} />
       <Typography variant="h6"> Upload Images Below </Typography>
-      <Box p={3} display="flex">
-        <S3ImageUploader classId={props.classId} programId={props.programId} />
+      <Box p={3} display="center">
+        <S3ImageUploader className={classes.s3} classId={props.classId} programId={props.programId} />
       </Box>
 
       <Box p={3} display="inline">
