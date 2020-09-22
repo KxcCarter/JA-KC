@@ -37,7 +37,7 @@ class MobileMainVolunteerHomePage extends Component {
             {(props) => (
               <div style={props}>
                 <Paper
-                  className="VolunteerPageBubbleStyle"
+                  className="MobileVolunteerPageBubbleStyle"
                   key={item.index}
                   onClick={(event) => this.clickClassDetails(event, item.id)}
                 >

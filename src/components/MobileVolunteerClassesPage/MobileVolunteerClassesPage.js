@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
 import './MobileVolunteerClassesPage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
 import MobileSubmitReportModal from './MobileSubmitReportModal';
 import InfoIcon from '@material-ui/icons/Info';
@@ -13,6 +13,7 @@ import { Spring } from 'react-spring/renderprops';
 
 import SchoolIcon from '@material-ui/icons/School';
 import SubjectIcon from '@material-ui/icons/Subject';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
@@ -40,7 +41,13 @@ class MobileVolunteerClassesPage extends Component {
             {' '}
             <SchoolIcon fontSize="small" /> {item.name}
           </h5>
-          <h5>Number of Sessions: {item.sessions}</h5>
+          <h5>
+            {' '}
+            <DateRangeIcon fontSize="small" /> Number of Sessions:{' '}
+            {item.sessions}
+          </h5>
+          <hr></hr>
+          <Typography variant="caption">{item.description}</Typography>
         </div>
       );
     });
