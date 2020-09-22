@@ -28,10 +28,9 @@ class MobileVolunteerClassesPage extends Component {
     let scheduled_classes = matchedClass.map((item, index) => {
       return (
         <div key={item.index}>
-          <h3 id="welcome">View Program Information</h3>
-          <h5>{item.title}</h5>
+          <h3 id="welcome">{item.title}</h3>
           <h5>{item.name}</h5>
-          {/* <h5>Number of Sessions: {item.sessions}</h5> */}
+          <h5>Number of Sessions: {item.sessions}</h5>
         </div>
       );
     });

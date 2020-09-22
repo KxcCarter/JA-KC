@@ -31,15 +31,15 @@ function VolunteerClassesModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    backgroundColor: 'rgba(0,255,0,0.5)',
+    backgroundColor: 'rgb(207, 206, 206)',
     width: 300,
-    height: 700,
+    height: 600,
     // backgroundColor: theme.palette.background.paper,
-    border: '1px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
     overflow: 'auto',
+
 
   },
   box: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '15%',
     overflow: 'auto',
     alignContent: 'center',
-    backgroundColor: 'rgba(0,255,0,0.5)',
+    backgroundColor: '#626366',
 
   },
   root: {
@@ -92,8 +92,6 @@ function VolunteerClassesModal(props) {
 
 
 
-        <S3ImageUploader classId={props.classId} programId={props.programId} />
-        <S3ImageUploader classId={props.classId} programId={props.programId} />
         <S3ImageUploader classId={props.classId} programId={props.programId} />
       </Box>
       <Box p={3} display="inline">
