@@ -29,11 +29,10 @@ function VolunteerClassesModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    backgroundColor: 'rgba(0,255,0,0.5)',
+    backgroundColor: 'rgb(207, 206, 206)',
     width: 300,
-    height: 700,
+    height: 600,
     // backgroundColor: theme.palette.background.paper,
-    border: '1px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
@@ -42,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
   box: {
     marginLeft: '15%',
     marginRight: '15%',
-    // overflow: 'auto',
-    textAlign: 'center',
-    backgroundColor: 'rgba(0,255,0,0.5)',
+    overflow: 'auto',
+    alignContent: 'center',
+    backgroundColor: '#626366',
   },
   root: {
     // backgroundColor: theme.palette.success.main,
@@ -85,8 +84,6 @@ function VolunteerClassesModal(props) {
       <MobileReportForm classId={props.classId} />
       <Typography variant="h6"> Upload Images Below </Typography>
       <Box p={3} display="flex">
-        <S3ImageUploader classId={props.classId} programId={props.programId} />
-        <S3ImageUploader classId={props.classId} programId={props.programId} />
         <S3ImageUploader classId={props.classId} programId={props.programId} />
       </Box>
 

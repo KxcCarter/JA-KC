@@ -67,7 +67,7 @@ p {
 }
 
 .MobileVolunteerClassPage {
-  background-color: rgba(0, 255, 0, 0.5);
+  background-color: #4ac05d;
   height: 650px;
 }
 
@@ -75,7 +75,7 @@ p {
   transform: scale(1.7);
   float: right !important;
   margin-top: 6px;
-  color: rgba(0, 255, 0, 0.5);
+  color: #4ac05d;
 }
 
 .ClickButtonsContainer {
