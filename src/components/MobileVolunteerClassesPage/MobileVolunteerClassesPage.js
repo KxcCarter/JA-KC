@@ -11,6 +11,9 @@ import MobileSubmitReportModal from './MobileSubmitReportModal';
 import InfoIcon from '@material-ui/icons/Info';
 import { Spring } from 'react-spring/renderprops';
 
+import SchoolIcon from '@material-ui/icons/School';
+import SubjectIcon from '@material-ui/icons/Subject';
+
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
     this.props.dispatch({
@@ -29,9 +32,15 @@ class MobileVolunteerClassesPage extends Component {
       return (
         <div key={item.index}>
           <h3 id="welcome">View Program Information</h3>
-          <h5>{item.title}</h5>
-          <h5>{item.name}</h5>
-          {/* <h5>Number of Sessions: {item.sessions}</h5> */}
+          <h5>
+            {' '}
+            <SubjectIcon fontSize="small" /> {item.title}
+          </h5>
+          <h5>
+            {' '}
+            <SchoolIcon fontSize="small" /> {item.name}
+          </h5>
+          <h5>Number of Sessions: {item.sessions}</h5>
         </div>
       );
     });

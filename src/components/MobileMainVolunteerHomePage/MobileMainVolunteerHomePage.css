@@ -1,37 +1,37 @@
 .VolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
-  height: 120px !important;
+  height: 170px !important;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .ProgramResourcesBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 60px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .WelcomeVolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 120px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .MobileVolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 120px !important;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 h1 {
   color: black;
@@ -58,11 +58,12 @@ p {
 }
 
 .MobileVolunteerHomePage {
-  background-color: rgba(0,255,0,0.5);  height: 650px;
+  background-color: rgba(0, 255, 0, 0.5);
+  height: 650px;
   max-height: 650px;
   overflow: auto;
 }
 
-.box{
+.box {
   height: 120px !important;
 }
