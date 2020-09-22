@@ -36,12 +36,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   root: {
-
-
     backgroundColor: '#008751',
     color: 'white',
     marginTop: '15px',
-
   },
 }));
 
@@ -74,9 +71,9 @@ function VolunteerClassesModal(props) {
     })
     .map((item, index) => {
       return (
-        <div>
+        <Box p={1}>
           <a href={item.content}>{item.title}</a>
-        </div>
+        </Box>
       );
     });
   console.log('training:', props.store.trainingReducer);
@@ -84,7 +81,6 @@ function VolunteerClassesModal(props) {
   console.log('programId:', props.programId);
 
   const body = (
-
     <div style={modalStyle} className={classes.paper}>
       <Box p={3} display="inline">
         <Typography
@@ -104,17 +100,20 @@ function VolunteerClassesModal(props) {
         ></Typography>
       </Box>
       <Box p={3} display="inline">
-        <Button variant="outlined" size="large" className={classes.root} onClick={handleClose}>
+        <Button
+          variant="outlined"
+          size="large"
+          className={classes.root}
+          onClick={handleClose}
+        >
           Cancel
         </Button>
       </Box>
     </div>
-
   );
 
   return (
     <>
-
       <InfoIcon
         className="InfoIcon"
         onClick={open ? handleClose : handleOpen}
@@ -125,20 +124,13 @@ function VolunteerClassesModal(props) {
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
       >
-
         <Spring
           from={{ opacity: 0, marginBottom: -600 }}
           to={{ opacity: 1, marginBottom: 0 }}
         >
-          {(props) => (
-            <div style={props}>
-
-              {body}
-            </div>
-          )}
+          {(props) => <div style={props}>{body}</div>}
         </Spring>
       </Modal>
-
     </>
   );
 }
