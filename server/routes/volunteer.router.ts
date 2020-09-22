@@ -14,7 +14,7 @@ router.get(
   '/classes',
   rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const query: string = `SELECT "scheduled_classes".*, "programs".image, "programs".sessions, "programs".title, "schools".name FROM "scheduled_classes"
+    const query: string = `SELECT "scheduled_classes".*, "programs".image, "programs".sessions, "programs".title, "programs".description, "schools".name FROM "scheduled_classes"
     JOIN "programs" on "programs".id = "scheduled_classes".program_id
     JOIN "schools" on "schools".id = "scheduled_classes".school_id
     WHERE "scheduled_classes".user_id = $1;`;
@@ -37,7 +37,7 @@ router.get(
   '/scheduled/:id',
   rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const query: string = `SELECT "scheduled_classes".*, "programs".image, "programs".sessions, "programs".title, "schools".name FROM "scheduled_classes"
+    const query: string = `SELECT "scheduled_classes".*, "programs".image, "programs".sessions, "programs".title, "programs".description, "schools".name FROM "scheduled_classes"
       JOIN "programs" on "programs".id = "scheduled_classes".program_id
       JOIN "schools" on "schools".id = "scheduled_classes".school_id
       WHERE "scheduled_classes".id = $1;`;

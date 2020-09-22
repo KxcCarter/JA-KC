@@ -1,76 +1,74 @@
 .VolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 100px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
-  
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-
 .WelcomeVolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 100px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 .MobileVolunteerPageBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 100px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
   color: black;
   font-weight: bold !important;
   font-family: 'Montserrat', sans-serif !important;
-  text-transform: none; 
+  text-transform: none;
 }
 h2 {
   color: black;
   font-weight: bold !important;
-    font-family: 'Montserrat', sans-serif !important;
-    text-transform: none; }
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;
+}
 
 h3 {
   color: black;
   font-weight: bold !important;
-    font-family: 'Montserrat', sans-serif !important;
-    text-transform: none; 
-    border-radius: 10px;
+  font-family: 'Montserrat', sans-serif !important;
+  text-transform: none;
+  border-radius: 10px;
 }
 h4 {
   color: black;
   font-weight: lighter !important;
   font-family: 'Montserrat', sans-serif !important;
-  text-transform: none; 
+  text-transform: none;
 }
 
 h5 {
   color: black;
   font-weight: lighter !important;
   font-family: 'Montserrat', sans-serif !important;
-  text-transform: none; 
-  
+  text-transform: none;
 }
 
 p {
   color: black;
   font-weight: lighter !important;
   font-family: 'Montserrat', sans-serif !important;
-  text-transform: none; 
+  text-transform: none;
 }
 
 .MobileVolunteerClassPage {
-  background-color: #4ac05d;  height: 650px;
+  background-color: #4ac05d;
+  height: 650px;
 }
 
 .InfoIcon {
@@ -80,26 +78,25 @@ p {
   color: #4ac05d;
 }
 
-.ClickButtonsContainer{
+.ClickButtonsContainer {
   margin-top: 70% !important;
   margin-bottom: 5px;
 }
 .ProgramResourcesBubbleStyle {
-  background-color: white!important;
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 100px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);  
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
 }
 
-.ImageBubbleStyle{
-  background-color: white!important;
+.ImageBubbleStyle {
+  background-color: white !important;
   margin: 20px auto 0;
   width: 80%;
   height: 100px;
   background: white;
-  box-shadow: 0px 8px 8px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
 }
-

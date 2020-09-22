@@ -5,11 +5,15 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Paper, Box, Container } from '@material-ui/core';
 import './MobileVolunteerClassesPage.css';
 import MobileTestNav from '../MobileNav/MobileTestNav';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import MobileVolunteerClassesModal from './MobileVolunteerClassesModal';
 import MobileSubmitReportModal from './MobileSubmitReportModal';
 import InfoIcon from '@material-ui/icons/Info';
 import { Spring } from 'react-spring/renderprops';
+
+import SchoolIcon from '@material-ui/icons/School';
+import SubjectIcon from '@material-ui/icons/Subject';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
 class MobileVolunteerClassesPage extends Component {
   componentDidMount() {
@@ -28,9 +32,22 @@ class MobileVolunteerClassesPage extends Component {
     let scheduled_classes = matchedClass.map((item, index) => {
       return (
         <div key={item.index}>
-          <h3 id="welcome">{item.title}</h3>
-          <h5>{item.name}</h5>
-          <h5>Number of Sessions: {item.sessions}</h5>
+          <h3 id="welcome">View Program Information</h3>
+          <h5>
+            {' '}
+            <SubjectIcon fontSize="small" /> {item.title}
+          </h5>
+          <h5>
+            {' '}
+            <SchoolIcon fontSize="small" /> {item.name}
+          </h5>
+          <h5>
+            {' '}
+            <DateRangeIcon fontSize="small" /> Number of Sessions:{' '}
+            {item.sessions}
+          </h5>
+          <hr></hr>
+          <Typography variant="caption">{item.description}</Typography>
         </div>
       );
     });

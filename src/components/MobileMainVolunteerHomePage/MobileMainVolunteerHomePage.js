@@ -8,6 +8,9 @@ import MobileTestNav from '../MobileNav/MobileTestNav';
 import { Spring } from 'react-spring/renderprops';
 import MobileFooter from '../Footer/MobileFooter';
 
+import SchoolIcon from '@material-ui/icons/School';
+import SubjectIcon from '@material-ui/icons/Subject';
+
 class MobileMainVolunteerHomePage extends Component {
   componentDidMount() {
     this.props.dispatch({
@@ -33,17 +36,25 @@ class MobileMainVolunteerHomePage extends Component {
           >
             {(props) => (
               <div style={props}>
-
                 <Paper
-                  className="VolunteerPageBubbleStyle"
+                  className="MobileVolunteerPageBubbleStyle"
                   key={item.index}
                   onClick={(event) => this.clickClassDetails(event, item.id)}
                 >
                   <Box p={1} m={1} className="box">
-                    <h3 id="welcome">{item.title}</h3>
-
-                    <h5>{item.name}</h5>
-                    <h5>Number of Sessions: {item.sessions}</h5>
+                    <h4 id="welcome">
+                      {' '}
+                      <SubjectIcon /> {item.title}
+                    </h4>
+                    {/* <h5>
+                      {' '}
+                      <SubjectIcon /> {item.title}
+                    </h5> */}
+                    <h5>
+                      {' '}
+                      <SchoolIcon fontSize="small" /> {item.name}
+                    </h5>
+                    {/* <h5>Number of Sessions: {item.sessions}</h5> */}
                   </Box>
                 </Paper>
               </div>
@@ -53,14 +64,12 @@ class MobileMainVolunteerHomePage extends Component {
       }
     );
     return (
-
       <div className="MobileVolunteerHomePage">
         <MobileTestNav />
         <Container>{scheduled_classes}</Container>
         {/* <LogOutButton className="log-in" /> */}
         {/* <MobileFooter /> */}
       </div>
-
     );
   }
 }

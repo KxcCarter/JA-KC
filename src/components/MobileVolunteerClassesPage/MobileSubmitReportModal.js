@@ -23,8 +23,6 @@ function VolunteerClassesModalStyle() {
     top: `${top}%`,
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
-
-
   };
 }
 
@@ -39,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
     overflow: 'auto',
-
-
   },
   box: {
     marginLeft: '15%',
@@ -48,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     alignContent: 'center',
     backgroundColor: '#626366',
-
   },
   root: {
     // backgroundColor: theme.palette.success.main,
@@ -87,13 +82,11 @@ function VolunteerClassesModal(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <MobileReportForm classId={props.classId} />
-
-      <Box p={3} className={classes.box}>
-
-
-
+      <Typography variant="h6"> Upload Images Below </Typography>
+      <Box p={3} display="flex">
         <S3ImageUploader classId={props.classId} programId={props.programId} />
       </Box>
+
       <Box p={3} display="inline">
         <Button
           variant="outlined"
@@ -105,7 +98,12 @@ function VolunteerClassesModal(props) {
         </Button>
       </Box>
       <Box p={3} display="inline">
-        <Button variant="outlined" size="large" className={classes.root} onClick={handleClose}>
+        <Button
+          variant="outlined"
+          size="large"
+          className={classes.root}
+          onClick={handleClose}
+        >
           Cancel
         </Button>
       </Box>

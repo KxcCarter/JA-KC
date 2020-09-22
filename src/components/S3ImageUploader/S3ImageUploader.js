@@ -6,6 +6,8 @@ import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button, Box } from '@material-ui/core';
 import plus_icon from '../S3ImageUploader/plus_icon.png';
+
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 //
 // NOTE:
 // This component uploads an image to AWS S3 and then saves the URL that is returned to the database.
@@ -28,18 +30,16 @@ import plus_icon from '../S3ImageUploader/plus_icon.png';
 //   };
 // }
 
-const innerElement = (
-  <div>
-    <p>Select an Image</p>
-  </div>
-);
+const innerElement = <AddAPhotoIcon fontSize="small" />;
 
 const dropStyle = {
   width: '80px',
   height: '80px',
   border: '1px solid black',
+  borderRadius: '3px',
   backgroundColor: '#dddddd',
   backgroundImage: plus_icon.png,
+  margin: '3px',
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -117,7 +117,9 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-    <div className={classes.paper}>
+    // <div className={classes.paper}>
+    <Box display="block">
+      <AddAPhotoIcon fontSize="small" />
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
         s3Url={s3Url}
@@ -126,13 +128,7 @@ function S3ImageUploader(props) {
         style={dropStyle}
         canCancel={true}
       />
-      {/* {uploadFinished && (
-        <Box>
-          <Button onClick={confirmUpload}>done</Button>{' '}
-          <Button onClick={cancelUpload}>cancel</Button>
-        </Box>
-      )} */}
-    </div>
+    </Box>
   );
 }
 
