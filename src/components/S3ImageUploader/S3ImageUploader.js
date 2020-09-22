@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.success.light,
     color: theme.palette.success.contrastText,
   },
+  s3: {
+    paddingLeft: '82px',
+  },
 }));
 
 function S3ImageUploader(props) {
@@ -118,7 +121,7 @@ function S3ImageUploader(props) {
 
   return (
     // <div className={classes.paper}>
-    <Box display="block">
+    <Box className={classes.s3} display="block">
       <AddAPhotoIcon fontSize="small" />
       <DropzoneS3Uploader
         onFinish={handleFinishedUpload}
