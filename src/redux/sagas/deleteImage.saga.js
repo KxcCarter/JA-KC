@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* deleteImage(action) {
   try {
-    const response = yield axios.delete(`/api/s3/delete/:${action.payload}`);
+    const response = yield axios.delete(`/api/s3/delete/${action.payload}`);
     yield put({ type: 'FETCH_IMAGES' });
   } catch (error) {
     console.log('Error deleting image! ', error);

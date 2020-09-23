@@ -53,26 +53,26 @@ router.get(
   }
 );
 
-router.delete('/', rejectUnauthenticated, (req: any, res: any) => {
-  const params = {
-    Bucket: 'operisstorage',
-    Key: req.body.s3_key,
-  };
-  s3.deleteObject(params, function (err, data) {
-    if (err)
-      console.log(
-        'There was an error with deleting the object. ',
-        err,
-        err.stack
-      );
-    // an error occurred
-    else console.log('Object deleted. ', data); // successful response
-    /*
-         data = {
-         }
-         */
-  });
-});
+// router.delete('/', rejectUnauthenticated, (req: any, res: any) => {
+//   const params = {
+//     Bucket: 'operisstorage',
+//     Key: req.body.s3_key,
+//   };
+//   s3.deleteObject(params, function (err, data) {
+//     if (err)
+//       console.log(
+//         'There was an error with deleting the object. ',
+//         err,
+//         err.stack
+//       );
+//     // an error occurred
+//     else console.log('Object deleted. ', data); // successful response
+//     /*
+//          data = {
+//          }
+//          */
+//   });
+// });
 
 router.delete(
   '/delete/:key',
@@ -82,11 +82,24 @@ router.delete(
     next: express.NextFunction
   ): Promise<void> => {
     try {
+      const deleteQuery: string = `DELETE FROM "images" WHERE "images".s3_key = $1;`;
+      await pool
+        .query(deleteQuery, [req.params.key])
+        .then((dbRes) => {
+          console.log('trying to delete: ', req.params.key);
+
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log('Error deleting image from database: ', err);
+          res.sendStatus(500);
+        });
+
       const params = {
         Bucket: 'operisstorage',
-        Key: req.params.s3_key,
+        Key: req.params.key,
       };
-      await s3.deleteObject(params, function (err, data) {
+      s3.deleteObject(params, function (err, data) {
         if (err)
           console.log(
             'There was an error with deleting the object. ',
@@ -96,9 +109,6 @@ router.delete(
         // an error occurred
         else console.log('Object deleted. ', data); // successful response
       });
-
-      const deleteQuery: string = `DELETE FROM "images" WHERE "images".s3_key = $1;`;
-      await pool.query(deleteQuery, [req.params.s3_key]);
 
       res.status(200);
     } catch (err) {

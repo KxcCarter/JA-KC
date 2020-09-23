@@ -58,6 +58,7 @@ class App extends Component {
               path="/images"
               component={AdminImagesManager}
             />
+
             <ProtectedRoute
               exact
               path="/adminreports"
