@@ -6,6 +6,7 @@
   height: 400px !important;
   background: white;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
+  overflow: auto !important;
 }
 
 .ProgramResourcesBubbleStyle {
@@ -33,6 +34,7 @@
   height: 120px !important;
   background: white;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
+  overflow: auto !important;
 }
 h1 {
   color: black;
@@ -62,7 +64,7 @@ p {
   background-color: #4ac05d;
   height: 650px;
   max-height: 650px;
-  overflow: auto;
+  overflow: auto !important;
 }
 
 .box {

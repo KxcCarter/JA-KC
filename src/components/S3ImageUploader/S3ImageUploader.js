@@ -35,11 +35,13 @@ const innerElement = <AddAPhotoIcon fontSize="small" />;
 const dropStyle = {
   width: '80px',
   height: '80px',
+
+  marginLeft: '15px !important',
   border: '1px solid black',
   borderRadius: '3px',
   backgroundColor: '#dddddd',
   backgroundImage: plus_icon.png,
-  margin: '3px',
+  // margin: '3px',
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -49,10 +51,13 @@ const useStyles = makeStyles((theme) => ({
     width: 80,
     height: 80,
     backgroundColor: theme.palette.background.paper,
-    margin: '8px',
+    marginLeft: '20px',
     overflow: 'auto',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  s3: {
+    paddingLeft: '85px',
   },
   button: {
     backgroundColor: theme.palette.success.light,
@@ -121,9 +126,11 @@ function S3ImageUploader(props) {
 
   return (
     // <div className={classes.paper}>
+    // <div>
     <Box className={classes.s3} display="block">
       <AddAPhotoIcon fontSize="small" />
       <DropzoneS3Uploader
+        position="center"
         onFinish={handleFinishedUpload}
         s3Url={s3Url}
         maxSize={1024 * 1024 * 5}
@@ -132,6 +139,7 @@ function S3ImageUploader(props) {
         canCancel={true}
       />
     </Box>
+    // </div>
   );
 }
 
