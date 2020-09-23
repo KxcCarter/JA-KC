@@ -471,9 +471,8 @@ function Administrators(props) {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={
-                  (<TableCell align="left">{adminList.phone}</TableCell>).length
-                }
+
+                count={adminList.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
