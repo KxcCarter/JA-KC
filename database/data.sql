@@ -118,13 +118,4 @@ VALUES
     (3, 2, 3),
     (4, 2, 2);
 
-INSERT INTO "images"
-    ("user_id", "program_id", "scheduled_class_id", "image_url")
-VALUES
-    (1, 1, 1, 'https://picsum.photos/200/300');
 
-
-INSERT INTO "images"
-    ("user_id", "program_id", "scheduled_class_id", "image_url")
-VALUES
-    (1, 2, 1, 'https://picsum.photos/200/300');

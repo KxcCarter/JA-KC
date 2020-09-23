@@ -54,6 +54,7 @@ CREATE TABLE "images"
     "program_id" int REFERENCES "programs",
     "scheduled_class_id" int REFERENCES "scheduled_classes",
     "image_url" varchar(150),
+    "s3_key" varchar(150),
     "upload_date" DATE DEFAULT CURRENT_DATE
 );
 

@@ -14,7 +14,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import MobileReportForm from '../content/MobileReportForm/MobileReportForm';
 import S3ImageUploader from '../S3ImageUploader/S3ImageUploader';
 import { CenterFocusStrong } from '@material-ui/icons';
-
+import { useHistory } from 'react-router-dom';
 function VolunteerClassesModalStyle() {
   const top = 50;
   const left = 50;
@@ -64,6 +64,7 @@ function VolunteerClassesModal(props) {
   const [modalStyle] = useState(VolunteerClassesModalStyle);
   const [open, setOpen] = useState(false);
   const [task, setTask] = useState('');
+  const history = useHistory();
 
   const {
     store: { projectDetails },
@@ -83,6 +84,7 @@ function VolunteerClassesModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     handleClose();
+    history.push('/volunteerhome');
   };
 
   const body = (

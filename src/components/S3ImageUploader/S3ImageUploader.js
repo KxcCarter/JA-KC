@@ -58,11 +58,13 @@ const useStyles = makeStyles((theme) => ({
   },
   s3: {
     paddingLeft: '85px',
-
   },
   button: {
     backgroundColor: theme.palette.success.light,
     color: theme.palette.success.contrastText,
+  },
+  s3: {
+    paddingLeft: '82px',
   },
 }));
 
@@ -108,14 +110,15 @@ function S3ImageUploader(props) {
 
     // Uncomment the code below and remove setUploadFinished(true) in order to enable automatic saving to database.
 
-    setUploadFinished(true);
+    // setUploadFinished(true);
 
     dispatch({
       type: 'POST_IMG_URL',
       payload: {
-        imageUrl: fileUrl,
-        program_id: props.program_id,
-        class_id: props.class_id,
+        imageUrl: info.fileUrl,
+        s3_key: info.filename,
+        program_id: props.programId,
+        class_id: props.classId,
       },
     });
   };
@@ -124,20 +127,20 @@ function S3ImageUploader(props) {
 
   return (
     // <div className={classes.paper}>
-    <div>
+    // <div>
+    <Box className={classes.s3} display="block">
       <AddAPhotoIcon fontSize="small" />
-      <Box className={classes.s3} display="block">
-        <DropzoneS3Uploader
-          position="center"
-          onFinish={handleFinishedUpload}
-          s3Url={s3Url}
-          maxSize={1024 * 1024 * 5}
-          upload={uploadOptions}
-          style={dropStyle}
-          canCancel={true}
-        />
-      </Box>
-    </div>
+      <DropzoneS3Uploader
+        position="center"
+        onFinish={handleFinishedUpload}
+        s3Url={s3Url}
+        maxSize={1024 * 1024 * 5}
+        upload={uploadOptions}
+        style={dropStyle}
+        canCancel={true}
+      />
+    </Box>
+    // </div>
   );
 }
 
