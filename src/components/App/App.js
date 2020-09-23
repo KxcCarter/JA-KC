@@ -18,6 +18,7 @@ import AdminLoginPage from '../AdminLoginPage/AdminLoginPage';
 import MobileVolunteerRegisterPage from '../MobileVolunteerRegisterPage/MobileVolunteerRegisterPage';
 import MobileMainVolunteerHomePage from '../MobileMainVolunteerHomePage/MobileMainVolunteerHomePage';
 import AdminImagesManager from '../AdminImagesManager/AdminImagesManager';
+import AdminImages from '../content/AdminImages';
 
 import './App.css';
 import AppDashboard from '../../AppDashboard';
@@ -53,11 +54,7 @@ class App extends Component {
               component={AdminClasses}
             />
 
-            <ProtectedRoute
-              exact
-              path="/images"
-              component={AdminImagesManager}
-            />
+            <ProtectedRoute exact path="/images" component={AdminImages} />
 
             <ProtectedRoute
               exact

@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 800,
-    height: 750,
+    width: '75%',
+    height: '90%',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -50,8 +50,8 @@ function AdminImagesManager(props) {
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">December</ListSubheader>
+        <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
+          <ListSubheader component="div">Volunteer Photos</ListSubheader>
         </GridListTile>
         {props.store.imagesReducer.map((tile) => (
           <GridListTile key={tile.image_url}>
