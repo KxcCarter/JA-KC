@@ -323,62 +323,62 @@ function Classes(props) {
     Math.min(rowsPerPage, programData.length - page * rowsPerPage);
 
 
-  function SearchClasses(props) {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const [list, setList] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const handleSearchChange = (event) => {
-      // searchQuery is what the user types in to search.
-      setSearchQuery(event.target.value);
-      // list is what is being searched through. It get's its data from a reducer.
-      // setList(
-      //   // This is searching through an array of objects to see if the object.name 
-      //   // matches the searchQuery.
-      //   props.talentPool.filter((el) => el.name.includes(event.target.value))
-      // );
-      setOpen(true);
-    };
-    const clickAway = () => {
-      setSearchQuery('');
-      setTimeout(() => {
-        setOpen(false);
-      }, 100);
-    };
-    return (
-      <Box className={classes.box} component="span">
-        <Paper className={classes.paper}>
-          <Box pt={.5}>
-            <TextField
-              className={classes.search}
-              id="outlined-basic"
-              size="small"
-              value={searchQuery}
-              label="Search"
-              variant="outlined"
-              autoComplete="off"
-              onBlur={clickAway}
-              onChange={handleSearchChange}
-            />
-          </Box>
-          <Box display={open ? 'block' : 'none'}>
-            <MenuList>
-              {list.slice(0, 5).map((item, index) => {
-                return (
-                  <MenuItem
-                    key={item.id}
-                    onClick={props.handleTalentAssign(item.id)}
-                  >
-                    {item.name}
-                  </MenuItem>
-                );
-              })}
-            </MenuList>
-          </Box>
-        </Paper>
-      </Box>
-    );
-  }
+  // function SearchClasses(props) {
+  //   const classes = useStyles();
+  //   const [open, setOpen] = useState(false);
+  //   const [list, setList] = useState([]);
+  //   const [searchQuery, setSearchQuery] = useState('');
+  //   const handleSearchChange = (event) => {
+  //     // searchQuery is what the user types in to search.
+  //     setSearchQuery(event.target.value);
+  //     // list is what is being searched through. It get's its data from a reducer.
+  //     // setList(
+  //     //   // This is searching through an array of objects to see if the object.name 
+  //     //   // matches the searchQuery.
+  //     //   props.talentPool.filter((el) => el.name.includes(event.target.value))
+  //     // );
+  //     setOpen(true);
+  //   };
+  //   const clickAway = () => {
+  //     setSearchQuery('');
+  //     setTimeout(() => {
+  //       setOpen(false);
+  //     }, 100);
+  //   };
+  //   return (
+  //     <Box className={classes.box} component="span">
+  //       <Paper className={classes.paper}>
+  //         <Box pt={.5}>
+  //           <TextField
+  //             className={classes.search}
+  //             id="outlined-basic"
+  //             size="small"
+  //             value={searchQuery}
+  //             label="Search"
+  //             variant="outlined"
+  //             autoComplete="off"
+  //             onBlur={clickAway}
+  //             onChange={handleSearchChange}
+  //           />
+  //         </Box>
+  //         <Box display={open ? 'block' : 'none'}>
+  //           <MenuList>
+  //             {list.slice(0, 5).map((item, index) => {
+  //               return (
+  //                 <MenuItem
+  //                   key={item.id}
+  //                   onClick={props.handleTalentAssign(item.id)}
+  //                 >
+  //                   {item.name}
+  //                 </MenuItem>
+  //               );
+  //             })}
+  //           </MenuList>
+  //         </Box>
+  //       </Paper>
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Spring
@@ -391,7 +391,7 @@ function Classes(props) {
             <Paper className={classes.paper}>
               <EnhancedTableToolbar numSelected={selected.length} />
               <TableContainer>
-                <SearchClasses />
+                {/* <SearchClasses /> */}
                 <Table
                   className={classes.table}
                   aria-labelledby="tableTitle"
