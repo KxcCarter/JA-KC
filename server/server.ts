@@ -44,7 +44,7 @@ app.use('/api/volunteerlist', volunteerlistRouter);
 app.use('/api/counters', adminboxesRouter);
 app.use('/api/schools', schoolsRouter);
 
-app.use('/s3delete', s3Router);
+app.use('/api/s3', s3Router);
 
 app.use(
   '/s3',

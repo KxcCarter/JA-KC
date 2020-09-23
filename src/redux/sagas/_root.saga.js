@@ -33,6 +33,9 @@ import saveImageUrlSaga from './saveImageToDatabase.saga';
 import postClassSaga from './postClass.saga';
 import postTrainingSaga from './postTraining.saga';
 
+import getImagesSaga from './getImages.saga';
+import deleteImageSaga from './deleteImage.saga';
+
 export default function* rootSaga() {
   yield all([
     loginSaga(),
@@ -68,5 +71,7 @@ export default function* rootSaga() {
     saveImageUrlSaga(),
     postClassSaga(),
     postTrainingSaga(),
+    getImagesSaga(),
+    deleteImageSaga(),
   ]);
 }

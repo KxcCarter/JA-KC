@@ -110,14 +110,15 @@ function S3ImageUploader(props) {
 
     // Uncomment the code below and remove setUploadFinished(true) in order to enable automatic saving to database.
 
-    setUploadFinished(true);
+    // setUploadFinished(true);
 
     dispatch({
       type: 'POST_IMG_URL',
       payload: {
-        imageUrl: fileUrl,
-        program_id: props.program_id,
-        class_id: props.class_id,
+        imageUrl: info.fileUrl,
+        s3_key: info.filename,
+        program_id: props.programId,
+        class_id: props.classId,
       },
     });
   };

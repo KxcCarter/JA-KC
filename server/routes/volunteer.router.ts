@@ -112,12 +112,13 @@ router.post(
     const program_id: number = <number>req.body.program_id;
     const class_id: number = <number>req.body.class_id;
     const imageUrl: string = req.body.imageUrl;
+    const s3_key: string = req.body.s3_key;
 
-    const queryText: string = `INSERT INTO "images" ("user_id", "program_id", "scheduled_class_id", "image_url")
-    VALUES ($1, $2, $3, $4);`;
+    const queryText: string = `INSERT INTO "images" ("user_id", "program_id", "scheduled_class_id", "image_url", "s3_key")
+    VALUES ($1, $2, $3, $4, $5);`;
 
     pool
-      .query(queryText, [user_id.id, program_id, class_id, imageUrl])
+      .query(queryText, [user_id.id, program_id, class_id, imageUrl, s3_key])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('Error saving image url to database. ', err);

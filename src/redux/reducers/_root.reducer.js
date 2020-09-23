@@ -15,6 +15,7 @@ import volunteerCounter from './volunteercount.reducer';
 import schoolList from './schoolList.reducer';
 import pendingInvites from './pendingInvites.reducer';
 import adminList from './getadminuser.reducer';
+import imagesReducer from './images.reducer';
 
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   schoolList,
   pendingInvites,
   adminList,
+  imagesReducer,
 });
 
 export default rootReducer;
