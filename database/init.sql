@@ -12,7 +12,7 @@ CREATE TABLE "users"
     "password" VARCHAR(1000) NOT NULL,
     "account_type_id" INT REFERENCES "account_type",
     "email" VARCHAR(80),
-    "telephone" VARCHAR(80)
+    "telephone" VARCHAR(20)
 );
 CREATE TABLE "programs"
 (
