@@ -58,7 +58,7 @@ Follow directions from this link https://docs.aws.amazon.com/AmazonS3/latest/use
   NODEMAILER_USER=AN_EMAIL_ADDRESS@gmail.com
   NODEMAILER_PASSWORD=xxxxxxxxxxxxx
   NODEMAILER_FROM=AN_EMAIL_ADDRESS@gmail.com
-  `
+
   ```
 
 While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
@@ -110,6 +110,11 @@ Directory Structure:
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-```
+## Acknowledgement
 
-```
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
+Also thanks to the development team: [David Walton](https://github.com/djwalto), [Ailea Patrinely](https://github.com/aileapatrinely), and [Skyler Burgard](https://github.com/SkylerBurgard) for their hard work.
+
+## Support
+
+If you have suggestions or issues, please email me at [kxccarter@gmail.com](www.google.com)
