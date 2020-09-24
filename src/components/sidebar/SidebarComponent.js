@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
   menuItemList: {
     marginTop: 52,
+    textDecoration: 'none',
   },
   outsideLayer: {
     position: 'absolute',
