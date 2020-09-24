@@ -39,7 +39,7 @@ class MobileVolunteerClassesPage extends Component {
           </h5>
           <h5>
             {' '}
-            <SchoolIcon fontSize="small" /> {item.name}
+            <SchoolIcon fontSize="small" />
           </h5>
           <h5>
             {' '}

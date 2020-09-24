@@ -36,9 +36,7 @@ export default function AddClassModalTable(props) {
       sessions: item.sessions,
       program_id: item.id,
       assign: (
-        <Button
-          onClick={() => props.assignToVolunteer(item.id, props.user_id, 1)}
-        >
+        <Button onClick={() => props.assignToVolunteer(item.id, props.user_id)}>
           Assign
         </Button>
       ),

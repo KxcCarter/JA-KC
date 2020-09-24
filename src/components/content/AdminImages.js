@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 });
 
 class AdminAdministrators extends React.Component {
-  state = { selectedItem: 'Administrators' };
+  state = { selectedItem: 'Images' };
 
   componentDidMount() {
     window.addEventListener('resize', this.resize);

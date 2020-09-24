@@ -52,9 +52,9 @@ class MobileMainVolunteerHomePage extends Component {
                     </h5> */}
                     <h5>
                       {' '}
-                      <SchoolIcon fontSize="small" /> {item.name}
+                      <SchoolIcon fontSize="small" />
                     </h5>
-                    {/* <h5>Number of Sessions: {item.sessions}</h5> */}
+                    <h5>Number of Sessions: {item.sessions}</h5>
                   </Box>
                 </Paper>
               </div>

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     textAlign: 'center',
-    overflow: 'auto',
+    overflow: 'none',
   },
   box: {
     marginLeft: '15%',
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   s3: {
     display: 'center',
     marginLeft: '15% !important',
-  }
+  },
 }));
 
 function VolunteerClassesModal(props) {
@@ -91,8 +91,22 @@ function VolunteerClassesModal(props) {
     <div style={modalStyle} className={classes.paper}>
       <MobileReportForm classId={props.classId} />
       <Typography variant="h6"> Upload Images Below </Typography>
-      <Box p={3} display="center">
-        <S3ImageUploader className={classes.s3} classId={props.classId} programId={props.programId} />
+      <Box display="flex">
+        <S3ImageUploader
+          className={classes.s3}
+          classId={props.classId}
+          programId={props.programId}
+        />
+        <S3ImageUploader
+          className={classes.s3}
+          classId={props.classId}
+          programId={props.programId}
+        />
+        <S3ImageUploader
+          className={classes.s3}
+          classId={props.classId}
+          programId={props.programId}
+        />
       </Box>
 
       <Box p={3} display="inline">

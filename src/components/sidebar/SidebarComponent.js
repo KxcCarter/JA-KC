@@ -13,6 +13,8 @@ import Volunteers from '../content/Volunteers';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './SidebarComponent.css';
+import ImageIcon from '@material-ui/icons/Image';
+
 // import UnresolvedTicketsComponent from '../content/UnresolvedTicketsComponent';
 // import AddAdmin from '../AddAdmin/AddAdmin';
 
@@ -176,7 +178,7 @@ function SidebarComponent({ onChange, selectedItem }) {
             <Link className="link" to="/images">
               <MenuItemComponent
                 title="Images"
-                icon={IconOverview}
+                icon={ImageIcon}
                 onClick={() => onImagesClick('Images')}
                 active={selectedItem === 'Images'}
               />

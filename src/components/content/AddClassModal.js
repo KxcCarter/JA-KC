@@ -61,11 +61,10 @@ function AddClassModal(props) {
     setOpen(false);
   };
 
-  const assignToVolunteer = (id, user_id, school_id) => {
-    console.log('yay', id, props.user_id);
+  const assignToVolunteer = (id, user_id) => {
     dispatch({
       type: 'ASSIGN_VOLUNTEER_CLASS',
-      payload: { program_id: id, user_id: user_id, school_id: school_id },
+      payload: { program_id: id, user_id: user_id },
     });
 
     handleClose();

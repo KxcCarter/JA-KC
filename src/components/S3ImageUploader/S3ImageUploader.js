@@ -126,9 +126,7 @@ function S3ImageUploader(props) {
   const s3Url = 'https://operisstorage.s3.amazonaws.com';
 
   return (
-    // <div className={classes.paper}>
-    // <div>
-    <Box className={classes.s3} display="block">
+    <Box p={1}>
       <AddAPhotoIcon fontSize="small" />
       <DropzoneS3Uploader
         position="center"
@@ -140,7 +138,6 @@ function S3ImageUploader(props) {
         canCancel={true}
       />
     </Box>
-    // </div>
   );
 }
 
