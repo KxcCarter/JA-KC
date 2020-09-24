@@ -14,6 +14,12 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
+### Local Development
+
+When developing locally `docker-compose up` will build all tables based on `init.sql` and `data.sql`.
+
+### For Deployment
+
 Create a new database called `ja_kc` and create an `account_type` and a `users` table:
 
 ```SQL
@@ -70,29 +76,6 @@ You will also want to replace the template data for AWS and Nodemailer with your
 - Run `npm run client`
 - Navigate to `localhost:3000`
 
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-4. `POST /api/user/register` registers a new user, see body to change username/password
-5. `POST /api/user/login` will login a user, see body to change username/password
-6. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
 Directory Structure:
 
 - `src/` contains the React application
@@ -102,19 +85,12 @@ Directory Structure:
 
 ## Deployment
 
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+1. Add Heroku remote to project: `git remote add heroku <herokuURL> `
+1. Connect to the Heroku Postgres database from Postico (Retrieve connection configuration from heroku).
+1. Make all neccessary new feature development changes, ensuring that you have commited your changes.
+1. `git push heroku master` for final deployment.
 
 ## Acknowledgement
 
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
-Also thanks to the development team: [David Walton](https://github.com/djwalto), [Ailea Patrinely](https://github.com/aileapatrinely), and [Skyler Burgard](https://github.com/SkylerBurgard) for their hard work.
-
-## Support
-
-If you have suggestions or issues, please email me at [kxccarter@gmail.com](www.google.com)
+Also thanks to the development team: [David Walton](https://github.com/djwalto), [Ailea Patrinely](https://github.com/aileapatrinely), [Skyler Burgard](https://github.com/SkylerBurgard), and [Kenneth Carter](https://github.com/kxccarter) for their hard work.
